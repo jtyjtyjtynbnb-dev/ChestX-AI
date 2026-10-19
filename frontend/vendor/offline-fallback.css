@@ -1,0 +1,22 @@
+/* 本地离线兜底基础布局与工具类，防止内网评审环境 CDN 断网导致样式错乱 */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.grid { display: grid; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.text-primary { color: #0F62FE; }
+.text-success { color: #00B42A; }
+.text-warning { color: #FF8A00; }
+.text-danger { color: #F53F3F; }
+.bg-white { background-color: #FFFFFF; }
+.bg-page-bg { background-color: #F7F8FA; }
+.rounded-lg { border-radius: 0.5rem; }
+.border { border: 1px solid #E5E6EB; }

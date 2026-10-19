@@ -1,0 +1,30 @@
+# 敏感配置
+.env
+.env.local
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# 运行期数据
+backend/data/
+*.db
+*.sqlite3
+*.log
+*.pid
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# 备份与打包产物
+frontend.backup-*/
+legacy-backup-*/
+*.zip

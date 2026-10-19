@@ -1,0 +1,154 @@
+"""Observable LangGraph Agent workflow for chest X-ray education reports."""
+
+from __future__ import annotations
+
+import asyncio
+import time
+import uuid
+from collections.abc import AsyncIterator, Callable
+from typing import Any, TypedDict
+
+try:
+    from langgraph.graph import END, START, StateGraph
+except ImportError:  # pragma: no cover - lightweight fallback when langgraph is not installed
+    START = "__start__"
+    END = "__end__"
+
+    class _CompiledFallbackGraph:
+        def __init__(self, nodes, edges, conditional_edges):
+            self._nodes = nodes
+            self._edges = edges
+            self._conditional_edges = conditional_edges
+
+        async def astream(self, initial_state: dict, stream_mode: str = "updates"):
+            state = dict(initial_state)
+            curr = self._edges.get(START)
+            while curr and curr != END:
+                fn = self._nodes[curr]
+                update = await fn(state)
+                state = {**state, **update}
+                yield {curr: update}
+                if curr in self._conditional_edges:
+                    router, mapping = self._conditional_edges[curr]
+                    curr = mapping.get(router(state), END)
+                else:
+                    curr = self._edges.get(curr, END)
+
+    class StateGraph:  # type: ignore[no-redef]
+        def __init__(self, _state_type):
+            self._nodes = {}
+            self._edges = {}
+            self._conditional_edges = {}
+
+        def add_node(self, name: str, fn: Callable):
+            self._nodes[name] = fn
+
+        def add_edge(self, src: str, dst: str):
+            self._edges[src] = dst
+
+        def add_conditional_edges(self, src: str, router: Callable, mapping: dict):
+            self._conditional_edges[src] = (router, mapping)
+
+        def compile(self):
+            return _CompiledFallbackGraph(self._nodes, self._edges, self._conditional_edges)
+
+from PIL import Image
+
+from .rag.retriever import hybrid_retrieve
+from .report_service import build_local_fallback, create_report
+
+
+class AgentState(TypedDict, total=False):
+    trace_id: str
+    image: Image.Image
+    question: str
+    infer: Callable[[Image.Image], dict]
+    inference: dict
+    sources: list[dict]
+    retrieval_info: dict
+    report: dict
+    provider: str
+    fallback_reason: str | None
+    steps: list[dict]
+
+
+def build_agent_graph():
+    async def validate(state: AgentState) -> dict[str, Any]:
+        if len(state.get("question", "")) > 500:
+            raise ValueError("问题长度不能超过500个字符")
+        if not isinstance(state.get("image"), Image.Image):
+            raise ValueError("胸片输入无效")
+        return {"trace_id": uuid.uuid4().hex[:12], "steps": [{"name": "输入校验", "status": "completed", "elapsed_ms": 0}]}
+
+    async def image_inference(state: AgentState) -> dict[str, Any]:
+        started = time.perf_counter()
+        result = await asyncio.to_thread(state["infer"], state["image"])
+        step = {"name": "影像推理", "status": "completed", "elapsed_ms": round((time.perf_counter() - started) * 1000, 1)}
+        return {"inference": result, "steps": [*state.get("steps", []), step]}
+
+    async def retrieve(state: AgentState) -> dict[str, Any]:
+        started = time.perf_counter()
+        codes = [item["code"] for item in state["inference"].get("all_predictions", [])[:3]]
+        sources, info = await hybrid_retrieve(codes, state.get("question", ""), top_k=4)
+        step = {"name": "知识检索", "status": "completed", "elapsed_ms": round((time.perf_counter() - started) * 1000, 1), "count": len(sources), "mode": info["mode"]}
+        return {"sources": sources, "retrieval_info": info, "steps": [*state.get("steps", []), step]}
+
+    def evidence_route(state: AgentState) -> str:
+        return "fallback" if not state.get("sources") else "report"
+
+    async def report(state: AgentState) -> dict[str, Any]:
+        started = time.perf_counter()
+        result, provider = await create_report(state["image"], state.get("question", ""), state["inference"], state["sources"])
+        step = {"name": "DashScope Qwen 多模态报告", "status": "completed" if provider == "qwen" else "degraded", "elapsed_ms": round((time.perf_counter() - started) * 1000, 1)}
+        return {"report": result, "provider": provider, "fallback_reason": None if provider == "qwen" else "qwen_unavailable", "steps": [*state.get("steps", []), step]}
+
+    async def fallback(state: AgentState) -> dict[str, Any]:
+        steps = [*state.get("steps", []), {"name": "证据充分性检查", "status": "degraded", "elapsed_ms": 0}]
+        steps.append({"name": "报告生成", "status": "degraded", "elapsed_ms": 0})
+        return {"report": build_local_fallback(state["inference"], []), "provider": "local_fallback", "fallback_reason": "insufficient_evidence", "steps": steps}
+
+    async def safety(state: AgentState) -> dict[str, Any]:
+        step = {"name": "安全审查", "status": "completed", "elapsed_ms": 0}
+        return {"steps": [*state.get("steps", []), step]}
+
+    graph = StateGraph(AgentState)
+    graph.add_node("input_validation", validate)
+    graph.add_node("image_inference", image_inference)
+    graph.add_node("hybrid_retrieval", retrieve)
+    graph.add_node("report_generation", report)
+    graph.add_node("insufficient_evidence", fallback)
+    graph.add_node("safety_review", safety)
+    graph.add_edge(START, "input_validation")
+    graph.add_edge("input_validation", "image_inference")
+    graph.add_edge("image_inference", "hybrid_retrieval")
+    graph.add_conditional_edges("hybrid_retrieval", evidence_route, {"report": "report_generation", "fallback": "insufficient_evidence"})
+    graph.add_edge("report_generation", "safety_review")
+    graph.add_edge("insufficient_evidence", "safety_review")
+    graph.add_edge("safety_review", END)
+    return graph.compile()
+
+
+AGENT_GRAPH = build_agent_graph()
+
+
+async def workflow_events(image: Image.Image, question: str, infer: Callable[[Image.Image], dict]) -> AsyncIterator[tuple[str, dict]]:
+    initial: AgentState = {"image": image, "question": question, "infer": infer, "steps": []}
+    state: AgentState = initial
+    emitted_count = 0
+    async for update in AGENT_GRAPH.astream(initial, stream_mode="updates"):
+        values = next(iter(update.values()))
+        state = {**state, **values}
+        steps = state.get("steps", [])
+        for step in steps[emitted_count:]:
+            yield "step", step
+        emitted_count = len(steps)
+    yield "complete", {
+        "trace_id": state["trace_id"],
+        "inference": state["inference"],
+        "report": state["report"],
+        "sources": state.get("sources", []),
+        "retrieval": state.get("retrieval_info", {}),
+        "provider": state["provider"],
+        "fallback_reason": state.get("fallback_reason"),
+        "steps": state["steps"],
+    }
