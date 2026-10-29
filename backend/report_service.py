@@ -11,6 +11,7 @@ from .qwen_client import DashScopeQwenClient
 REQUIRED_REPORT_FIELDS = {
     "summary",
     "findings",
+    "impression",
     "evidence",
     "limitations",
     "suggested_actions",
@@ -51,6 +52,7 @@ def build_report_prompt(
 {{
   "summary": "不超过120字的摘要",
   "findings": [{{"code": "疾病代码", "name": "疾病名称", "probability": 0.0, "explanation": "解释模型结果"}}],
+  "impression": ["影像学印象，须为描述性、非诊断性表述"],
   "evidence": [{{"chunk_id": "知识片段ID", "claim": "该片段支持的说法"}}],
   "limitations": ["影像或模型局限性"],
   "suggested_actions": ["适合的下一步建议"],
@@ -69,7 +71,7 @@ def validate_report(
         raise ValueError("Qwen report is missing required fields")
     if not isinstance(report.get("summary"), str):
         raise ValueError("Qwen report summary must be text")
-    for field in ("findings", "evidence", "limitations", "suggested_actions"):
+    for field in ("findings", "impression", "evidence", "limitations", "suggested_actions"):
         if not isinstance(report.get(field), list):
             raise ValueError(f"Qwen report {field} must be a list")
     if not all(isinstance(item, dict) for item in report["evidence"]):
@@ -114,6 +116,9 @@ def build_local_fallback(inference: dict, documents: list[dict]) -> dict:
                 "explanation": "来自本地影像模型的概率输出，不代表临床确诊。",
             }
             for item in inference.get("probabilities", [])[:3]
+        ],
+        "impression": [
+            f"模型输出提示 {top.get('name', '未知')} 方向需关注；影像学印象需由医生结合临床判断。"
         ],
         "evidence": [
             {"chunk_id": item["id"], "claim": item["content"]}
