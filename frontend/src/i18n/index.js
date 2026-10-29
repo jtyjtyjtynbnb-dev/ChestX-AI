@@ -262,6 +262,8 @@ const en = {
 Object.assign(en, enExtra);
 
 const zh = Object.fromEntries(Object.keys(en).map((key) => [key, key]));
+zh.recordsSearchPlaceholder = '搜索文件名、病种或结论...';
+zh.knowledgeSearchPlaceholder = '快速筛选胸片征象...';
 
 export const i18n = createI18n({
   legacy: false,
