@@ -28,3 +28,11 @@ Thumbs.db
 frontend.backup-*/
 legacy-backup-*/
 *.zip
+
+# 工具缓存与本地杂项
+.npm-cache/
+frontend/1
+1121.py
+frontend/tests/*.png
+.tmp-build/
+frontend/.npm-cache/
