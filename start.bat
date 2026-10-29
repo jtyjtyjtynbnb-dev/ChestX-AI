@@ -2,6 +2,8 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 set "RUN_ROOT=%~dp0"
+set "APP_DIR=%RUN_ROOT%"
+if "%APP_DIR:~-1%"=="\" set "APP_DIR=%APP_DIR:~0,-1%"
 if not defined CHESTX_API_PORT set "CHESTX_API_PORT=8000"
 cd /d "%RUN_ROOT%"
 if errorlevel 1 (
@@ -133,7 +135,7 @@ if defined BACKEND_REUSE (
   echo Reusing existing ChestX-AI backend on port %CHESTX_API_PORT%...
 ) else (
   echo Starting backend on port %CHESTX_API_PORT%...
-  start "ChestX-AI Backend" /b "%PYTHON_EXE%" -m uvicorn backend.main:app --app-dir "%RUN_ROOT%" --host 127.0.0.1 --port %CHESTX_API_PORT%
+  start "ChestX-AI Backend" /b "%PYTHON_EXE%" -m uvicorn backend.main:app --app-dir "%APP_DIR%" --host 127.0.0.1 --port %CHESTX_API_PORT%
 )
 
 set "READY="
