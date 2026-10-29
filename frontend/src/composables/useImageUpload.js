@@ -1,10 +1,8 @@
 import { reactive, ref } from 'vue';
-import { MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES, CLINICAL_SAMPLE_CASES } from '../stores/referenceData.js';
+import { CLINICAL_SAMPLE_CASES } from '../stores/referenceData.js';
+import { IMAGE_UPLOAD, VIEWER_DEFAULTS } from '../constants/app.js';
 import { formatNowTime } from '../utils/format.js';
 import { decodeDicom, isDicomFile } from '../utils/dicom.js';
-
-const DICOM_MAX_SIZE = 40 * 1024 * 1024;
-const MAX_SERIES = 20;
 
 function cloneDemoCase() {
   const base = JSON.parse(JSON.stringify(CLINICAL_SAMPLE_CASES['case-high']));
@@ -50,7 +48,7 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
       image.onload = () => {
         images.delete(pending);
         try {
-          const maxSide = 1600;
+          const maxSide = IMAGE_UPLOAD.maxSide;
           const scale = Math.min(1, maxSide / Math.max(image.naturalWidth, image.naturalHeight));
           const width = Math.max(1, Math.round(image.naturalWidth * scale));
           const height = Math.max(1, Math.round(image.naturalHeight * scale));
@@ -59,8 +57,8 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
             : Object.assign(document.createElement('canvas'), { width, height });
           canvas.getContext('2d').drawImage(image, 0, 0, width, height);
           const finish = (blob) => resolve({ blob, width: image.naturalWidth, height: image.naturalHeight });
-          if (canvas.convertToBlob) canvas.convertToBlob({ type: 'image/jpeg', quality: 0.85 }).then(finish, reject);
-          else canvas.toBlob((blob) => blob ? finish(blob) : reject(new Error('图片压缩失败')), 'image/jpeg', 0.85);
+          if (canvas.convertToBlob) canvas.convertToBlob({ type: 'image/jpeg', quality: IMAGE_UPLOAD.jpegQuality }).then(finish, reject);
+          else canvas.toBlob((blob) => blob ? finish(blob) : reject(new Error('图片压缩失败')), 'image/jpeg', IMAGE_UPLOAD.jpegQuality);
         } catch (error) { reject(error); }
       };
       image.src = source;
@@ -76,11 +74,11 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
   function validateFile(file) {
     if (!file) return '未选择文件';
     if (isDicomFile(file)) {
-      if (file.size > DICOM_MAX_SIZE) return 'DICOM 文件不能超过 40MB';
+      if (file.size > IMAGE_UPLOAD.maxDicomBytes) return 'DICOM 文件不能超过 40MB';
       return '';
     }
-    if (!ALLOWED_IMAGE_TYPES.includes(file.type) && !/\.(jpg|jpeg|png)$/i.test(file.name)) return '格式错误：仅支持 JPG / PNG / DICOM';
-    if (file.size > MAX_IMAGE_SIZE) return '文件超限：单张胸片大小不能超过 10MB，请压缩后重试';
+    if (!IMAGE_UPLOAD.allowedTypes.includes(file.type) && !/\.(jpg|jpeg|png)$/i.test(file.name)) return '格式错误：仅支持 JPG / PNG / DICOM';
+    if (file.size > IMAGE_UPLOAD.maxImageBytes) return '文件超限：单张胸片大小不能超过 10MB，请压缩后重试';
     return '';
   }
 
@@ -143,12 +141,12 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
     AppState.viewer.measureMode = 'none';
     AppState.viewer.measurePoints = [];
     AppState.viewer.measurements = [];
-    AppState.viewer.brightness = 100;
-    AppState.viewer.contrast = 100;
+    AppState.viewer.brightness = VIEWER_DEFAULTS.brightness;
+    AppState.viewer.contrast = VIEWER_DEFAULTS.contrast;
   }
 
   async function handleLocalXrayFiles(files, options = {}) {
-    const list = [...(files || [])].slice(0, MAX_SERIES);
+    const list = [...(files || [])].slice(0, IMAGE_UPLOAD.maxSeries);
     if (!list.length) return false;
     for (const file of list) {
       const error = validateFile(file);

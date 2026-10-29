@@ -1,4 +1,4 @@
-import { PROB_THRESHOLD } from '../stores/referenceData.js';
+import { PROB_THRESHOLD } from '../constants/app.js';
 
 export function formatProb(val) {
   return Number(val || 0).toFixed(1) + '%';

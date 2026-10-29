@@ -39,3 +39,7 @@ frontend/.npm-cache/
 .tmp-*/
 .dsh-office-*/
 pip-*/
+wheelhouse/
+wheels/
+coverage/
+.cache/

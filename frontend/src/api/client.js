@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_ENDPOINTS, REQUEST_TIMEOUT_MS } from '../constants/api.js';
 
 const params = new URLSearchParams(globalThis.location?.search || '');
 const viteEnv = import.meta.env || {};
@@ -13,7 +14,7 @@ function newRequestId() {
 
 const http = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 30000,
+  timeout: REQUEST_TIMEOUT_MS.default,
   headers: { Accept: 'application/json' },
 });
 
@@ -91,7 +92,7 @@ export function createApiScope() {
   }
 
   async function sample(id, options = {}) {
-    const response = await scopedFetch('/api/samples/' + encodeURIComponent(id), options);
+    const response = await scopedFetch(API_ENDPOINTS.sample(id), options);
     try {
       if (!response.ok) throw new Error('教学胸片读取失败');
       return await response.blob();

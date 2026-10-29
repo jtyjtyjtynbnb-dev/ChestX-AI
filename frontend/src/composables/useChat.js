@@ -1,3 +1,4 @@
+import { API_ENDPOINTS } from '../constants/api.js';
 import { computed } from 'vue';
 
 export function ensureChatState(AppState) {
@@ -48,7 +49,7 @@ export function useChat(ctx) {
     try {
       let completed;
       try {
-        const result = await api.stream('/api/agent/chat/stream', options, (event, data) => {
+        const result = await api.stream(API_ENDPOINTS.chatStream, options, (event, data) => {
           if (controller.signal.aborted) return;
           const name = typeof event === 'string' ? event : event.event || event.type;
           const value = data ?? event.data ?? {};
@@ -61,7 +62,7 @@ export function useChat(ctx) {
         if (!completed?.answer) throw new Error('stream_fallback');
       } catch (error) {
         if (controller.signal.aborted || error.name === 'AbortError') throw error;
-        completed = await api.json('/api/agent/chat', options);
+        completed = await api.json(API_ENDPOINTS.chat, options);
         completed = completed?.data || completed;
         if (!completed?.answer) throw new Error('问答服务暂不可用');
       }
@@ -74,7 +75,7 @@ export function useChat(ctx) {
       if (controller.signal.aborted || error.name === 'AbortError') {
         const index = chat.messages.indexOf(pending);
         if (index >= 0) chat.messages.splice(index, 1);
-      } else Object.assign(pending, { pending: false, stepText: '', content: error.message || '问答失败，请检查后端服务和 Qwen 设置' });
+      } else { Object.assign(pending, { pending: false, stepText: '', content: error.message || '问答失败，请检查后端服务和 Qwen 设置' }); actions.showToast?.(error.message || '问答服务暂不可用', 'error'); }
     } finally {
       if (request === controller) { request = null; chat.busy = false; if (chat.open) chat.focusInput++; }
     }

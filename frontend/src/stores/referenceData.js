@@ -1,11 +1,10 @@
 /** Reference content and deterministic initial state owned by the Pinia store layer. */
+import { IMAGE_UPLOAD, PROB_THRESHOLD, VIEWER_DEFAULTS, VIEWER_ZOOM } from '../constants/app.js';
     /**
      * 一、全局常量定义 (对应 src/utils/constant.js，严禁魔法数字)
      */
-    const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
-    const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/jpg'];
-    const VIEWER_ZOOM = { MIN: 0.5, MAX: 4.0, STEP: 0.2, DEFAULT: 1.0 };
-    const PROB_THRESHOLD = { HIGH: 60.0, MEDIUM: 25.0 };
+    const MAX_IMAGE_SIZE = IMAGE_UPLOAD.maxImageBytes;
+    const ALLOWED_IMAGE_TYPES = IMAGE_UPLOAD.allowedTypes;
     const SAMPLE_IMAGES = {
       ABNORMAL: '/assets/sample_2.jpg',
       NORMAL: '/assets/sample_3.jpg'
@@ -591,16 +590,16 @@
         dragStartX: 0,
         dragStartY: 0,
         invertFilter: false,
-        brightness: 100,
-        contrast: 100,
+        brightness: VIEWER_DEFAULTS.brightness,
+        contrast: VIEWER_DEFAULTS.contrast,
         measureMode: 'none',
         measurePoints: [],
         measurements: [],
         pixelSpacing: null,
         showHeatmap: true,
-        heatmapOpacity: 68,
+        heatmapOpacity: VIEWER_DEFAULTS.heatmapOpacity,
         compareMode: false,
-        splitPercent: 50
+        splitPercent: VIEWER_DEFAULTS.splitPercent
       },
       probViewMode: 'list', // 'list' | 'chart'
       selectedDiseaseCode: 'pneumonia',

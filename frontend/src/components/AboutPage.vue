@@ -38,7 +38,6 @@ import { aboutChartOption } from '../composables/useDashboard.js';
           <div class="flex justify-between"><span class="text-text-3">工程定位：</span><span class="font-medium text-primary">本地推理 · 可解释热力图 · 科普档案</span></div>
           <div class="flex justify-between"><span class="text-text-3">核心框架：</span><span class="font-medium text-text-1">Vue 3.5 / Vite 5 / Pinia 2</span></div>
           <div class="flex justify-between"><span class="text-text-3">UI与样式：</span><span class="font-medium text-text-1">Tailwind 3.4 + 原生组件</span></div>
-          <div class="flex justify-between"><span class="text-text-3">响应式断点：</span><span class="font-medium tabular-nums text-text-1">375px ~ 1440px+ 全适配</span></div>
           <div class="flex justify-between"><span class="text-text-3">部署方式：</span><span class="font-medium tabular-nums text-success">单端口 · 本地同源托管</span></div>
         </div>
       </div>

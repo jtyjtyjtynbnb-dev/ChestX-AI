@@ -1,12 +1,13 @@
 import { ensureChatState } from './useChat.js';
+import { VIEWER_DEFAULTS } from '../constants/app.js';
 
 export function useChatMessages({ AppState, actions }) {
   const chat = ensureChatState(AppState);
   async function triggerCopilotFocusHeatmap() {
     AppState.viewer.showHeatmap = true;
-    AppState.viewer.heatmapOpacity = 75;
+    AppState.viewer.heatmapOpacity = VIEWER_DEFAULTS.focusHeatmapOpacity;
     if (!await actions.focusHeatmap()) return;
-    actions.showToast('已定位至模型高激活热力图层 (透明度 75%)', 'info');
+    actions.showToast('已定位至模型高激活热力图层 (透明度 ' + VIEWER_DEFAULTS.focusHeatmapOpacity + '%)', 'info');
   }
   function triggerCopilotSaveToMemberNotes(answerText) {
     const member = actions.getCurrentMember();

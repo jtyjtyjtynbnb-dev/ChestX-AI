@@ -1,3 +1,4 @@
+import { API_ENDPOINTS } from '../constants/api.js';
 import { computed } from 'vue';
 import { ensureChatState } from './useChat.js';
 
@@ -18,7 +19,7 @@ export function useChatConversations({ AppState, api, store, actions, modules = 
     const request = new AbortController();
     requests.add(request);
     chat.syncState = 'syncing';
-    return api.json('/api/conversations/sync', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ conversations: sliced }), signal: request.signal })
+    return api.json(API_ENDPOINTS.conversationsSync, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ conversations: sliced }), signal: request.signal })
       .then(() => { if (!request.signal.aborted) chat.syncState = 'synced'; })
       .catch(() => { if (!request.signal.aborted) chat.syncState = 'local'; })
       .finally(() => requests.delete(request));
@@ -57,7 +58,7 @@ export function useChatConversations({ AppState, api, store, actions, modules = 
   async function restoreRemote() {
     const request = new AbortController(); requests.add(request);
     try {
-      const payload = await api.json('/api/conversations', { signal: request.signal });
+      const payload = await api.json(API_ENDPOINTS.conversations, { signal: request.signal });
       const remote = payload?.conversations || payload?.data?.conversations;
       if (!request.signal.aborted && Array.isArray(remote) && remote.length && AppState.conversations.length <= 1 && !activeChatConversation()?.messages.some((message) => message.role === 'user')) {
         AppState.conversations = remote;

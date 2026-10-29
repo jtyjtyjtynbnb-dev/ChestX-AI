@@ -21,9 +21,7 @@ const en = {
   '医疗合规与免责提示': 'Medical compliance',
   '本平台输出结果仅供健康科普与教学演示参考，不作为临床诊断依据。如身体不适请及时前往正规医院就诊。': 'Outputs are for health education and teaching demonstrations only, not for clinical diagnosis. Seek care at a qualified hospital if you feel unwell.',
   '© 2026 胸影智识 (ChestX-AI) · 标准化前端工程': '© 2026 ChestX-AI · Standardized front-end engineering',
-  '遵循 Vue 3.5 组合式 API · Tailwind 3.4 · 零控制台报错标准': 'Vue 3.5 Composition API · Tailwind 3.4 · zero uncaught console errors',
   '打开设置': 'Open settings',
-  '展开或收起导航菜单': 'Toggle navigation menu',
   '当前家庭成员': 'Current family member',
   '关闭问答': 'Close chat',
   '打开医学影像问答': 'Open imaging Q&A',
@@ -152,15 +150,14 @@ const en = {
   '未填写': 'Not provided',
   '男': 'Male',
   '女': 'Female',
-  '搜索文件名、病种或结论...': 'Search file name, finding or conclusion...',
-  '快速筛选 10 类胸部疾病...': 'Filter the health library...',
+  'recordsSearch': 'Search file name, finding or conclusion...',
+  'knowledgeSearch': 'Filter chest X-ray findings...',
   '记录家人的健康关注点（可选）': 'Family health notes (optional)',
   '例如：爸爸、林知夏': 'e.g. Dad, Lin Zhixia',
   '例如：高血压、青霉素过敏（可选）': 'e.g. hypertension, penicillin allergy (optional)',
   '例如：影像科 张医生': 'e.g. Dr. Zhang, Radiology',
   '例如：胸腔积液在胸片上常见哪些线索？': 'e.g. What are common chest X-ray signs of pleural effusion?',
   '输入新的 API Key': 'Enter a new API key',
-  '密钥仅保存在当前后端进程内存，重启后需重新配置': 'The key is saved to the local backend .env and persists across restarts.',
   'Qwen AI 服务': 'Qwen AI service',
   '家庭成员管理': 'Family members',
   '未配置': 'Not configured',
@@ -185,24 +182,18 @@ const en = {
   '仅供公众健康科普参考与医学影像教学演示使用，不具备任何临床诊断效力，亦不可替代执业医师的面对面问诊与放射科正式审核报告': 'For public health education and imaging teaching demonstrations only. It has no clinical diagnostic validity and cannot replace an in-person consultation or a formal radiology report.',
   '「胸影智识 (ChestX-AI)」系统所提供的胸部X光影像概率分析、模型注意力热力图定位及全部健康科普内容，': 'The chest X-ray probability analysis, model attention heatmaps and health content provided by ChestX-AI ',
   '。若您存在发热、胸痛、持续咳嗽或呼吸困难等症状，请立即前往正规医疗机构呼吸内科或胸外科就诊。': '. If you have fever, chest pain, persistent cough or breathing difficulty, seek care at a qualified hospital promptly.',
-  '英文界面为预览版，医学科普正文暂保留中文。': 'English UI preview. Long-form medical articles remain in Chinese.',
 
   // Misc
   '临床意义：': 'Clinical relevance:',
   '典型征象': 'Typical signs',
-  '十类胸部征象影像讲解': 'Ten chest findings explained',
   '含交互解剖热区与读片自测': 'Interactive anatomy hotspots and a reading quiz',
   '图文互动': 'Visual learning',
   '定位高激活热区': 'Locate high-activation regions',
-  '全流程耗时 < 10秒': 'End-to-end under 10 seconds',
-  '响应式断点：': 'Responsive breakpoints:',
   '工程定位：': 'Positioning:',
   '核心框架：': 'Core stack:',
   'UI与样式：': 'UI & styling:',
   '部署方式：': 'Deployment:',
   '单端口 · 本地同源托管': 'Single port · local same-origin hosting',
-  '375px ~ 1440px+ 全适配': 'Responsive from 375px to 1440px+',
-  '05 数据与隐私': '05 Data and privacy',
   '上传与解码': 'Upload and decoding',
   '本地存储': 'Local storage',
   '同源访问': 'Same-origin access',
@@ -242,7 +233,6 @@ const en = {
   '样本1：右下肺斑片影 (高风险)': 'Sample 1: right lower-lobe opacity (high risk)',
   '样本2：右肺微小结节 (中风险)': 'Sample 2: small right lung nodule (medium risk)',
   '样本3：标准正常胸片 (低风险)': 'Sample 3: normal chest X-ray (low risk)',
-  '示教病例': 'Teaching case',
   '演示数据': 'Demo data',
   '高风险关注': 'High risk',
   '中风险随访': 'Medium risk',
@@ -251,19 +241,16 @@ const en = {
   '中风险': 'Medium risk',
   '低风险': 'Low risk',
   '梳理模型 10 类与扩展 4 类胸片征象，点击左侧病种即可切换查阅': 'Model 10 findings plus 4 extended articles; select a finding on the left.',
-  '快速筛选胸片征象...': 'Filter chest X-ray findings...',
   '胸片征象影像讲解（模型 10 类 + 扩展）': 'Chest X-ray findings explained (model 10 + extensions)',
   '3 步完成 · 本地推理': '3 steps · local inference',
   '组件化前端实现': 'Component-based front end',
-  'recordsSearchPlaceholder': 'Search file name, finding or conclusion...',
-  'knowledgeSearchPlaceholder': 'Filter chest X-ray findings...',
 };
 
 Object.assign(en, enExtra);
 
 const zh = Object.fromEntries(Object.keys(en).map((key) => [key, key]));
-zh.recordsSearchPlaceholder = '搜索文件名、病种或结论...';
-zh.knowledgeSearchPlaceholder = '快速筛选胸片征象...';
+zh.recordsSearch = '搜索文件名、病种或结论...';
+zh.knowledgeSearch = '快速筛选胸片征象...';
 
 export const i18n = createI18n({
   legacy: false,

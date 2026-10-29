@@ -1,5 +1,7 @@
 <script setup>
 import { useInterpretPage } from "../composables/useInterpretPage.js";
+import AnalyzingPanel from "./AnalyzingPanel.vue";
+import ImageViewerInfo from "./ImageViewerInfo.vue";
 const vm = useInterpretPage();
 </script>
 
@@ -228,25 +230,7 @@ const vm = useInterpretPage();
               </div>
             </div>
 
-            <!-- 影像信息栏：文件名、尺寸、文件大小、上传时间 -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-md bg-page-bg px-3.5 py-2 text-xs text-text-2 border border-border-line">
-              <div class="truncate">
-                <span class="text-text-3">文件名：</span>{{ ' ' }}
-                <span id="infoFileName" class="font-medium text-text-1">{{ vm.currentCase.fileName }}</span>
-              </div>
-              <div>
-                <span class="text-text-3">尺寸：</span>{{ ' ' }}
-                <span id="infoDimensions" class="font-medium tabular-nums text-text-1">{{ vm.currentCase.dimensions }}</span>
-              </div>
-              <div>
-                <span class="text-text-3">大小：</span>{{ ' ' }}
-                <span id="infoFileSize" class="font-medium tabular-nums text-text-1">{{ vm.formatBytes(vm.currentCase.fileSize) }}</span>
-              </div>
-              <div>
-                <span class="text-text-3">上传时间：</span>{{ ' ' }}
-                <span id="infoUploadTime" class="font-medium tabular-nums text-text-1">{{ vm.currentCase.uploadedAt }}</span>
-              </div>
-            </div>
+            <ImageViewerInfo :current-case="vm.currentCase" />
 
             <!-- 多文件序列播放条 -->
             <div v-if="vm.series.length > 1" class="flex items-center gap-2 rounded-md border border-border-line bg-white px-3 py-2">
@@ -284,46 +268,7 @@ const vm = useInterpretPage();
             </div>
           </div>
 
-          <!-- 状态 2：分析中骨架屏面板 (analyzing - 1.5s循环骨架屏 + 进度提示) -->
-          <div id="stateAnalyzingPanel" v-show="vm.AppState.diagnoseStatus === 'analyzing'" class="space-y-4">
-            <div class="med-card border-primary/30 bg-primary/[0.02]">
-              <div class="flex items-center justify-between text-xs font-medium text-primary mb-2">
-                <span id="analyzingStageText">{{ vm.diagnosis.progress.text }}</span>
-                <span id="analyzingPercentText" class="tabular-nums font-semibold">{{ vm.diagnosis.progress.percent + '%' }}</span>
-              </div>
-              <div class="h-2 w-full overflow-hidden rounded-full bg-gray-200">
-                <div id="analyzingProgressBar" class="h-full bg-primary transition-all duration-200" :style="{ width: vm.diagnosis.progress.percent + '%' }"></div>
-              </div>
-            </div>
-
-            <!-- 骨架屏卡片 -->
-            <div class="med-card skeleton-pulse space-y-4">
-              <div class="flex items-center justify-between">
-                <div class="h-5 w-32 rounded bg-gray-200"></div>
-                <div class="h-6 w-16 rounded bg-gray-200"></div>
-              </div>
-              <div class="h-16 w-full rounded bg-gray-100"></div>
-              <div class="space-y-3 pt-2">
-                <div class="h-4 w-40 rounded bg-gray-200"></div>
-                <div class="space-y-2">
-                  <div class="flex justify-between"><div class="h-3.5 w-28 rounded bg-gray-200"></div><div class="h-3.5 w-12 rounded bg-gray-200"></div></div>
-                  <div class="h-2.5 w-full rounded-full bg-gray-100"></div>
-                </div>
-                <div class="space-y-2">
-                  <div class="flex justify-between"><div class="h-3.5 w-32 rounded bg-gray-200"></div><div class="h-3.5 w-12 rounded bg-gray-200"></div></div>
-                  <div class="h-2.5 w-full rounded-full bg-gray-100"></div>
-                </div>
-                <div class="space-y-2">
-                  <div class="flex justify-between"><div class="h-3.5 w-24 rounded bg-gray-200"></div><div class="h-3.5 w-12 rounded bg-gray-200"></div></div>
-                  <div class="h-2.5 w-full rounded-full bg-gray-100"></div>
-                </div>
-                <div class="space-y-2">
-                  <div class="flex justify-between"><div class="h-3.5 w-28 rounded bg-gray-200"></div><div class="h-3.5 w-12 rounded bg-gray-200"></div></div>
-                  <div class="h-2.5 w-full rounded-full bg-gray-100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <AnalyzingPanel v-if="vm.AppState.diagnoseStatus === 'analyzing'" :progress="vm.diagnosis.progress" />
 
           <!-- 状态 3：分析完成结构化结果面板 (done) -->
           <div id="stateDonePanel" v-show="vm.AppState.diagnoseStatus === 'done'" class="space-y-4">
@@ -425,12 +370,6 @@ const vm = useInterpretPage();
           </div>
 
         </div>
-      </div>
-
-      <!-- 手机端 (<768px) 底部悬浮快捷操作栏 -->
-      <div class="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between gap-2 border-t border-border-line bg-white/95 backdrop-blur px-4 py-2.5 shadow-lg md:hidden">
-        <button type="button" id="mobileReuploadBtn" @click="vm.upload.showUploader()" class="btn-secondary btn-sm flex-1">重新上传</button>
-        <button type="button" id="mobileSaveRecordBtn" @click="vm.actions.saveCurrentToHealthRecords()" :disabled="vm.AppState.diagnoseStatus !== 'done'" class="btn-primary !h-9 !text-xs flex-1 disabled:cursor-not-allowed disabled:opacity-50">保存到健康档案</button>
       </div>
     </section>
 </template>

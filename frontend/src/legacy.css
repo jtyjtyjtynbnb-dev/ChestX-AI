@@ -217,10 +217,6 @@
     .ai-chat-bubble.user { margin-left: auto; background: #0F62FE; color: #fff; }
     .ai-chat-bubble.assistant { margin-right: auto; background: #fff; border: 1px solid #E5E6EB; color: #1D2129; }
     .ai-chat-source { display: block; margin-top: 6px; color: #4E5969; font-size: 11px; text-decoration: underline; }
-    @media (max-width: 576px) {
-      .ai-chat-launcher { right: 16px; bottom: 16px; }
-      .ai-chat-panel { right: 16px; bottom: 82px; width: calc(100vw - 32px); height: min(560px, calc(100vh - 105px)); }
-    }
 
     /* 自定义滚动条 */
     ::-webkit-scrollbar {
@@ -264,7 +260,7 @@
 
     /* 报告打印 / 另存为 PDF：只保留报告弹窗 */
     @media print {
-      #mainHeader, #mobileNavMenu, footer, #aiChatLauncher, #aiChatPanel,
+      #mainHeader, footer, #aiChatLauncher, #aiChatPanel,
       #toastContainer, #routeProgressBar, .no-print { display: none !important; }
       body { background: #FFFFFF !important; }
       main { padding: 0 !important; margin: 0 !important; max-width: none !important; }

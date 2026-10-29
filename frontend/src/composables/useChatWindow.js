@@ -1,4 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, reactive, watch } from 'vue';
+import { CHAT_PANEL } from '../constants/app.js';
 import { ensureChatState } from './useChat.js';
 
 export function useChatWindow({ AppState, modules = {}, actions }) {
@@ -8,14 +9,14 @@ export function useChatWindow({ AppState, modules = {}, actions }) {
   let drag = null;
   let draggedLauncher = false;
   function clampFloatingPosition(size, left, top) {
-    return { left: Math.max(8, Math.min(viewport.width - size.width - 8, left)), top: Math.max(8, Math.min(viewport.height - size.height - 8, top)) };
+    return { left: Math.max(CHAT_PANEL.screenInset, Math.min(viewport.width - size.width - CHAT_PANEL.screenInset, left)), top: Math.max(CHAT_PANEL.screenInset, Math.min(viewport.height - size.height - CHAT_PANEL.screenInset, top)) };
   }
-  function panelSize() { return { width: Math.min(390, viewport.width - 32), height: Math.min(560, viewport.height - (viewport.width <= 576 ? 105 : 130)) }; }
+  function panelSize() { return { width: Math.min(CHAT_PANEL.width, viewport.width - CHAT_PANEL.viewportGap), height: Math.min(CHAT_PANEL.maxHeight, viewport.height - CHAT_PANEL.heightGap) }; }
   function positionChatPanel() {
-    const edge = viewport.width <= 576 ? 16 : 24;
-    const launcher = position.launcher || { left: viewport.width - edge - 54, top: viewport.height - edge - 54 };
+    const edge = CHAT_PANEL.edge;
+    const launcher = position.launcher || { left: viewport.width - edge - CHAT_PANEL.launcherSize, top: viewport.height - edge - CHAT_PANEL.launcherSize };
     const size = panelSize();
-    position.panel = clampFloatingPosition(size, launcher.left + 54 - size.width, launcher.top - size.height - 14);
+    position.panel = clampFloatingPosition(size, launcher.left + CHAT_PANEL.launcherSize - size.width, launcher.top - size.height - CHAT_PANEL.panelGap);
   }
   const cssPosition = (value) => value ? { left: `${value.left}px`, top: `${value.top}px`, right: 'auto', bottom: 'auto' } : {};
   const launcherStyle = computed(() => cssPosition(position.launcher));
@@ -53,7 +54,7 @@ export function useChatWindow({ AppState, modules = {}, actions }) {
   }
   function resize() {
     viewport.width = window.innerWidth; viewport.height = window.innerHeight;
-    if (position.launcher) position.launcher = clampFloatingPosition({ width: 54, height: 54 }, position.launcher.left, position.launcher.top);
+    if (position.launcher) position.launcher = clampFloatingPosition({ width: CHAT_PANEL.launcherSize, height: CHAT_PANEL.launcherSize }, position.launcher.left, position.launcher.top);
     if (chat.open) positionChatPanel();
   }
   function keydown(event) {
@@ -73,7 +74,7 @@ export function useChatWindow({ AppState, modules = {}, actions }) {
     resize();
     try {
       const saved = JSON.parse(localStorage.getItem('chestx-ai-chat-position') || 'null');
-      if (saved && Number.isFinite(saved.left) && Number.isFinite(saved.top)) position.launcher = clampFloatingPosition({ width: 54, height: 54 }, saved.left, saved.top);
+      if (saved && Number.isFinite(saved.left) && Number.isFinite(saved.top)) position.launcher = clampFloatingPosition({ width: CHAT_PANEL.launcherSize, height: CHAT_PANEL.launcherSize }, saved.left, saved.top);
     } catch { /* Ignore invalid cached position. */ }
     window.addEventListener('pointermove', moveDrag);
     window.addEventListener('pointerup', endDrag);

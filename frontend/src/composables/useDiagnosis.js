@@ -1,3 +1,5 @@
+import { ANALYSIS_STAGE_PERCENT } from '../constants/app.js';
+import { REQUEST_TIMEOUT_MS } from '../constants/api.js';
 import { reactive } from 'vue';
 import { createDiagnosisApi } from '../api/diagnosis.js';
 import { CLINICAL_SAMPLE_CASES } from '../stores/referenceData.js';
@@ -6,7 +8,7 @@ import { formatNowTime, getRiskStyle, isNormalDominant } from '../utils/format.j
 export function useDiagnosis({ AppState, api, actions }) {
   const progress = reactive({ percent: 0, text: '正在上传图片并执行模型推理...' });
   const diagnosisApi = createDiagnosisApi(api);
-  const stagePercent = { '输入校验': 15, '影像推理': 45, '知识检索': 65, 'Qwen 多模态报告': 88, '安全审查': 96 };
+  const stagePercent = ANALYSIS_STAGE_PERCENT;
   let controller = null;
   let timeoutId = null;
   let generation = 0;
@@ -25,7 +27,7 @@ export function useDiagnosis({ AppState, api, actions }) {
     controller = new AbortController();
     const requestController = controller;
     let timedOut = false;
-    timeoutId = setTimeout(() => { timedOut = true; requestController.abort(); }, 90000);
+    timeoutId = setTimeout(() => { timedOut = true; requestController.abort(); }, REQUEST_TIMEOUT_MS.diagnosis);
     AppState.diagnoseStatus = 'analyzing';
     progress.percent = 0;
     progress.text = '正在上传图片并执行模型推理...';

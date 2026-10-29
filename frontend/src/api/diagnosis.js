@@ -1,3 +1,5 @@
+import { API_ENDPOINTS } from '../constants/api.js';
+
 /** The page owns cancellation; this adapter never reads the UI. */
 export function createDiagnosisApi(api) {
   async function requestAgentDiagnosis(file, { question = '', signal, onStep = () => {} } = {}) {
@@ -5,7 +7,7 @@ export function createDiagnosisApi(api) {
     body.append('file', file, file.name || 'xray.jpg');
     body.append('question', question.trim());
     let result = null;
-    await api.stream('/api/agent/diagnose/stream', { method: 'POST', body, signal }, (event, data) => {
+    await api.stream(API_ENDPOINTS.agentDiagnoseStream, { method: 'POST', body, signal }, (event, data) => {
       if (event === 'step') onStep(data);
       if (event === 'complete') result = data;
       if (event === 'error') throw new Error(data.message || 'Agent 工作流执行失败');

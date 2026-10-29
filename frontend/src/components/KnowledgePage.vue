@@ -13,7 +13,7 @@ const k = reactive(useKnowledge(useAppContext()));
         <p class="text-xs text-text-3 mt-0.5">梳理模型 10 类与扩展 4 类胸片征象，点击左侧病种即可切换查阅</p>
       </div>
       <div class="w-full sm:w-64">
-        <input id="knowledgeSearchInput" v-model="k.state.search" type="text" :placeholder="$t('knowledgeSearchPlaceholder')" class="w-full rounded-md border border-border-line bg-page-bg px-3 py-1.5 text-xs text-text-1 focus:border-primary focus:bg-white focus:outline-none" />
+        <input id="knowledgeSearchInput" v-model="k.state.search" type="text" :placeholder="$t('knowledgeSearch')" class="w-full rounded-md border border-border-line bg-page-bg px-3 py-1.5 text-xs text-text-1 focus:border-primary focus:bg-white focus:outline-none" />
       </div>
     </div>
 

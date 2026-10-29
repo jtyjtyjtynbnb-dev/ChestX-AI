@@ -2,16 +2,17 @@
 
 from io import BytesIO
 import json
-import os
+import logging
 from pathlib import Path
 
-from fastapi import Body, FastAPI, File, Form, Request, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Query, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
 from starlette.concurrency import run_in_threadpool
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .chat_service import answer_question, stream_answer_question
 from .config import ALLOWED_CONTENT_TYPES, FRONTEND_ORIGINS, MAX_UPLOAD_BYTES
@@ -24,12 +25,12 @@ from .database import (
 )
 from .model_infer import diagnose_image
 from .qwen_client import DashScopeError, DashScopeQwenClient, runtime_config_status, set_runtime_config
+from .schemas import ChatRequest, ConversationsSyncRequest, MembersSyncRequest, QwenSettingsRequest
 from .workflow import workflow_events
 
 
-app = FastAPI(title="ChestX-AI API", version="2.0.0")
-API_PORT = int(os.getenv("CHESTX_API_PORT", "8000"))
-SUPPORTED_QWEN_MODELS = {"qwen3.8-flash", "qwen3.8-max"}
+logger = logging.getLogger(__name__)
+app = FastAPI(title="ChestX-AI API", version="2.0.0", debug=False)
 FRONTEND_ASSETS = Path(__file__).resolve().parents[1] / "frontend" / "assets"
 DIST_DIR = Path(__file__).resolve().parents[1] / "frontend" / "dist"
 SAMPLE_IMAGES = {
@@ -54,15 +55,52 @@ app.add_middleware(
 init_db()
 
 
-@app.exception_handler(RequestValidationError)
-async def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
-    """Normalize missing multipart fields to the public 400 contract."""
-    return error_response(400, "缺少图片文件")
-
-
 def error_response(code: int, message: str) -> JSONResponse:
     """Build the API's fixed error envelope."""
     return JSONResponse(status_code=code, content={"code": code, "message": message, "data": None})
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(_request: Request, exc: RequestValidationError) -> JSONResponse:
+    """Return a stable envelope; preserve the legacy missing-file message."""
+    if any("file" in (item.get("loc") or ()) for item in exc.errors()):
+        return error_response(400, "缺少图片文件")
+    return error_response(422, "请求参数校验失败，请检查输入")
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(_request: Request, exc: StarletteHTTPException) -> JSONResponse:
+    message = exc.detail if isinstance(exc.detail, str) and exc.detail else "请求失败"
+    return error_response(exc.status_code, message)
+
+
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(_request: Request, _exc: Exception) -> JSONResponse:
+    """Do not leak Python tracebacks to the browser."""
+    logger.exception("Unhandled API exception")
+    return error_response(500, "服务器内部错误")
+
+
+async def _read_image_upload(file: UploadFile) -> Image.Image:
+    """Validate the multipart image type, size and decodability."""
+    if file.content_type not in ALLOWED_CONTENT_TYPES:
+        raise HTTPException(status_code=415, detail="仅支持 JPG/PNG 图片")
+    payload = await file.read(MAX_UPLOAD_BYTES + 1)
+    if len(payload) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="图片大小不能超过 10MB")
+    try:
+        image = Image.open(BytesIO(payload))
+        image.load()
+        return image
+    except (UnidentifiedImageError, OSError, Image.DecompressionBombError, ValueError) as exc:
+        raise HTTPException(status_code=400, detail="图片解析失败，请上传有效的 JPG/PNG 文件") from exc
+
+
+def _validated_question(question: str) -> str:
+    value = question.strip()
+    if len(value) > 500:
+        raise HTTPException(status_code=400, detail="问题长度不能超过500个字符")
+    return value
 
 
 @app.get("/api/health")
@@ -78,37 +116,28 @@ def list_members() -> dict:
 
 
 @app.post("/api/members/sync")
-async def sync_members(payload: dict = Body(...)) -> JSONResponse:
+async def sync_members(payload: MembersSyncRequest) -> JSONResponse:
     """Synchronize family members and their records from the frontend into SQLite."""
-    members = payload.get("members")
-    current_member_id = payload.get("current_member_id")
-    if not isinstance(members, list):
-        return error_response(400, "家庭成员列表格式无效")
-    data = await run_in_threadpool(sync_members_payload, members, current_member_id)
+    data = await run_in_threadpool(sync_members_payload, payload.members, payload.current_member_id)
     return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": data})
 
 
 @app.get("/api/conversations")
-def list_conversations(member_id: str | None = None) -> dict:
+def list_conversations(member_id: str | None = Query(default=None, max_length=100)) -> dict:
     """Return persisted AI chat conversations from SQLite."""
     return {"code": 200, "message": "success", "data": {"conversations": get_conversations(member_id)}}
 
 
 @app.post("/api/conversations/sync")
-async def sync_conversations(payload: dict = Body(...)) -> JSONResponse:
+async def sync_conversations(payload: ConversationsSyncRequest) -> JSONResponse:
     """Synchronize floating AI chat conversations into SQLite."""
-    conversations = payload.get("conversations")
-    if not isinstance(conversations, list):
-        return error_response(400, "会话列表格式无效")
-    data = await run_in_threadpool(sync_conversations_payload, conversations)
+    data = await run_in_threadpool(sync_conversations_payload, payload.conversations)
     return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": {"conversations": data}})
 
 
 @app.get("/api/samples/{sample_id}")
 def get_sample_image(sample_id: str):
     """Serve only the bundled chest X-ray demo images, never arbitrary paths."""
-    from fastapi.responses import FileResponse
-
     path = SAMPLE_IMAGES.get(sample_id)
     if path is None or not path.is_file():
         return error_response(404, "未找到演示胸片")
@@ -116,42 +145,28 @@ def get_sample_image(sample_id: str):
 
 
 @app.post("/api/agent/chat")
-async def agent_chat(payload: dict = Body(...)) -> JSONResponse:
+async def agent_chat(payload: ChatRequest) -> JSONResponse:
     """Answer a bounded chat question using Qwen and source-backed RAG."""
-    question = payload.get("question", "")
-    if not isinstance(question, str) or not question.strip() or len(question) > 500:
-        return error_response(400, "问题不能为空且不能超过500个字符")
-    history = payload.get("history", [])
-    context = payload.get("diagnosis_context")
-    if context is not None and not isinstance(context, dict):
-        return error_response(400, "影像上下文格式无效")
     try:
-        data = await answer_question(question, history, context)
+        data = await answer_question(payload.question, payload.history, payload.diagnosis_context)
     except ValueError as exc:
         return error_response(400, str(exc))
     return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": data})
 
 
 @app.post("/api/agent/chat/stream")
-async def agent_chat_stream(payload: dict = Body(...)) -> Response:
+async def agent_chat_stream(payload: ChatRequest) -> Response:
     """Stream step transitions, incremental answer tokens, and sources for the floating AI chat."""
-    question = payload.get("question", "")
-    if not isinstance(question, str) or not question.strip() or len(question) > 500:
-        return error_response(400, "问题不能为空且不能超过500个字符")
-    history = payload.get("history", [])
-    context = payload.get("diagnosis_context")
-    if context is not None and not isinstance(context, dict):
-        return error_response(400, "影像上下文格式无效")
-
     async def event_stream():
         def event(name: str, data: dict) -> str:
             return f"event: {name}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
 
         try:
-            async for event_name, data in stream_answer_question(question, history, context):
+            async for event_name, data in stream_answer_question(payload.question, payload.history, payload.diagnosis_context):
                 yield event(event_name, data)
-        except Exception as exc:
-            yield event("error", {"message": str(exc) or "问答流执行失败"})
+        except Exception:
+            logger.exception("Chat stream failed")
+            yield event("error", {"message": "问答流执行失败，请稍后重试"})
 
     return StreamingResponse(
         event_stream(),
@@ -167,15 +182,8 @@ def get_qwen_settings() -> dict:
 
 
 @app.post("/api/settings/qwen")
-async def update_qwen_settings(payload: dict = Body(...)) -> JSONResponse:
-    api_key = payload.get("api_key")
-    model = payload.get("model", "qwen3.8-flash")
-    persist = bool(payload.get("persist", True))
-    if not isinstance(api_key, str) or len(api_key.strip()) > 500:
-        return error_response(400, "API Key 格式无效")
-    if not isinstance(model, str) or model.strip() not in SUPPORTED_QWEN_MODELS:
-        return error_response(400, "仅支持 qwen3.8-flash 或 qwen3.8-max")
-    set_runtime_config(api_key, model, persist=persist)
+async def update_qwen_settings(payload: QwenSettingsRequest) -> dict:
+    set_runtime_config(payload.api_key, payload.model, persist=payload.persist)
     return {"code": 200, "message": "success", "data": runtime_config_status()}
 
 
@@ -199,21 +207,13 @@ async def test_qwen_settings() -> JSONResponse:
 @app.post("/api/diagnose")
 async def diagnose(file: UploadFile = File(...)) -> JSONResponse:
     """Validate an uploaded JPG/PNG, infer probabilities, and return a heatmap."""
-    if file.content_type not in ALLOWED_CONTENT_TYPES:
-        return error_response(400, "仅支持 JPG/PNG 图片")
-    payload = await file.read(MAX_UPLOAD_BYTES + 1)
-    if len(payload) > MAX_UPLOAD_BYTES:
-        return error_response(413, "图片大小不能超过 10MB")
-    try:
-        image = Image.open(BytesIO(payload))
-        image.load()
-    except (UnidentifiedImageError, OSError, Image.DecompressionBombError, ValueError):
-        return error_response(400, "图片解析失败，请上传有效的 JPG/PNG 文件")
+    image = await _read_image_upload(file)
     try:
         data = await run_in_threadpool(diagnose_image, image)
     except FileNotFoundError:
         return error_response(500, "模型不可用或推理失败")
     except Exception:
+        logger.exception("Diagnosis failed")
         return error_response(500, "模型不可用或推理失败")
     return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": data})
 
@@ -221,27 +221,15 @@ async def diagnose(file: UploadFile = File(...)) -> JSONResponse:
 @app.post("/api/agent/diagnose")
 async def agent_diagnose(
     file: UploadFile = File(...),
-    question: str = Form(""),
+    question: str = Form("", max_length=500),
 ) -> JSONResponse:
     """Run image inference, local retrieval, and an optional Qwen report."""
-    if len(question) > 500:
-        return error_response(400, "问题长度不能超过500个字符")
-    if file.content_type not in ALLOWED_CONTENT_TYPES:
-        return error_response(400, "仅支持 JPG/PNG 图片")
-
-    payload = await file.read(MAX_UPLOAD_BYTES + 1)
-    if len(payload) > MAX_UPLOAD_BYTES:
-        return error_response(413, "图片大小不能超过 10MB")
-
-    try:
-        image = Image.open(BytesIO(payload))
-        image.load()
-    except (UnidentifiedImageError, OSError, Image.DecompressionBombError, ValueError):
-        return error_response(400, "图片解析失败，请上传有效的 JPG/PNG 文件")
+    image = await _read_image_upload(file)
+    question = _validated_question(question)
 
     try:
         result = None
-        async for event_name, data in workflow_events(image, question.strip(), diagnose_image):
+        async for event_name, data in workflow_events(image, question, diagnose_image):
             if event_name == "complete":
                 result = data
         if result is None:
@@ -251,6 +239,7 @@ async def agent_diagnose(
     except FileNotFoundError:
         return error_response(500, "模型不可用或推理失败")
     except Exception:
+        logger.exception("Agent diagnosis failed")
         return error_response(500, "模型不可用或推理失败")
 
     return JSONResponse(
@@ -268,32 +257,23 @@ async def agent_diagnose(
 @app.post("/api/agent/diagnose/stream")
 async def agent_diagnose_stream(
     file: UploadFile = File(...),
-    question: str = Form(""),
+    question: str = Form("", max_length=500),
 ) -> Response:
     """Stream actual workflow node transitions and the completed result as SSE."""
-    if len(question) > 500:
-        return error_response(400, "问题长度不能超过500个字符")
-    if file.content_type not in ALLOWED_CONTENT_TYPES:
-        return error_response(400, "仅支持 JPG/PNG 图片")
-    payload = await file.read(MAX_UPLOAD_BYTES + 1)
-    if len(payload) > MAX_UPLOAD_BYTES:
-        return error_response(413, "图片大小不能超过 10MB")
-    try:
-        image = Image.open(BytesIO(payload))
-        image.load()
-    except (UnidentifiedImageError, OSError, Image.DecompressionBombError, ValueError):
-        return error_response(400, "图片解析失败，请上传有效的 JPG/PNG 文件")
+    image = await _read_image_upload(file)
+    question = _validated_question(question)
 
     async def event_stream():
         def event(name: str, data: dict) -> str:
             return f"event: {name}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
 
         try:
-            async for event_name, data in workflow_events(image, question.strip(), diagnose_image):
+            async for event_name, data in workflow_events(image, question, diagnose_image):
                 yield event(event_name, data)
         except FileNotFoundError:
             yield event("error", {"message": "模型不可用或推理失败"})
         except Exception:
+            logger.exception("Agent diagnosis stream failed")
             yield event("error", {"message": "Agent 工作流执行失败"})
 
     return StreamingResponse(

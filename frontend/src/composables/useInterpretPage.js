@@ -1,4 +1,5 @@
 import { computed, markRaw, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
+import { VIEWER_DEFAULTS } from '../constants/app.js';
 import { useAppContext } from './useAppContext.js';
 import { useDiagnosis } from './useDiagnosis.js';
 import { useDiagnosisResults } from './useDiagnosisResults.js';
@@ -62,7 +63,7 @@ export function useInterpretPage() {
   }
   function focusHeatmap() {
     AppState.viewer.showHeatmap = true;
-    AppState.viewer.heatmapOpacity = 75;
+    AppState.viewer.heatmapOpacity = VIEWER_DEFAULTS.focusHeatmapOpacity;
     viewport.value?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return true;
   }

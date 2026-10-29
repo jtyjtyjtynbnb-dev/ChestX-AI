@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { VIEWER_ZOOM } from '../stores/referenceData.js';
+import { VIEWER_DEFAULTS, VIEWER_ZOOM } from '../constants/app.js';
 import { measurementLabel } from '../utils/viewer.js';
 
 const MEASURE_LABEL = { length: '长度', angle: '角度', roi: 'ROI' };
@@ -188,7 +188,7 @@ export function useImageViewer({ AppState, actions }, canvasRef, measureCanvasRe
   }
 
   function resetViewerState() {
-    Object.assign(AppState.viewer, { scale: VIEWER_ZOOM.DEFAULT, rotation: 0, tx: 0, ty: 0, invertFilter: false, isDragging: false, brightness: 100, contrast: 100 });
+    Object.assign(AppState.viewer, { scale: VIEWER_ZOOM.DEFAULT, rotation: 0, tx: 0, ty: 0, invertFilter: false, isDragging: false, brightness: VIEWER_DEFAULTS.brightness, contrast: VIEWER_DEFAULTS.contrast });
   }
   function zoom(delta, event) {
     const viewer = AppState.viewer;

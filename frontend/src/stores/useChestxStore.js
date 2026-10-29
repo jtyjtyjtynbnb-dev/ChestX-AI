@@ -5,7 +5,7 @@ export const useChestxStore = defineStore('chestx', () => {
   const appState = reactive({
     ...JSON.parse(JSON.stringify(INITIAL_APP_STATE)),
     conversations: [], chatHistory: [], agentQuestion: '', pendingSample: null,
-    mobileMenuOpen: false, toasts: [], routeProgress: { width: 0, opacity: 0 },
+    toasts: [], routeProgress: { width: 0, opacity: 0 },
     knowledge: { search: '', hotspot: 0 }, academy: { tab: 'basics', hotspots: {} },
     statsOpen: false, syncState: 'ready'
   });

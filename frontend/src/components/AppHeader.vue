@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useShell } from '../composables/useShell.js';
 import { getLocale, toggleLocale } from '../i18n/index.js';
-const { state, actions, nav, member, recordCount } = useShell();
+const { actions, nav, member, recordCount } = useShell();
 const locale = computed(() => getLocale());
 </script>
 <template>
@@ -26,30 +26,30 @@ const locale = computed(() => getLocale());
 
       <!-- 桌面端导航菜单 (≥992px 完整展开) -->
       <nav class="hidden lg:flex items-center gap-1" aria-label="主导航">
-        <button type="button" data-nav="home" :class="nav.navClass('home', false)" @click="actions.switchPage('home')">
+        <button type="button" data-nav="home" :class="nav.navClass('home')" @click="actions.switchPage('home')">
           首页
         </button>
-        <button type="button" data-nav="interpret" :class="nav.navClass('interpret', false)" @click="actions.switchPage('interpret')">
+        <button type="button" data-nav="interpret" :class="nav.navClass('interpret')" @click="actions.switchPage('interpret')">
           <span>智能解读</span>
           <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
         </button>
-        <button type="button" data-nav="records" :class="nav.navClass('records', false)" @click="actions.switchPage('records')">
+        <button type="button" data-nav="records" :class="nav.navClass('records')" @click="actions.switchPage('records')">
           <span>健康档案</span>
           <span id="navRecordBadge" class="rounded-full bg-primary/10 px-1.5 py-0.2 text-xs font-semibold text-primary tabular-nums">{{ recordCount }}</span>
         </button>
-        <button type="button" data-nav="knowledge" :class="nav.navClass('knowledge', false)" @click="actions.switchPage('knowledge')">
+        <button type="button" data-nav="knowledge" :class="nav.navClass('knowledge')" @click="actions.switchPage('knowledge')">
           健康科普
         </button>
-        <button type="button" data-nav="academy" :class="nav.navClass('academy', false)" @click="actions.switchPage('academy')">
+        <button type="button" data-nav="academy" :class="nav.navClass('academy')" @click="actions.switchPage('academy')">
           <span>影像课堂</span>
           <span class="rounded bg-info/15 px-1.5 py-0.5 text-[10px] font-medium text-primary">互动</span>
         </button>
-        <button type="button" data-nav="about" :class="nav.navClass('about', false)" @click="actions.switchPage('about')">
+        <button type="button" data-nav="about" :class="nav.navClass('about')" @click="actions.switchPage('about')">
           关于我们
         </button>
       </nav>
 
-      <!-- 右侧操作区：统计看板 + 用户状态 + 移动端汉堡按钮 -->
+      <!-- 右侧操作区：用户状态 + 语言 + 设置 -->
       <div class="flex items-center gap-2.5">
         <button type="button" id="openStatsBtn" @click="actions.openStatsModal()" class="hidden" title="查看数据统计看板">
           <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -66,24 +66,6 @@ const locale = computed(() => getLocale());
         <button type="button" id="openSettingsBtn" @click="actions.openFamilyModal()" class="btn-secondary btn-sm" title="设置" aria-label="打开设置">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m19.4 15 .1.1a1.7 1.7 0 0 1-2.4 2.4l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 0 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 0 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 0 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 0 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V2a1.7 1.7 0 0 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 0 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 0 1 0 3.4h-.2a1.7 1.7 0 0 0-1.2 2.9Z"/></svg>
         </button>
-
-        <button type="button" id="mobileMenuBtn" @click="state.mobileMenuOpen = !state.mobileMenuOpen" class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-line text-text-1 hover:border-primary hover:text-primary lg:hidden" aria-label="展开或收起导航菜单" :aria-expanded="state.mobileMenuOpen" aria-controls="mobileNavMenu">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- 平板与手机端折叠汉堡菜单 (<992px) -->
-    <div id="mobileNavMenu" class="border-t border-border-line bg-white px-6 py-3 lg:hidden" :class="{ hidden: !state.mobileMenuOpen }">
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-        <button type="button" data-nav="home" :class="nav.navClass('home', true)" @click="actions.switchPage('home')">首页</button>
-        <button type="button" data-nav="interpret" :class="nav.navClass('interpret', true)" @click="actions.switchPage('interpret')">智能解读</button>
-        <button type="button" data-nav="records" :class="nav.navClass('records', true)" @click="actions.switchPage('records')">健康档案</button>
-        <button type="button" data-nav="knowledge" :class="nav.navClass('knowledge', true)" @click="actions.switchPage('knowledge')">健康科普</button>
-        <button type="button" data-nav="academy" :class="nav.navClass('academy', true)" @click="actions.switchPage('academy')">影像课堂</button>
-        <button type="button" data-nav="about" :class="nav.navClass('about', true)" @click="actions.switchPage('about')">关于我们</button>
       </div>
     </div>
   </header>
