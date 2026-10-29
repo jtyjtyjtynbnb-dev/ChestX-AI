@@ -1,6 +1,14 @@
 import { i18n } from './index.js';
 
 const TRANSLATABLE_ATTRS = ['placeholder', 'title', 'aria-label', 'alt'];
+const DYNAMIC_PATTERNS = [
+  [/^缩放: (\d+)%$/, (match) => `Zoom: ${match[1]}%`],
+  [/^已连接 · (.+)$/, (match) => `Connected · ${match[1]}`],
+  [/^解读结果已保存至(.+)的健康档案$/, (match) => `Saved to ${match[1]}'s health records`],
+  [/^较新 · (.+)$/, (match) => `Newer · ${match[1]}`],
+  [/^较早 · (.+)$/, (match) => `Earlier · ${match[1]}`],
+  [/^诊断时间：(.+)$/, (match) => `Study date: ${match[1]}`],
+];
 const textOriginals = new Map();
 const attributeOriginals = new Map();
 let applying = false;
@@ -14,8 +22,14 @@ function canTranslate(key) {
 function translateTextNode(node) {
   const raw = node.nodeValue || '';
   const key = raw.trim();
-  if (!canTranslate(key)) return;
-  const translated = i18n.global.t(key);
+  if (!key || !/[\u4e00-\u9fff]/.test(key)) return;
+  let translated = canTranslate(key) ? i18n.global.t(key) : '';
+  if (!translated || translated === key) {
+    for (const [pattern, render] of DYNAMIC_PATTERNS) {
+      const match = key.match(pattern);
+      if (match) { translated = render(match); break; }
+    }
+  }
   if (!translated || translated === key) return;
   textOriginals.set(node, raw);
   node.nodeValue = raw.replace(key, translated);

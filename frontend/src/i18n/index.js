@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n';
+import enExtra from './en-extra.json';
 
 const STORAGE_KEY = 'chestx-ai-locale';
 
@@ -256,6 +257,8 @@ const en = {
   '组件化前端实现': 'Component-based front end',
 };
 
+Object.assign(en, enExtra);
+
 const zh = Object.fromEntries(Object.keys(en).map((key) => [key, key]));
 
 export const i18n = createI18n({
@@ -268,6 +271,10 @@ export const i18n = createI18n({
   missingWarn: false,
   fallbackWarn: false,
 });
+
+if (typeof document !== 'undefined') {
+  document.documentElement.lang = i18n.global.locale.value === 'en' ? 'en' : 'zh-CN';
+}
 
 export function getLocale() {
   return i18n.global.locale.value === 'en' ? 'en' : 'zh';
