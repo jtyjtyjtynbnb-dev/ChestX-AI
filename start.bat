@@ -88,8 +88,7 @@ if errorlevel 1 (
   )
   echo Installing requirements from backend\requirements.txt ...
   echo This may take several minutes on first run and requires network access.
-  "!PYTHON_EXE!" -m pip install --disable-pip-version-check --upgrade pip
-  "!PYTHON_EXE!" -m pip install --disable-pip-version-check -r "%RUN_ROOT%backend\requirements.txt"
+  "!PYTHON_EXE!" -m pip install --disable-pip-version-check --no-input --prefer-binary --timeout 20 --retries 1 -r "%RUN_ROOT%backend\requirements.txt"
   if errorlevel 1 (
     echo ERROR: Dependency installation failed.
     echo Check your network/proxy, then retry start.bat.
@@ -142,7 +141,7 @@ for /L %%I in (1,1,20) do (
   curl --silent --fail "%HEALTH_URL%" >nul 2>nul
   if not errorlevel 1 set "READY=1"
   if defined READY goto backend_ready
-  timeout /t 1 /nobreak >nul
+  ping -n 2 127.0.0.1 >nul
 )
 
 :backend_ready
@@ -153,7 +152,7 @@ if not defined READY (
   exit /b 1
 )
 
-start "" "http://127.0.0.1:%CHESTX_API_PORT%/"
+if not defined CHESTX_NO_BROWSER start "" "http://127.0.0.1:%CHESTX_API_PORT%/"
 echo ChestX-AI is ready at http://127.0.0.1:%CHESTX_API_PORT%/
 echo Keep this window open while using the demo.
-pause
+if not defined CHESTX_NO_PAUSE pause
