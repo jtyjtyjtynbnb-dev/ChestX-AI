@@ -235,5 +235,9 @@
   "随访对比面板": "Follow-up comparison panel",
   "顺时针旋转90度": "Rotate 90 degrees clockwise",
   "结构化 JSON 已导出": "Structured JSON exported",
-  "Word 兼容报告已导出（.doc）": "Word-compatible report exported (.doc)"
+  "Word 兼容报告已导出（.doc）": "Word-compatible report exported (.doc)",
+  "14 类": "14 topics",
+  "模型 10 类 + 扩展 4 类科普": "Model 10 findings + 4 extended topics",
+  "涵盖模型 10 类与扩展 4 类胸片征象的概述、常见病因、典型症状与预防建议，并与交互式「影像小课堂」解剖热区无缝联动。": "Covers overview, causes, symptoms and prevention for the model's 10 findings plus 4 extended topics, linked to the interactive anatomy hotspots in the Imaging Academy.",
+  "内置模型 10 类 + 扩展 4 类胸片征象百科与交互式「影像小课堂」，点击胸片上的气管、肺门、心影、肋膈角等解剖热点即可对照学习正常与异常征象，轻松掌握九步标准读片法。": "Includes the model's 10 findings plus 4 extended topics and an interactive Imaging Academy: tap anatomy hotspots such as trachea, hilum, heart and costophrenic angle to compare normal and abnormal signs and learn the nine-step reading method."
 }

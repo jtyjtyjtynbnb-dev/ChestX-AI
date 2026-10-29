@@ -38,8 +38,8 @@ const { actions } = useShell();
             <!-- 关键性能指标栏 (tabular-nums) -->
             <div class="grid grid-cols-3 gap-4 border-t border-border-line pt-4">
               <div>
-                <div class="text-lg font-semibold text-primary tabular-nums">10 类</div>
-                <div class="text-xs text-text-3">常见胸部征象覆盖</div>
+                <div class="text-lg font-semibold text-primary tabular-nums">14 类</div>
+                <div class="text-xs text-text-3">模型 10 类 + 扩展 4 类科普</div>
               </div>
               <div>
                 <div class="text-lg font-semibold text-success tabular-nums">本地</div>
@@ -121,7 +121,7 @@ const { actions } = useShell();
             </div>
             <h3 class="mt-3 text-lg font-medium text-text-1">胸部健康科普</h3>
             <p class="mt-1.5 text-xs text-text-2 leading-5">
-              涵盖 10 类胸部常见疾病的概述、常见病因、典型症状与预防建议，并与交互式「影像小课堂」解剖热区无缝联动。
+              涵盖模型 10 类与扩展 4 类胸片征象的概述、常见病因、典型症状与预防建议，并与交互式「影像小课堂」解剖热区无缝联动。
             </p>
           </div>
 
@@ -217,7 +217,7 @@ const { actions } = useShell();
               </div>
               <h3 class="mt-3 text-lg font-medium text-text-1">健康知识学习</h3>
               <p class="mt-1.5 text-xs text-text-2 leading-5">
-                内置 10 类胸部疾病百科与交互式「影像小课堂」，点击胸片上的气管、肺门、心影、肋膈角等解剖热点即可对照学习正常与异常征象，轻松掌握九步标准读片法。
+                内置模型 10 类 + 扩展 4 类胸片征象百科与交互式「影像小课堂」，点击胸片上的气管、肺门、心影、肋膈角等解剖热点即可对照学习正常与异常征象，轻松掌握九步标准读片法。
               </p>
             </div>
             <div class="mt-4 pt-3 border-t border-border-line flex items-center justify-between">
