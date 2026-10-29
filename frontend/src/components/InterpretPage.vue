@@ -153,6 +153,7 @@ const vm = useInterpretPage();
                 <button type="button" data-measure="clear" class="btn-secondary btn-sm !text-text-3" @click="vm.viewer.clearMeasurements()">清除标注</button>
                 <span v-if="vm.currentCase.isDicom" class="rounded bg-info/10 px-2 py-0.5 text-[11px] text-primary">DICOM 窗宽 {{ Math.round(vm.currentCase.windowWidth || 0) }} / 窗位 {{ Math.round(vm.currentCase.windowCenter || 0) }}</span>
                 <span v-else-if="vm.AppState.viewer.pixelSpacing" class="text-[11px] text-text-3">已读取像素间距，长度以 mm 显示</span>
+                <span v-if="vm.currentCase.isDicom && vm.AppState.viewer.pixelSpacing" class="text-[11px] text-text-3">已读取像素间距，长度以 mm 显示</span>
               </div>
             </div>
 

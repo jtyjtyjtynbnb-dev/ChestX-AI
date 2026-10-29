@@ -233,5 +233,7 @@
   "选择胸部X光图片或DICOM文件": "Choose a chest X-ray image or DICOM file",
   "重置缩放与位移 (或双击画面)": "Reset zoom and pan (or double-click the image)",
   "随访对比面板": "Follow-up comparison panel",
-  "顺时针旋转90度": "Rotate 90 degrees clockwise"
+  "顺时针旋转90度": "Rotate 90 degrees clockwise",
+  "结构化 JSON 已导出": "Structured JSON exported",
+  "Word 兼容报告已导出（.doc）": "Word-compatible report exported (.doc)"
 }
