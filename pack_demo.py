@@ -6,10 +6,18 @@ from fnmatch import fnmatch
 from pathlib import Path
 
 EXCLUDE_DIR_NAMES = {".venv", "venv", "__pycache__", ".git", "node_modules", "data", ".pytest_cache", "tests"}
-EXCLUDE_DIR_PATTERNS = ("frontend.backup-*", "legacy-backup-*", "ChestX-AI-跨电脑演示包-*")
+EXCLUDE_DIR_PATTERNS = (
+    "frontend.backup-*",
+    "legacy-backup-*",
+    "ChestX-AI-跨电脑演示包-*",
+    ".tmp-*",
+    ".dsh-office-*",
+    "pip-*",
+    ".npm-cache",
+)
 EXCLUDE_FILE_NAMES = {".env", ".env.local", "1121.py"}
 # Keep .env.example in the package on purpose: it is the configuration template.
-EXCLUDE_FILE_PATTERNS = ()
+EXCLUDE_FILE_PATTERNS = ("*.zip",)
 EXCLUDE_EXTS = {".pyc", ".pyo", ".log", ".pid", ".db", ".sqlite3"}
 
 

@@ -7,13 +7,13 @@ ChestX-AI 演示包 · 快速使用说明
 
 启动步骤
 1. 将整个 ZIP 解压到一个有写入权限的文件夹。
-2. 双击 一键启动.bat（推荐；它内部调用 start.bat）。
+2. 双击 一键启动.bat。
 3. 脚本会自动检测 Python 与依赖；缺失时在包内创建 .venv 并安装 requirements.txt，可能需要几分钟。
 4. 启动成功后自动打开 http://127.0.0.1:8000/。使用期间保持启动窗口开启。
 
 端口
 - 前端与后端共用 8000 端口，不再使用 8765。
-- 如 8000 被占用：在命令行执行 set CHESTX_API_PORT=8001 后再运行 start.bat。
+- 如 8000 被占用：在命令行执行 set CHESTX_API_PORT=8001 后再运行 一键启动.bat。
 
 Qwen 配置
 - 方式一：页面右上角“设置” → Qwen AI 服务 → 填写 DashScope API Key → 测试连接 → 保存。

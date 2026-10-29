@@ -36,3 +36,6 @@ frontend/1
 frontend/tests/*.png
 .tmp-build/
 frontend/.npm-cache/
+.tmp-*/
+.dsh-office-*/
+pip-*/
