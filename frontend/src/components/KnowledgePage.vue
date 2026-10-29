@@ -10,10 +10,10 @@ const k = reactive(useKnowledge(useAppContext()));
     <div class="med-card flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-4">
       <div>
         <h1 class="text-xl font-semibold text-text-1">胸部X光常见疾病健康科普库</h1>
-        <p class="text-xs text-text-3 mt-0.5">权威梳理 10 类胸部常见影像征象与疾病防治指南，点击左侧病种即可切换查阅</p>
+        <p class="text-xs text-text-3 mt-0.5">梳理模型 10 类与扩展 4 类胸片征象，点击左侧病种即可切换查阅</p>
       </div>
       <div class="w-full sm:w-64">
-        <input id="knowledgeSearchInput" v-model="k.state.search" type="text" placeholder="快速筛选 10 类胸部疾病..." class="w-full rounded-md border border-border-line bg-page-bg px-3 py-1.5 text-xs text-text-1 focus:border-primary focus:bg-white focus:outline-none" />
+        <input id="knowledgeSearchInput" v-model="k.state.search" type="text" placeholder="快速筛选胸片征象..." class="w-full rounded-md border border-border-line bg-page-bg px-3 py-1.5 text-xs text-text-1 focus:border-primary focus:bg-white focus:outline-none" />
       </div>
     </div>
 

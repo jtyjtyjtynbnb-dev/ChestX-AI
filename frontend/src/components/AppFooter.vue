@@ -37,7 +37,7 @@ const { actions } = useShell();
       </div>
       <div class="mt-6 border-t border-border-line pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-text-3 gap-2">
         <span>© 2026 胸影智识 (ChestX-AI) · 标准化前端工程</span>
-        <span>遵循 Vue 3.5 组合式 API · Tailwind 3.4 · 零控制台报错标准</span>
+        <span>遵循 Vue 3.5 组合式 API · Tailwind 3.4 · 组件化前端实现</span>
       </div>
     </div>
   </footer>

@@ -249,6 +249,11 @@ const en = {
   '高风险': 'High risk',
   '中风险': 'Medium risk',
   '低风险': 'Low risk',
+  '梳理模型 10 类与扩展 4 类胸片征象，点击左侧病种即可切换查阅': 'Model 10 findings plus 4 extended articles; select a finding on the left.',
+  '快速筛选胸片征象...': 'Filter chest X-ray findings...',
+  '胸片征象影像讲解（模型 10 类 + 扩展）': 'Chest X-ray findings explained (model 10 + extensions)',
+  '3 步完成 · 本地推理': '3 steps · local inference',
+  '组件化前端实现': 'Component-based front end',
 };
 
 const zh = Object.fromEntries(Object.keys(en).map((key) => [key, key]));

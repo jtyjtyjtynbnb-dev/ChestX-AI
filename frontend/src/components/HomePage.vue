@@ -19,7 +19,7 @@ const { actions } = useShell();
               “洞见胸片毫厘征象，传递有温度、可解释的AI健康科普”
             </p>
             <p class="text-sm text-text-2 leading-6">
-              面向体检人群、患者家属与医学影像初学者打造。上传正位胸部X光片，即可在秒级内获取 10 类常见胸部病变概率评估、模型注意力热力图、权威医学科普解读与全周期健康档案追踪。
+              面向体检人群、患者家属与医学影像初学者打造。上传正位胸部X光片，即可获取 10 类常见胸部病变概率评估、模型注意力热力图、权威医学科普解读与全周期健康档案追踪。
             </p>
             <div class="flex flex-wrap items-center gap-3 pt-2">
               <button type="button" id="heroStartBtn" @click="actions.switchPage('interpret')" class="btn-primary">
@@ -146,7 +146,7 @@ const { actions } = useShell();
             <h2 class="text-xl font-semibold text-text-1">三步标准使用流程</h2>
             <p class="text-xs text-text-3 mt-0.5">极简交互设计，零医学背景也能轻松看懂胸片AI分析结果</p>
           </div>
-          <span class="rounded bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">全流程耗时 &lt; 10秒</span>
+          <span class="rounded bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">3 步完成 · 本地推理</span>
         </div>
 
         <div class="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">

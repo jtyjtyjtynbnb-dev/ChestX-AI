@@ -49,7 +49,7 @@ function optionStyle(q, idx) {
     </div>
 
     <div id="academy-tab-signs" class="academy-tab-panel space-y-4" :class="{hidden:a.state.tab!=='signs'}">
-      <h2 class="text-base font-semibold text-text-1">十类胸部征象影像讲解</h2><p class="text-xs text-text-2">点击每张示例影像上的编号标记查看观察提示。影像和标注仅供科普教学，不作为诊断依据。</p>
+      <h2 class="text-base font-semibold text-text-1">胸片征象影像讲解（模型 10 类 + 扩展）</h2><p class="text-xs text-text-2">点击每张示例影像上的编号标记查看观察提示。影像和标注仅供科普教学，不作为诊断依据。</p>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3" id="academySignsGrid">
         <article v-for="sg in a.academySigns" :key="sg.disease.code" class="med-card med-card-hover flex flex-col justify-between space-y-3" :data-sign-card="sg.disease.code">
           <div class="space-y-2"><div class="flex items-center justify-between"><span class="rounded border px-2 py-0.5 text-xs font-medium" :class="a.getRiskStyle(sg.risk).badgeClass" :style="{color:riskTextColor(sg.risk)}">{{sg.tag}}</span><span class="text-xs text-text-2">典型征象</span></div><h3 class="text-base font-semibold text-text-1">{{sg.title}}</h3><p class="text-xs text-text-2 leading-5">{{sg.desc}}</p></div>

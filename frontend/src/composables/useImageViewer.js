@@ -1,5 +1,6 @@
 import { computed } from 'vue';
 import { VIEWER_ZOOM } from '../stores/referenceData.js';
+import { measurementLabel } from '../utils/viewer.js';
 
 const MEASURE_LABEL = { length: '长度', angle: '角度', roi: 'ROI' };
 
@@ -152,35 +153,12 @@ export function useImageViewer({ AppState, actions }, canvasRef, measureCanvasRe
 
   function measurementValue(mode, points) {
     const canvas = measureCanvasRef?.value;
-    const w = canvas?.width || 420;
-    const h = canvas?.height || 420;
-    if (mode === 'length') {
-      const [a, b] = points;
-      const dx = (b.x - a.x) * w;
-      const dy = (b.y - a.y) * h;
-      const px = Math.hypot(dx, dy);
-      const spacing = AppState.viewer.pixelSpacing;
-      const naturalWidth = Number(AppState.currentCase?.naturalWidth || 0);
-      if (spacing && naturalWidth) {
-        const mm = px * (naturalWidth / w) * spacing[1];
-        return mm.toFixed(1) + ' mm';
-      }
-      return px.toFixed(0) + ' px';
-    }
-    if (mode === 'angle') {
-      const [a, b, c] = points;
-      const v1 = { x: (a.x - b.x) * w, y: (a.y - b.y) * h };
-      const v2 = { x: (c.x - b.x) * w, y: (c.y - b.y) * h };
-      const denominator = Math.hypot(v1.x, v1.y) * Math.hypot(v2.x, v2.y) || 1;
-      const cosine = Math.max(-1, Math.min(1, (v1.x * v2.x + v1.y * v2.y) / denominator));
-      return (Math.acos(cosine) * 180 / Math.PI).toFixed(1) + '°';
-    }
-    if (mode === 'roi') {
-      const [a, b] = points;
-      const area = Math.abs((b.x - a.x) * w) * Math.abs((b.y - a.y) * h);
-      return 'ROI ' + Math.round(area) + ' px²';
-    }
-    return '';
+    return measurementLabel(mode, points, {
+      width: canvas?.width || 420,
+      height: canvas?.height || 420,
+      pixelSpacing: AppState.viewer.pixelSpacing,
+      naturalWidth: Number(AppState.currentCase?.naturalWidth || 0),
+    });
   }
 
   function handleMeasurePointer(event) {
