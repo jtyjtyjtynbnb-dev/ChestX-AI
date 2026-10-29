@@ -9,7 +9,7 @@
 ### Windows
 
 1. 安装 Python 3.10+（64 位），勾选 “Add Python to PATH”。
-2. 双击 `start.bat`。脚本会检测依赖；缺失时自动在包内创建 `.venv` 并安装 `backend/requirements.txt`（首次需要联网）。
+2. 双击 `一键启动.bat`（推荐）或 `start.bat`。脚本会检测依赖；缺失时自动在包内创建 `.venv` 并安装 `backend/requirements.txt`（首次需要联网）。
 3. 浏览器自动打开 `http://127.0.0.1:8000/`。
 4. 如果需要 Qwen 问答/报告，在页面右上角“设置”中填写 DashScope API Key，或编辑 `backend/.env`。
 
@@ -25,7 +25,8 @@ python3 -m venv .venv
 
 ```text
 ChestX-AI-演示运行包/
-├─ start.bat / start.sh          # 一键启动（单端口 8000）
+├─ 一键启动.bat                  # 推荐入口（双击）
+├─ start.bat / start.sh          # 底层启动脚本（单端口 8000）
 ├─ 操作手册.md                    # 安装、操作、功能、排障、打包
 ├─ backend/                       # FastAPI、ONNX 推理、RAG、SQLite
 │  ├─ model.onnx                  # 10 类胸片多标签模型
@@ -63,6 +64,7 @@ ChestX-AI-演示运行包/
 ## 文档
 
 - [操作手册](操作手册.md)：安装、启动、功能操作、排障、打包
+- [图文使用说明（Word）](ChestX-AI-图文使用说明.docx)：带截图的交付版说明
 - 后端接口：启动后访问 `http://127.0.0.1:8000/docs`（FastAPI OpenAPI）
 
 ## 安全与隐私
