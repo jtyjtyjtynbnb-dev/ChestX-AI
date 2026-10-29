@@ -1,4 +1,4 @@
-/* 本地离线兜底基础布局与工具类，防止内网评审环境 CDN 断网导致样式错乱 */
+/* 本地离线兜底基础布局与工具类，防止弱网或内网环境 CDN 断网导致样式错乱 */
 .hidden { display: none !important; }
 .flex { display: flex; }
 .grid { display: grid; }
