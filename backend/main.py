@@ -8,7 +8,8 @@ from pathlib import Path
 from fastapi import Body, FastAPI, File, Form, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
 from starlette.concurrency import run_in_threadpool
 
@@ -30,6 +31,7 @@ app = FastAPI(title="ChestX-AI API", version="2.0.0")
 API_PORT = int(os.getenv("CHESTX_API_PORT", "8000"))
 SUPPORTED_QWEN_MODELS = {"qwen3.8-flash", "qwen3.8-max"}
 FRONTEND_ASSETS = Path(__file__).resolve().parents[1] / "frontend" / "assets"
+DIST_DIR = Path(__file__).resolve().parents[1] / "frontend" / "dist"
 SAMPLE_IMAGES = {
     "case-high": FRONTEND_ASSETS / "sample_2.jpg",
     "case-medium": FRONTEND_ASSETS / "sample_2.jpg",
@@ -299,3 +301,31 @@ async def agent_diagnose_stream(
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+
+
+# Deployment layer: serve the prebuilt Vue application from the same origin as the API.
+# API routes above are registered first so unknown /api paths remain JSON 404 responses.
+if DIST_DIR.is_dir() and (DIST_DIR / "assets").is_dir():
+    app.mount("/assets", StaticFiles(directory=DIST_DIR / "assets"), name="frontend-assets")
+
+
+@app.get("/")
+def frontend_root() -> Response:
+    if not (DIST_DIR / "index.html").is_file():
+        return JSONResponse(status_code=503, content={"code": 503, "message": "前端构建产物缺失，请先运行 npm run build", "data": None})
+    return FileResponse(DIST_DIR / "index.html", media_type="text/html")
+
+
+@app.get("/{full_path:path}")
+def frontend_spa(full_path: str) -> Response:
+    if full_path == "api" or full_path.startswith("api/"):
+        return error_response(404, "Not found")
+    dist_root = DIST_DIR.resolve()
+    if not dist_root.is_dir() or not (dist_root / "index.html").is_file():
+        return JSONResponse(status_code=503, content={"code": 503, "message": "前端构建产物缺失，请先运行 npm run build", "data": None})
+    target = (dist_root / full_path).resolve()
+    if not target.is_relative_to(dist_root):
+        return error_response(404, "Not found")
+    if target.is_file():
+        return FileResponse(target)
+    return FileResponse(dist_root / "index.html", media_type="text/html")

@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = BASE_DIR.parents[1]
+PROJECT_ROOT = BASE_DIR.parent
 MODEL_CANDIDATES = (
     BASE_DIR / "model.onnx",
     PROJECT_ROOT / "模型文件" / "model.onnx",

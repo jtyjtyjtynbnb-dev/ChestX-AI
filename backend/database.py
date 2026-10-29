@@ -54,6 +54,8 @@ def init_db() -> None:
                 attention_region TEXT DEFAULT '',
                 probabilities_json TEXT NOT NULL,
                 report_json TEXT DEFAULT '{}',
+                heatmap_data TEXT DEFAULT '',
+                is_demo INTEGER DEFAULT 0,
                 created_at INTEGER NOT NULL,
                 FOREIGN KEY (member_id) REFERENCES family_members(id) ON DELETE CASCADE
             );
@@ -69,6 +71,17 @@ def init_db() -> None:
                 value TEXT NOT NULL
             );
             """
+        )
+        # Lightweight migration for packages created before demo tagging existed.
+        columns = {row["name"] for row in conn.execute("PRAGMA table_info(diagnosis_records)")}
+        if "is_demo" not in columns:
+            conn.execute("ALTER TABLE diagnosis_records ADD COLUMN is_demo INTEGER DEFAULT 0")
+        if "heatmap_data" not in columns:
+            conn.execute("ALTER TABLE diagnosis_records ADD COLUMN heatmap_data TEXT DEFAULT ''")
+        # Seed records created by older demo packages should keep their demo badge.
+        conn.execute(
+            "UPDATE diagnosis_records SET is_demo = 1 WHERE id IN (?, ?, ?)",
+            ("REC-20261017-01", "REC-20261011-02", "REC-20260922-03"),
         )
 
 
@@ -99,6 +112,8 @@ def get_all_members_with_records() -> dict[str, Any]:
             "attentionRegion": r["attention_region"],
             "probabilities": json.loads(r["probabilities_json"] or "[]"),
             "report": json.loads(r["report_json"] or "{}"),
+            "heatmapDataUrl": r["heatmap_data"] or "",
+            "isDemo": bool(r["is_demo"]),
         }
         records_by_member.setdefault(r["member_id"], []).append(rec)
 
@@ -172,8 +187,8 @@ def sync_members_payload(members: list[dict[str, Any]], current_member_id: str |
                     """
                     INSERT INTO diagnosis_records (
                         id, member_id, case_code, title, date_str, days_ago, risk_level,
-                        image_url, summary, attention_region, probabilities_json, report_json, created_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        image_url, summary, attention_region, probabilities_json, report_json, heatmap_data, is_demo, created_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         rid,
@@ -188,6 +203,8 @@ def sync_members_payload(members: list[dict[str, Any]], current_member_id: str |
                         str(rec.get("attentionRegion") or ""),
                         json.dumps(rec.get("probabilities") or [], ensure_ascii=False),
                         json.dumps(rec.get("report") or {}, ensure_ascii=False),
+                        str(rec.get("heatmapDataUrl") or "")[:2_000_000],
+                        1 if (rec.get("isDemo") or rec.get("is_demo")) else 0,
                         now_ms - r_idx,
                     ),
                 )

@@ -1,4 +1,4 @@
-"""ONNX inference and Grad-CAM-compatible heatmap generation."""
+"""ONNX inference and model-attention heatmap generation."""
 
 import base64
 from functools import lru_cache

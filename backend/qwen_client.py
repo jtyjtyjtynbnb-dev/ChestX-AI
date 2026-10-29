@@ -25,6 +25,33 @@ _runtime_api_key: str | None = None
 _runtime_model: str | None = None
 
 
+def _load_env_file() -> None:
+    """Load backend/.env into the process environment without extra dependencies.
+
+    Existing environment variables always win, so a shell-provided key can
+    override the local file. Invalid lines are ignored instead of failing
+    application startup.
+    """
+    if not ENV_PATH.is_file():
+        return
+    try:
+        lines = ENV_PATH.read_text(encoding="utf-8", errors="ignore").splitlines()
+    except OSError:
+        return
+    for line in lines:
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+        name, value = stripped.split("=", 1)
+        name = name.strip()
+        value = value.strip().strip('"').strip("'")
+        if name and name not in os.environ:
+            os.environ[name] = value
+
+
+_load_env_file()
+
+
 def _persist_env_config(api_key: str | None, model: str | None) -> None:
     """Safely update DASHSCOPE_API_KEY and QWEN_MODEL in backend/.env."""
     try:
