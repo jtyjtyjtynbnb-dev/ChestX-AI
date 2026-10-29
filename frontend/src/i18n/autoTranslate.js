@@ -8,6 +8,12 @@ const DYNAMIC_PATTERNS = [
   [/^较新 · (.+)$/, (match) => `Newer · ${match[1]}`],
   [/^较早 · (.+)$/, (match) => `Earlier · ${match[1]}`],
   [/^诊断时间：(.+)$/, (match) => `Study date: ${match[1]}`],
+  [/^查看第 (\d+) 张影像$/, (match) => `View image ${match[1]}`],
+  [/^观察点 (\d+)：(.+)$/, (match) => `Hotspot ${match[1]}: ${match[2]}`],
+  [/^(.+)观察点 (\d+)：(.+)$/, (match) => `${match[1]} hotspot ${match[2]}: ${match[3]}`],
+  [/^(.+)观察点$/, (match) => `${match[1]} hotspots`],
+  [/^热力图：(.+)$/, (match) => `Heatmap: ${match[1]}`],
+  [/^胸片：(.+)$/, (match) => `Chest X-ray: ${match[1]}`],
 ];
 const textOriginals = new Map();
 const attributeOriginals = new Map();
@@ -123,7 +129,13 @@ export function installAutoTranslate() {
     }
     schedule();
   });
-  observer.observe(root, { subtree: true, childList: true, characterData: true });
+  observer.observe(root, {
+    subtree: true,
+    childList: true,
+    characterData: true,
+    attributes: true,
+    attributeFilter: TRANSLATABLE_ATTRS,
+  });
   window.addEventListener('dsh-locale-change', schedule);
   schedule();
 }

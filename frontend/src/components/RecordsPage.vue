@@ -55,7 +55,7 @@ const topThree = rec => [...(rec.probabilities || [])].sort((a,b) => b.prob-a.pr
             <input
               id="filterKeyword" v-model="AppState.recordFilters.keyword"
               type="text"
-              placeholder="搜索文件名、病种或结论..."
+              :placeholder="$t('recordsSearchPlaceholder')"
               class="w-full rounded-md border border-border-line bg-white px-3 py-2 text-sm text-text-1 focus:border-primary focus:outline-none"
             />
           </div>

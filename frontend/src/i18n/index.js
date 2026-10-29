@@ -255,6 +255,8 @@ const en = {
   '胸片征象影像讲解（模型 10 类 + 扩展）': 'Chest X-ray findings explained (model 10 + extensions)',
   '3 步完成 · 本地推理': '3 steps · local inference',
   '组件化前端实现': 'Component-based front end',
+  'recordsSearchPlaceholder': 'Search file name, finding or conclusion...',
+  'knowledgeSearchPlaceholder': 'Filter chest X-ray findings...',
 };
 
 Object.assign(en, enExtra);
