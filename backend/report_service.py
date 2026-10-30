@@ -150,7 +150,7 @@ async def create_report(
     try:
         # 隐私优先：不把原始影像发送到云端。Qwen 只接收结构化概率、问题和知识片段。
         report = parse_report_content(
-            await client.generate_chat(build_report_prompt(user_question, inference, documents))
+            await client.generate_chat(build_report_prompt(user_question, inference, documents), max_tokens=1600)
         )
         return validate_report(report, inference, documents), "qwen"
     except Exception:

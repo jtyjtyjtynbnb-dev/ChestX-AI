@@ -137,7 +137,7 @@ class DashScopeQwenClient:
                 return str(part["text"])
         raise ValueError("DashScope response did not contain message text")
 
-    async def generate_chat(self, prompt: str) -> str:
+    async def generate_chat(self, prompt: str, max_tokens: int = 1000) -> str:
         """Generate a plain-text answer using the configured Qwen model."""
         if not self.enabled():
             raise DashScopeError("not_configured")
@@ -145,7 +145,7 @@ class DashScopeQwenClient:
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
             "temperature": 0.2,
-            "max_tokens": 1000,
+            "max_tokens": max_tokens,
         }
         body = await self.post_json(self.chat_endpoint, payload)
         self.last_usage = body.get("usage", {})
