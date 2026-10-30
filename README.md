@@ -15,13 +15,22 @@
 3. 浏览器自动打开 `http://127.0.0.1:8000/`。
 4. 如果需要 Qwen 问答/报告，在页面右上角“设置”中填写 DashScope API Key，或编辑 `backend/.env`。Qwen 报告只发送结构化概率/问题/知识片段，不发送原始影像；零云端场景保持 Key 为空。
 
-### 简单鲁棒性评估
+### 测试集评估
 
 ```bash
+# 7 张内置教学图 smoke test
 python -m backend.evaluate
+
+# NIH ChestX-ray14 官方 test 分层子集（400 张）
+python -m backend.evaluate_nih \
+  --labels data/nih_eval_400/selected_images.csv \
+  --images data/nih_eval_400/images \
+  --output data/nih_eval_400/eval_metrics.json
 ```
 
-使用 7 张内置教学图做 Top-1/Top-3 与亮度/旋转扰动稳定性 smoke test，**不是临床验证集**；结果与局限性见 [技术报告-合规与安全](技术报告-合规与安全.md)。
+当前 400 张 NIH 子集：**Top-1 57.25%、Top-3 80.0%**。  
+最新测试集评估、guard 指标与局限性见 [模型评估](模型评估.md)。  
+7 张教学图只用于 smoke test，**不是临床验证集**；完整说明见 [技术报告-合规与安全](技术报告-合规与安全.md)。
 
 ### Linux / macOS
 
@@ -39,8 +48,11 @@ ChestX-AI-演示运行包/
 ├─ start.sh                     # Linux/macOS 启动脚本（单端口 8000）
 ├─ 操作手册.md                    # 安装、操作、功能、排障、打包
 ├─ 技术报告-合规与安全.md          # 医疗边界、隐私、输出安全、预处理与评估
+├─ 模型评估.md                     # NIH 400 子集与 guard 实测指标
 ├─ backend/                       # FastAPI、ONNX 推理、RAG、SQLite
-│  ├─ model.onnx                  # 10 类胸片多标签模型
+│  ├─ model.onnx                  # 10 类胸片多标签模型（DenseNet121）
+│  ├─ guard_model.onnx            # 胸片/非胸片 guard 分类器（MobileNetV3）
+│  ├─ guard_threshold.json        # guard 双阈值
 │  ├─ data/chestx.db              # 本地 SQLite（运行期生成/演示数据）
 │  └─ requirements.txt
 ├─ frontend/
@@ -56,6 +68,7 @@ ChestX-AI-演示运行包/
 - 前端：Vue 3.5、Pinia 2、Vue Router 4、Vite 5、Tailwind CSS 3.4、ECharts 5、vue-i18n 9、Axios（JSON）+ fetch（SSE）
 - 后端：Python 3.10+、FastAPI、Uvicorn、ONNX Runtime、LangGraph 1.2.16、SQLite
 - 模型：224×224 输入、10 类 sigmoid 输出、第二个输出为 7×7 注意力图（用于热力图叠加）
+- 输入防御：MobileNetV3 guard（胸片/非胸片）+ 启发式兜底，guard 不替代 121 主模型
 - 检索：BM25 + TF-IDF + RRF 排序；配置 DashScope 后可启用 embedding / rerank
 
 ## 主要能力

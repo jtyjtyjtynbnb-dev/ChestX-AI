@@ -1,0 +1,4 @@
+{
+  "reject_threshold": 0.1,
+  "warn_threshold": 0.07
+}

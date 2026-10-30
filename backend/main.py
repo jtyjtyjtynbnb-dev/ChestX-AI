@@ -23,6 +23,7 @@ from .database import (
     sync_conversations_payload,
     sync_members_payload,
 )
+from .guard_classifier import evaluate_guard
 from .image_quality import inspect_chest_xray
 from .model_infer import diagnose_image
 from .qwen_client import DashScopeError, DashScopeQwenClient, runtime_config_status, set_runtime_config
@@ -96,6 +97,13 @@ async def _read_image_upload(file: UploadFile) -> Image.Image:
     except (UnidentifiedImageError, OSError, Image.DecompressionBombError, ValueError) as exc:
         raise HTTPException(status_code=400, detail="图片解析失败，请上传有效的 JPG/PNG 文件") from exc
     plausible, message, _metrics = inspect_chest_xray(image)
+    guard = evaluate_guard(image)
+    if guard.get("available"):
+        if guard.get("decision") == "reject":
+            raise HTTPException(status_code=400, detail=guard.get("reason") or "未识别为胸片")
+        if guard.get("decision") == "accept":
+            return image
+    # Guard unavailable/ambiguous: keep the conservative heuristic as fallback.
     if not plausible:
         raise HTTPException(status_code=400, detail=message)
     return image
