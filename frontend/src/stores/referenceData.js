@@ -578,6 +578,7 @@ import { IMAGE_UPLOAD, PROB_THRESHOLD, VIEWER_DEFAULTS, VIEWER_ZOOM } from '../c
       currentPage: 'home',
       currentSampleKey: 'case-high',
       diagnoseStatus: 'idle', // 'idle' | 'analyzing' | 'done'
+      diagnosisError: '',
       currentCase: JSON.parse(JSON.stringify(CLINICAL_SAMPLE_CASES['case-high'])),
       series: [],
       seriesIndex: 0,

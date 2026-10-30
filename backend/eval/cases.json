@@ -1,0 +1,9 @@
+[
+  {"image": "sample_2.jpg", "expected": "pneumonia", "acceptable": ["pneumonia", "infiltration", "consolidation"], "label": "右下肺斑片影（肺炎）"},
+  {"image": "sample_3.jpg", "expected": "no_finding", "acceptable": ["no_finding"], "label": "正常胸片"},
+  {"image": "knowledge/source-pneumonia.jpg", "expected": "pneumonia", "acceptable": ["pneumonia", "infiltration", "consolidation"], "label": "肺炎教学图"},
+  {"image": "knowledge/nodule.jpg", "expected": "nodule", "acceptable": ["nodule", "mass"], "label": "肺结节教学图"},
+  {"image": "knowledge/effusion.jpg", "expected": "effusion", "acceptable": ["effusion"], "label": "胸腔积液教学图"},
+  {"image": "knowledge/pneumothorax.jpg", "expected": "pneumothorax", "acceptable": ["pneumothorax"], "label": "气胸教学图"},
+  {"image": "knowledge/atelectasis.jpg", "expected": "atelectasis", "acceptable": ["atelectasis", "infiltration"], "label": "肺不张教学图"}
+]

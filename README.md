@@ -2,7 +2,9 @@
 
 胸部 X 光影像 AI 健康科普与家庭健康档案演示系统。后端使用 FastAPI + ONNX Runtime + LangGraph + SQLite，前端使用 Vue 3 + Pinia + Vite + Tailwind CSS，构建产物由 FastAPI 在单端口托管。
 
-> **医疗声明**：本系统仅用于健康科普与医学影像教学演示，不具备临床诊断效力，不能替代医生面诊与正式影像报告。
+> **医疗声明**：本工具仅用于健康科普与教学演示，**不可用于临床诊断，不能替代医生**。系统输出为影像提示与可能性，不构成确诊或治疗建议。
+>
+> **隐私声明**：原始影像仅在内存中处理，不保存原始文件；健康档案为本机 SQLite/localStorage。默认本地运行；启用 Qwen 时仅发送结构化概率/问题/知识片段，不发送原始影像。当前无鉴权、无 HTTPS，禁止公网部署。详见 [技术报告-合规与安全](技术报告-合规与安全.md)。
 
 ## 快速开始
 
@@ -11,7 +13,15 @@
 1. 安装 Python 3.10+（64 位），勾选 “Add Python to PATH”。
 2. 双击 `一键启动.bat`。脚本会检测依赖；缺失时自动在包内创建 `.venv` 并安装 `backend/requirements.txt`（首次需要联网）。
 3. 浏览器自动打开 `http://127.0.0.1:8000/`。
-4. 如果需要 Qwen 问答/报告，在页面右上角“设置”中填写 DashScope API Key，或编辑 `backend/.env`。
+4. 如果需要 Qwen 问答/报告，在页面右上角“设置”中填写 DashScope API Key，或编辑 `backend/.env`。Qwen 报告只发送结构化概率/问题/知识片段，不发送原始影像；零云端场景保持 Key 为空。
+
+### 简单鲁棒性评估
+
+```bash
+python -m backend.evaluate
+```
+
+使用 7 张内置教学图做 Top-1/Top-3 与亮度/旋转扰动稳定性 smoke test，**不是临床验证集**；结果与局限性见 [技术报告-合规与安全](技术报告-合规与安全.md)。
 
 ### Linux / macOS
 
@@ -28,6 +38,7 @@ ChestX-AI-演示运行包/
 ├─ 一键启动.bat                  # 推荐入口（双击）
 ├─ start.sh                     # Linux/macOS 启动脚本（单端口 8000）
 ├─ 操作手册.md                    # 安装、操作、功能、排障、打包
+├─ 技术报告-合规与安全.md          # 医疗边界、隐私、输出安全、预处理与评估
 ├─ backend/                       # FastAPI、ONNX 推理、RAG、SQLite
 │  ├─ model.onnx                  # 10 类胸片多标签模型
 │  ├─ data/chestx.db              # 本地 SQLite（运行期生成/演示数据）

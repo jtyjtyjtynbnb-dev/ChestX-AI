@@ -11,6 +11,7 @@ from typing import Any
 from .config import DISCLAIMER
 from .qwen_client import DashScopeError, DashScopeQwenClient
 from .rag.retriever import retrieve_knowledge
+from .safety import sanitize_text
 
 
 FORBIDDEN_PATTERNS = ("已确诊", "可以确诊", "排除疾病", "一定是", "百分之百", "立即服药", "自行用药")
@@ -192,7 +193,8 @@ async def stream_answer_question(
 
     if _local_intent_answer(clean_q):
         result = await answer_question(clean_q, history, diagnosis_context)
-        text = result.get("answer", "")
+        text = sanitize_text(result.get("answer", ""))
+        result["answer"] = text
         for i in range(0, len(text), 12):
             yield "token", {"delta": text[i : i + 12]}
             await asyncio.sleep(0.008)
@@ -208,6 +210,7 @@ async def stream_answer_question(
     yield "step", {"name": "知识检索", "status": "completed" if documents else "no_evidence", "count": len(documents)}
 
     result = await answer_question(clean_q, history, diagnosis_context)
+    result["answer"] = sanitize_text(result.get("answer", ""))
     qwen_status = "completed" if result.get("provider") == "qwen" else ("skipped" if result.get("failure_reason") == "qwen_not_configured" else "degraded")
     yield "step", {"name": "Qwen 生成", "status": qwen_status}
 

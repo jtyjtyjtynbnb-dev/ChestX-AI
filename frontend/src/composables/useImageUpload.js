@@ -10,15 +10,6 @@ function cloneDemoCase() {
   return base;
 }
 
-function dataUrlToBlob(dataUrl) {
-  const [header, body] = String(dataUrl).split(',');
-  const mime = /data:([^;]+)/.exec(header)?.[1] || 'image/jpeg';
-  const binary = atob(body || '');
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
-  return new Blob([bytes], { type: mime });
-}
-
 export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {}, onLoaded = () => {} } = {}) {
   const state = reactive({ visible: false, dragging: false, percent: 0, busy: false });
   const fileInput = ref(null);
@@ -56,19 +47,13 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
             ? new OffscreenCanvas(width, height)
             : Object.assign(document.createElement('canvas'), { width, height });
           canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-          const finish = (blob) => resolve({ blob, width: image.naturalWidth, height: image.naturalHeight });
+          const finish = (blob) => readFile(blob).then((dataUrl) => resolve({ blob, width: image.naturalWidth, height: image.naturalHeight, dataUrl }), reject);
           if (canvas.convertToBlob) canvas.convertToBlob({ type: 'image/jpeg', quality: IMAGE_UPLOAD.jpegQuality }).then(finish, reject);
           else canvas.toBlob((blob) => blob ? finish(blob) : reject(new Error('图片压缩失败')), 'image/jpeg', IMAGE_UPLOAD.jpegQuality);
         } catch (error) { reject(error); }
       };
       image.src = source;
     });
-  }
-
-  async function compressImageForUpload(file) {
-    const source = await readFile(file);
-    if (!active) throw new DOMException('读取已取消', 'AbortError');
-    return compressSource(source);
   }
 
   function validateFile(file) {
@@ -95,7 +80,7 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
       caseBadge: '本地上传胸片',
       fileSize: file.size,
       uploadedAt: formatNowTime(),
-      imageUrl: source,
+      imageUrl: compressed.dataUrl,
       dimensions: compressed.width + ' × ' + compressed.height + ' px',
       naturalWidth: compressed.width,
       naturalHeight: compressed.height,
@@ -110,6 +95,7 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
     const buffer = await file.arrayBuffer();
     if (!active) throw new DOMException('读取已取消', 'AbortError');
     const decoded = decodeDicom(buffer);
+    const compressed = await compressSource(decoded.dataUrl);
     const caseData = cloneDemoCase();
     const baseName = file.name.replace(/\.dcm$/i, '');
     return {
@@ -120,11 +106,11 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
       caseBadge: '本地 DICOM（未压缩）',
       fileSize: file.size,
       uploadedAt: formatNowTime(),
-      imageUrl: decoded.dataUrl,
+      imageUrl: compressed.dataUrl,
       dimensions: decoded.width + ' × ' + decoded.height + ' px',
       naturalWidth: decoded.width,
       naturalHeight: decoded.height,
-      sourceFile: new File([dataUrlToBlob(decoded.dataUrl)], baseName + '.jpg', { type: 'image/jpeg' }),
+      sourceFile: new File([compressed.blob], baseName + '.jpg', { type: 'image/jpeg' }),
       isDicom: true,
       pixelSpacing: decoded.pixelSpacing,
       windowCenter: decoded.windowCenter,
@@ -137,6 +123,7 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
     AppState.currentCase = caseData;
     AppState.agentResult = null;
     AppState.diagnoseStatus = 'idle';
+    AppState.diagnosisError = '';
     AppState.viewer.pixelSpacing = caseData.pixelSpacing || null;
     AppState.viewer.measureMode = 'none';
     AppState.viewer.measurePoints = [];
@@ -220,7 +207,7 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
   function dispose() { active = false; cancelPending(); }
 
   return {
-    state, fileInput, compressImageForUpload, handleLocalXrayFile, handleLocalXrayFiles,
+    state, fileInput, handleLocalXrayFile, handleLocalXrayFiles,
     selectSeries, stepSeries, chooseFile, fileChanged, drop, showUploader, hideUploader,
     testInvalidFile, cancelPending, dispose,
   };

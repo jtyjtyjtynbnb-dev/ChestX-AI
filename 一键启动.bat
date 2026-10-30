@@ -71,6 +71,8 @@ if not defined PYTHON_EXE (
   pause
   exit /b 1
 )
+echo Using Python: %PYTHON_EXE%
+echo Working directory: %APP_DIR%
 
 REM ---------------------------------------------------------------------------
 REM 2. Check runtime dependencies; install them into a local .venv on demand.

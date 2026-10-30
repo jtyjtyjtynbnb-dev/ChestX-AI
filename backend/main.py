@@ -23,8 +23,10 @@ from .database import (
     sync_conversations_payload,
     sync_members_payload,
 )
+from .image_quality import inspect_chest_xray
 from .model_infer import diagnose_image
 from .qwen_client import DashScopeError, DashScopeQwenClient, runtime_config_status, set_runtime_config
+from .safety import sanitize_text
 from .schemas import ChatRequest, ConversationsSyncRequest, MembersSyncRequest, QwenSettingsRequest
 from .workflow import workflow_events
 
@@ -91,9 +93,12 @@ async def _read_image_upload(file: UploadFile) -> Image.Image:
     try:
         image = Image.open(BytesIO(payload))
         image.load()
-        return image
     except (UnidentifiedImageError, OSError, Image.DecompressionBombError, ValueError) as exc:
         raise HTTPException(status_code=400, detail="图片解析失败，请上传有效的 JPG/PNG 文件") from exc
+    plausible, message, _metrics = inspect_chest_xray(image)
+    if not plausible:
+        raise HTTPException(status_code=400, detail=message)
+    return image
 
 
 def _validated_question(question: str) -> str:
@@ -118,7 +123,11 @@ def list_members() -> dict:
 @app.post("/api/members/sync")
 async def sync_members(payload: MembersSyncRequest) -> JSONResponse:
     """Synchronize family members and their records from the frontend into SQLite."""
-    data = await run_in_threadpool(sync_members_payload, payload.members, payload.current_member_id)
+    data = await run_in_threadpool(
+        sync_members_payload,
+        [member.model_dump() for member in payload.members],
+        payload.current_member_id,
+    )
     return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": data})
 
 
@@ -151,6 +160,7 @@ async def agent_chat(payload: ChatRequest) -> JSONResponse:
         data = await answer_question(payload.question, payload.history, payload.diagnosis_context)
     except ValueError as exc:
         return error_response(400, str(exc))
+    data["answer"] = sanitize_text(data.get("answer", ""))
     return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": data})
 
 

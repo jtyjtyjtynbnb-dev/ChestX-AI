@@ -14,10 +14,12 @@ KNOWLEDGE_PATH = Path(__file__).with_name("knowledge.json")
 
 @lru_cache(maxsize=1)
 def load_knowledge() -> list[dict]:
+    """加载本地知识库；不访问网络，保证离线可检索。"""
     return json.loads(KNOWLEDGE_PATH.read_text(encoding="utf-8"))
 
 
 def _terms(value: str) -> set[str]:
+    """中文按字/双字切分，英文按词切分，用于 BM25 词项匹配。"""
     value = value.lower()
     terms = set(re.findall(r"[a-z0-9]+", value))
     chinese = "".join(re.findall(r"[\u4e00-\u9fff]", value))
@@ -46,6 +48,7 @@ def _score(item: dict, query_terms: set[str], predicted_codes: set[str]) -> int:
 
 
 def _bm25_scores(corpus: list[str], query_terms: set[str]) -> list[float]:
+    """轻量 BM25：不引入额外依赖，适合内置小知识库。"""
     tokenized = [_tokens(text) for text in corpus]
     n = len(tokenized)
     average_length = sum(map(len, tokenized)) / max(n, 1)
@@ -86,6 +89,7 @@ def _tfidf_vectors(corpus: list[str], query: str) -> tuple[list[list[float]], li
     return vectors, similarities
 
 
+# 本地同步检索入口：类别过滤 + 文本相关性，供聊天和报告兜底使用。
 def retrieve_knowledge(
     predicted_codes: list[str],
     query: str = "",
@@ -134,6 +138,7 @@ def retrieve_knowledge(
     return results[: min(max(0, top_k), 8)]
 
 
+# 异步混合检索入口：本地 BM25/TF-IDF 为基线，可选 DashScope embedding/rerank 增强。
 async def hybrid_retrieve(
     predicted_codes: list[str],
     query: str,

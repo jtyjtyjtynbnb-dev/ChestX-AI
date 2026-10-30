@@ -67,7 +67,7 @@ const vm = useInterpretPage();
                 </svg>
               </div>
               <h3 class="mt-4 text-lg font-medium text-text-1">点击选择或将胸部X光片拖拽至此处上传</h3>
-              <p id="uploadHelpText" class="mt-1 text-xs text-text-3">支持后前位 (PA) / 前后位 (AP) 胸片，JPG / PNG / 未压缩 DICOM；单张 ≤ 10MB（DICOM ≤ 40MB），多选可建立序列</p>
+              <p id="uploadHelpText" class="mt-1 text-xs text-text-3">支持后前位 (PA) / 前后位 (AP) 胸片，JPG / PNG / 未压缩 DICOM；单张 ≤ 10MB（DICOM ≤ 40MB），多选可建立序列。压缩 DICOM 请先转为未压缩 DICOM 或 JPG/PNG。</p>
 
               <!-- 校验规则说明标签 -->
               <div class="mt-4 flex flex-wrap justify-center gap-2 text-xs text-text-2">
@@ -251,7 +251,17 @@ const vm = useInterpretPage();
         <div class="lg:col-span-5 space-y-4">
 
           <!-- 状态 1：待分析面板 (idle) -->
-          <div id="stateIdlePanel" v-show="vm.AppState.diagnoseStatus === 'idle'" class="med-card text-center py-12 px-6 space-y-4">
+          <div v-if="vm.AppState.diagnosisError" id="diagnosisErrorPanel" class="med-card border-danger/30 bg-danger/5 space-y-3" role="alert">
+            <h3 class="text-base font-semibold text-danger">{{ $t('分析未能完成') }}</h3>
+            <p class="text-xs leading-5 text-text-2">{{ vm.AppState.diagnosisError }}</p>
+            <p class="text-xs leading-5 text-text-3">{{ $t('请检查网络或后端服务后重试；也可以重新上传胸片。') }}</p>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" id="retryAnalysisBtn" class="btn-primary btn-sm" @click="vm.analyze()">{{ $t('重试分析') }}</button>
+              <button type="button" class="btn-secondary btn-sm" @click="vm.upload.showUploader()">{{ $t('重新上传') }}</button>
+            </div>
+          </div>
+
+          <div id="stateIdlePanel" v-show="vm.AppState.diagnoseStatus === 'idle' && !vm.AppState.diagnosisError" class="med-card text-center py-12 px-6 space-y-4">
             <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
               <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -286,6 +296,7 @@ const vm = useInterpretPage();
               <!-- 一句话总结结论 -->
               <div class="mt-3 rounded-md bg-page-bg p-3 border border-border-line">
                 <p id="resultSummaryText" class="text-sm font-medium text-text-1 leading-6">{{ vm.currentCase.summary }}</p>
+                <p v-if="vm.currentCase.preprocessing?.applied" id="preprocessNote" class="mt-2 text-[11px] text-text-3">{{ $t('已自动校正影像方向或曝光，仅用于模型输入；原始影像未上传云端。') }}</p>
               </div>
             </div>
 
@@ -331,7 +342,7 @@ const vm = useInterpretPage();
               <div class="flex flex-wrap items-center justify-between gap-2 border-b border-border-line pb-3">
                 <div>
                   <h3 class="text-base font-semibold text-text-1">循证科普报告</h3>
-                  <p id="agentProviderLabel" class="mt-0.5 text-xs text-text-3">{{ vm.results.agentResult.provider === 'qwen' ? 'DashScope Qwen 多模态报告已完成' : 'Qwen 不可用，当前显示本地模型与知识库结果' }}</p>
+                  <p id="agentProviderLabel" class="mt-0.5 text-xs text-text-3">{{ vm.results.agentResult.provider === 'qwen' ? 'DashScope Qwen 循证报告已完成（未上传影像）' : 'Qwen 不可用，当前显示本地模型与知识库结果' }}</p>
                 </div>
                 <span id="agentSourceCount" class="text-xs text-text-3">检索到 {{ vm.results.agentResult.sources?.length || 0 }} 条知识依据</span>
               </div>

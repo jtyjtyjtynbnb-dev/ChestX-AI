@@ -1,8 +1,6 @@
-"""Native DashScope multimodal client for Qwen-VL report generation."""
+"""DashScope text client for local-first chat and evidence reports."""
 
 import asyncio
-import base64
-import io
 import json
 import os
 from collections.abc import AsyncIterator
@@ -11,13 +9,8 @@ from typing import Any
 from urllib.parse import urlparse
 
 import httpx
-from PIL import Image
 
 
-DEFAULT_ENDPOINT = (
-    "https://dashscope.aliyuncs.com/api/v1/services/aigc/"
-    "multimodal-generation/generation"
-)
 DEFAULT_CHAT_ENDPOINT = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 DEFAULT_MODEL = "qwen3.8-flash"
 ENV_PATH = Path(__file__).resolve().parent / ".env"
@@ -120,55 +113,16 @@ class DashScopeQwenClient:
         self.transport = transport
         self.api_key = (_runtime_api_key if _runtime_api_key is not None else os.getenv("DASHSCOPE_API_KEY", "")).strip()
         self.model = _runtime_model or os.getenv("QWEN_MODEL", DEFAULT_MODEL)
-        self.endpoint = os.getenv("DASHSCOPE_ENDPOINT", DEFAULT_ENDPOINT)
         self.chat_endpoint = os.getenv("DASHSCOPE_CHAT_ENDPOINT", DEFAULT_CHAT_ENDPOINT)
         self.timeout_seconds = float(os.getenv("QWEN_TIMEOUT_SECONDS", "45"))
-        url = urlparse(self.endpoint)
-        if url.scheme != 'https' or not (url.hostname or '').endswith('.aliyuncs.com') or '/compatible-mode/' in url.path:
-            raise ValueError('Use a native HTTPS DashScope aliyuncs.com endpoint')
+        url = urlparse(self.chat_endpoint)
+        if url.scheme != 'https' or not (url.hostname or '').endswith('.aliyuncs.com'):
+            raise ValueError('Use an HTTPS DashScope aliyuncs.com endpoint')
         self.origin = f'{url.scheme}://{url.netloc}'
         self.last_usage = {}
 
     def enabled(self) -> bool:
         return bool(self.api_key)
-
-    @staticmethod
-    def image_to_data_url(image: Image.Image) -> str:
-        image = image.convert("RGB")
-        image.thumbnail((1600, 1600))
-        buffer = io.BytesIO()
-        image.save(buffer, format="JPEG", quality=85, optimize=True)
-        encoded = base64.b64encode(buffer.getvalue()).decode("ascii")
-        return f"data:image/jpeg;base64,{encoded}"
-
-    async def generate_report(
-        self,
-        image: Image.Image,
-        prompt: str,
-    ) -> dict[str, Any]:
-        if not self.enabled():
-            raise RuntimeError("DASHSCOPE_API_KEY is not configured")
-
-        body = await self.post_json(self.chat_endpoint, self.build_compatible_payload(image, prompt))
-        self.last_usage = body.get('usage', {})
-        choices = body.get('choices', [])
-        if choices and choices[0].get('finish_reason') == 'length':
-            raise DashScopeError('truncated_output')
-        return parse_report_content(self._extract_compatible_text(body))
-
-    def build_compatible_payload(self, image: Image.Image, prompt: str) -> dict[str, Any]:
-        return {
-            "model": self.model,
-            "messages": [{
-                "role": "user",
-                "content": [
-                    {"type": "image_url", "image_url": {"url": self.image_to_data_url(image)}},
-                    {"type": "text", "text": prompt},
-                ],
-            }],
-            "temperature": 0.1,
-            "max_tokens": 1600,
-        }
 
     @staticmethod
     def _extract_compatible_text(body: dict[str, Any]) -> str:

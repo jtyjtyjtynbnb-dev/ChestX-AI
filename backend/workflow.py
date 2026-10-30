@@ -73,6 +73,7 @@ class AgentState(TypedDict, total=False):
 
 
 def build_agent_graph():
+    # 节点 1：输入校验。只做边界检查，不在这里调用模型，便于快速失败。
     async def validate(state: AgentState) -> dict[str, Any]:
         if len(state.get("question", "")) > 500:
             raise ValueError("问题长度不能超过500个字符")
@@ -80,12 +81,14 @@ def build_agent_graph():
             raise ValueError("胸片输入无效")
         return {"trace_id": uuid.uuid4().hex[:12], "steps": [{"name": "输入校验", "status": "completed", "elapsed_ms": 0}]}
 
+    # 节点 2：本地 ONNX 推理。推理放入线程池，避免阻塞 FastAPI 事件循环。
     async def image_inference(state: AgentState) -> dict[str, Any]:
         started = time.perf_counter()
         result = await asyncio.to_thread(state["infer"], state["image"])
         step = {"name": "影像推理", "status": "completed", "elapsed_ms": round((time.perf_counter() - started) * 1000, 1)}
         return {"inference": result, "steps": [*state.get("steps", []), step]}
 
+    # 节点 3：混合检索。用模型 top-3 类别 + 用户问题召回本地知识片段。
     async def retrieve(state: AgentState) -> dict[str, Any]:
         started = time.perf_counter()
         codes = [item["code"] for item in state["inference"].get("all_predictions", [])[:3]]
@@ -93,20 +96,24 @@ def build_agent_graph():
         step = {"name": "知识检索", "status": "completed", "elapsed_ms": round((time.perf_counter() - started) * 1000, 1), "count": len(sources), "mode": info["mode"]}
         return {"sources": sources, "retrieval_info": info, "steps": [*state.get("steps", []), step]}
 
+    # 条件路由：没有证据时不调用大模型，直接走本地模板，防止凭空编造。
     def evidence_route(state: AgentState) -> str:
         return "fallback" if not state.get("sources") else "report"
 
+    # 节点 4：可选 Qwen 循证报告；只发送结构化概率与知识片段，不上传原始影像。
     async def report(state: AgentState) -> dict[str, Any]:
         started = time.perf_counter()
-        result, provider = await create_report(state["image"], state.get("question", ""), state["inference"], state["sources"])
-        step = {"name": "DashScope Qwen 多模态报告", "status": "completed" if provider == "qwen" else "degraded", "elapsed_ms": round((time.perf_counter() - started) * 1000, 1)}
+        result, provider = await create_report(state.get("question", ""), state["inference"], state["sources"])
+        step = {"name": "DashScope Qwen 循证报告", "status": "completed" if provider == "qwen" else "degraded", "elapsed_ms": round((time.perf_counter() - started) * 1000, 1)}
         return {"report": result, "provider": provider, "fallback_reason": None if provider == "qwen" else "qwen_unavailable", "steps": [*state.get("steps", []), step]}
 
+    # 节点 5：证据不足兜底，仍使用统一的安全话术。
     async def fallback(state: AgentState) -> dict[str, Any]:
         steps = [*state.get("steps", []), {"name": "证据充分性检查", "status": "degraded", "elapsed_ms": 0}]
         steps.append({"name": "报告生成", "status": "degraded", "elapsed_ms": 0})
         return {"report": build_local_fallback(state["inference"], []), "provider": "local_fallback", "fallback_reason": "insufficient_evidence", "steps": steps}
 
+    # 节点 6：安全审查/收尾；报告字段已在 report_service 内做证据 ID 校验和话术清洗。
     async def safety(state: AgentState) -> dict[str, Any]:
         step = {"name": "安全审查", "status": "completed", "elapsed_ms": 0}
         return {"steps": [*state.get("steps", []), step]}

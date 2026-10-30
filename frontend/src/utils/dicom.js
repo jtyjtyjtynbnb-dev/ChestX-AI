@@ -96,8 +96,10 @@ export function decodeDicom(arrayBuffer) {
   else if (transferSyntax === '1.2.840.10008.1.2.2') {
     little = false;
     explicit = true;
+  } else if (transferSyntax.startsWith('1.2.840.10008.1.2.4.') || transferSyntax === '1.2.840.10008.1.2.5') {
+    throw new Error('检测到压缩 DICOM（Transfer Syntax ' + transferSyntax + '）。本演示仅支持未压缩 8/16 位 DICOM，请在 PACS/导出工具中另存为未压缩 DICOM，或转换为 JPG/PNG 后上传。');
   } else if (transferSyntax) {
-    throw new Error('暂不支持压缩 DICOM（' + transferSyntax + '），请先导出为未压缩 DICOM 或 JPG/PNG');
+    throw new Error('暂不支持该 DICOM 传输语法（' + transferSyntax + '），请先导出为未压缩 DICOM 或 JPG/PNG');
   }
 
   const tags = new Map();

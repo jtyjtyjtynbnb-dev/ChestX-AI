@@ -24,7 +24,7 @@ export const ANALYSIS_STAGE_PERCENT = {
   '输入校验': 15,
   '影像推理': 45,
   '知识检索': 65,
-  'Qwen 多模态报告': 88,
+  'DashScope Qwen 循证报告': 88,
   '安全审查': 96,
 };
 

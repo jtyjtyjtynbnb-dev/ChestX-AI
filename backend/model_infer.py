@@ -2,12 +2,14 @@
 
 import base64
 from functools import lru_cache
+from io import BytesIO
 
 import cv2
 import numpy as np
 from PIL import Image
 
 from .config import DISEASE_LIST, MODEL_INPUT_SIZE, MODEL_PATH
+from .image_quality import preprocess_image
 
 try:
     import onnxruntime as ort
@@ -64,9 +66,12 @@ def _heatmap_overlay(image: Image.Image, cam: np.ndarray) -> tuple[np.ndarray, s
 
 def diagnose_image(image: Image.Image) -> dict:
     """Run ONNX inference and return the fixed frontend response payload."""
+    # 预处理只在内存中完成：EXIF 方向、轻微旋转、过暗/过曝自动校正。
+    # 预处理后的图会随结果返回，热力图与显示图使用同一坐标系，避免叠加错位。
+    processed, preprocessing = preprocess_image(image)
     session = _load_session()
     input_name = session.get_inputs()[0].name
-    outputs = session.run(None, {input_name: _preprocess(image)})
+    outputs = session.run(None, {input_name: _preprocess(processed)})
     if len(outputs) != 2:
         raise RuntimeError("model must export logits and a CAM output")
     logits = np.asarray(outputs[0], dtype=np.float32)
@@ -88,7 +93,12 @@ def diagnose_image(image: Image.Image) -> dict:
             }
         )
     sorted_items = sorted(items, key=lambda item: item["probability"], reverse=True)
-    overlay, heatmap = _heatmap_overlay(image, outputs[1])
+    overlay, heatmap = _heatmap_overlay(processed, outputs[1])
+    normalized_image = None
+    if preprocessing.get("applied"):
+        buffer = BytesIO()
+        processed.save(buffer, format="JPEG", quality=88)
+        normalized_image = "data:image/jpeg;base64," + base64.b64encode(buffer.getvalue()).decode("ascii")
     return {
         "top_prediction": sorted_items[0],
         "all_predictions": sorted_items,
@@ -96,4 +106,6 @@ def diagnose_image(image: Image.Image) -> dict:
         "probabilities": sorted_items,
         "heatmap": heatmap,
         "heatmap_overlay": heatmap,
+        "normalized_image": normalized_image,
+        "preprocessing": preprocessing,
     }
