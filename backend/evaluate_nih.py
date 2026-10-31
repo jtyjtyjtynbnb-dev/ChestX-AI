@@ -14,6 +14,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
+from .guard_classifier import evaluate_guard
 from .image_quality import inspect_chest_xray
 from .model_infer import diagnose_image
 
@@ -114,9 +115,14 @@ def main() -> int:
         except Exception as exc:
             failures.append(f"{row['image']}: {exc}")
             continue
-        plausible, _message, _metrics = inspect_chest_xray(image)
-        if not plausible:
-            guard_rejected.append(row["image"])
+        guard = evaluate_guard(image)
+        if guard.get("available"):
+            if guard.get("decision") == "reject":
+                guard_rejected.append(row["image"])
+        else:
+            plausible, _message, _metrics = inspect_chest_xray(image)
+            if not plausible:
+                guard_rejected.append(row["image"])
         try:
             result = diagnose_image(image)
         except Exception as exc:

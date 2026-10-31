@@ -49,7 +49,14 @@ class GuardDataset(Dataset):
     def __init__(self, roots: list[Path], transform):
         self.items: list[tuple[Path, int, str]] = []
         for root, label in roots:
+            manifest = root / "manifest.csv"
+            allowed = None
+            if manifest.exists():
+                with manifest.open(encoding="utf-8", newline="") as handle:
+                    allowed = {row["image"] for row in csv.DictReader(handle) if row.get("image")}
             for path in sorted((root / "images").glob("*")):
+                if allowed is not None and path.name not in allowed:
+                    continue
                 if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff", ".bmp", ".gif"}:
                     self.items.append((path, label, root.name))
         self.transform = transform
@@ -200,11 +207,16 @@ def main() -> int:
     # The learned threshold can collapse to ~0 on perfectly separated data. Use a
     # human-auditable high threshold when it still keeps >=99% CXR recall.
     selected = None
-    for candidate in (0.10, 0.20, 0.30, 0.50, 0.80, 0.90):
+    selected_recall = -1.0
+    for candidate in (0.20, 0.30, 0.10, 0.50, 0.80, 0.90):
         candidate_metrics = metrics_at(val_y, val_p, candidate)
-        if candidate_metrics["cxr_recall"] >= 0.99:
-            if selected is None or candidate_metrics["non_chest_specificity"] > selected[1]:
-                selected = (candidate, candidate_metrics["non_chest_specificity"])
+        if candidate_metrics["cxr_recall"] < 0.99:
+            continue
+        recall = candidate_metrics["cxr_recall"]
+        specificity = candidate_metrics["non_chest_specificity"]
+        if recall > selected_recall or (recall == selected_recall and selected and specificity > selected[1]):
+            selected = (candidate, specificity)
+            selected_recall = recall
     if selected:
         threshold = selected[0]
     test_loss, test_y, test_p, test_paths = run_epoch(model, test_loader, criterion, optimizer, device, False)

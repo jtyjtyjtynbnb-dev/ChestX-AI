@@ -21,14 +21,14 @@
 # 7 张内置教学图 smoke test
 python -m backend.evaluate
 
-# NIH ChestX-ray14 官方 test 分层子集（400 张）
+# NIH ChestX-ray14 官方 test 完整集（25,596 张）
 python -m backend.evaluate_nih \
-  --labels data/nih_eval_400/selected_images.csv \
-  --images data/nih_eval_400/images \
-  --output data/nih_eval_400/eval_metrics.json
+  --labels data/nih_test_full/selected_images.csv \
+  --images data/nih_test_full/images \
+  --output data/nih_test_full/eval_metrics.json
 ```
 
-当前 400 张 NIH 子集：**Top-1 57.25%、Top-3 80.0%**。  
+当前完整 NIH test：**Top-1 45.67%、Top-3 71.11%**（400 张子集为 57.25%/80.0%，仅作早期 smoke）。  
 最新测试集评估、guard 指标与局限性见 [模型评估](模型评估.md)。  
 7 张教学图只用于 smoke test，**不是临床验证集**；完整说明见 [技术报告-合规与安全](技术报告-合规与安全.md)。
 

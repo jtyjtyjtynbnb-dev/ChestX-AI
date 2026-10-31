@@ -1,0 +1,111 @@
+{
+  "model": "backend/model.onnx",
+  "labels": "ChestX-AI-演示运行包\\data\\nih_test_full\\selected_images.csv",
+  "images": "ChestX-AI-演示运行包\\data\\nih_test_full\\images",
+  "requested_rows": 25596,
+  "evaluated_rows": 25596,
+  "missing_images": 0,
+  "guard_rejected": [
+    "00003029_018.png",
+    "00009608_054.png",
+    "00010007_121.png",
+    "00010625_005.png",
+    "00010625_010.png",
+    "00010625_017.png",
+    "00010625_020.png",
+    "00013685_045.png",
+    "00021201_042.png",
+    "00021222_008.png",
+    "00022815_061.png"
+  ],
+  "failures": [],
+  "top_metrics": {
+    "evaluated_images": 24468,
+    "top1": 0.4567,
+    "top3": 0.7111,
+    "exact_match": 0.0688
+  },
+  "per_class": {
+    "no_finding": {
+      "support": 9861,
+      "auroc": 0.7243995122930049,
+      "average_precision": 0.6450639030057806,
+      "precision_at_0_5": 0.6754,
+      "recall_at_0_5": 0.4951,
+      "f1_at_0_5": 0.5714
+    },
+    "atelectasis": {
+      "support": 3279,
+      "auroc": 0.7632423969774401,
+      "average_precision": 0.3231648314454108,
+      "precision_at_0_5": 0.2177,
+      "recall_at_0_5": 0.8054,
+      "f1_at_0_5": 0.3427
+    },
+    "cardiomegaly": {
+      "support": 1069,
+      "auroc": 0.8899373146479569,
+      "average_precision": 0.34160293685036563,
+      "precision_at_0_5": 0.2166,
+      "recall_at_0_5": 0.6763,
+      "f1_at_0_5": 0.3281
+    },
+    "effusion": {
+      "support": 4658,
+      "auroc": 0.8141481499223555,
+      "average_precision": 0.4780358059889436,
+      "precision_at_0_5": 0.2894,
+      "recall_at_0_5": 0.921,
+      "f1_at_0_5": 0.4405
+    },
+    "infiltration": {
+      "support": 6112,
+      "auroc": 0.694964399235888,
+      "average_precision": 0.3874400901926208,
+      "precision_at_0_5": 0.2757,
+      "recall_at_0_5": 0.9105,
+      "f1_at_0_5": 0.4232
+    },
+    "mass": {
+      "support": 1748,
+      "auroc": 0.8036301683161933,
+      "average_precision": 0.28681462944844305,
+      "precision_at_0_5": 0.1519,
+      "recall_at_0_5": 0.7706,
+      "f1_at_0_5": 0.2537
+    },
+    "nodule": {
+      "support": 1623,
+      "auroc": 0.7251184641666216,
+      "average_precision": 0.20452205342802338,
+      "precision_at_0_5": 0.1173,
+      "recall_at_0_5": 0.6445,
+      "f1_at_0_5": 0.1985
+    },
+    "pneumonia": {
+      "support": 555,
+      "auroc": 0.6886066490595064,
+      "average_precision": 0.0452685145663634,
+      "precision_at_0_5": 0.0479,
+      "recall_at_0_5": 0.3514,
+      "f1_at_0_5": 0.0843
+    },
+    "pneumothorax": {
+      "support": 2665,
+      "auroc": 0.843132006346145,
+      "average_precision": 0.3873421771309275,
+      "precision_at_0_5": 0.3231,
+      "recall_at_0_5": 0.6811,
+      "f1_at_0_5": 0.4383
+    },
+    "consolidation": {
+      "support": 1815,
+      "auroc": 0.7340146652714745,
+      "average_precision": 0.1521333919200892,
+      "precision_at_0_5": 0.1198,
+      "recall_at_0_5": 0.7702,
+      "f1_at_0_5": 0.2074
+    }
+  },
+  "note": "NIH labels are report-NLP labels; this is a held-out test split, not clinical validation."
+}
