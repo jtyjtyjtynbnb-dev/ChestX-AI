@@ -300,6 +300,32 @@ const vm = useInterpretPage();
               </div>
             </div>
 
+            <!-- Agent 工作流时间线 -->
+            <div v-if="vm.results.agentSteps.length" id="agentTimeline" class="med-card">
+              <div class="flex items-center justify-between border-b border-border-line pb-3">
+                <div>
+                  <h3 class="text-base font-medium text-text-1">Agent 工作流</h3>
+                  <p class="mt-0.5 text-xs text-text-3">每一步均可审计，便于答辩时说明推理链路</p>
+                </div>
+                <span class="text-[11px] text-text-3">{{ vm.results.agentSteps.length }} 步</span>
+              </div>
+              <ol class="mt-3 space-y-0">
+                <li v-for="(step, index) in vm.results.agentSteps" :key="index" class="relative flex gap-3 pb-3 last:pb-0">
+                  <div class="flex flex-col items-center">
+                    <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="step.status === 'failed' ? 'bg-danger' : step.status === 'degraded' ? 'bg-warning' : 'bg-success'"></span>
+                    <span v-if="index < vm.results.agentSteps.length - 1" class="mt-1 w-px flex-1 bg-border-line"></span>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="text-xs font-medium text-text-1">{{ step.name }}</span>
+                      <span class="text-[10px] tabular-nums text-text-3">{{ step.elapsed_ms != null ? step.elapsed_ms + 'ms' : '—' }}</span>
+                    </div>
+                    <p class="mt-0.5 text-[11px] text-text-3">{{ step.status === 'completed' ? '已完成' : step.status === 'degraded' ? '降级完成' : step.status === 'failed' ? '失败' : step.status }}</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
             <!-- 3.2 疾病概率列表：按概率从高到低排序；横向进度条+ECharts切换；hover显示说明；点击跳转科普 -->
             <div class="med-card">
               <div class="flex items-center justify-between mb-3">
@@ -352,9 +378,9 @@ const vm = useInterpretPage();
                   <span id="agentSourceCount" class="text-xs text-text-3">检索到 {{ vm.results.agentResult.sources?.length || 0 }} 条知识依据</span>
                 </div>
               </div>
-              <div class="rounded-md border border-border-line bg-page-bg/60 p-3">
+              <div class="rounded-md border p-3" :class="vm.results.reportMode === 'doctor' ? 'border-border-line bg-white' : 'border-primary/20 bg-primary/[0.03]'">
                 <p class="text-[11px] font-medium text-text-3">{{ vm.results.reportMode === 'doctor' ? '医生版摘要（描述性，非诊断）' : '患者版摘要（通俗解释）' }}</p>
-                <p id="agentReportSummary" class="mt-1 text-sm leading-6 text-text-1">{{ vm.results.reportSummary || '暂无报告摘要' }}</p>
+                <p id="agentReportSummary" class="mt-1 text-sm leading-7 text-text-1">{{ vm.results.reportSummary || '暂无报告摘要' }}</p>
               </div>
               <div v-if="vm.results.riskExplanation" id="reportRiskExplanation" class="rounded-md border border-warning/30 bg-warning/5 p-3 text-xs leading-5 text-text-2">
                 <strong class="text-text-1">风险分级说明：</strong>{{ vm.results.riskExplanation }}
@@ -371,7 +397,7 @@ const vm = useInterpretPage();
               </div>
               <details class="border-t border-border-line pt-2">
                 <summary class="cursor-pointer text-xs font-medium text-primary">查看检索依据与来源</summary>
-                <div id="agentEvidenceList" class="mt-2 space-y-2"><article v-for="(item, index) in vm.results.evidence" :key="item.id + '-' + index" class="border-l-2 border-primary/40 pl-3 text-xs leading-5"><p class="font-medium text-text-1">{{ item.title }}</p><p class="text-text-2">{{ item.claim }}</p><a class="text-primary underline" :href="item.source_url" target="_blank" rel="noopener noreferrer">{{ item.source }}</a></article><p v-if="!vm.results.evidence.length" class="text-xs text-text-3">本次没有可展示的引用依据。</p></div>
+                <div id="agentEvidenceList" class="mt-2 space-y-2"><article v-for="(item, index) in vm.results.evidence" :key="item.id + '-' + index" class="border-l-2 border-primary/40 pl-3 text-xs leading-5"><p class="font-medium text-text-1"><span class="mr-1 text-primary">[{{ index + 1 }}]</span>{{ item.title }}</p><p class="text-text-2">{{ item.claim }}</p><a class="text-primary underline" :href="item.source_url" target="_blank" rel="noopener noreferrer">{{ item.source }}</a></article><p v-if="!vm.results.evidence.length" class="text-xs text-text-3">本次没有可展示的引用依据。</p></div>
               </details>
               <p id="agentDisclaimer" class="border-t border-border-line pt-2 text-[11px] leading-5 text-text-3">{{ vm.results.agentResult.report?.disclaimer || '' }}</p>
             </div>

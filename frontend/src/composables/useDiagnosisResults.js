@@ -19,6 +19,7 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
     }));
   });
   const agentResult = computed(() => currentCase.value?.agentResult || null);
+  const agentSteps = computed(() => agentResult.value?.steps || []);
   const report = computed(() => agentResult.value?.report || null);
   const reportSummary = computed(() => {
     if (!report.value) return '';
@@ -71,6 +72,6 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
   }
   function setProbabilityMode(mode) { AppState.probViewMode = mode; }
   function dispose() { disposed = true; observer?.disconnect(); observer = null; chart?.dispose(); chart = null; }
-  return { currentCase, risk, probabilities, agentResult, report, reportMode, reportSummary, riskExplanation, followUpQuestions, reportActions, evidence, setReportMode, openKnowledge, openRelatedKnowledge, renderProbabilityChart, setProbabilityMode, mount, dispose };
+  return { currentCase, risk, probabilities, agentResult, agentSteps, report, reportMode, reportSummary, riskExplanation, followUpQuestions, reportActions, evidence, setReportMode, openKnowledge, openRelatedKnowledge, renderProbabilityChart, setProbabilityMode, mount, dispose };
 }
 

@@ -77,8 +77,8 @@ const dashboard=reactive(modules.dashboard);
   <!-- ==========================================
        全局弹窗 3：数据统计看板弹窗 （扩展功能）
        ========================================== -->
-  <div id="statsModalBackdrop" :class="{ hidden: !AppState.statsOpen }" class="fixed inset-0 z-[70] bg-slate-900/55 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="modal-content-anim w-full max-w-7xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white border border-border-line shadow-2xl p-6 space-y-4">
+  <div id="statsModalBackdrop" :class="{ hidden: !AppState.statsOpen }" class="fixed inset-0 z-[70] bg-slate-900/55 backdrop-blur-xs flex justify-end">
+    <div class="modal-content-anim h-full w-full max-w-[1280px] overflow-y-auto rounded-l-2xl bg-white border-l border-border-line shadow-2xl p-6 space-y-4">
       <div class="flex items-start justify-between gap-3 border-b border-border-line pb-3">
         <div>
           <h3 class="text-lg font-semibold text-text-1">成员健康数据看板</h3>
