@@ -1,5 +1,6 @@
 """Evidence-grounded report generation and local fallback behavior."""
 
+import asyncio
 import json
 
 from .config import DISCLAIMER
@@ -205,9 +206,12 @@ async def create_report(
 
     try:
         # 隐私优先：不把原始影像发送到云端。Qwen 只接收结构化概率、问题和知识片段。
-        report = parse_report_content(
-            await client.generate_chat(build_report_prompt(user_question, inference, documents), max_tokens=1600)
+        # 即使 Qwen 网络悬挂，40 秒后也回退本地报告，避免前端等到超时。
+        content = await asyncio.wait_for(
+            client.generate_chat(build_report_prompt(user_question, inference, documents), max_tokens=1600),
+            timeout=40,
         )
+        report = parse_report_content(content)
         return validate_report(report, inference, documents), "qwen"
     except Exception:
         return build_local_fallback(inference, documents), "local_fallback"

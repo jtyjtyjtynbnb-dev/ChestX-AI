@@ -114,7 +114,7 @@ class DashScopeQwenClient:
         self.api_key = (_runtime_api_key if _runtime_api_key is not None else os.getenv("DASHSCOPE_API_KEY", "")).strip()
         self.model = _runtime_model or os.getenv("QWEN_MODEL", DEFAULT_MODEL)
         self.chat_endpoint = os.getenv("DASHSCOPE_CHAT_ENDPOINT", DEFAULT_CHAT_ENDPOINT)
-        self.timeout_seconds = float(os.getenv("QWEN_TIMEOUT_SECONDS", "45"))
+        self.timeout_seconds = float(os.getenv("QWEN_TIMEOUT_SECONDS", "30"))
         url = urlparse(self.chat_endpoint)
         if url.scheme != 'https' or not (url.hostname or '').endswith('.aliyuncs.com'):
             raise ValueError('Use an HTTPS DashScope aliyuncs.com endpoint')
@@ -197,9 +197,8 @@ class DashScopeQwenClient:
                     suffix = f'_{provider_code}' if provider_code else ''
                     raise DashScopeError(f'provider_http_{status}{suffix}') from None
                 except (httpx.TimeoutException, httpx.NetworkError):
-                    if attempt == 0:
-                        await asyncio.sleep(0.5)
-                        continue
+                    # Do not retry timeouts: a retried 30s timeout would block the
+                    # analysis request for ~60s before the local report fallback.
                     raise DashScopeError('network_timeout') from None
         raise DashScopeError('unavailable')
 

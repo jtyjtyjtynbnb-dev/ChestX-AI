@@ -17,6 +17,6 @@ export const API_ENDPOINTS = {
 
 export const REQUEST_TIMEOUT_MS = {
   default: 30000,
-  diagnosis: 90000,
+  diagnosis: 180000,
   qwenTest: 30000,
 };
