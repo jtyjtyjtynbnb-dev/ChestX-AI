@@ -305,10 +305,24 @@ const vm = useInterpretPage();
               </div>
 
               <!-- 一句话总结结论 -->
+              <div class="mt-3 flex flex-wrap items-end justify-between gap-2">
+                <div>
+                  <p class="text-xs text-text-3">演示风险分级</p>
+                  <p class="mt-0.5 text-2xl font-semibold tracking-tight" :style="{ color: vm.results.risk.color }">{{ vm.results.risk.label }}</p>
+                </div>
+                <p v-if="vm.results.topProbabilities.length" class="text-xs text-text-3">最高类别 <strong class="text-text-1">{{ vm.formatProb(vm.results.topProbabilities[0].prob) }}</strong></p>
+              </div>
               <div class="mt-3 rounded-md bg-page-bg p-3 border border-border-line">
                 <p id="resultSummaryText" class="text-sm font-medium text-text-1 leading-6">{{ vm.currentCase.summary }}</p>
                 <p v-if="vm.currentCase.preprocessing?.applied" id="preprocessNote" class="mt-2 text-[11px] text-text-3">{{ $t('已自动校正影像方向或曝光，仅用于模型输入；原始影像未上传云端。') }}</p>
               </div>
+              <div class="mt-3 grid grid-cols-3 gap-2">
+                <button v-for="item in vm.results.topProbabilities" :key="item.code" type="button" class="min-w-0 rounded-lg border border-border-line bg-white p-2.5 text-left transition hover:border-primary/40 hover:bg-primary/[0.02]" @click="vm.results.openKnowledge(item.code)">
+                  <span class="block truncate text-[11px] text-text-2">{{ item.name }}</span>
+                  <strong class="mt-1 block text-2xl leading-none tabular-nums" :style="{ color: item.risk.color }">{{ vm.formatProb(item.prob) }}</strong>
+                </button>
+              </div>
+              <button id="toggleAllProbBtn" type="button" class="mt-2 text-xs font-medium text-primary hover:underline" @click="vm.results.toggleProbabilities()">{{ vm.results.probExpanded ? '收起 10 类明细' : '展开全部 10 类明细 →' }}</button>
             </div>
 
             <!-- Agent 工作流时间线 -->
@@ -338,7 +352,7 @@ const vm = useInterpretPage();
             </div>
 
             <!-- 3.2 疾病概率列表：按概率从高到低排序；横向进度条+ECharts切换；hover显示说明；点击跳转科普 -->
-            <div class="med-card">
+            <div v-show="vm.results.probExpanded" class="med-card">
               <div class="flex items-center justify-between mb-3">
                 <div>
                   <h3 class="text-lg font-medium text-text-1">疾病征象概率列表</h3>
@@ -378,7 +392,7 @@ const vm = useInterpretPage();
             <div id="agentReportPanel" v-if="vm.results.agentResult" class="med-card space-y-3 border-l-4 border-l-primary/60">
               <div class="flex flex-wrap items-center justify-between gap-2 border-b border-border-line pb-3">
                 <div>
-                  <h3 class="text-base font-semibold text-text-1">循证科普报告</h3>
+                  <h3 class="text-base font-semibold text-text-1">胸部X光 AI 科普报告</h3>
                   <p id="agentProviderLabel" class="mt-0.5 text-xs text-text-3">{{ vm.results.agentResult.provider === 'qwen' ? 'DashScope Qwen 循证报告已完成（未上传影像）' : 'Qwen 不可用，当前显示本地模型与知识库结果' }}</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-2">
@@ -388,6 +402,12 @@ const vm = useInterpretPage();
                   </div>
                   <span id="agentSourceCount" class="text-xs text-text-3">检索到 {{ vm.results.agentResult.sources?.length || 0 }} 条知识依据</span>
                 </div>
+              </div>
+              <div class="flex flex-wrap gap-x-4 gap-y-1 text-[10px] text-text-3">
+                <span>受检人：{{ vm.AppState.userProfile?.name || '当前成员' }}</span>
+                <span>影像：{{ vm.currentCase.fileName || '未命名' }}</span>
+                <span>时间：{{ vm.currentCase.uploadedAt || '—' }}</span>
+                <span>模型：DenseNet-121 · 10 类</span>
               </div>
               <div class="rounded-md border p-3" :class="vm.results.reportMode === 'doctor' ? 'border-border-line bg-white' : 'border-primary/20 bg-primary/[0.03]'">
                 <p class="text-[11px] font-medium text-text-3">{{ vm.results.reportMode === 'doctor' ? '医生版摘要（描述性，非诊断）' : '患者版摘要（通俗解释）' }}</p>

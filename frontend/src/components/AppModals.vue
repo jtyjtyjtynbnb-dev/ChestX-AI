@@ -87,82 +87,81 @@ const dashboard=reactive(modules.dashboard);
         <button type="button" id="closeStatsModalBtn" @click="dashboard.closeStatsModal()" class="btn-secondary btn-sm">✕ 关闭</button>
       </div>
 
-      <div class="grid grid-cols-2 gap-3 text-center sm:grid-cols-3 lg:grid-cols-6">
-        <div class="rounded-lg bg-page-bg p-3 border border-border-line">
-          <div id="statTotalCount" class="text-xl font-semibold text-primary tabular-nums">{{ dashboard.stats.total || 0 }}</div>
-          <div class="text-xs text-text-3 mt-0.5">累计解读</div>
-        </div>
-        <div class="rounded-lg bg-page-bg p-3 border border-border-line">
-          <div id="statHighRiskCount" class="text-xl font-semibold text-danger tabular-nums">{{ dashboard.stats.high || 0 }}</div>
-          <div class="text-xs text-text-3 mt-0.5">高风险关注</div>
-        </div>
-        <div class="rounded-lg bg-page-bg p-3 border border-border-line">
-          <div id="statMediumRiskCount" class="text-xl font-semibold text-warning tabular-nums">{{ dashboard.stats.medium || 0 }}</div>
-          <div class="text-xs text-text-3 mt-0.5">中风险随访</div>
-        </div>
-        <div class="rounded-lg bg-page-bg p-3 border border-border-line">
-          <div id="statLowRiskCount" class="text-xl font-semibold text-success tabular-nums">{{ dashboard.stats.low || 0 }}</div>
-          <div class="text-xs text-text-3 mt-0.5">低风险正常</div>
-        </div>
-        <div class="rounded-lg bg-page-bg p-3 border border-border-line">
-          <div id="statsMemberCount" class="text-xl font-semibold text-text-1 tabular-nums">{{ dashboard.stats.memberCount || 0 }}</div>
-          <div class="text-xs text-text-3 mt-0.5">覆盖成员</div>
-        </div>
-        <div class="rounded-lg bg-page-bg p-3 border border-border-line">
-          <div id="statsFollowUpCount" class="text-xl font-semibold text-text-1 tabular-nums">{{ dashboard.stats.followUpCount || 0 }}</div>
-          <div class="text-xs text-text-3 mt-0.5">建议随访</div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-        <section class="rounded-lg border border-border-line p-3">
-          <h4 class="text-xs font-semibold text-text-1">风险等级分布</h4>
-          <p class="mt-0.5 text-[11px] text-text-3">按演示阈值汇总，不是临床风险分层。</p>
-          <ChartCanvas v-if="AppState.statsOpen" id="statsRiskPieChart" class="relative h-56 w-full" :option="dashboard.statsPieOption" />
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-[220px_minmax(0,1fr)_300px]">
+        <section id="statsMemberTable" class="rounded-xl border border-border-line p-3 lg:row-span-3">
+          <div class="flex items-center justify-between gap-2">
+            <h4 class="text-xs font-semibold text-text-1">成员列表</h4>
+            <span class="text-[10px] text-text-3">当前高亮</span>
+          </div>
+          <div class="mt-2 space-y-1.5">
+            <div v-for="member in dashboard.memberRows" :key="member.id" class="rounded-lg border p-2" :class="member.current ? 'border-primary/40 bg-primary/[0.04]' : 'border-border-line bg-page-bg/50'">
+              <div class="flex items-center justify-between gap-1">
+                <span class="truncate text-xs font-medium text-text-1">{{ member.name }}</span>
+                <span v-if="member.current" class="rounded bg-primary/10 px-1.5 py-0.5 text-[9px] text-primary">当前</span>
+              </div>
+              <p class="mt-1 text-[10px] tabular-nums text-text-3">{{ member.total }} 次 · <span class="text-danger">{{ member.high }}</span>/<span class="text-warning">{{ member.medium }}</span>/<span class="text-success">{{ member.low }}</span></p>
+            </div>
+            <p v-if="!dashboard.memberRows.length" class="py-3 text-center text-xs text-text-3">暂无家庭成员数据</p>
+          </div>
         </section>
-        <section class="rounded-lg border border-border-line p-3">
-          <h4 class="text-xs font-semibold text-text-1">高频关注征象</h4>
-          <p class="mt-0.5 text-[11px] text-text-3">每次解读取最高概率的非正常类别；同一征象累计出现次数。</p>
-          <ChartCanvas v-if="AppState.statsOpen" id="statsFindingsChart" class="relative h-56 w-full" :option="dashboard.statsFindingsOption" />
-          <p v-if="!dashboard.stats.topFindings.length" class="py-6 text-center text-xs text-text-3">暂无达到 25% 的关注征象</p>
+
+        <div class="min-w-0 space-y-3">
+          <div class="grid grid-cols-2 gap-2 text-center sm:grid-cols-3">
+            <div class="rounded-lg bg-page-bg p-3 border border-border-line">
+              <div id="statTotalCount" class="text-xl font-semibold text-primary tabular-nums">{{ dashboard.stats.total || 0 }}</div>
+              <div class="text-[11px] text-text-3 mt-0.5">累计解读</div>
+            </div>
+            <div class="rounded-lg bg-page-bg p-3 border border-border-line">
+              <div id="statHighRiskCount" class="text-xl font-semibold text-danger tabular-nums">{{ dashboard.stats.high || 0 }}</div>
+              <div class="text-[11px] text-text-3 mt-0.5">高风险关注</div>
+            </div>
+            <div class="rounded-lg bg-page-bg p-3 border border-border-line">
+              <div id="statMediumRiskCount" class="text-xl font-semibold text-warning tabular-nums">{{ dashboard.stats.medium || 0 }}</div>
+              <div class="text-[11px] text-text-3 mt-0.5">中风险随访</div>
+            </div>
+            <div class="rounded-lg bg-page-bg p-3 border border-border-line">
+              <div id="statLowRiskCount" class="text-xl font-semibold text-success tabular-nums">{{ dashboard.stats.low || 0 }}</div>
+              <div class="text-[11px] text-text-3 mt-0.5">低风险正常</div>
+            </div>
+            <div class="rounded-lg bg-page-bg p-3 border border-border-line">
+              <div id="statsMemberCount" class="text-xl font-semibold text-text-1 tabular-nums">{{ dashboard.stats.memberCount || 0 }}</div>
+              <div class="text-[11px] text-text-3 mt-0.5">覆盖成员</div>
+            </div>
+            <div class="rounded-lg bg-page-bg p-3 border border-border-line">
+              <div id="statsFollowUpCount" class="text-xl font-semibold text-text-1 tabular-nums">{{ dashboard.stats.followUpCount || 0 }}</div>
+              <div class="text-[11px] text-text-3 mt-0.5">建议随访</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-3 xl:grid-cols-2">
+            <section class="rounded-lg border border-border-line p-3">
+              <h4 class="text-xs font-semibold text-text-1">风险等级分布</h4>
+              <p class="mt-0.5 text-[11px] text-text-3">按演示阈值汇总，不是临床风险分层。</p>
+              <ChartCanvas v-if="AppState.statsOpen" id="statsRiskPieChart" class="relative h-52 w-full" :option="dashboard.statsPieOption" />
+            </section>
+            <section class="rounded-lg border border-border-line p-3">
+              <h4 class="text-xs font-semibold text-text-1">高频关注征象</h4>
+              <p class="mt-0.5 text-[11px] text-text-3">每次解读取最高非正常类别累计。</p>
+              <ChartCanvas v-if="AppState.statsOpen" id="statsFindingsChart" class="relative h-52 w-full" :option="dashboard.statsFindingsOption" />
+              <p v-if="!dashboard.stats.topFindings.length" class="py-6 text-center text-xs text-text-3">暂无达到 25% 的关注征象</p>
+            </section>
+          </div>
+
+          <div class="rounded-lg border border-primary/20 bg-primary/5 p-3 text-xs text-text-2 leading-5">
+            <div class="font-semibold text-text-1 mb-1">AI 解读摘要</div>
+            <p id="statsAiInterpretation">{{ dashboard.summary }}</p>
+          </div>
+        </div>
+
+        <section id="statsKnowledgeGrid" class="grid grid-cols-1 gap-2 self-start lg:row-span-3">
+          <p class="text-xs font-semibold text-text-1">知识提示</p>
+          <button v-for="(point, index) in dashboard.knowledgePoints" :key="index" type="button" class="rounded-lg border border-primary/20 bg-primary/5 p-3 text-left transition hover:border-primary/50 hover:bg-primary/10" @click="dashboard.openKnowledge(point.code)">
+            <span class="rounded bg-white/80 px-1.5 py-0.5 text-[10px] font-medium text-primary">{{ point.tag }}</span>
+            <strong class="mt-1.5 block text-xs text-text-1">{{ point.title }}</strong>
+            <span class="mt-1 block text-[11px] leading-5 text-text-2">{{ point.text }}</span>
+            <span class="mt-1 block text-[10px] font-medium text-primary">查看科普 →</span>
+          </button>
         </section>
-      </div>
-
-      <section id="statsMemberTable" class="rounded-lg border border-border-line p-3">
-        <div class="flex items-center justify-between gap-2">
-          <h4 class="text-xs font-semibold text-text-1">成员概览</h4>
-          <span class="text-[11px] text-text-3">当前成员高亮显示</span>
-        </div>
-        <div class="mt-2 overflow-x-auto">
-          <table class="w-full min-w-[520px] text-left text-xs">
-            <thead class="border-b border-border-line text-text-3">
-              <tr><th class="py-1.5 pr-3 font-medium">成员</th><th class="py-1.5 pr-3 font-medium">解读次数</th><th class="py-1.5 pr-3 font-medium">高 / 中 / 低</th><th class="py-1.5 font-medium">最近一次</th></tr>
-            </thead>
-            <tbody>
-              <tr v-for="member in dashboard.memberRows" :key="member.id" class="border-b border-border-line/60 last:border-0" :class="member.current ? 'bg-primary/5' : ''">
-                <td class="py-2 pr-3"><span class="font-medium text-text-1">{{ member.name }}</span><span v-if="member.current" class="ml-1 rounded bg-primary/10 px-1.5 py-0.5 text-[10px] text-primary">当前</span></td>
-                <td class="py-2 pr-3 tabular-nums text-text-1">{{ member.total }}</td>
-                <td class="py-2 pr-3 tabular-nums"><span class="text-danger">{{ member.high }}</span> / <span class="text-warning">{{ member.medium }}</span> / <span class="text-success">{{ member.low }}</span></td>
-                <td class="py-2 text-text-2">{{ member.latest }}</td>
-              </tr>
-              <tr v-if="!dashboard.memberRows.length"><td colspan="4" class="py-3 text-center text-text-3">暂无家庭成员数据</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="statsKnowledgeGrid" class="grid grid-cols-1 gap-2 md:grid-cols-2">
-        <button v-for="(point, index) in dashboard.knowledgePoints" :key="index" type="button" class="rounded-lg border border-primary/20 bg-primary/5 p-3 text-left transition hover:border-primary/50 hover:bg-primary/10" @click="dashboard.openKnowledge(point.code)">
-          <span class="rounded bg-white/80 px-1.5 py-0.5 text-[10px] font-medium text-primary">{{ point.tag }}</span>
-          <strong class="mt-1.5 block text-xs text-text-1">{{ point.title }}</strong>
-          <span class="mt-1 block text-[11px] leading-5 text-text-2">{{ point.text }}</span>
-          <span class="mt-1 block text-[10px] font-medium text-primary">查看科普 →</span>
-        </button>
-      </section>
-
-      <div class="rounded-lg border border-primary/20 bg-primary/5 p-3 text-xs text-text-2 leading-5">
-        <div class="font-semibold text-text-1 mb-1">AI 解读摘要</div>
-        <p id="statsAiInterpretation">{{ dashboard.summary }}</p>
       </div>
       <p class="text-[10px] leading-4 text-text-3">数据来自本机已保存的解读记录；知识卡片用于健康科普，不构成诊断或治疗建议。</p>
     </div>

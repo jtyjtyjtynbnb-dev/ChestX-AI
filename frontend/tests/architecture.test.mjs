@@ -12,7 +12,7 @@ function staticIds(source) {
   return [...source.matchAll(/(?<![:\w-])id="([^"]+)"/g)].map(match => match[1]).filter(id => !id.includes('${')).sort();
 }
 
-test('Vue templates preserve all 180 reference static DOM ids', () => {
+test('Vue templates preserve all 181 reference static DOM ids', () => {
   // Frozen from the original reference HTML. Page markup now lives in components,
   // and :data-*-id bindings are expressions, not static DOM ids.
   const templates = [...filesIn('src/components'), ...filesIn('src/views')].filter(name => name.endsWith('.vue'));

@@ -20,7 +20,7 @@ const k = reactive(useKnowledge(useAppContext()));
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
       <aside class="med-card lg:col-span-4 !p-3 space-y-1" id="knowledgeNavList">
         <button v-for="(d, idx) in k.filteredList" :key="d.code" type="button" :data-disease-code="d.code" class="knowledge-item-btn flex w-full cursor-pointer items-center justify-between rounded-md px-3.5 py-2.5 text-left text-sm transition-all" :class="d.code === k.activeItem.code ? 'bg-primary text-white font-semibold shadow-xs' : 'text-text-1 hover:bg-page-bg'" @click="k.selectDisease(d.code)">
-          <span class="flex items-center gap-2 truncate"><span class="text-xs tabular-nums" :class="d.code === k.activeItem.code ? 'text-white/80' : 'text-text-3'">{{ String(idx + 1).padStart(2, '0') }}</span><span class="truncate">{{ d.name }}</span></span>
+          <span class="flex min-w-0 items-center gap-2 truncate"><span class="text-xs tabular-nums" :class="d.code === k.activeItem.code ? 'text-white/80' : 'text-text-3'">{{ String(idx + 1).padStart(2, '0') }}</span><span class="h-1.5 w-1.5 shrink-0 rounded-full" :style="{ backgroundColor: d.code === k.activeItem.code ? '#fff' : k.getRiskStyle(d.severity).color }"></span><span class="truncate">{{ d.name }}</span></span>
           <span class="ml-2 shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium" :class="d.code === k.activeItem.code ? 'bg-white/20 text-white' : k.getRiskStyle(d.severity).badgeClass">{{ k.getRiskStyle(d.severity).shortLabel }}</span>
         </button>
       </aside>
@@ -54,6 +54,12 @@ const k = reactive(useKnowledge(useAppContext()));
         </div>
 
         <div class="flex flex-wrap items-center justify-between gap-3 border-t border-border-line pt-4"><span class="text-xs text-text-3">想在真实胸片上直观对比该病种的解剖部位与典型征象？</span><div class="flex items-center gap-2.5"><button type="button" id="knowledgeToAcademySignsBtn" class="btn-primary !h-9 !text-xs" @click="k.toAcademy">去查看影像示例 (影像小课堂) →</button><button type="button" id="knowledgeToInterpretBtn" class="btn-secondary btn-sm" @click="k.toInterpret">在解读台体验样本</button></div></div>
+        <div class="border-t border-border-line pt-3">
+          <p class="text-[11px] font-medium text-text-3">相关征象</p>
+          <div class="mt-1.5 flex flex-wrap gap-1.5">
+            <button v-for="related in k.filteredList.filter(item => item.code !== k.activeItem.code).slice(0, 5)" :key="related.code" type="button" class="rounded-full border border-border-line bg-page-bg px-2.5 py-1 text-[11px] text-text-2 transition hover:border-primary/40 hover:text-primary" @click="k.selectDisease(related.code)">{{ related.shortName }}</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
