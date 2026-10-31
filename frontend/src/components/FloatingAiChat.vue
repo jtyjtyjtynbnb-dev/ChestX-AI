@@ -1,13 +1,15 @@
 <script setup>
 import { useChatPanel } from '../composables/useChatPanel.js';
-const { chat, inputElement, messagesElement, launcherStyle, panelStyle, launcherClick, beginDrag, hidePanel, openSample, syncBadge, syncClass, samples, contextText, conversations, currentConversationId, send, newConversation, openConversation, focusHeatmap, saveNotes, providerText, stepStatus } = useChatPanel();
+const { chat, inputElement, messagesElement, launcherStyle, panelStyle, launcherClick, beginDrag, hidePanel, openSample, syncBadge, syncClass, samples, contextText, conversations, currentConversationId, send, newConversation, openConversation, renameConversation, focusHeatmap, saveNotes, providerText, stepStatus } = useChatPanel();
 </script>
 
 <template>
 <button id="aiChatLauncher" :style="launcherStyle" @pointerdown="beginDrag($event, 'launcher')" @click="launcherClick" :aria-expanded="chat.open" aria-controls="aiChatPanel" class="ai-chat-launcher" type="button" aria-label="打开医学影像问答" title="医学影像问答">
-    <svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-3.5 2v-5.2A7.5 7.5 0 1 1 20 11.5Z" />
-      <path d="M12.5 7.5v7m-3.5-3.5h7" />
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 4.5v7.2" />
+      <path d="M9.4 8.2C7.1 9.6 5.6 12 5.6 14.7v2.8c0 1 .8 1.8 1.8 1.8h1.2c1 0 1.8-.8 1.8-1.8v-3.1c0-2.2-.4-4.3-1-6.2Z" />
+      <path d="M14.6 8.2c2.3 1.4 3.8 3.8 3.8 6.5v2.8c0 1-.8 1.8-1.8 1.8h-1.2c-1 0-1.8-.8-1.8-1.8v-3.1c0-2.2.4-4.3 1-6.2Z" />
+      <path d="M18.8 3.8l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6Z" />
     </svg>
   </button>
   <section id="aiChatPanel" class="ai-chat-panel" :class="{ hidden: !chat.open }" :style="panelStyle" role="dialog" aria-modal="false" aria-labelledby="aiChatTitle">
@@ -29,8 +31,16 @@ const { chat, inputElement, messagesElement, launcherStyle, panelStyle, launcher
       <span id="aiChatMemberContextText" class="truncate">{{ contextText }}</span>
       <span id="aiChatSyncBadge" :class="syncClass">{{ syncBadge.text }}</span>
     </div>
-    <nav id="aiChatConversationList" class="max-h-32 overflow-y-auto border-b border-border-line bg-white p-2" :class="{ hidden: !chat.historyOpen }" aria-label="已保存的对话">
-      <button v-for="conversation in conversations" :key="conversation.id" type="button" class="block w-full truncate rounded px-2 py-1.5 text-left text-xs" :class="conversation.id === currentConversationId ? 'bg-primary/10 text-primary' : 'hover:bg-page-bg'" :title="conversation.title || '新建对话'" @click="openConversation(conversation.id)">{{ conversation.title || '新建对话' }}</button>
+    <nav id="aiChatConversationList" class="max-h-40 overflow-y-auto border-b border-border-line bg-white p-2" :class="{ hidden: !chat.historyOpen }" aria-label="已保存的对话">
+      <div v-for="conversation in conversations" :key="conversation.id" class="group flex items-start gap-1 rounded" :class="conversation.id === currentConversationId ? 'bg-primary/10' : 'hover:bg-page-bg'">
+        <button type="button" class="min-w-0 flex-1 px-2 py-1.5 text-left" :title="conversation.title || '新建对话'" @click="openConversation(conversation.id)">
+          <span class="block truncate text-xs" :class="conversation.id === currentConversationId ? 'text-primary' : 'text-text-1'">{{ conversation.title || '新建对话' }}</span>
+          <span class="mt-0.5 block truncate text-[10px] text-text-3">提问成员：{{ conversation.memberName || '未记录' }}</span>
+        </button>
+        <button type="button" class="mt-1 rounded px-1.5 py-1 text-[10px] text-text-3 opacity-70 hover:bg-white hover:text-primary group-hover:opacity-100" :aria-label="`重命名对话 ${conversation.title || ''}`" title="重命名" @click.stop="renameConversation(conversation.id, conversation.title)">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3Z" /><path d="m13.5 6.5 4 4" /></svg>
+        </button>
+      </div>
       <p v-if="!conversations.length" class="px-2 py-2 text-xs text-text-3">暂无保存的对话</p>
     </nav>
     <div id="aiChatMessages" ref="messagesElement" class="ai-chat-messages" aria-live="polite">

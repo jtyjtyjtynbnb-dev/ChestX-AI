@@ -24,11 +24,37 @@ export function useChatConversations({ AppState, api, store, actions, modules = 
       .catch(() => { if (!request.signal.aborted) chat.syncState = 'local'; })
       .finally(() => requests.delete(request));
   }
+  function currentMemberSnapshot() {
+    const member = actions.getCurrentMember?.();
+    return {
+      memberId: member?.id || '',
+      memberName: member?.profile?.name || '默认成员'
+    };
+  }
   function persistChatMessage(message) {
     const conversation = activeChatConversation();
     if (!conversation) return;
-    conversation.messages.push({ ...message });
-    if (message.role === 'user' && conversation.title === '新建对话') conversation.title = message.content.slice(0, 24);
+    const member = currentMemberSnapshot();
+    const stored = { ...message, memberId: message.memberId || member.memberId, memberName: message.memberName || member.memberName };
+    conversation.messages.push(stored);
+    if (message.role === 'user') {
+      if (!conversation.memberId || conversation.memberName === '默认成员') {
+        conversation.memberId = member.memberId;
+        conversation.memberName = member.memberName;
+      }
+      if (!conversation.titleEdited && (!conversation.title || conversation.title === '新建对话')) {
+        conversation.title = message.content.slice(0, 24);
+      }
+    }
+    conversation.updatedAt = Date.now();
+    saveChatConversations();
+  }
+  function renameChatConversation(id, title) {
+    const conversation = AppState.conversations.find((item) => item.id === id);
+    const clean = String(title || '').trim().slice(0, 40);
+    if (!conversation || !clean) return;
+    conversation.title = clean;
+    conversation.titleEdited = true;
     conversation.updatedAt = Date.now();
     saveChatConversations();
   }
@@ -49,7 +75,16 @@ export function useChatConversations({ AppState, api, store, actions, modules = 
   }
   function newChatConversation(save = true) {
     modules.chat?.cancel();
-    const conversation = { id: `chat-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, title: '新建对话', updatedAt: Date.now(), messages: [{ role: 'assistant', content: '你好，我是影像问答助手，可以解释胸片术语并结合医学知识库回答科普问题。不能替代医生诊断。' }] };
+    const member = currentMemberSnapshot();
+    const conversation = {
+      id: `chat-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      title: '新建对话',
+      titleEdited: false,
+      memberId: member.memberId,
+      memberName: member.memberName,
+      updatedAt: Date.now(),
+      messages: [{ role: 'assistant', content: '你好，我是影像问答助手，可以解释胸片术语并结合医学知识库回答科普问题。不能替代医生诊断。' }]
+    };
     AppState.conversations.push(conversation);
     store.currentConversationId = conversation.id;
     renderChatConversation(conversation);
@@ -82,5 +117,5 @@ export function useChatConversations({ AppState, api, store, actions, modules = 
     else renderChatConversation(activeChatConversation());
     restoreRemote();
   }
-  return { conversations, saveChatConversations, activeChatConversation, persistChatMessage, renderChatConversationList, renderChatConversation, openChatConversation, newChatConversation, mount, dispose };
+  return { conversations, saveChatConversations, activeChatConversation, persistChatMessage, renameChatConversation, renderChatConversationList, renderChatConversation, openChatConversation, newChatConversation, mount, dispose };
 }

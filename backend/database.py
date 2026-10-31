@@ -62,6 +62,7 @@ def init_db() -> None:
             CREATE TABLE IF NOT EXISTS chat_conversations (
                 id TEXT PRIMARY KEY,
                 member_id TEXT DEFAULT '',
+                member_name TEXT DEFAULT '',
                 title TEXT NOT NULL,
                 messages_json TEXT NOT NULL,
                 updated_at INTEGER NOT NULL
@@ -78,6 +79,9 @@ def init_db() -> None:
             conn.execute("ALTER TABLE diagnosis_records ADD COLUMN is_demo INTEGER DEFAULT 0")
         if "heatmap_data" not in columns:
             conn.execute("ALTER TABLE diagnosis_records ADD COLUMN heatmap_data TEXT DEFAULT ''")
+        conversation_columns = {row["name"] for row in conn.execute("PRAGMA table_info(chat_conversations)")}
+        if "member_name" not in conversation_columns:
+            conn.execute("ALTER TABLE chat_conversations ADD COLUMN member_name TEXT DEFAULT ''")
         # Seed records created by older demo packages should keep their demo badge.
         conn.execute(
             "UPDATE diagnosis_records SET is_demo = 1 WHERE id IN (?, ?, ?)",
@@ -236,6 +240,7 @@ def get_conversations(member_id: str | None = None) -> list[dict[str, Any]]:
         {
             "id": row["id"],
             "memberId": row["member_id"],
+            "memberName": row["member_name"],
             "title": row["title"],
             "updatedAt": row["updated_at"],
             "messages": json.loads(row["messages_json"] or "[]"),
@@ -254,10 +259,11 @@ def sync_conversations_payload(conversations: list[dict[str, Any]]) -> list[dict
                 continue
             conn.execute(
                 """
-                INSERT INTO chat_conversations (id, member_id, title, messages_json, updated_at)
-                VALUES (?, ?, ?, ?, ?)
+                INSERT INTO chat_conversations (id, member_id, member_name, title, messages_json, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?)
                 ON CONFLICT(id) DO UPDATE SET
-                    member_id=excluded.member_id,
+                    member_id=CASE WHEN excluded.member_id = '' THEN chat_conversations.member_id ELSE excluded.member_id END,
+                    member_name=CASE WHEN excluded.member_name = '' THEN chat_conversations.member_name ELSE excluded.member_name END,
                     title=excluded.title,
                     messages_json=excluded.messages_json,
                     updated_at=excluded.updated_at
@@ -265,6 +271,7 @@ def sync_conversations_payload(conversations: list[dict[str, Any]]) -> list[dict
                 (
                     cid,
                     str(conv.get("memberId") or ""),
+                    str(conv.get("memberName") or "")[:40],
                     str(conv.get("title") or "新建对话")[:60],
                     json.dumps(conv.get("messages") or [], ensure_ascii=False),
                     int(conv.get("updatedAt") or now_ms),
