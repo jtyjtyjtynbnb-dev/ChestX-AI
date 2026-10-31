@@ -5,11 +5,10 @@ const { chat, inputElement, messagesElement, launcherStyle, panelStyle, launcher
 
 <template>
 <button id="aiChatLauncher" :style="launcherStyle" @pointerdown="beginDrag($event, 'launcher')" @click="launcherClick" :aria-expanded="chat.open" aria-controls="aiChatPanel" class="ai-chat-launcher" type="button" aria-label="打开医学影像问答" title="医学影像问答">
-    <svg aria-hidden="true" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 4.5v7.2" />
-      <path d="M9.4 8.2C7.1 9.6 5.6 12 5.6 14.7v2.8c0 1 .8 1.8 1.8 1.8h1.2c1 0 1.8-.8 1.8-1.8v-3.1c0-2.2-.4-4.3-1-6.2Z" />
-      <path d="M14.6 8.2c2.3 1.4 3.8 3.8 3.8 6.5v2.8c0 1-.8 1.8-1.8 1.8h-1.2c-1 0-1.8-.8-1.8-1.8v-3.1c0-2.2.4-4.3 1-6.2Z" />
-      <path d="M18.8 3.8l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6Z" />
+    <svg aria-hidden="true" viewBox="0 0 32 32" width="31" height="31" fill="none">
+      <path d="M16 4.8 7.4 8.5v7.1c0 5.3 3.6 9 8.6 11.4 5-2.4 8.6-6.1 8.6-11.4V8.5L16 4.8Z" fill="#fff" fill-opacity=".96" />
+      <path d="M14.2 11.2h3.6v3.1h3.1v3.6h-3.1v3.1h-3.6v-3.1h-3.1v-3.6h3.1v-3.1Z" fill="#0F62FE" />
+      <path d="m23.2 4.1.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8Z" fill="#fff" />
     </svg>
   </button>
   <section id="aiChatPanel" class="ai-chat-panel" :class="{ hidden: !chat.open }" :style="panelStyle" role="dialog" aria-modal="false" aria-labelledby="aiChatTitle">
@@ -56,7 +55,7 @@ const { chat, inputElement, messagesElement, launcherStyle, panelStyle, launcher
           <a v-for="(source, sourceIndex) in message.sources || []" :key="sourceIndex" class="ai-chat-source" :href="source.source_url" target="_blank" rel="noopener noreferrer">来源：{{ source.title }} · {{ source.source }}</a>
           <div v-if="message.content?.length > 15" class="mt-2 flex flex-wrap items-center gap-2 border-t border-border-line pt-1.5">
             <button type="button" class="rounded bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary hover:bg-primary/20 transition-colors" @click="focusHeatmap">定位高激活热区</button>
-            <button type="button" class="rounded bg-page-bg px-2 py-0.5 text-[10px] font-medium text-text-2 hover:text-primary border border-border-line transition-colors" @click="saveNotes(message.content)">记入成员随访备注</button>
+            <button type="button" :disabled="chat.noteSaving" class="rounded bg-page-bg px-2 py-0.5 text-[10px] font-medium text-text-2 hover:text-primary border border-border-line transition-colors disabled:opacity-60" @click="saveNotes(message.content)">{{ chat.noteSaving ? 'AI 总结中…' : 'AI 总结记入备注' }}</button>
           </div>
         </template>
       </div>

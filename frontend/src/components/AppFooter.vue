@@ -4,7 +4,7 @@ const { actions } = useShell();
 </script>
 <template>
 <footer class="mt-12 border-t border-border-line bg-white py-8">
-    <div class="mx-auto max-w-6xl px-6">
+    <div class="w-full px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
         <div class="md:col-span-4 space-y-2">
           <div class="flex items-center gap-2">

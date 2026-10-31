@@ -11,7 +11,7 @@ from typing import Any
 from .config import DISCLAIMER
 from .qwen_client import DashScopeError, DashScopeQwenClient
 from .rag.retriever import retrieve_knowledge
-from .safety import sanitize_text
+from .safety import has_unsafe_clinical_language, sanitize_text
 
 
 FORBIDDEN_PATTERNS = ("已确诊", "可以确诊", "排除疾病", "一定是", "百分之百", "立即服药", "自行用药")
@@ -184,6 +184,47 @@ async def answer_question(question: str, history: Any = None, diagnosis_context:
         response = _local_answer(question, documents, failure_reason, diagnosis_context=diagnosis_context)
         response["steps"] = _chat_steps("completed" if documents else "no_evidence", "failed", "degraded")
         return response
+
+
+def _local_note_summary(text: str) -> str:
+    """Extractive fallback used when Qwen is unavailable for note summarization."""
+    clean = str(text or "").replace(DISCLAIMER, "").replace("仅供公众健康科普参考", "")
+    clean = re.sub(r"\s+", " ", clean).strip()
+    sentences = [item.strip() for item in re.split(r"(?<=[。！？!?])", clean) if item.strip()]
+    summary = "".join(sentences[:2])[:80].strip("，；。 ")
+    if not summary:
+        summary = "AI 回答提示需关注影像征象，建议携带影像咨询医生。"
+    summary = sanitize_text(summary)
+    if has_unsafe_clinical_language(summary):
+        summary = "AI 回答提示需关注影像征象，建议携带影像咨询医生。"
+    return summary
+
+
+async def summarize_note(text: str) -> dict[str, str]:
+    """Summarize an AI answer into a short, safe follow-up note (text only)."""
+    clean = re.sub(r"\s+", " ", str(text or "")).strip()
+    fallback = _local_note_summary(clean)
+    client = DashScopeQwenClient()
+    if not client.enabled() or len(clean) < 20:
+        return {"summary": fallback, "provider": "local_fallback"}
+    prompt = f"""请把下面的健康科普问答压缩成一条“随访备注”，要求：
+1. 不超过80字；
+2. 保留模型关注的征象、建议的检查/随访方向、需要就医的提示；
+3. 不得写确诊、排除疾病、自行用药或治疗处方；
+4. 只输出备注正文，不要标题、引号或 Markdown。
+
+原文：
+{clean[:3000]}"""
+    try:
+        summary = await asyncio.wait_for(client.generate_chat(prompt, max_tokens=180), timeout=20)
+        summary = re.sub(r"\s+", " ", str(summary or "")).strip().strip('"“”')
+        summary = re.sub(r"^(摘要|随访备注)[:：\s]*", "", summary)
+        summary = sanitize_text(summary)[:100].strip("，；。 ")
+        if not summary or has_unsafe_clinical_language(summary):
+            return {"summary": fallback, "provider": "local_fallback"}
+        return {"summary": summary, "provider": "qwen"}
+    except Exception:
+        return {"summary": fallback, "provider": "local_fallback"}
 
 
 async def stream_answer_question(

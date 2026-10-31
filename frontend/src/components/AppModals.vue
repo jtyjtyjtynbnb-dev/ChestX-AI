@@ -78,7 +78,7 @@ const dashboard=reactive(modules.dashboard);
        全局弹窗 3：数据统计看板弹窗 （扩展功能）
        ========================================== -->
   <div id="statsModalBackdrop" :class="{ hidden: !AppState.statsOpen }" class="fixed inset-0 z-[70] bg-slate-900/55 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="modal-content-anim w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg bg-white border border-border-line shadow-2xl p-6 space-y-4">
+    <div class="modal-content-anim w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-lg bg-white border border-border-line shadow-2xl p-6 space-y-4">
       <div class="flex items-start justify-between gap-3 border-b border-border-line pb-3">
         <div>
           <h3 class="text-lg font-semibold text-text-1">成员健康数据看板</h3>
@@ -180,7 +180,6 @@ const dashboard=reactive(modules.dashboard);
         </div>
         <button type="button" id="closeUserModalBtn" @click="family.closeUserModal()" class="btn-secondary btn-sm">✕ 关闭</button>
       </div>
-      <button type="button" id="settingsStatsBtn" @click="dashboard.openStatsModal()" class="btn-secondary btn-sm" title="查看数据统计看板">查看数据统计看板</button>
       <section class="border-b border-border-line pb-4">
         <div class="mb-2 flex items-center justify-between gap-3">
           <div>

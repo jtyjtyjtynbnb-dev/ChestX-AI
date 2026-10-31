@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 export function ensureChatState(AppState) {
   AppState.chat ||= {};
-  const defaults = { open: false, busy: false, input: '', historyOpen: false, messages: [], syncState: null, sampleBusy: null, focusInput: 0 };
+  const defaults = { open: false, busy: false, noteSaving: false, input: '', historyOpen: false, messages: [], syncState: null, sampleBusy: null, focusInput: 0 };
   for (const [key, value] of Object.entries(defaults)) if (AppState.chat[key] === undefined) AppState.chat[key] = value;
   AppState.chatHistory ||= [];
   AppState.conversations ||= [];

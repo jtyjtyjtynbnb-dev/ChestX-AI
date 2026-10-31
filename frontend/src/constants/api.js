@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
   conversationsSync: '/api/conversations/sync',
   chat: '/api/agent/chat',
   chatStream: '/api/agent/chat/stream',
+  noteSummary: '/api/agent/note-summary',
   diagnose: '/api/diagnose',
   agentDiagnose: '/api/agent/diagnose',
   agentDiagnoseStream: '/api/agent/diagnose/stream',

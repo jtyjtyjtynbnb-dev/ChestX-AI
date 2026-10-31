@@ -86,6 +86,18 @@ class ChatRequest(BaseModel):
         return value
 
 
+class NoteSummaryRequest(BaseModel):
+    text: str = Field(min_length=10, max_length=4000)
+
+    @field_validator("text")
+    @classmethod
+    def text_must_not_be_blank(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("text must not be blank")
+        return value
+
+
 class QwenSettingsRequest(BaseModel):
     api_key: str = Field(default="", max_length=500)
     model: Literal["qwen3.8-flash", "qwen3.8-max"] = "qwen3.8-flash"

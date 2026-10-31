@@ -14,7 +14,7 @@ from PIL import Image, UnidentifiedImageError
 from starlette.concurrency import run_in_threadpool
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from .chat_service import answer_question, stream_answer_question
+from .chat_service import answer_question, stream_answer_question, summarize_note
 from .config import ALLOWED_CONTENT_TYPES, FRONTEND_ORIGINS, MAX_UPLOAD_BYTES
 from .database import (
     get_all_members_with_records,
@@ -28,7 +28,7 @@ from .image_quality import inspect_chest_xray
 from .model_infer import diagnose_image
 from .qwen_client import DashScopeError, DashScopeQwenClient, runtime_config_status, set_runtime_config
 from .safety import sanitize_text
-from .schemas import ChatRequest, ConversationsSyncRequest, MembersSyncRequest, QwenSettingsRequest
+from .schemas import ChatRequest, ConversationsSyncRequest, MembersSyncRequest, NoteSummaryRequest, QwenSettingsRequest
 from .workflow import workflow_events
 
 
@@ -169,6 +169,13 @@ async def agent_chat(payload: ChatRequest) -> JSONResponse:
     except ValueError as exc:
         return error_response(400, str(exc))
     data["answer"] = sanitize_text(data.get("answer", ""))
+    return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": data})
+
+
+@app.post("/api/agent/note-summary")
+async def agent_note_summary(payload: NoteSummaryRequest) -> JSONResponse:
+    """Summarize a text answer into a short follow-up note; text only, no image."""
+    data = await summarize_note(payload.text)
     return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": data})
 
 

@@ -42,7 +42,7 @@ function reloadPage() {
   <AppGlobals />
   <FloatingAiChat />
   <AppHeader />
-  <main class="mx-auto w-full max-w-6xl flex-1 px-6 py-6">
+  <main class="w-full flex-1 px-4 py-6 sm:px-6 lg:px-8">
     <div id="main-content" tabindex="-1">
       <RouterView />
     </div>

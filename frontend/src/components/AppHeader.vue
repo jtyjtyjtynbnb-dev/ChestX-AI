@@ -7,7 +7,7 @@ const locale = computed(() => getLocale());
 </script>
 <template>
 <header class="sticky top-0 z-50 border-b border-border-line bg-white/90 backdrop-blur-md transition-shadow duration-200" id="mainHeader">
-    <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+    <div class="flex h-16 w-full items-center justify-between px-4 sm:px-6 lg:px-8">
       <!-- 左侧 Logo + 名称 -->
       <button type="button" id="brandLogoBtn" @click="actions.switchPage('home')" class="flex items-center gap-3 cursor-pointer text-left group">
         <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white shadow-sm group-hover:bg-primary-dark transition-colors">

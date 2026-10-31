@@ -12,7 +12,7 @@ function staticIds(source) {
   return [...source.matchAll(/(?<![:\w-])id="([^"]+)"/g)].map(match => match[1]).filter(id => !id.includes('${')).sort();
 }
 
-test('Vue templates preserve all 180 reference static DOM ids', () => {
+test('Vue templates preserve all 179 reference static DOM ids', () => {
   // Frozen from the original reference HTML. Page markup now lives in components,
   // and :data-*-id bindings are expressions, not static DOM ids.
   const templates = [...filesIn('src/components'), ...filesIn('src/views')].filter(name => name.endsWith('.vue'));
@@ -37,7 +37,7 @@ test('six real routes use one RouterView and preserve the shell order', () => {
   const renderedOrder = ['AppGlobals', 'FloatingAiChat', 'AppHeader', 'RouterView', 'AppFooter', 'AppModals'].map(name => app.indexOf(`<${name}`));
   assert.ok(renderedOrder.every(index => index >= 0));
   assert.deepEqual(renderedOrder, [...renderedOrder].sort((a, b) => a - b));
-  assert.match(app, /<main class="mx-auto w-full max-w-6xl flex-1 px-6 py-6">/);
+  assert.match(app, /<main class="w-full flex-1 px-4 py-6 sm:px-6 lg:px-8">/);
 });
 
 test('the active coordinator owns only global services and cleanup', () => {
