@@ -146,6 +146,31 @@
     .stagger-3 { animation: pageEnter 300ms ease-out 150ms both; }
     .stagger-4 { animation: pageEnter 300ms ease-out 200ms both; }
 
+    /* 上传扫描线：仅在读取/校验时出现 */
+    .upload-scan-line {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(15, 98, 254, 0.15), #0F62FE, rgba(15, 98, 254, 0.15), transparent);
+      box-shadow: 0 0 12px rgba(15, 98, 254, 0.45);
+      animation: uploadScan 1.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes uploadScan {
+      0% { transform: translateY(0); opacity: 0; }
+      12% { opacity: 1; }
+      88% { opacity: 1; }
+      100% { transform: translateY(360px); opacity: 0; }
+    }
+
+    .report-fade { animation: reportFade 220ms ease-out; }
+    @keyframes reportFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* 骨架屏脉冲动画 1.5s 循环 */
     @keyframes skeletonPulse {
       0%, 100% { opacity: 1; }

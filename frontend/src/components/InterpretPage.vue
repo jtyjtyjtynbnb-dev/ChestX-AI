@@ -58,8 +58,9 @@ const vm = useInterpretPage();
               tabindex="0"
               aria-label="选择胸部X光图片上传"
               aria-describedby="uploadHelpText"
-              class="flex min-h-[380px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-border-line bg-page-bg/70 p-6 text-center transition-all duration-200 hover:border-primary hover:bg-primary/[0.02]"
+              class="relative flex min-h-[380px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-border-line bg-page-bg/70 p-6 text-center transition-all duration-200 hover:border-primary hover:bg-primary/[0.02]"
             >
+              <div v-if="vm.upload.state.busy" class="upload-scan-line" aria-hidden="true"></div>
               <input id="xrayFileInput" :ref="el => vm.upload.fileInput = el" @click.stop @change="vm.upload.fileChanged($event)" type="file" multiple accept=".jpg,.jpeg,.png,.dcm,image/jpeg,image/png,application/dicom" class="hidden" aria-label="选择胸部X光图片或DICOM文件" />
               <div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -411,7 +412,7 @@ const vm = useInterpretPage();
               </div>
               <div class="rounded-md border p-3" :class="vm.results.reportMode === 'doctor' ? 'border-border-line bg-white' : 'border-primary/20 bg-primary/[0.03]'">
                 <p class="text-[11px] font-medium text-text-3">{{ vm.results.reportMode === 'doctor' ? '医生版摘要（描述性，非诊断）' : '患者版摘要（通俗解释）' }}</p>
-                <p id="agentReportSummary" class="mt-1 text-sm leading-7 text-text-1">{{ vm.results.reportSummary || '暂无报告摘要' }}</p>
+                <p id="agentReportSummary" :key="vm.results.reportMode" class="report-fade mt-1 text-sm leading-7 text-text-1">{{ vm.results.reportSummary || '暂无报告摘要' }}</p>
               </div>
               <div v-if="vm.results.riskExplanation" id="reportRiskExplanation" class="rounded-md border border-warning/30 bg-warning/5 p-3 text-xs leading-5 text-text-2">
                 <strong class="text-text-1">风险分级说明：</strong>{{ vm.results.riskExplanation }}
