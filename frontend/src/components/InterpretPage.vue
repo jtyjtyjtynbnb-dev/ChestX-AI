@@ -261,20 +261,31 @@ const vm = useInterpretPage();
             </div>
           </div>
 
-          <div id="stateIdlePanel" v-show="vm.AppState.diagnoseStatus === 'idle' && !vm.AppState.diagnosisError" class="med-card text-center py-12 px-6 space-y-4">
-            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
+          <div id="stateIdlePanel" v-show="vm.AppState.diagnoseStatus === 'idle' && !vm.AppState.diagnosisError" class="med-card py-8 px-6 space-y-5">
+            <div class="text-center space-y-3">
+              <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-medium text-text-1">上传影像后点击开始分析</h3>
+              <p class="text-xs text-text-2 max-w-xs mx-auto leading-5">
+                当前胸片已载入就绪，点击下方按钮即可启动 DenseNet-121 多病种概率筛查与模型热力定位分析。
+              </p>
+              <div class="pt-1">
+                <button type="button" id="startAnalyzeBtn" @click="vm.analyze()" class="btn-primary w-full sm:w-auto px-8">
+                  <span>开始 AI 智能分析</span>
+                </button>
+              </div>
             </div>
-            <h3 class="text-lg font-medium text-text-1">上传影像后点击开始分析</h3>
-            <p class="text-xs text-text-2 max-w-xs mx-auto leading-5">
-              当前胸片已载入就绪，点击下方按钮即可启动 DenseNet-121 多病种概率筛查与模型热力定位分析。
-            </p>
-            <div class="pt-2">
-              <button type="button" id="startAnalyzeBtn" @click="vm.analyze()" class="btn-primary w-full sm:w-auto px-8">
-                <span>开始 AI 智能分析</span>
-              </button>
+            <div class="grid grid-cols-2 gap-2 text-left">
+              <div class="rounded-lg border border-border-line bg-page-bg/60 p-3"><div class="text-[10px] font-semibold text-primary">01 · 输入校验</div><p class="mt-1 text-[11px] leading-5 text-text-2">guard 判断是否胸片，拒绝人像/截图/其他模态。</p></div>
+              <div class="rounded-lg border border-border-line bg-page-bg/60 p-3"><div class="text-[10px] font-semibold text-primary">02 · 影像推理</div><p class="mt-1 text-[11px] leading-5 text-text-2">DenseNet-121 输出 10 类概率与注意力热力图。</p></div>
+              <div class="rounded-lg border border-border-line bg-page-bg/60 p-3"><div class="text-[10px] font-semibold text-primary">03 · 知识检索</div><p class="mt-1 text-[11px] leading-5 text-text-2">从 40 条来源可追溯的知识库中检索依据。</p></div>
+              <div class="rounded-lg border border-border-line bg-page-bg/60 p-3"><div class="text-[10px] font-semibold text-primary">04 · 循证报告</div><p class="mt-1 text-[11px] leading-5 text-text-2">患者/医生双版本，带风险说明和来源引用。</p></div>
+            </div>
+            <div class="rounded-lg border border-primary/20 bg-primary/[0.03] px-3 py-2 text-[11px] leading-5 text-text-2">
+              <strong class="text-text-1">本次将输出：</strong>10 类概率 · 热力图 · 风险分级 · 患者/医生报告 · 可继续追问的问题
             </div>
           </div>
 
