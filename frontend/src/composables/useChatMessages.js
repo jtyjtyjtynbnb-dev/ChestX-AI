@@ -12,9 +12,11 @@ export function useChatMessages({ AppState, actions }) {
   function triggerCopilotSaveToMemberNotes(answerText) {
     const member = actions.getCurrentMember();
     if (!member) return;
+    const maxNotesLength = 240;
     const cleanSnippet = String(answerText || '').replace(/\s+/g, ' ').slice(0, 90);
     const entry = `[${new Date().toLocaleDateString('zh-CN')} AI问答备忘] ${cleanSnippet}…`;
-    member.profile.notes = member.profile.notes ? `${member.profile.notes}\n${entry}`.slice(0, 950) : entry;
+    const previous = String(member.profile.notes || '').replace(/\s+/g, ' ').trim();
+    member.profile.notes = (previous ? `${previous}；${entry}` : entry).slice(-maxNotesLength);
     actions.syncCurrentMemberState?.();
     actions.persistFamilyMembers('copilot_note');
     actions.showToast(`已记入「${member.profile.name}」的随访备注并同步至数据库`, 'success');
