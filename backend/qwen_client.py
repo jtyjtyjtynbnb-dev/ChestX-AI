@@ -114,7 +114,7 @@ class DashScopeQwenClient:
         self.api_key = (_runtime_api_key if _runtime_api_key is not None else os.getenv("DASHSCOPE_API_KEY", "")).strip()
         self.model = _runtime_model or os.getenv("QWEN_MODEL", DEFAULT_MODEL)
         self.chat_endpoint = os.getenv("DASHSCOPE_CHAT_ENDPOINT", DEFAULT_CHAT_ENDPOINT)
-        self.timeout_seconds = float(os.getenv("QWEN_TIMEOUT_SECONDS", "30"))
+        self.timeout_seconds = float(os.getenv("QWEN_TIMEOUT_SECONDS", "40"))
         url = urlparse(self.chat_endpoint)
         if url.scheme != 'https' or not (url.hostname or '').endswith('.aliyuncs.com'):
             raise ValueError('Use an HTTPS DashScope aliyuncs.com endpoint')
