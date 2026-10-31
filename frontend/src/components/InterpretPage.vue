@@ -290,7 +290,17 @@ const vm = useInterpretPage();
             </div>
           </div>
 
-          <AnalyzingPanel v-if="vm.AppState.diagnoseStatus === 'analyzing'" :progress="vm.diagnosis.progress" />
+          <div v-show="vm.AppState.diagnoseStatus === 'idle' && !vm.AppState.diagnosisError" class="med-card space-y-2">
+            <h3 class="text-sm font-semibold text-text-1">读片边界与使用建议</h3>
+            <ul class="list-disc space-y-1.5 pl-5 text-xs leading-6 text-text-2">
+              <li>AI 只提示模型关注方向，不能确诊、不能排除疾病，也不能替代医生面诊。</li>
+              <li>建议上传标准 PA/AP 正位片；报告截图、人像、CT/MRI 会被 guard 拦截。</li>
+              <li>如出现突发胸痛、呼吸困难、咯血或症状加重，请直接就医，不要等待分析结果。</li>
+              <li>报告中的患者版用于沟通，医生版用于复核；两者都不是正式医疗文书。</li>
+            </ul>
+          </div>
+
+          <AnalyzingPanel v-if="vm.AppState.diagnoseStatus === 'analyzing'" :progress="vm.analysisProgress" />
 
           <!-- 状态 3：分析完成结构化结果面板 (done) -->
           <div id="stateDonePanel" v-show="vm.AppState.diagnoseStatus === 'done'" class="space-y-4">

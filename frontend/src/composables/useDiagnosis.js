@@ -13,6 +13,11 @@ export function useDiagnosis({ AppState, api, actions }) {
   let timeoutId = null;
   let generation = 0;
   let active = true;
+  function publishProgress(percent, text) {
+    progress.percent = percent;
+    progress.text = text;
+    AppState.analysisProgress = { percent, text };
+  }
   function cancel() {
     generation++;
     controller?.abort();
@@ -31,8 +36,7 @@ export function useDiagnosis({ AppState, api, actions }) {
     timeoutId = setTimeout(() => { timedOut = true; requestController.abort(); }, REQUEST_TIMEOUT_MS.diagnosis);
     AppState.diagnosisError = '';
     AppState.diagnoseStatus = 'analyzing';
-    progress.percent = 0;
-    progress.text = '正在上传图片并执行模型推理...';
+    publishProgress(0, '正在上传图片并执行模型推理...');
     try {
       if (sampleId) {
         const reference = CLINICAL_SAMPLE_CASES[sampleId];
@@ -57,8 +61,7 @@ export function useDiagnosis({ AppState, api, actions }) {
         question: AppState.agentQuestion || '', signal: requestController.signal,
         onStep(step) {
           if (!active || requestId !== generation) return;
-          progress.percent = stagePercent[step.name] || 50;
-          progress.text = step.name + (step.count ? '（' + step.count + ' 条）' : '') + '完成';
+          publishProgress(stagePercent[step.name] || 50, step.name + (step.count ? '（' + step.count + ' 条）' : '') + '完成');
         }
       });
       if (!active || requestId !== generation) return;
@@ -69,7 +72,7 @@ export function useDiagnosis({ AppState, api, actions }) {
       AppState.agentResult = result;
       AppState.diagnoseStatus = 'done';
       AppState.diagnosisError = '';
-      progress.percent = 100;
+      publishProgress(100, '分析完成');
       actions.showToast('AI 胸片智能解读与热力定位已完成', 'success');
     } catch (error) {
       if (!active || requestId !== generation) return;

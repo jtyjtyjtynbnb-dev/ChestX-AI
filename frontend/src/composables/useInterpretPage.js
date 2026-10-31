@@ -67,6 +67,7 @@ export function useInterpretPage() {
     viewport.value?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return true;
   }
+  const analysisProgress = computed(() => AppState.analysisProgress || diagnosis.progress);
   const pageModule = markRaw({ analyze, loadSample, handleLocalXrayFile: upload.handleLocalXrayFile, focusHeatmap });
   watch(() => AppState.pendingSample, consumePendingSample);
   watch(() => [AppState.currentCase?.heatmapDataUrl, AppState.currentCase?.hotspots, AppState.viewer.compareMode, AppState.viewer.splitPercent], () => nextTick(viewer.drawGradCamHeatmap), { deep: true });
@@ -83,11 +84,28 @@ export function useInterpretPage() {
   onBeforeUnmount(() => {
     mounted = false;
     sampleRequest?.abort();
-    diagnosis.dispose(); upload.dispose(); viewer.dispose(); results.dispose();
-    api.dispose(); scope.dispose();
+    // Keep an in-flight analysis alive across route changes. The request writes
+    // into the shared AppState, so returning to /interpret shows its result.
+    const analysisRunning = AppState.diagnoseStatus === 'analyzing';
+    if (!analysisRunning) {
+      diagnosis.dispose();
+      api.dispose();
+    } else {
+      const cleanupWhenSettled = () => {
+        if (AppState.diagnoseStatus === 'analyzing') {
+          globalThis.setTimeout(cleanupWhenSettled, 500);
+          return;
+        }
+        diagnosis.dispose();
+        api.dispose();
+      };
+      globalThis.setTimeout(cleanupWhenSettled, 500);
+    }
+    upload.dispose(); viewer.dispose(); results.dispose();
+    scope.dispose();
     if (modules.interpret === pageModule) delete modules.interpret;
   });
-  return reactive({ AppState, actions, viewer, diagnosis, results, upload, heatmapCanvas, measureCanvas, probabilityChart, viewport,
+  return reactive({ AppState, actions, viewer, diagnosis, results, upload, analysisProgress, heatmapCanvas, measureCanvas, probabilityChart, viewport,
     currentCase: computed(() => AppState.currentCase), series: computed(() => AppState.series || []), formatBytes, formatProb, analyze, exportReport, focusHeatmap,
     sampleCases: [
       { id: 'case-high', label: '样本1：右下肺斑片影', className: '!border-danger/40 !text-danger hover:!bg-danger/5' },

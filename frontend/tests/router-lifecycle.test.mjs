@@ -27,7 +27,7 @@ const renderer = createRenderer({
   }
 });
 
-test('router owns page lifetime while shared context survives navigation and aborts on app teardown', async (t) => {
+test('router owns page lifetime while shared context survives navigation and keeps analysis alive', async (t) => {
   const requests = [];
   const storage = new Map();
   t.mock.method(globalThis, 'fetch', async (url, { signal }) => {
@@ -113,9 +113,12 @@ test('router owns page lifetime while shared context survives navigation and abo
   assert.equal(context.api.pendingCount(), 1, 'page requests must have their own API scope');
   await context.actions.switchPage('home');
   await nextTick();
-  await analysis;
-  assert.equal(requests.find(request => request.url === '/api/agent/diagnose/stream').signal.aborted, true);
+  const pageAnalysisRequest = requests.find(request => request.url === '/api/agent/diagnose/stream');
+  assert.equal(pageAnalysisRequest.signal.aborted, false, 'leaving /interpret must not abort an in-flight analysis');
+  assert.equal(context.AppState.diagnoseStatus, 'analyzing');
   assert.equal(globalRequest.signal.aborted, false, 'leaving a page must preserve global requests');
+  firstPage.diagnosis.cancel();
+  await analysis;
   assert.equal(context.AppState.diagnoseStatus, 'idle');
   assert.equal(context.modules.interpret, undefined);
   await context.actions.switchPage('interpret');

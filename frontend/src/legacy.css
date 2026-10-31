@@ -31,6 +31,14 @@
     }
 
     body { min-height: 100vh; min-height: 100dvh; }
+    /* 全局字号略上调：医疗工作台需要比普通后台更易读 */
+    body { font-size: 15px; }
+    .text-xs { font-size: 13px !important; line-height: 1.5; }
+    .text-sm { font-size: 15px !important; line-height: 1.55; }
+    .text-base { font-size: 16px !important; }
+    .text-\[11px\] { font-size: 12px !important; line-height: 1.45; }
+    .text-\[10px\] { font-size: 11px !important; line-height: 1.4; }
+
     button, input, select, textarea { font: inherit; }
     :focus-visible { outline: 3px solid rgba(15, 98, 254, 0.55); outline-offset: 2px; }
 
