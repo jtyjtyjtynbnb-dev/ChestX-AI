@@ -26,8 +26,22 @@ export function useChat(ctx) {
   });
   function currentChatDiagnosisContext() {
     const result = AppState.currentCase?.agentResult;
+    const report = result?.report || {};
     const member = actions.getCurrentMember?.();
-    return { probabilities: (result?.inference?.probabilities || []).slice(0, 5), summary: result?.report?.summary || '', member_profile: member ? { id: member.id, name: member.profile.name, age: member.profile.age, gender: member.profile.gender, conditions: member.profile.conditions, notes: member.profile.notes, record_count: (member.records || []).length } : null };
+    return {
+      probabilities: (result?.inference?.probabilities || []).slice(0, 5),
+      summary: report.patient_summary || report.summary || '',
+      doctor_summary: report.doctor_summary || '',
+      risk_explanation: report.risk_explanation || '',
+      follow_up_questions: (report.follow_up_questions || []).slice(0, 3),
+      evidence: (report.evidence || []).slice(0, 4),
+      member_profile: member ? { id: member.id, name: member.profile.name, age: member.profile.age, gender: member.profile.gender, conditions: member.profile.conditions, notes: member.profile.notes, record_count: (member.records || []).length } : null
+    };
+  }
+  function askAiQuestion(question) {
+    chat.open = true;
+    chat.input = String(question || '');
+    chat.focusInput++;
   }
   function cancel() { request?.abort(); request = null; chat.busy = false; chat.messages = chat.messages.filter((message) => !message.pending); }
   async function sendAiChatMessage(question = chat.input) {
@@ -80,5 +94,5 @@ export function useChat(ctx) {
       if (request === controller) { request = null; chat.busy = false; if (chat.open) chat.focusInput++; }
     }
   }
-  return { chat, contextText, updateChatContextBanner, currentChatDiagnosisContext, sendAiChatMessage, cancel, dispose: cancel, mount() {} };
+  return { chat, contextText, updateChatContextBanner, currentChatDiagnosisContext, askAiQuestion, sendAiChatMessage, cancel, dispose: cancel, mount() {} };
 }

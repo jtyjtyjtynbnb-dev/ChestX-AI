@@ -344,12 +344,30 @@ const vm = useInterpretPage();
                   <h3 class="text-base font-semibold text-text-1">循证科普报告</h3>
                   <p id="agentProviderLabel" class="mt-0.5 text-xs text-text-3">{{ vm.results.agentResult.provider === 'qwen' ? 'DashScope Qwen 循证报告已完成（未上传影像）' : 'Qwen 不可用，当前显示本地模型与知识库结果' }}</p>
                 </div>
-                <span id="agentSourceCount" class="text-xs text-text-3">检索到 {{ vm.results.agentResult.sources?.length || 0 }} 条知识依据</span>
+                <div class="flex flex-wrap items-center gap-2">
+                  <div class="inline-flex rounded-md border border-border-line p-0.5" role="tablist" aria-label="报告版本">
+                    <button type="button" id="reportPatientTab" :aria-pressed="vm.results.reportMode === 'patient'" @click="vm.results.setReportMode('patient')" class="rounded px-2.5 py-1 text-xs font-medium" :class="vm.results.reportMode === 'patient' ? 'bg-primary text-white' : 'text-text-2 hover:bg-page-bg'">患者版</button>
+                    <button type="button" id="reportDoctorTab" :aria-pressed="vm.results.reportMode === 'doctor'" @click="vm.results.setReportMode('doctor')" class="rounded px-2.5 py-1 text-xs font-medium" :class="vm.results.reportMode === 'doctor' ? 'bg-primary text-white' : 'text-text-2 hover:bg-page-bg'">医生版</button>
+                  </div>
+                  <span id="agentSourceCount" class="text-xs text-text-3">检索到 {{ vm.results.agentResult.sources?.length || 0 }} 条知识依据</span>
+                </div>
               </div>
-              <p id="agentReportSummary" class="text-sm leading-6 text-text-1">{{ vm.results.agentResult.report?.summary || '暂无报告摘要' }}</p>
+              <div class="rounded-md border border-border-line bg-page-bg/60 p-3">
+                <p class="text-[11px] font-medium text-text-3">{{ vm.results.reportMode === 'doctor' ? '医生版摘要（描述性，非诊断）' : '患者版摘要（通俗解释）' }}</p>
+                <p id="agentReportSummary" class="mt-1 text-sm leading-6 text-text-1">{{ vm.results.reportSummary || '暂无报告摘要' }}</p>
+              </div>
+              <div v-if="vm.results.riskExplanation" id="reportRiskExplanation" class="rounded-md border border-warning/30 bg-warning/5 p-3 text-xs leading-5 text-text-2">
+                <strong class="text-text-1">风险分级说明：</strong>{{ vm.results.riskExplanation }}
+              </div>
               <div>
                 <h4 class="text-xs font-semibold text-text-2">建议与局限</h4>
                 <ul id="agentReportActions" class="mt-1 list-disc space-y-1 pl-5 text-xs leading-5 text-text-2"><li v-for="(item, index) in vm.results.reportActions" :key="index">{{ item }}</li></ul>
+              </div>
+              <div v-if="vm.results.followUpQuestions.length" id="reportFollowUpQuestions" class="border-t border-border-line pt-2">
+                <p class="text-xs font-medium text-text-2">可以继续追问</p>
+                <div class="mt-1.5 flex flex-wrap gap-1.5">
+                  <button v-for="(question, index) in vm.results.followUpQuestions" :key="index" type="button" class="rounded-full border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs text-primary hover:bg-primary/10" @click="vm.actions.askAiQuestion(question)">{{ question }}</button>
+                </div>
               </div>
               <details class="border-t border-border-line pt-2">
                 <summary class="cursor-pointer text-xs font-medium text-primary">查看检索依据与来源</summary>

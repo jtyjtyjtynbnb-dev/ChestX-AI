@@ -69,12 +69,13 @@ ChestX-AI-演示运行包/
 - 后端：Python 3.10+、FastAPI、Uvicorn、ONNX Runtime、LangGraph 1.2.16、SQLite
 - 模型：224×224 输入、10 类 sigmoid 输出、第二个输出为 7×7 注意力图（用于热力图叠加）
 - 输入防御：MobileNetV3 guard（胸片/非胸片）+ 启发式兜底，guard 不替代 121 主模型
-- 检索：BM25 + TF-IDF + RRF 排序；配置 DashScope 后可启用 embedding / rerank
+- 检索：BM25 + TF-IDF + RRF 排序；40 条来源可追溯的胸片科普知识；配置 DashScope 后可启用 embedding / rerank
 
 ## 主要能力
 
 - 本地胸片上传（JPG/PNG/未压缩 DICOM）、多文件序列、亮度/对比度、缩放/平移/旋转/反色、长度/角度/ROI 测量
 - 10 类征象概率、模型注意力热力图、可解释说明
+- Qwen 循证报告：患者版/医生版摘要、风险分级说明、来源引用、报告追问快捷问题
 - Agent 工作流：输入校验 → 推理 → 混合检索 → 报告生成 → 安全审查
 - 家庭健康档案、随访对比、风险趋势、报告模板/JSON/Word/打印 PDF
 - 健康科普、影像小课堂、互动测验

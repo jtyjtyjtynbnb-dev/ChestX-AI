@@ -1,4 +1,4 @@
-import { computed, nextTick } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import * as echarts from 'echarts';
 import { DISEASE_KNOWLEDGE_LIST } from '../stores/referenceData.js';
 import { getRiskStyle, isNormalDominant } from '../utils/format.js';
@@ -7,6 +7,7 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
   let chart = null;
   let observer = null;
   let disposed = false;
+  const reportMode = ref('patient');
   const currentCase = computed(() => AppState.currentCase);
   const risk = computed(() => getRiskStyle(currentCase.value?.riskLevel));
   const probabilities = computed(() => {
@@ -18,6 +19,18 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
     }));
   });
   const agentResult = computed(() => currentCase.value?.agentResult || null);
+  const report = computed(() => agentResult.value?.report || null);
+  const reportSummary = computed(() => {
+    if (!report.value) return '';
+    return reportMode.value === 'doctor'
+      ? (report.value.doctor_summary || report.value.summary || '')
+      : (report.value.patient_summary || report.value.summary || '');
+  });
+  const riskExplanation = computed(() => report.value?.risk_explanation || '');
+  const followUpQuestions = computed(() => (report.value?.follow_up_questions || []).slice(0, 3));
+  function setReportMode(mode) {
+    reportMode.value = mode === 'doctor' ? 'doctor' : 'patient';
+  }
   const reportActions = computed(() => [
     ...(agentResult.value?.report?.suggested_actions || []),
     ...(agentResult.value?.report?.limitations || []).map(item => '局限：' + item)
@@ -58,6 +71,6 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
   }
   function setProbabilityMode(mode) { AppState.probViewMode = mode; }
   function dispose() { disposed = true; observer?.disconnect(); observer = null; chart?.dispose(); chart = null; }
-  return { currentCase, risk, probabilities, agentResult, reportActions, evidence, openKnowledge, openRelatedKnowledge, renderProbabilityChart, setProbabilityMode, mount, dispose };
+  return { currentCase, risk, probabilities, agentResult, report, reportMode, reportSummary, riskExplanation, followUpQuestions, reportActions, evidence, setReportMode, openKnowledge, openRelatedKnowledge, renderProbabilityChart, setProbabilityMode, mount, dispose };
 }
 

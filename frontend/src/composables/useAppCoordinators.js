@@ -59,6 +59,7 @@ export function useAppCoordinators() {
     populateMemberForm: (...args) => modules.family.populateMemberForm(...args),
     openRecordDetailModal: (...args) => modules.recordDetail.openRecordDetailModal(...args),
     updateChatContextBanner: (...args) => modules.chat.updateChatContextBanner(...args),
+    askAiQuestion: (...args) => modules.chat.askAiQuestion(...args),
     sendAiChatMessage: (...args) => modules.chat.sendAiChatMessage(...args),
     appendChatMessage: (...args) => modules.chatMsg.appendChatMessage(...args),
     attachAssistantMetaAndActions: (...args) => modules.chatMsg.attachAssistantMetaAndActions(...args),

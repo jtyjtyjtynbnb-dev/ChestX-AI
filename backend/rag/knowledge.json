@@ -6,7 +6,14 @@
     "content": "胸片可见局灶性或肺叶分布的片状、斑片状密度增高影，可能伴有支气管充气征。影像表现需要结合症状、体征和其他检查综合判断。",
     "source": "Radiology Assistant：Chest X-ray",
     "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
-    "keywords": ["肺炎", "斑片影", "浸润影", "密度增高", "发热", "咳嗽"]
+    "keywords": [
+      "肺炎",
+      "斑片影",
+      "浸润影",
+      "密度增高",
+      "发热",
+      "咳嗽"
+    ]
   },
   {
     "id": "pneumonia-limits",
@@ -15,7 +22,12 @@
     "content": "胸片表现不能单独确定感染病原体，也不能仅凭模型概率确认肺炎。医生通常需要结合病史、实验室检查和症状变化进行判断。",
     "source": "Merck Manual：Pneumonia",
     "source_url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia",
-    "keywords": ["局限性", "病原体", "实验室检查", "病史"]
+    "keywords": [
+      "局限性",
+      "病原体",
+      "实验室检查",
+      "病史"
+    ]
   },
   {
     "id": "atelectasis-signs",
@@ -24,7 +36,12 @@
     "content": "肺不张可表现为局部肺容积减少、线性或片状密度增高，以及邻近结构移位。具体表现取决于受累肺叶和范围。",
     "source": "Radiopaedia：Atelectasis",
     "source_url": "https://radiopaedia.org/articles/atelectasis",
-    "keywords": ["肺不张", "容积减少", "移位", "线性影"]
+    "keywords": [
+      "肺不张",
+      "容积减少",
+      "移位",
+      "线性影"
+    ]
   },
   {
     "id": "atelectasis-limits",
@@ -33,7 +50,12 @@
     "content": "肺不张可能与分泌物堵塞、压迫或术后状态有关。单张胸片通常不能确定病因，必要时需要结合既往病史或进一步影像检查。",
     "source": "Merck Manual：Atelectasis",
     "source_url": "https://www.merckmanuals.com/professional/pulmonary-disorders/atelectasis",
-    "keywords": ["病因", "术后", "分泌物", "进一步检查"]
+    "keywords": [
+      "病因",
+      "术后",
+      "分泌物",
+      "进一步检查"
+    ]
   },
   {
     "id": "cardiomegaly-signs",
@@ -42,7 +64,13 @@
     "content": "在标准立位后前位胸片上，心胸比率通常以约 0.50 作为成人心影增大的参考阈值。前后位片或吸气不足可能使心影看起来偏大。",
     "source": "Radiology Assistant：Chest X-ray",
     "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
-    "keywords": ["心脏扩大", "心影", "心胸比", "后前位", "前后位"]
+    "keywords": [
+      "心脏扩大",
+      "心影",
+      "心胸比",
+      "后前位",
+      "前后位"
+    ]
   },
   {
     "id": "cardiomegaly-limits",
@@ -51,7 +79,12 @@
     "content": "心胸比率受投照体位、吸气程度和旋转影响。发现心影增大时，通常需要结合临床情况，必要时通过超声心动图进一步评估。",
     "source": "Radiology Assistant：Chest X-ray",
     "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
-    "keywords": ["心胸比率", "体位", "吸气", "超声心动图"]
+    "keywords": [
+      "心胸比率",
+      "体位",
+      "吸气",
+      "超声心动图"
+    ]
   },
   {
     "id": "effusion-signs",
@@ -60,7 +93,12 @@
     "content": "立位胸片上，胸腔积液可表现为肋膈角变钝或消失，液体较多时可出现弧形液面。少量积液的检出能力受体位和影像质量影响。",
     "source": "Radiopaedia：Pleural effusion",
     "source_url": "https://radiopaedia.org/articles/pleural-effusion",
-    "keywords": ["胸腔积液", "肋膈角", "变钝", "液面"]
+    "keywords": [
+      "胸腔积液",
+      "肋膈角",
+      "变钝",
+      "液面"
+    ]
   },
   {
     "id": "effusion-followup",
@@ -69,7 +107,12 @@
     "content": "胸片发现疑似积液后，超声可帮助确认液体及其位置，医生会结合心、肺、感染或肿瘤等可能病因决定后续检查。",
     "source": "Merck Manual：Pleural effusion",
     "source_url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pleural-and-mediastinal-disorders/pleural-effusion",
-    "keywords": ["超声", "病因", "感染", "肿瘤"]
+    "keywords": [
+      "超声",
+      "病因",
+      "感染",
+      "肿瘤"
+    ]
   },
   {
     "id": "infiltration-signs",
@@ -78,7 +121,13 @@
     "content": "浸润影是对肺野密度增高的一种影像学描述，可见于感染、出血、水肿或其他病变，单凭这一描述不能确定具体疾病。",
     "source": "Radiology Assistant：Chest X-ray",
     "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
-    "keywords": ["浸润", "肺野", "密度增高", "感染", "水肿"]
+    "keywords": [
+      "浸润",
+      "肺野",
+      "密度增高",
+      "感染",
+      "水肿"
+    ]
   },
   {
     "id": "mass-signs",
@@ -87,7 +136,13 @@
     "content": "肺部肿块是影像学上的占位性描述，需要观察大小、边缘、位置和随时间的变化。胸片发现可疑占位时通常需要进一步 CT 评估。",
     "source": "Radiopaedia：Pulmonary mass",
     "source_url": "https://radiopaedia.org/articles/pulmonary-mass",
-    "keywords": ["肿块", "占位", "边缘", "CT", "肺部"]
+    "keywords": [
+      "肿块",
+      "占位",
+      "边缘",
+      "CT",
+      "肺部"
+    ]
   },
   {
     "id": "nodule-signs",
@@ -96,7 +151,12 @@
     "content": "肺结节通常表现为肺野内局灶性、类圆形的密度增高影。胸片对小结节的检出能力有限，发现可疑结节后常需结合薄层 CT 进一步判断。",
     "source": "Fleischner Society：Pulmonary nodules",
     "source_url": "https://www.fleischnersociety.org/",
-    "keywords": ["肺结节", "类圆形", "局灶性", "薄层 CT"]
+    "keywords": [
+      "肺结节",
+      "类圆形",
+      "局灶性",
+      "薄层 CT"
+    ]
   },
   {
     "id": "nodule-followup",
@@ -105,7 +165,13 @@
     "content": "结节的良恶性需要综合大小、密度、边缘、增长速度、年龄和吸烟史等因素。模型概率和胸片表现都不能替代放射科医生的正式判断。",
     "source": "American College of Radiology：Lung-RADS",
     "source_url": "https://www.acr.org/Clinical-Resources/Reporting-and-Data-Systems/Lung-Rads",
-    "keywords": ["良恶性", "增长", "吸烟史", "随访", "放射科"]
+    "keywords": [
+      "良恶性",
+      "增长",
+      "吸烟史",
+      "随访",
+      "放射科"
+    ]
   },
   {
     "id": "pneumonia-pneumothorax",
@@ -114,7 +180,13 @@
     "content": "气胸可能表现为脏层胸膜线及其外侧肺纹理减少。小气胸或特殊体位下的表现可能不典型，需要结合症状和临床情况判断。",
     "source": "Radiopaedia：Pneumothorax",
     "source_url": "https://radiopaedia.org/articles/pneumothorax",
-    "keywords": ["气胸", "胸膜线", "肺纹理减少", "胸痛", "呼吸困难"]
+    "keywords": [
+      "气胸",
+      "胸膜线",
+      "肺纹理减少",
+      "胸痛",
+      "呼吸困难"
+    ]
   },
   {
     "id": "pneumothorax-urgent",
@@ -123,7 +195,12 @@
     "content": "突发胸痛、呼吸困难或症状快速加重时，应及时寻求医疗帮助。影像模型不能评估患者生命体征，也不能替代急诊处理。",
     "source": "NHS：Pneumothorax",
     "source_url": "https://www.nhs.uk/conditions/pneumothorax/",
-    "keywords": ["急诊", "胸痛", "呼吸困难", "生命体征"]
+    "keywords": [
+      "急诊",
+      "胸痛",
+      "呼吸困难",
+      "生命体征"
+    ]
   },
   {
     "id": "consolidation-signs",
@@ -132,7 +209,12 @@
     "content": "肺实变可表现为肺泡内密度增高，常见为片状或肺叶性阴影，有时可见支气管充气征。需要结合临床表现判断原因。",
     "source": "Radiology Assistant：Chest X-ray",
     "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
-    "keywords": ["实变", "肺泡", "肺叶", "支气管充气征"]
+    "keywords": [
+      "实变",
+      "肺泡",
+      "肺叶",
+      "支气管充气征"
+    ]
   },
   {
     "id": "no-finding-baseline",
@@ -141,7 +223,12 @@
     "content": "模型未提示明显异常只能说明当前影像和模型类别中没有高概率发现，不能排除所有疾病，也不能替代医生对完整影像的审核。",
     "source": "Radiology Assistant：Chest X-ray",
     "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
-    "keywords": ["正常", "无明显异常", "局限性", "排除"]
+    "keywords": [
+      "正常",
+      "无明显异常",
+      "局限性",
+      "排除"
+    ]
   },
   {
     "id": "general-quality",
@@ -150,6 +237,356 @@
     "content": "投照体位、吸气程度、旋转、曝光和遮挡都会影响胸片解读。单张低质量影像可能无法支持可靠判断。",
     "source": "Radiology Assistant：Chest X-ray",
     "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
-    "keywords": ["影像质量", "体位", "吸气", "曝光", "旋转"]
+    "keywords": [
+      "影像质量",
+      "体位",
+      "吸气",
+      "曝光",
+      "旋转"
+    ]
+  },
+  {
+    "id": "edema-signs",
+    "disease": "edema",
+    "title": "肺水肿的胸片线索",
+    "content": "肺水肿可表现为双侧肺门周围模糊、蝶翼样分布、肺纹理增粗或胸腔积液。心源性与非心源性原因需要结合病史和心影大小由医生判断。",
+    "source": "Radiopaedia：Pulmonary oedema",
+    "source_url": "https://radiopaedia.org/articles/pulmonary-oedema",
+    "keywords": [
+      "肺水肿",
+      "蝶翼",
+      "肺门",
+      "模糊",
+      "心衰"
+    ]
+  },
+  {
+    "id": "edema-limits",
+    "disease": "edema",
+    "title": "肺水肿不能只靠胸片分型",
+    "content": "单张胸片不能可靠区分心源性与非心源性肺水肿，也不能判断严重程度。需要结合症状、体征、心脏超声等检查。",
+    "source": "Radiopaedia：Pulmonary oedema",
+    "source_url": "https://radiopaedia.org/articles/pulmonary-oedema",
+    "keywords": [
+      "心源性",
+      "非心源性",
+      "严重程度",
+      "超声"
+    ]
+  },
+  {
+    "id": "emphysema-signs",
+    "disease": "emphysema",
+    "title": "肺气肿的胸片表现",
+    "content": "肺气肿可见肺过度充气、膈肌低平、肺野透亮度增加和肋间隙增宽。轻度肺气肿在胸片上可能不明显。",
+    "source": "Radiopaedia：Emphysema",
+    "source_url": "https://radiopaedia.org/articles/emphysema",
+    "keywords": [
+      "肺气肿",
+      "过度充气",
+      "膈肌低平",
+      "透亮度"
+    ]
+  },
+  {
+    "id": "emphysema-limits",
+    "disease": "emphysema",
+    "title": "肺气肿需要肺功能评估",
+    "content": "胸片对轻度肺气肿不敏感，不能替代肺功能检查。吸烟史、症状和肺功能结果需要由医生综合判断。",
+    "source": "NHS：COPD",
+    "source_url": "https://www.nhs.uk/conditions/chronic-obstructive-pulmonary-disease-copd/",
+    "keywords": [
+      "肺功能",
+      "吸烟",
+      "轻度",
+      "慢阻肺"
+    ]
+  },
+  {
+    "id": "fibrosis-signs",
+    "disease": "fibrosis",
+    "title": "肺纤维化的胸片线索",
+    "content": "肺纤维化可表现为网状或蜂窝状改变、肺容积缩小、牵拉性支气管扩张，常以下肺外周为主。胸片对早期纤维化不敏感。",
+    "source": "Radiopaedia：Pulmonary fibrosis",
+    "source_url": "https://radiopaedia.org/articles/pulmonary-fibrosis",
+    "keywords": [
+      "肺纤维化",
+      "网状",
+      "蜂窝",
+      "牵拉性支气管扩张"
+    ]
+  },
+  {
+    "id": "fibrosis-limits",
+    "disease": "fibrosis",
+    "title": "肺纤维化不能仅凭胸片确认",
+    "content": "胸片发现可疑纤维化时，通常需要高分辨率 CT 和临床评估。模型概率不能替代影像科医生的正式判断。",
+    "source": "NHS：Idiopathic pulmonary fibrosis",
+    "source_url": "https://www.nhs.uk/conditions/idiopathic-pulmonary-fibrosis/",
+    "keywords": [
+      "高分辨率CT",
+      "临床评估",
+      "早期",
+      "确诊"
+    ]
+  },
+  {
+    "id": "pleural-thickening-signs",
+    "disease": "pleural-thickening",
+    "title": "胸膜增厚的胸片表现",
+    "content": "胸膜增厚可表现为胸膜线增厚、肋膈角变钝或胸膜钙化，可能与陈旧感染、职业暴露或其他原因有关。",
+    "source": "Radiopaedia：Pleural thickening",
+    "source_url": "https://radiopaedia.org/articles/pleural-thickening",
+    "keywords": [
+      "胸膜增厚",
+      "肋膈角",
+      "钙化",
+      "职业暴露"
+    ]
+  },
+  {
+    "id": "pleural-thickening-limits",
+    "disease": "pleural-thickening",
+    "title": "胸膜增厚需要结合病史",
+    "content": "胸片对轻度胸膜增厚不敏感，也不能判断是否活动。需要结合既往影像、职业暴露史和医生查体。",
+    "source": "Radiopaedia：Pleural thickening",
+    "source_url": "https://radiopaedia.org/articles/pleural-thickening",
+    "keywords": [
+      "轻度",
+      "活动性",
+      "既往影像",
+      "暴露史"
+    ]
+  },
+  {
+    "id": "hernia-signs",
+    "disease": "hernia",
+    "title": "膈疝的胸片线索",
+    "content": "膈疝可能表现为膈肌轮廓异常、胸腔内出现肠管或胃泡影。先天性和创伤性膈疝需要医生结合病史和影像评估。",
+    "source": "Radiopaedia：Diaphragmatic hernia",
+    "source_url": "https://radiopaedia.org/articles/diaphragmatic-hernia",
+    "keywords": [
+      "膈疝",
+      "膈肌",
+      "肠管",
+      "胃泡"
+    ]
+  },
+  {
+    "id": "hernia-limits",
+    "disease": "hernia",
+    "title": "膈疝不能仅凭胸片排除",
+    "content": "小的膈疝在胸片上可能不明显，胸片也不能判断是否发生嵌顿。突发腹痛、呕吐或呼吸困难应及时就医。",
+    "source": "NHS：Hernia",
+    "source_url": "https://www.nhs.uk/conditions/hernia/",
+    "keywords": [
+      "嵌顿",
+      "腹痛",
+      "呕吐",
+      "急诊"
+    ]
+  },
+  {
+    "id": "normal-xray",
+    "disease": "general",
+    "title": "正常胸片报告通常包含什么",
+    "content": "正常胸片通常描述肺野清晰、心影大小正常、纵隔无增宽、肋膈角锐利。但正常胸片不能排除所有疾病，仍需结合症状。",
+    "source": "Radiology Assistant：Chest X-ray",
+    "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
+    "keywords": [
+      "正常胸片",
+      "肺野清晰",
+      "肋膈角",
+      "心影",
+      "概率",
+      "正常"
+    ]
+  },
+  {
+    "id": "urgent-symptoms",
+    "disease": "general",
+    "title": "哪些症状不能等 AI 报告",
+    "content": "突发胸痛、明显呼吸困难、咯血、意识改变、口唇发紫或血氧降低时，应尽快就医或呼叫急救，不要等待模型结果。",
+    "source": "NHS：Chest pain",
+    "source_url": "https://www.nhs.uk/conditions/chest-pain/",
+    "keywords": [
+      "急诊",
+      "胸痛",
+      "呼吸困难",
+      "咯血",
+      "血氧",
+      "严重"
+    ]
+  },
+  {
+    "id": "radiation",
+    "disease": "general",
+    "title": "胸片辐射与检查选择",
+    "content": "单次胸片辐射剂量通常较低，但不应进行无指征的重复检查。孕妇、儿童和需要反复检查的人应主动告知医生。",
+    "source": "WHO：Ionizing radiation",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/ionizing-radiation-health-effects-and-protective-measures",
+    "keywords": [
+      "辐射",
+      "剂量",
+      "孕妇",
+      "儿童",
+      "重复检查"
+    ]
+  },
+  {
+    "id": "ai-limits",
+    "disease": "general",
+    "title": "AI 胸片概率的边界",
+    "content": "AI 概率受训练数据、设备、体位、图像质量和标签噪声影响。它不能确诊、不能排除疾病，也不能替代医生面诊和正式影像报告。",
+    "source": "WHO：AI ethics for health",
+    "source_url": "https://www.who.int/publications/i/item/9789240029200",
+    "keywords": [
+      "人工智能",
+      "概率",
+      "训练数据",
+      "标签噪声",
+      "不能确诊",
+      "准确率",
+      "AI",
+      "模型"
+    ]
+  },
+  {
+    "id": "report-terms",
+    "disease": "general",
+    "title": "影像报告里的“提示/考虑/待排”",
+    "content": "影像报告常用“提示、考虑、待排”等词表示可能性，不是确诊。具体含义需要医生结合病史、体检和其他检查解释。",
+    "source": "Radiology Assistant：Chest X-ray",
+    "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
+    "keywords": [
+      "提示",
+      "考虑",
+      "待排",
+      "报告术语",
+      "概率",
+      "报告",
+      "含义"
+    ]
+  },
+  {
+    "id": "follow-up",
+    "disease": "general",
+    "title": "发现异常后如何安排复查",
+    "content": "复查时间取决于病变大小、形态、变化、年龄和危险因素，不能只按模型概率决定。请让医生根据正式影像和病史制定随访计划。",
+    "source": "American College of Radiology：Lung-Rads",
+    "source_url": "https://www.acr.org/Clinical-Resources/Reporting-and-Data-Systems/Lung-Rads",
+    "keywords": [
+      "复查",
+      "随访",
+      "间隔",
+      "危险因素",
+      "检查",
+      "概率"
+    ]
+  },
+  {
+    "id": "image-acquisition",
+    "disease": "general",
+    "title": "体位和吸气会影响胸片判断",
+    "content": "前后位、吸气不足、旋转和曝光都会影响心影、肺野和肋膈角的判断。比较既往影像时，应尽量采用相近的投照条件。",
+    "source": "Radiology Assistant：Chest X-ray",
+    "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
+    "keywords": [
+      "前后位",
+      "吸气",
+      "旋转",
+      "曝光",
+      "既往影像"
+    ]
+  },
+  {
+    "id": "patient-questions",
+    "disease": "general",
+    "title": "就诊时可以问医生什么",
+    "content": "可以问：这个影子需要进一步检查吗？是否需要 CT？多久复查？和我以前的片子相比有变化吗？这些问题需要医生结合完整资料回答。",
+    "source": "American College of Radiology：Appropriateness Criteria",
+    "source_url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Appropriateness-Criteria",
+    "keywords": [
+      "就诊",
+      "CT",
+      "复查",
+      "对比",
+      "医生",
+      "概率",
+      "检查",
+      "资料"
+    ]
+  },
+  {
+    "id": "prevention",
+    "disease": "general",
+    "title": "呼吸健康能做什么",
+    "content": "戒烟、避免二手烟、接种疫苗、控制慢性病和按医嘱随访有助于呼吸健康。这些措施不能替代对已有影像异常的医学评估。",
+    "source": "WHO：Tobacco",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/tobacco",
+    "keywords": [
+      "戒烟",
+      "疫苗",
+      "慢性病",
+      "预防"
+    ]
+  },
+  {
+    "id": "dicom",
+    "disease": "general",
+    "title": "DICOM 与隐私提示",
+    "content": "DICOM 是医学影像常用格式，压缩 DICOM 可能需要转换后才能在本演示中打开。上传前请确认不含姓名、住院号等身份信息。",
+    "source": "DICOM Standard",
+    "source_url": "https://www.dicomstandard.org/",
+    "keywords": [
+      "DICOM",
+      "压缩",
+      "隐私",
+      "身份信息"
+    ]
+  },
+  {
+    "id": "infiltration-limits",
+    "disease": "infiltration",
+    "title": "浸润影不是一种具体疾病",
+    "content": "浸润影是一类影像描述，原因可能是感染、水肿、出血或其他病变。不能仅凭模型概率判断病因，需要医生结合病史和检查。",
+    "source": "Radiology Assistant：Chest X-ray",
+    "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
+    "keywords": [
+      "浸润影",
+      "病因",
+      "感染",
+      "水肿",
+      "出血"
+    ]
+  },
+  {
+    "id": "mass-followup",
+    "disease": "mass",
+    "title": "肺部肿块通常需要进一步评估",
+    "content": "胸片发现可疑肿块时，医生通常会结合既往片、CT 和危险因素判断。肿块的大小、边缘和增长速度比单次模型概率更重要。",
+    "source": "Radiopaedia：Pulmonary mass",
+    "source_url": "https://radiopaedia.org/articles/pulmonary-mass",
+    "keywords": [
+      "肿块",
+      "CT",
+      "既往片",
+      "边缘",
+      "增长"
+    ]
+  },
+  {
+    "id": "consolidation-limits",
+    "disease": "consolidation",
+    "title": "肺实变需要结合临床",
+    "content": "肺实变可见于感染、误吸、水肿或其他原因。单张胸片不能确定病因，也不能仅凭实变判断病原体。",
+    "source": "Merck Manual：Pneumonia",
+    "source_url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia",
+    "keywords": [
+      "实变",
+      "误吸",
+      "病原体",
+      "临床"
+    ]
   }
 ]
