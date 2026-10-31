@@ -51,7 +51,7 @@ const locale = computed(() => getLocale());
 
       <!-- 右侧操作区：用户状态 + 语言 + 设置 -->
       <div class="flex items-center gap-2.5">
-        <button type="button" id="openStatsBtn" @click="actions.openStatsModal()" class="hidden" title="查看数据统计看板">
+        <button type="button" id="openStatsBtn" @click="actions.openStatsModal()" class="btn-secondary btn-sm hidden items-center gap-1 sm:flex" title="查看成员健康数据看板" aria-label="查看成员健康数据看板">
           <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
           </svg>
