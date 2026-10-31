@@ -30,11 +30,11 @@ const vm = useInterpretPage();
         <span class="text-xs text-text-3">影像推理、知识检索与报告生成由后端 Agent 工作流执行</span>
       </div>
 
-      <!-- 主工作区：左 60% (lg:col-span-7) 影像区，右 40% (lg:col-span-5) 结果区 -->
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
+      <!-- 主工作区：左侧影像工作台，右侧粘性解读工作台 -->
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(360px,0.65fr)] items-start">
 
         <!-- 左侧 60% 影像区 -->
-        <div class="med-card lg:col-span-7 space-y-4">
+        <div class="med-card min-w-0 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-border-line pb-3">
             <div class="flex items-center gap-2">
               <h2 class="text-lg font-medium text-text-1">医学影像查看器</h2>
@@ -162,7 +162,7 @@ const vm = useInterpretPage();
             <!-- 影像画布区：支持滚轮以鼠标为中心缩放、左键拖拽平移、双击重置、模型热力层平滑过渡 300ms -->
             <div
               id="xrayViewport" :ref="el => vm.viewport = el" @wheel.prevent="vm.viewer.wheel($event)" @pointerdown="vm.viewer.startDrag($event)" @pointermove="vm.viewer.drag($event)" @pointerup="vm.viewer.endDrag()" @pointercancel="vm.viewer.endDrag()" @lostpointercapture="vm.viewer.endDrag()" @dblclick="vm.viewer.resetViewerState()"
-              class="relative h-[430px] sm:h-[470px] w-full select-none overflow-hidden rounded-lg bg-slate-950 border border-slate-800 cursor-grab active:cursor-grabbing flex items-center justify-center"
+              class="relative h-[500px] sm:h-[540px] xl:h-[600px] w-full select-none overflow-hidden rounded-lg bg-slate-950 border border-slate-800 cursor-grab active:cursor-grabbing flex items-center justify-center"
             >
               <!-- 放射科标准方位角标 -->
               <div class="pointer-events-none absolute top-3 left-3 z-20 flex items-center gap-2">
@@ -175,7 +175,7 @@ const vm = useInterpretPage();
               </div>
 
               <!-- 变换容器 (缩放+平移+旋转) -->
-              <div id="xrayTransformLayer" class="relative h-[420px] w-[420px] max-w-full max-h-full flex items-center justify-center" :style="vm.viewer.transformStyle">
+              <div id="xrayTransformLayer" class="relative h-[460px] w-[460px] max-w-full max-h-full flex items-center justify-center" :style="vm.viewer.transformStyle">
                 <!-- 底层：原始胸部X光图像 -->
                 <img
                   id="xrayBaseImg"
@@ -247,8 +247,8 @@ const vm = useInterpretPage();
           </div>
         </div>
 
-        <!-- 右侧 40% (lg:col-span-5) 结果区 -->
-        <div class="lg:col-span-5 space-y-4">
+        <!-- 右侧粘性解读工作台 -->
+        <div class="min-w-0 space-y-4 lg:sticky lg:top-24">
 
           <!-- 状态 1：待分析面板 (idle) -->
           <div v-if="vm.AppState.diagnosisError" id="diagnosisErrorPanel" class="med-card border-danger/30 bg-danger/5 space-y-3" role="alert">
@@ -338,7 +338,7 @@ const vm = useInterpretPage();
               </div>
             </div>
 
-            <div id="agentReportPanel" v-if="vm.results.agentResult" class="med-card space-y-3">
+            <div id="agentReportPanel" v-if="vm.results.agentResult" class="med-card space-y-3 border-l-4 border-l-primary/60">
               <div class="flex flex-wrap items-center justify-between gap-2 border-b border-border-line pb-3">
                 <div>
                   <h3 class="text-base font-semibold text-text-1">循证科普报告</h3>

@@ -21,8 +21,9 @@
     html, body {
       margin: 0;
       padding: 0;
-      background-color: #F7F8FA;
-      color: #1D2129;
+      background-color: #F4F7FB;
+      color: #0B1B33;
+      background-image: radial-gradient(circle at 8% 0%, rgba(15, 98, 254, 0.045), transparent 30%), radial-gradient(circle at 92% 8%, rgba(14, 165, 164, 0.035), transparent 28%);
       font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
@@ -40,10 +41,10 @@
     /* 医疗卡片规范：8px圆角、柔和阴影、hover阴影加深+上移0.5单位、200ms过渡 */
     .med-card {
       background-color: #FFFFFF;
-      border-radius: 8px;
-      padding: 20px;
-      border: 1px solid #E5E6EB;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid #E2E8F2;
+      box-shadow: 0 8px 24px rgba(15, 40, 80, 0.055);
       transition: all 200ms ease-out;
     }
     .med-card-hover:hover {
@@ -92,8 +93,8 @@
       padding: 0 16px;
       border-radius: 6px;
       background-color: #FFFFFF;
-      color: #1D2129;
-      border: 1px solid #E5E6EB;
+      color: #0B1B33;
+      border: 1px solid #E2E8F2;
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;

@@ -7,8 +7,8 @@ export default {
       colors: {
         primary: '#0F62FE', 'primary-dark': '#0047AB', success: '#00B42A',
         warning: '#FF8A00', danger: '#F53F3F', info: '#36BFFA',
-        'page-bg': '#F7F8FA', 'card-bg': '#FFFFFF', 'text-1': '#1D2129',
-        'text-2': '#4E5969', 'text-3': '#86909C', 'border-line': '#E5E6EB'
+        'page-bg': '#F4F7FB', 'card-bg': '#FFFFFF', 'text-1': '#0B1B33',
+        'text-2': '#4E5969', 'text-3': '#86909C', 'border-line': '#E2E8F2'
       },
       fontFamily: {
         sans: ['system-ui', '-apple-system', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'sans-serif']

@@ -10,7 +10,7 @@ const { actions } = useShell();
           <div class="space-y-4 lg:col-span-7">
             <div class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.06] px-3 py-1 text-xs font-medium text-primary">
               <span class="h-2 w-2 rounded-full bg-primary"></span>
-              <span>DenseNet-121 多标签胸部影像模型 + 模型热力定位</span>
+              <span>DenseNet-121 胸片模型 + Qwen 循证报告 + 模型热力定位</span>
             </div>
             <h1 class="text-2xl sm:text-[28px] font-semibold text-text-1 tracking-tight">
               胸影智识 —— 胸部X光影像AI健康科普与管理系统
@@ -72,7 +72,7 @@ const { actions } = useShell();
                   </div>
                   <p class="text-[11px] text-text-2 mt-0.5">支持缩放/平移/热力透明度无级调节/左右卷帘对比</p>
                 </div>
-                <span class="rounded bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary tabular-nums">v2.0.0</span>
+                <span class="rounded bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary tabular-nums">v2.7.0</span>
               </div>
             </div>
           </div>

@@ -6,11 +6,11 @@ const { actions, nav, member, recordCount } = useShell();
 const locale = computed(() => getLocale());
 </script>
 <template>
-<header class="sticky top-0 z-50 border-b border-border-line bg-white/90 backdrop-blur-md transition-shadow duration-200" id="mainHeader">
+<header class="sticky top-0 z-50 border-b border-border-line bg-white/90 backdrop-blur-md shadow-[0_1px_0_rgba(15,40,80,0.04)]" id="mainHeader">
     <div class="flex h-16 w-full items-center justify-between px-4 sm:px-6 lg:px-8">
       <!-- 左侧 Logo + 名称 -->
       <button type="button" id="brandLogoBtn" @click="actions.switchPage('home')" class="flex items-center gap-3 cursor-pointer text-left group">
-        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white shadow-sm group-hover:bg-primary-dark transition-colors">
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-[#2D7BFF] text-white shadow-[0_8px_18px_rgba(15,98,254,0.22)] group-hover:from-primary-dark group-hover:to-primary transition-colors">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18c-3.5 0-7 2.5-7 7.5 0 3.8 2 6.5 4.5 7.5M12 3c3.5 0 7 2.5 7 7.5 0 3.8-2 6.5-4.5 7.5M8 10h2m4 0h2m-8 4h2.5m3 0H16" />
           </svg>
