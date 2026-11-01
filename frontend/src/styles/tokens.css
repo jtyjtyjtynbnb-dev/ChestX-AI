@@ -107,15 +107,15 @@
   --cat-thickening:    #8FA39E; /* 扩展 · 胸膜增厚 */
 
   /* ── 字号刻度（第四轮放大，正文 24px） ─────────────────── */
-  --text-3xs: 11px;
-  --text-2xs: 12px;
-  --text-xs:  13px;
-  --text-sm:  15px;
-  --text-md:  15px;
-  --text-lg:  17px;
-  --text-xl:  20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
+  --text-3xs: 12px;
+  --text-2xs: 13px;
+  --text-xs:  14px;
+  --text-sm:  16px;
+  --text-md:  16px;
+  --text-lg:  18px;
+  --text-xl:  22px;
+  --text-2xl: 26px;
+  --text-3xl: 34px;
 
   /* ── 圆角 / 层级 / 动效 ─────────────────────────────────── */
   --radius-sm: 8px;

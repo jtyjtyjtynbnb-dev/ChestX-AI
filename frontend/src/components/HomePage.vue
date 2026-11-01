@@ -783,7 +783,7 @@ onBeforeUnmount(() => {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-400) 16%, transparent);
 }
 .hero-title {
-  font-size: clamp(30px, 3.4vw, 42px);
+  font-size: clamp(32px, 3.6vw, 44px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.03em;
@@ -1012,7 +1012,7 @@ onBeforeUnmount(() => {
   margin-bottom: 16px;
 }
 .sec-eyebrow { color: var(--brand-700); font-size: var(--text-3xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
-.sec-title { margin-top: 6px; font-size: clamp(20px, 2vw, 25px); font-weight: 700; line-height: 1.26; letter-spacing: -0.02em; color: var(--color-text-1); }
+.sec-title { margin-top: 6px; font-size: clamp(22px, 2.2vw, 27px); font-weight: 700; line-height: 1.26; letter-spacing: -0.02em; color: var(--color-text-1); }
 .sec-index { flex: none; color: var(--ink-400); font-size: var(--text-3xs); font-weight: 600; letter-spacing: 0.1em; }
 
 /* ══ 能力卡（四列） ════════════════════════════════════════════ */
@@ -1315,7 +1315,7 @@ onBeforeUnmount(() => {
 }
 .home-cta-glow { position: absolute; inset: auto -6% -70% 40%; height: 180%; background: radial-gradient(40% 50% at 60% 40%, color-mix(in srgb, var(--brand-500) 18%, transparent), transparent 70%); filter: blur(30px); pointer-events: none; }
 .cta-eyebrow { color: var(--brand-300); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.16em; }
-.cta-title { margin-top: 4px; font-size: clamp(16px, 1.8vw, 20px); font-weight: 700; letter-spacing: -0.01em; }
+.cta-title { margin-top: 4px; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: -0.01em; }
 .cta-desc { margin-top: 4px; color: var(--film-dim); font-size: var(--text-2xs); }
 .btn-on-dark {
   display: inline-flex;

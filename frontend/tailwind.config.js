@@ -82,16 +82,16 @@ export default {
       },
       /* 字号刻度第四轮放大，正文 24px */
       fontSize: {
-        '3xs': ['11px', { lineHeight: '1.45' }],
-        '2xs': ['12px', { lineHeight: '1.5' }],
-        xs:   ['13px', { lineHeight: '1.55' }],
-        sm:   ['15px', { lineHeight: '1.6' }],
-        base: ['15px', { lineHeight: '1.65' }],
-        md:   ['15px', { lineHeight: '1.65' }],
-        lg:   ['17px', { lineHeight: '1.55' }],
-        xl:   ['20px', { lineHeight: '1.45' }],
-        '2xl': ['24px', { lineHeight: '1.35' }],
-        '3xl': ['32px', { lineHeight: '1.25' }]
+        '3xs': ['12px', { lineHeight: '1.45' }],
+        '2xs': ['13px', { lineHeight: '1.5' }],
+        xs:   ['14px', { lineHeight: '1.55' }],
+        sm:   ['16px', { lineHeight: '1.6' }],
+        base: ['16px', { lineHeight: '1.65' }],
+        md:   ['16px', { lineHeight: '1.65' }],
+        lg:   ['18px', { lineHeight: '1.55' }],
+        xl:   ['22px', { lineHeight: '1.45' }],
+        '2xl': ['26px', { lineHeight: '1.35' }],
+        '3xl': ['34px', { lineHeight: '1.25' }]
       },
       borderRadius: {
         sm: '8px', md: '12px', lg: '16px', xl: '22px'
