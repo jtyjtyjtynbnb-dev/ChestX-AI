@@ -93,7 +93,7 @@ def _tfidf_vectors(corpus: list[str], query: str) -> tuple[list[list[float]], li
 def retrieve_knowledge(
     predicted_codes: list[str],
     query: str = "",
-    top_k: int = 4,
+    top_k: int = 10,
 ) -> list[dict]:
     """Return ranked evidence chunks with their source metadata."""
     if not predicted_codes and not query.strip():
@@ -135,14 +135,14 @@ def retrieve_knowledge(
                 "mode": "local_tfidf",
             },
         })
-    return results[: min(max(0, top_k), 8)]
+    return results[: min(max(0, top_k), 12)]
 
 
 # 异步混合检索入口：本地 BM25/TF-IDF 为基线，可选 DashScope embedding/rerank 增强。
 async def hybrid_retrieve(
     predicted_codes: list[str],
     query: str,
-    top_k: int = 4,
+    top_k: int = 10,
 ) -> tuple[list[dict], dict]:
     """Fuse local BM25/TF-IDF with optional DashScope embeddings and reranking."""
     local = retrieve_knowledge(predicted_codes, query, top_k=12)

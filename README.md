@@ -71,7 +71,7 @@ ChestX-AI-演示运行包/
 - 后端：Python 3.10+、FastAPI、Uvicorn、ONNX Runtime、LangGraph 1.2.16、SQLite
 - 模型：224×224 输入、10 类 sigmoid 输出、第二个输出为 7×7 注意力图（用于热力图叠加）
 - 输入防御：MobileNetV3 guard（胸片/非胸片）+ 启发式兜底，guard 不替代 121 主模型
-- 检索：BM25 + TF-IDF + RRF 排序；200 条来源可追溯的胸片科普知识；配置 DashScope 后可启用 embedding / rerank
+- 检索：BM25 + TF-IDF + RRF 排序；200 条来源可追溯的胸片科普知识；每次默认返回 Top10 证据（最多 12 条）；配置 DashScope 后可启用 embedding / rerank
 
 ## 主要能力
 

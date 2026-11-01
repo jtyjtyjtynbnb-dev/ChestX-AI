@@ -160,7 +160,7 @@ async def answer_question(question: str, history: Any = None, diagnosis_context:
         for item in (diagnosis_context or {}).get("probabilities", [])[:3]
         if isinstance(item, dict) and item.get("code")
     ]
-    documents = retrieve_knowledge(predicted, question, top_k=4)
+    documents = retrieve_knowledge(predicted, question, top_k=10)
     client = DashScopeQwenClient()
     if not client.enabled():
         response = _local_answer(question, documents, "qwen_not_configured", diagnosis_context=diagnosis_context)
@@ -254,7 +254,7 @@ async def stream_answer_question(
         for item in (diagnosis_context or {}).get("probabilities", [])[:3]
         if isinstance(item, dict) and item.get("code")
     ]
-    documents = retrieve_knowledge(predicted, clean_q, top_k=4)
+    documents = retrieve_knowledge(predicted, clean_q, top_k=10)
     yield "step", {"name": "知识检索", "status": "completed" if documents else "no_evidence", "count": len(documents)}
 
     result = await answer_question(clean_q, history, diagnosis_context)
@@ -320,7 +320,7 @@ def _cobrain_risk(context: dict[str, Any] | None) -> str:
 def _cobrain_evidence(context: dict[str, Any] | None, focus: str) -> tuple[str, list[dict[str, Any]]]:
     top = _cobrain_top(context)
     codes = [item["code"] for item in top[:3] if item["code"]]
-    documents = retrieve_knowledge(codes, focus or "影像表现 随访 会诊", top_k=3)
+    documents = retrieve_knowledge(codes, focus or "影像表现 随访 会诊", top_k=10)
     text = "\n".join(
         f"[{item['id']}] {item['title']}：{item['content']}（来源：{item['source']}）" for item in documents
     ) or "无匹配知识片段"

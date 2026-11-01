@@ -92,7 +92,7 @@ def build_agent_graph():
     async def retrieve(state: AgentState) -> dict[str, Any]:
         started = time.perf_counter()
         codes = [item["code"] for item in state["inference"].get("all_predictions", [])[:3]]
-        sources, info = await hybrid_retrieve(codes, state.get("question", ""), top_k=4)
+        sources, info = await hybrid_retrieve(codes, state.get("question", ""), top_k=10)
         step = {"name": "知识检索", "status": "completed", "elapsed_ms": round((time.perf_counter() - started) * 1000, 1), "count": len(sources), "mode": info["mode"]}
         return {"sources": sources, "retrieval_info": info, "steps": [*state.get("steps", []), step]}
 
