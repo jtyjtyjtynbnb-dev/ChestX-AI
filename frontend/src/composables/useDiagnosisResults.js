@@ -1,5 +1,5 @@
 import { computed, nextTick, ref, watch } from 'vue';
-import * as echarts from 'echarts';
+import { echarts } from '../utils/echarts.js';
 import { DISEASE_KNOWLEDGE_LIST } from '../stores/referenceData.js';
 import { getRiskStyle, isNormalDominant } from '../utils/format.js';
 
@@ -22,6 +22,8 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
   const topProbabilities = computed(() => probabilities.value.slice(0, 3));
   const agentResult = computed(() => currentCase.value?.agentResult || null);
   const agentSteps = computed(() => agentResult.value?.steps || []);
+  const uncertainty = computed(() => agentResult.value?.inference?.uncertainty || null);
+  const groundedness = computed(() => report.value?.groundedness || null);
   const report = computed(() => agentResult.value?.report || null);
   const reportSummary = computed(() => {
     if (!report.value) return '';
@@ -78,6 +80,6 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
   function setProbabilityMode(mode) { AppState.probViewMode = mode; }
   watch(probExpanded, () => { if (probExpanded.value) nextTick(renderProbabilityChart); });
   function dispose() { disposed = true; observer?.disconnect(); observer = null; chart?.dispose(); chart = null; }
-  return { currentCase, risk, probabilities, topProbabilities, probExpanded, toggleProbabilities, agentResult, agentSteps, report, reportMode, reportSummary, riskExplanation, followUpQuestions, reportActions, evidence, setReportMode, openKnowledge, openRelatedKnowledge, renderProbabilityChart, setProbabilityMode, mount, dispose };
+  return { currentCase, risk, probabilities, topProbabilities, probExpanded, toggleProbabilities, agentResult, agentSteps, uncertainty, groundedness, report, reportMode, reportSummary, riskExplanation, followUpQuestions, reportActions, evidence, setReportMode, openKnowledge, openRelatedKnowledge, renderProbabilityChart, setProbabilityMode, mount, dispose };
 }
 

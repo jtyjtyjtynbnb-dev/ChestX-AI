@@ -1,0 +1,156 @@
+/*
+ * 胸影智识 · 设计令牌（唯一色值来源）
+ * 主题：医疗影像 · 冷石墨 + 青蓝（v3 临床科技风）
+ *
+ * 约定
+ * - 任何组件里不再写十六进制；Tailwind 类名与 CSS 变量都从本文件取值。
+ * - --ink-* 是冷调石墨中性色（略偏蓝），承载 95% 的界面。
+ * - --brand-* 是青蓝强调色，只用于交互与"正在发生"的状态，绝不表示严重程度。
+ * - --risk-* 是风险语义色，与品牌色彻底分离（蓝/青 ≠ 危险）。
+ * - --cat-* 是 10 类疾病的分类色，用于图表与标签，彼此亮度接近。
+ * - --film-* 是阅片深色面（影像查看器、报告、阅片模式）。
+ */
+
+:root {
+  /* ── 冷石墨中性 ─────────────────────────────────────────── */
+  --ink-50:  #F5F7FA;
+  --ink-100: #ECEFF4;
+  --ink-200: #DCE2EA;
+  --ink-300: #C2CBD8;
+  --ink-400: #8E9AAB;
+  --ink-500: #647186;
+  --ink-600: #475063;
+  --ink-700: #333B4A;
+  --ink-800: #202634;
+  --ink-900: #131826;
+  --ink-950: #0A0E18;
+
+  /* ── 青蓝品牌 ───────────────────────────────────────────── */
+  --brand-50:  #ECFEFF;
+  --brand-100: #CFF7FE;
+  --brand-200: #9FEEF9;
+  --brand-300: #67E0F2;
+  --brand-400: #27C8E2;
+  --brand-500: #0BA2BC; /* 装饰性填充 / 图表 / 光晕（白字 3.0:1，仅大字/非文本） */
+  --brand-600: #087A92; /* 按钮填充（白字 5.0:1） */
+  --brand-700: #0B6278; /* 正文级文本（白底 6.9:1） */
+  --brand-800: #105063;
+  --brand-900: #124252;
+  --brand-950: #062C38;
+
+  /* ── 风险语义（三通道：色 + 文案 + 形状，从不只靠颜色） ── */
+  --risk-high:        #D12F2C;
+  --risk-high-strong: #A91E1C;
+  --risk-high-soft:   #FEF2F2;
+  --risk-high-line:   #F9C9C7;
+
+  --risk-mid:         #B25C09;
+  --risk-mid-strong:  #8A4707;
+  --risk-mid-soft:    #FFFAEB;
+  --risk-mid-line:    #F4D9A4;
+
+  --risk-low:         #18744F;
+  --risk-low-strong:  #0F5C3D;
+  --risk-low-soft:    #E9F8F1;
+  --risk-low-line:    #B7E2CD;
+
+  /* ── 语义别名（供既有 class 名继续使用） ────────────────── */
+  --color-primary:      var(--brand-700);
+  --color-primary-dark: var(--brand-800);
+  --color-accent:       var(--brand-500);
+  --color-success:      var(--risk-low);
+  --color-warning:      var(--risk-mid);
+  --color-danger:       var(--risk-high);
+  --color-info:         #036396;
+  --color-page-bg:      var(--ink-50);
+  --color-card-bg:      #FFFFFF;
+  --color-text-1:       var(--ink-900);
+  --color-text-2:       var(--ink-600);
+  --color-text-3:       var(--ink-500);
+  --color-border-line:  var(--ink-200);
+
+  /* ── 表面（浅色临床面） ─────────────────────────────────── */
+  --surface-page:   var(--ink-50);
+  --surface-card:   #FFFFFF;
+  --surface-sunken: var(--ink-100);
+  --surface-hover:  var(--ink-100);
+  --border-subtle:  var(--ink-200);
+  --border-strong:  var(--ink-300);
+
+  /* ── 表面（深色阅片面） ─────────────────────────────────── */
+  --film-bg:    #080D16;
+  --film-850:   #0D1420;
+  --film-panel: #121B2A;
+  --film-raise: #1B2638;
+  --film-line:  #28354A;
+  --film-text:  #E8EFF8;
+  --film-dim:   #98A6BC;
+  --film-accent: var(--brand-400);
+
+  /* ── 14 类分类色（模型 10 类 + 扩展科普 4 类） ───────────────
+   * 模型 10 类用饱和度较高的色相；扩展 4 类用略灰的色相，
+   * 视觉上可一眼区分"模型算的"与"科普讲的"。 */
+  --cat-no_finding:    #647186; /* 模型 · 无异常 */
+  --cat-atelectasis:   #6E8F2E; /* 模型 · 肺不张 */
+  --cat-cardiomegaly:  #A14E8C; /* 模型 · 心脏扩大 */
+  --cat-effusion:      #2F76D1; /* 模型 · 胸腔积液 */
+  --cat-infiltration:  #C25038; /* 模型 · 浸润影 */
+  --cat-mass:          #B0385C; /* 模型 · 肿块 */
+  --cat-nodule:        #7558D6; /* 模型 · 结节 */
+  --cat-pneumonia:     #D07036; /* 模型 · 肺炎 */
+  --cat-pneumothorax:  #0E93A8; /* 模型 · 气胸 */
+  --cat-consolidation: #8A6A1E; /* 模型 · 实变 */
+
+  --cat-edema:         #94A3B8; /* 扩展 · 肺水肿 */
+  --cat-emphysema:     #A89C86; /* 扩展 · 肺气肿 */
+  --cat-fibrosis:      #A28E8A; /* 扩展 · 肺纤维化 */
+  --cat-thickening:    #8FA39E; /* 扩展 · 胸膜增厚 */
+
+  /* ── 字号刻度（第四轮放大，正文 24px） ─────────────────── */
+  --text-3xs: 17px;
+  --text-2xs: 18px;
+  --text-xs:  21px;
+  --text-sm:  24px;
+  --text-md:  24px;
+  --text-lg:  26px;
+  --text-xl:  30px;
+  --text-2xl: 34px;
+  --text-3xl: 44px;
+
+  /* ── 圆角 / 层级 / 动效 ─────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.07);
+  --shadow-2: 0 6px 16px rgba(16, 24, 40, 0.08), 0 2px 6px rgba(16, 24, 40, 0.05);
+  --shadow-3: 0 20px 48px rgba(16, 24, 40, 0.14), 0 6px 16px rgba(16, 24, 40, 0.06);
+  --shadow-film: 0 24px 60px rgba(0, 0, 0, 0.5);
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+}
+
+/* 深色阅片面：给查看器、报告、阅片模式用 */
+[data-surface='film'] {
+  --surface-page:   var(--film-bg);
+  --surface-card:   var(--film-panel);
+  --surface-sunken: var(--film-850);
+  --surface-hover:  var(--film-raise);
+  --border-subtle:  var(--film-line);
+  --border-strong:  #3A4757;
+  --color-card-bg:  var(--film-panel);
+  --color-page-bg:  var(--film-bg);
+  --color-text-1:   var(--film-text);
+  --color-text-2:   var(--film-dim);
+  --color-text-3:   var(--film-dim);
+  --color-border-line: var(--film-line);
+  --color-primary:  var(--brand-400);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 6px 16px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 24px 60px rgba(0, 0, 0, 0.55);
+}

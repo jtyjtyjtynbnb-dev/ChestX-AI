@@ -113,7 +113,19 @@ def build_agent_graph():
         steps.append({"name": "报告生成", "status": "degraded", "elapsed_ms": 0})
         return {"report": build_local_fallback(state["inference"], []), "provider": "local_fallback", "fallback_reason": "insufficient_evidence", "steps": steps}
 
-    # 节点 6：安全审查/收尾；报告字段已在 report_service 内做证据 ID 校验和话术清洗。
+    # 节点 6：证据一致性检查。只读取 report_service 已算好的 groundedness，
+    # 不额外调用大模型，避免为了“多一个节点”增加延迟。
+    async def grounding_check(state: AgentState) -> dict[str, Any]:
+        grounded = state.get("report", {}).get("groundedness") or {}
+        status = grounded.get("status", "no_evidence")
+        step = {
+            "name": "证据一致性",
+            "status": "completed" if status in {"strong", "partial"} else "degraded",
+            "elapsed_ms": 0,
+        }
+        return {"steps": [*state.get("steps", []), step]}
+
+    # 节点 7：安全审查/收尾；报告字段已在 report_service 内做证据 ID 校验和话术清洗。
     async def safety(state: AgentState) -> dict[str, Any]:
         step = {"name": "安全审查", "status": "completed", "elapsed_ms": 0}
         return {"steps": [*state.get("steps", []), step]}
@@ -124,13 +136,15 @@ def build_agent_graph():
     graph.add_node("hybrid_retrieval", retrieve)
     graph.add_node("report_generation", report)
     graph.add_node("insufficient_evidence", fallback)
+    graph.add_node("grounding_check", grounding_check)
     graph.add_node("safety_review", safety)
     graph.add_edge(START, "input_validation")
     graph.add_edge("input_validation", "image_inference")
     graph.add_edge("image_inference", "hybrid_retrieval")
     graph.add_conditional_edges("hybrid_retrieval", evidence_route, {"report": "report_generation", "fallback": "insufficient_evidence"})
-    graph.add_edge("report_generation", "safety_review")
-    graph.add_edge("insufficient_evidence", "safety_review")
+    graph.add_edge("report_generation", "grounding_check")
+    graph.add_edge("insufficient_evidence", "grounding_check")
+    graph.add_edge("grounding_check", "safety_review")
     graph.add_edge("safety_review", END)
     return graph.compile()
 

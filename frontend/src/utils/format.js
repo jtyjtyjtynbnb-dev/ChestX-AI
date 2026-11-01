@@ -30,8 +30,8 @@ export function getRiskStyle(levelOrProb, diseaseCode = null) {
       level: 'HIGH',
       label: '高风险关注',
       shortLabel: '高风险',
-      color: '#F53F3F',
-      badgeClass: 'border-danger/30 bg-danger/10 text-danger',
+      color: 'var(--risk-high)',
+      badgeClass: 'border-danger-line bg-danger-soft text-danger-strong',
       dotClass: 'bg-danger'
     };
   }
@@ -40,8 +40,8 @@ export function getRiskStyle(levelOrProb, diseaseCode = null) {
       level: 'MEDIUM',
       label: '中风险随访',
       shortLabel: '中风险',
-      color: '#FF8A00',
-      badgeClass: 'border-warning/30 bg-warning/10 text-warning',
+      color: 'var(--risk-mid)',
+      badgeClass: 'border-warning-line bg-warning-soft text-warning-strong',
       dotClass: 'bg-warning'
     };
   }
@@ -49,8 +49,8 @@ export function getRiskStyle(levelOrProb, diseaseCode = null) {
     level: 'LOW',
     label: '低风险正常',
     shortLabel: '低风险',
-    color: '#00B42A',
-    badgeClass: 'border-success/30 bg-success/10 text-success',
+    color: 'var(--risk-low)',
+    badgeClass: 'border-success-line bg-success-soft text-success-strong',
     dotClass: 'bg-success'
   };
 }

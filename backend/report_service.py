@@ -1,9 +1,12 @@
 """Evidence-grounded report generation and local fallback behavior."""
 
 import asyncio
+import hashlib
 import json
 
+from .ai_cache import TTLCache
 from .config import DISCLAIMER
+from .grounding import evaluate_grounding
 from .qwen_client import DashScopeQwenClient, parse_report_content
 from .safety import SAFE_SUFFIX, has_unsafe_clinical_language, sanitize_report, sanitize_text
 
@@ -25,6 +28,8 @@ DISEASE_CN = {
 def _display_name(item: dict) -> str:
     code = str(item.get("code") or "")
     return DISEASE_CN.get(code, str(item.get("name") or code or "未知类别"))
+
+REPORT_CACHE = TTLCache(maxsize=64, ttl_seconds=900)
 
 REQUIRED_REPORT_FIELDS = {
     "summary",
@@ -241,6 +246,16 @@ def validate_report(
         "这个征象在胸片上通常意味着什么？",
         "我就诊时需要带哪些资料？",
     ]
+    report["groundedness"] = evaluate_grounding(report, documents)
+    uncertainty = inference.get("uncertainty") if isinstance(inference, dict) else None
+    if isinstance(uncertainty, dict) and uncertainty.get("needs_review"):
+        report.setdefault("limitations", [])
+        if not any("置信度" in str(item) for item in report["limitations"]):
+            report["limitations"].append("模型置信度偏低或类别区分度不足，建议由医生结合原始影像复核。")
+    if report["groundedness"]["status"] in {"weak", "no_evidence"}:
+        report.setdefault("limitations", [])
+        if not any("证据支持" in str(item) for item in report["limitations"]):
+            report["limitations"].append("本次报告的证据支持度较低，建议以医生对原始影像的正式判断为准。")
     report = sanitize_report(report)
     report["disclaimer"] = DISCLAIMER
     if has_unsafe_clinical_language(report):
@@ -294,14 +309,31 @@ def build_local_fallback(inference: dict, documents: list[dict]) -> dict:
         "limitations": [
             "本地兜底报告基于结构化概率和知识库生成，未调用 Qwen。",
             "模型使用报告级弱标签训练，存在标签噪声、类别不平衡和设备/体位差异。",
-            "模型只能提示影像关注方向，不能确诊、不能排除其他疾病，也不能替代医生面诊。",
+            "模型只能提示影像关注方向，不能作为诊断依据，也不能排除其他疾病，也不能替代医生面诊。",
         ],
         "suggested_actions": _tailored_actions(inference),
         "disclaimer": DISCLAIMER,
     }
+    fallback["groundedness"] = evaluate_grounding(fallback, documents)
+    uncertainty = inference.get("uncertainty") if isinstance(inference, dict) else None
+    if isinstance(uncertainty, dict) and uncertainty.get("needs_review"):
+        fallback["limitations"].append("模型置信度偏低或类别区分度不足，建议由医生结合原始影像复核。")
     fallback = sanitize_report(fallback)
     fallback["suggested_actions"].append(SAFE_SUFFIX)
     return fallback
+
+
+def _report_cache_key(user_question: str, inference: dict, documents: list[dict], model: str) -> str:
+    payload = {
+        "question": user_question.strip(),
+        "model": model,
+        "probabilities": [
+            [item.get("code"), item.get("prob")]
+            for item in inference.get("probabilities", [])[:10]
+        ],
+        "documents": [item.get("id") for item in documents],
+    }
+    return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
 
 
 async def create_report(
@@ -314,6 +346,11 @@ async def create_report(
     if not client.enabled():
         return build_local_fallback(inference, documents), "local_fallback"
 
+    cache_key = _report_cache_key(user_question, inference, documents, client.model)
+    cached = REPORT_CACHE.get(cache_key)
+    if cached:
+        return cached
+
     try:
         # 隐私优先：不把原始影像发送到云端。Qwen 只接收结构化概率、问题和知识片段。
         # 即使 Qwen 网络悬挂，40 秒后也回退本地报告，避免前端等到超时。
@@ -322,7 +359,11 @@ async def create_report(
             timeout=45,
         )
         report = parse_report_content(content)
-        return validate_report(report, inference, documents), "qwen"
+        result = (validate_report(report, inference, documents), "qwen")
+        REPORT_CACHE.set(cache_key, result)
+        return result
     except Exception:
-        return build_local_fallback(inference, documents), "local_fallback"
+        result = (build_local_fallback(inference, documents), "local_fallback")
+        REPORT_CACHE.set(cache_key, result)
+        return result
 

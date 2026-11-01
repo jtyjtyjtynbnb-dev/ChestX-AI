@@ -43,6 +43,10 @@ export default defineConfig({
   server: {
     host: '127.0.0.1',
     port: 8765,
+    // 编辑器/工具的临时目录会触发 Windows 下的 EBUSY 文件监听错误，直接忽略。
+    watch: {
+      ignored: ['**/.*.tmpdir/**', '**/*.tmpdir/**']
+    },
     proxy: {
       '/api': {
         target: process.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000',

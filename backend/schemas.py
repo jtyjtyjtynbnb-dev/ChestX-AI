@@ -98,6 +98,11 @@ class NoteSummaryRequest(BaseModel):
         return value
 
 
+class CoBrainRequest(BaseModel):
+    diagnosis_context: dict[str, Any] | None = None
+    focus: str = Field(default="", max_length=300)
+
+
 class QwenSettingsRequest(BaseModel):
     api_key: str = Field(default="", max_length=500)
     model: Literal["qwen3.8-flash", "qwen3.8-max"] = "qwen3.8-flash"

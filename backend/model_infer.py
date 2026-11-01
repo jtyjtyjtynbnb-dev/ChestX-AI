@@ -10,6 +10,7 @@ from PIL import Image
 
 from .config import DISEASE_LIST, MODEL_INPUT_SIZE, MODEL_PATH
 from .image_quality import preprocess_image
+from .uncertainty import assess_uncertainty
 
 try:
     import onnxruntime as ort
@@ -108,4 +109,5 @@ def diagnose_image(image: Image.Image) -> dict:
         "heatmap_overlay": heatmap,
         "normalized_image": normalized_image,
         "preprocessing": preprocessing,
+        "uncertainty": assess_uncertainty(sorted_items),
     }

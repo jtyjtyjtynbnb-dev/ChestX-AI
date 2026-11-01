@@ -12,7 +12,7 @@ function staticIds(source) {
   return [...source.matchAll(/(?<![:\w-])id="([^"]+)"/g)].map(match => match[1]).filter(id => !id.includes('${')).sort();
 }
 
-test('Vue templates preserve all 181 reference static DOM ids', () => {
+test('Vue templates preserve all 183 reference static DOM ids', () => {
   // Frozen from the original reference HTML. Page markup now lives in components,
   // and :data-*-id bindings are expressions, not static DOM ids.
   const templates = [...filesIn('src/components'), ...filesIn('src/views')].filter(name => name.endsWith('.vue'));
@@ -25,7 +25,11 @@ test('six real routes use one RouterView and preserve the shell order', () => {
   assert.match(main, /createWebHistory\s*\(/);
   for (const page of ['home', 'interpret', 'records', 'knowledge', 'academy', 'about']) {
     const view = page[0].toUpperCase() + page.slice(1) + 'View';
-    assert.match(main, new RegExp(`path:\\s*['"]/${page}['"].*component:\\s*${view}`));
+    // 允许静态引用与懒加载两种写法，二者都指向同一份 views/<View>.vue。
+    // 断言的是"路由确实指向该视图"，而不是打包策略。
+    const staticRoute = new RegExp(`path:\\s*['"]/${page}['"].*component:\\s*${view}`);
+    const lazyRoute = new RegExp(`path:\\s*['"]/${page}['"].*component:\\s*\\(\\)\\s*=>\\s*import\\(\\s*['"]\\./views/${view}\\.vue['"]\\s*\\)`);
+    assert.ok(staticRoute.test(main) || lazyRoute.test(main), `${page} route must mount ${view}`);
     assert.ok(existsSync(join(frontendRoot, `src/views/${view}.vue`)));
     assert.doesNotMatch(app, new RegExp(`<${view}\\b|import\\s+${view}\\s+from`));
   }

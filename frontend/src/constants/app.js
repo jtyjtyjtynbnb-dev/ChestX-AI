@@ -29,8 +29,8 @@ export const ANALYSIS_STAGE_PERCENT = {
 };
 
 export const CHAT_PANEL = {
-  width: 390,
-  maxHeight: 560,
+  width: 460,
+  maxHeight: 620,
   edge: 24,
   viewportGap: 32,
   heightGap: 130,

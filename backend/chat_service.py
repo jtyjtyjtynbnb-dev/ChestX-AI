@@ -269,3 +269,203 @@ async def stream_answer_question(
 
     yield "step", {"name": "整理回答与来源", "status": "completed"}
     yield "complete", result
+# ── Multi-role Qwen co-brain consultation ────────────────────────────────
+
+_COBRAIN_ROLE_SPECS = [
+    {
+        "key": "radiology",
+        "role": "影像科",
+        "title": "病灶与热区",
+        "instruction": "从影像表现、模型概率和注意力热区出发，指出最需要关注的征象；说明热区不等于临床病灶定位。",
+    },
+    {
+        "key": "respiratory",
+        "role": "呼吸科",
+        "title": "临床与检查",
+        "instruction": "结合症状、血常规/CRP、CT 与复查路径给出下一步检查建议；不要写具体处方、剂量或治疗指令。",
+    },
+    {
+        "key": "gp",
+        "role": "全科 / 健康管理",
+        "title": "分级与转诊",
+        "instruction": "给出风险分级、是否需要门诊/转诊、随访节奏和危险因素管理建议。",
+    },
+    {
+        "key": "patient",
+        "role": "患者 / 家属",
+        "title": "下一步怎么做",
+        "instruction": "用家属能听懂的话解释结果，列出 2–3 个要问医生的问题，并提示哪些症状需要尽快急诊。",
+    },
+]
+
+_COBRAIN_CACHE: dict[str, dict[str, Any]] = {}
+
+
+def _cobrain_top(context: dict[str, Any] | None) -> list[dict[str, Any]]:
+    values = (context or {}).get("probabilities") or []
+    rows = [
+        {"code": str(item.get("code") or ""), "name": str(item.get("name") or ""), "prob": float(item.get("prob") or 0)}
+        for item in values
+        if isinstance(item, dict)
+    ]
+    rows.sort(key=lambda item: item["prob"], reverse=True)
+    return rows
+
+
+def _cobrain_risk(context: dict[str, Any] | None) -> str:
+    context = context or {}
+    return str(context.get("risk_label") or context.get("risk") or "需关注")
+
+
+def _cobrain_evidence(context: dict[str, Any] | None, focus: str) -> tuple[str, list[dict[str, Any]]]:
+    top = _cobrain_top(context)
+    codes = [item["code"] for item in top[:3] if item["code"]]
+    documents = retrieve_knowledge(codes, focus or "影像表现 随访 会诊", top_k=3)
+    text = "\n".join(
+        f"[{item['id']}] {item['title']}：{item['content']}（来源：{item['source']}）" for item in documents
+    ) or "无匹配知识片段"
+    return text, documents
+
+
+def _cobrain_facts(context: dict[str, Any] | None) -> str:
+    context = context or {}
+    top = _cobrain_top(context)
+    probs = "，".join(f"{item['name']} {item['prob']:.1f}%" for item in top[:4]) or "未提供概率"
+    summary = str(context.get("summary") or context.get("patient_summary") or "未提供摘要")
+    attention = str(context.get("attention_region") or "未提供热区描述")
+    member = _format_member_profile(context)
+    return (
+        f"风险：{_cobrain_risk(context)}；成员：{member}。\n"
+        f"模型概率：{probs}。\n影像摘要：{summary}\n关注区域：{attention}"
+    )
+
+
+def _local_cobrain_role(spec: dict[str, str], context: dict[str, Any] | None) -> dict[str, str]:
+    top = _cobrain_top(context)
+    name = top[0]["name"] if top else "当前征象"
+    prob = f"{top[0]['prob']:.1f}%" if top else "—"
+    risk = _cobrain_risk(context)
+    attention = str((context or {}).get("attention_region") or "右下肺野内中带")
+    takes = {
+        "radiology": f"{name} {prob}，热区位于{attention}；影像表现与模型关注区域基本一致，但热区不是临床病灶定位。",
+        "respiratory": "若伴发热、咳嗽，先查血常规与 CRP；感染指标升高时先抗感染，4–6 周复查；持续不吸收再考虑胸部 CT。",
+        "gp": f"综合风险为{risk}；有吸烟史、慢病或症状加重者优先门诊；低风险也需按体检周期随访。",
+        "patient": "这不是确诊。带原始影像看呼吸科，问医生：是否需要 CT、多久复查、出现哪些症状要急诊。",
+    }
+    return {**spec, "take": takes.get(spec["key"], ""), "status": "local_fallback"}
+
+
+def _cobrain_local_result(context: dict[str, Any] | None, focus: str) -> dict[str, Any]:
+    roles = [_local_cobrain_role(spec, context) for spec in _COBRAIN_ROLE_SPECS]
+    top = _cobrain_top(context)
+    name = top[0]["name"] if top else "当前征象"
+    documents = _cobrain_evidence(context, focus)[1]
+    return {
+        "provider": "local_fallback",
+        "roles": roles,
+        "consensus": f"四方共识：{name}是需要临床结合的高风险提示，不是诊断。建议带片至呼吸科 / 胸外科门诊，结合症状与化验决定是否 CT；4–6 周复查，症状加重随时急诊。",
+        "divergence": "呼吸科倾向结合感染指标先治疗后复查；影像科更关注热区与影像变化。两者都认为需要临床门诊，而不是仅凭 AI 结果下结论。",
+        "sources": [
+            {key: item[key] for key in ("id", "title", "source", "source_url")}
+            for item in documents[:3]
+        ],
+    }
+
+
+def _build_cobrain_prompt(spec: dict[str, str], facts: str, evidence: str) -> str:
+    return f"""你是 ChestX-AI 多角色会诊中的「{spec['role']}」，职责是「{spec['title']}」。
+请基于下面的病例信息与本地知识片段，给出你的角色意见。
+
+【病例事实】
+{facts}
+
+【可引用知识片段】
+{evidence}
+
+【你的职责】
+{spec['instruction']}
+
+【统一要求】
+1. 约 80–130 个中文字符，直接说结论和下一步建议。
+2. 不得声称确诊或排除疾病，不得给出处方、剂量或自行用药建议。
+3. 不得改变模型概率；热区不等于临床病灶定位。
+4. 只输出发言正文，不要角色名、标题、JSON 或 Markdown。
+5. 不要重复免责声明，系统会统一展示。"""
+
+
+def _clean_cobrain_text(text: Any) -> str:
+    value = re.sub(r"\s+", " ", str(text or "")).strip()
+    value = re.sub(r"^(影像科|呼吸科|全科|患者)[^：:]{0,10}[：:]\s*", "", value)
+    value = sanitize_text(value)
+    if len(value) > 260:
+        value = value[:260].rstrip("，。；; ") + "。"
+    return value
+
+
+async def _qwen_cobrain_role(
+    client: DashScopeQwenClient,
+    spec: dict[str, str],
+    context: dict[str, Any] | None,
+    facts: str,
+    evidence: str,
+) -> dict[str, str]:
+    fallback = _local_cobrain_role(spec, context)
+    try:
+        raw = await asyncio.wait_for(
+            client.generate_chat(_build_cobrain_prompt(spec, facts, evidence), max_tokens=320),
+            timeout=32,
+        )
+        text = _clean_cobrain_text(raw)
+        if not text:
+            raise ValueError("empty role answer")
+        return {**spec, "take": text, "status": "qwen"}
+    except Exception:
+        return {**fallback, "status": "local_fallback"}
+
+
+async def answer_cobrain(diagnosis_context: dict[str, Any] | None = None, focus: str = "") -> dict[str, Any]:
+    """Four Qwen roles read the same case in parallel, with a safe local fallback."""
+    context = diagnosis_context if isinstance(diagnosis_context, dict) else {}
+    cache_key = json.dumps(
+        {
+            "case": str(context.get("case_id") or ""),
+            "risk": _cobrain_risk(context),
+            "probs": [f"{item['code']}:{item['prob']:.1f}" for item in _cobrain_top(context)[:5]],
+            "member": ((context.get("member_profile") or {}) if isinstance(context.get("member_profile"), dict) else {}).get("name", ""),
+            "focus": str(focus or ""),
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+    )
+    cached = _COBRAIN_CACHE.get(cache_key)
+    if cached:
+        return cached
+
+    facts = _cobrain_facts(context)
+    evidence, documents = _cobrain_evidence(context, focus)
+    client = DashScopeQwenClient()
+    if not client.enabled():
+        result = _cobrain_local_result(context, focus)
+        _COBRAIN_CACHE[cache_key] = result
+        return result
+
+    roles = await asyncio.gather(
+        *[_qwen_cobrain_role(client, spec, context, facts, evidence) for spec in _COBRAIN_ROLE_SPECS]
+    )
+    provider = "qwen" if any(item.get("status") == "qwen" for item in roles) else "local_fallback"
+    top = _cobrain_top(context)
+    name = top[0]["name"] if top else "当前征象"
+    result = {
+        "provider": provider,
+        "roles": roles,
+        "consensus": f"四方共识：{name}是需要临床结合的高风险提示，不是诊断。建议带片至呼吸科 / 胸外科门诊，结合症状与化验决定是否 CT；4–6 周复查，症状加重随时急诊。",
+        "divergence": "呼吸科倾向结合感染指标先治疗后复查；影像科更关注热区与影像变化。两者都认为需要临床门诊，而不是仅凭 AI 结果下结论。",
+        "sources": [
+            {key: item[key] for key in ("id", "title", "source", "source_url")}
+            for item in documents[:3]
+        ],
+    }
+    _COBRAIN_CACHE[cache_key] = result
+    if len(_COBRAIN_CACHE) > 12:
+        _COBRAIN_CACHE.pop(next(iter(_COBRAIN_CACHE)))
+    return result

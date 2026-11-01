@@ -73,6 +73,7 @@ export function createApiScope() {
         data: options.body,
         headers,
         signal: controller.signal,
+        timeout: options.timeout || REQUEST_TIMEOUT_MS.default,
         responseType: 'json',
       });
       const payload = response.data;
