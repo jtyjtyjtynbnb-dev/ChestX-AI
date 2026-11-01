@@ -506,7 +506,7 @@ input[type='range']::-moz-range-thumb {
   background: var(--brand-50);
   padding: 2px 9px;
   color: var(--brand-800);
-  font-size: var(--text-3xs);
+  font-size: var(--text-2xs);
   line-height: 1.45;
   white-space: nowrap;
   transition: background-color var(--dur-1) var(--ease-out);

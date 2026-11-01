@@ -53,7 +53,7 @@ async function askPrompt(prompt) {
             <h2 id="aiChatTitle" class="truncate text-sm font-semibold text-text-1">医学影像问答</h2>
             <span class="ai-chat-online" title="AI 助手已就绪"></span>
           </div>
-          <p class="truncate text-3xs text-text-3">Qwen + 本地知识库 · {{ $t(pageLabel) }}</p>
+          <p class="truncate text-2xs text-text-3">Qwen + 本地知识库 · {{ $t(pageLabel) }}</p>
         </div>
       </div>
       <div class="flex shrink-0 items-center gap-0.5">
@@ -71,7 +71,7 @@ async function askPrompt(prompt) {
         </button>
       </div>
     </header>
-    <div id="aiChatContextBanner" class="flex items-center justify-between gap-2 border-b border-border-line bg-brand-50 px-3 py-1 text-3xs text-text-2">
+    <div id="aiChatContextBanner" class="flex items-center justify-between gap-2 border-b border-border-line bg-brand-50 px-3 py-1.5 text-2xs text-text-2">
       <span class="flex min-w-0 items-center gap-1.5">
         <span class="ai-chat-context-dot" aria-hidden="true"></span>
         <span id="aiChatMemberContextText" class="truncate">{{ contextText }}</span>
@@ -79,7 +79,7 @@ async function askPrompt(prompt) {
       <span id="aiChatSyncBadge" :class="syncClass" class="shrink-0">{{ syncBadge.text }}</span>
     </div>
     <div class="ai-chat-prompts" data-chat-page-context>
-      <span class="shrink-0 text-3xs font-semibold text-brand-700">{{ $t('试试问') }}</span>
+      <span class="shrink-0 text-xs font-semibold text-brand-700">{{ $t('试试问') }}</span>
       <div class="flex min-w-0 gap-1 overflow-x-auto pb-0.5">
         <button
           v-for="prompt in pagePrompts"
@@ -133,14 +133,14 @@ async function askPrompt(prompt) {
     </div>
     <div class="ai-chat-composer">
       <div id="aiChatTeachingSamples" class="mb-1.5 flex items-center gap-1.5 overflow-x-auto">
-        <span class="shrink-0 text-3xs text-text-3">{{ $t('示例') }}</span>
-        <button v-for="[id, label] in samples" :key="id" type="button" :data-chat-sample="id" :disabled="chat.sampleBusy === id" class="btn-secondary h-6 flex-none px-2 text-3xs" @click="openSample(id)">{{ label }}</button>
+        <span class="shrink-0 text-2xs text-text-3">{{ $t('示例') }}</span>
+        <button v-for="[id, label] in samples" :key="id" type="button" :data-chat-sample="id" :disabled="chat.sampleBusy === id" class="btn-secondary h-6 flex-none px-2 text-2xs" @click="openSample(id)">{{ label }}</button>
       </div>
       <form id="aiChatForm" @submit.prevent="send" class="flex items-end gap-2">
         <textarea id="aiChatInput" ref="inputElement" v-model="chat.input" rows="1" maxlength="500" aria-label="输入医学影像问题" class="field ai-chat-input min-w-0 flex-1 resize-none" placeholder="例如：胸腔积液在胸片上常见哪些线索？"></textarea>
         <button id="aiChatSendBtn" :disabled="chat.busy" type="submit" class="btn-primary h-8 shrink-0 px-3 text-2xs">{{ chat.busy ? '思考中' : '发送' }}</button>
       </form>
-      <p class="mt-1 text-3xs leading-4 text-text-3">{{ $t('内容仅供健康科普参考，请勿据此自行用药。') }}</p>
+      <p class="mt-1 text-2xs leading-4 text-text-3">{{ $t('内容仅供健康科普参考，请勿据此自行用药。') }}</p>
     </div>
   </section>
 

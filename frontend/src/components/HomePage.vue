@@ -678,8 +678,8 @@ onBeforeUnmount(() => {
 
         <div class="faq-card" data-reveal :style="{ '--delay': '60ms' }">
           <div class="faq-head">
-            <h3 class="text-md font-semibold text-text-1">{{ $t('你可能想问的') }}</h3>
-            <span class="text-2xs text-text-3">{{ $t('常见问题') }}</span>
+            <h3 class="text-lg font-semibold text-text-1">{{ $t('你可能想问的') }}</h3>
+            <span class="text-xs text-text-3">{{ $t('常见问题') }}</span>
           </div>
           <div
             v-for="(item, index) in faqs"
@@ -1286,13 +1286,13 @@ onBeforeUnmount(() => {
 .faq-card { padding: 18px; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); background: var(--surface-card); box-shadow: var(--shadow-1); }
 .faq-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
 .faq-item { border-top: 1px solid var(--border-subtle); }
-.faq-q { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 14px; padding: 9px 0; text-align: left; border: 0; background: transparent; color: var(--color-text-1); font-size: var(--text-2xs); font-weight: 600; }
+.faq-q { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 0; text-align: left; border: 0; background: transparent; color: var(--color-text-1); font-size: var(--text-sm); font-weight: 600; }
 .faq-icon { display: flex; align-items: center; justify-content: center; flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-2); transition: transform var(--dur-2); }
 .faq-item.is-open .faq-icon { transform: rotate(45deg); border-color: var(--brand-300); color: var(--brand-700); }
 .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 300ms var(--ease-out); }
 .faq-item.is-open .faq-a { grid-template-rows: 1fr; }
 .faq-a-inner { overflow: hidden; }
-.faq-a p { padding: 0 0 10px; font-size: var(--text-3xs); line-height: 1.7; color: var(--color-text-2); }
+.faq-a p { padding: 0 0 10px; font-size: var(--text-xs); line-height: 1.7; color: var(--color-text-2); }
 
 /* ══ CTA ══════════════════════════════════════════════════════ */
 .home-cta {

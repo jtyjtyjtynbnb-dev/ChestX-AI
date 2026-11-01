@@ -325,8 +325,8 @@ function optionClass(q, idx) {
           :data-sign-card="sg.disease.code"
         >
           <div class="sign-head">
-            <h3 class="min-w-0 truncate text-sm font-semibold text-text-1">{{ sg.title }}</h3>
-            <span class="flex-none rounded px-1.5 text-3xs font-semibold" :class="a.getRiskStyle(sg.risk).badgeClass">{{ $t(sg.tag) }}</span>
+            <h3 class="min-w-0 truncate text-base font-semibold text-text-1">{{ sg.title }}</h3>
+            <span class="flex-none rounded px-1.5 text-2xs font-semibold" :class="a.getRiskStyle(sg.risk).badgeClass">{{ $t(sg.tag) }}</span>
           </div>
 
           <div data-surface="film" class="sign-image">
@@ -351,16 +351,16 @@ function optionClass(q, idx) {
           </div>
 
           <div class="sign-body">
-            <p class="text-xs leading-relaxed text-text-2">{{ sg.desc }}</p>
+            <p class="text-sm leading-relaxed text-text-2">{{ sg.desc }}</p>
             <div class="sign-note">
-              <h4 class="academy-sign-note-title text-2xs font-semibold text-brand-800">{{ selectedNote(sg.disease).title }}</h4>
-              <p class="academy-sign-note mt-0.5 text-3xs leading-relaxed text-text-2" aria-live="polite">{{ selectedNote(sg.disease).text }}</p>
+              <h4 class="academy-sign-note-title text-sm font-semibold text-brand-800">{{ selectedNote(sg.disease).title }}</h4>
+              <p class="academy-sign-note mt-0.5 text-xs leading-relaxed text-text-2" aria-live="polite">{{ selectedNote(sg.disease).text }}</p>
             </div>
-            <p class="mt-auto text-3xs leading-relaxed text-text-3">
+            <p class="mt-auto text-xs leading-relaxed text-text-3">
               <strong class="text-text-2">{{ $t('临床意义') }}：</strong>{{ sg.clinical }}
             </p>
             <div class="flex items-center justify-between gap-2">
-              <a :href="sg.disease.imageSource" target="_blank" rel="noopener noreferrer" class="text-3xs font-medium text-brand-700 underline decoration-brand-300 underline-offset-2">{{ $t('影像来源') }} ↗</a>
+              <a :href="sg.disease.imageSource" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-brand-700 underline decoration-brand-300 underline-offset-2">{{ $t('影像来源') }} ↗</a>
               <button type="button" class="cap-link" @click="a.switchAcademyTab('guide')">{{ $t('去自测') }} →</button>
             </div>
           </div>
@@ -372,10 +372,10 @@ function optionClass(q, idx) {
         <div class="extension-grid">
           <article v-for="sg in extensionSigns" :key="sg.disease.code" class="extension-card">
             <div class="flex items-center justify-between gap-2">
-              <h4 class="text-xs font-semibold text-text-1">{{ $t(sg.disease.shortName) }}</h4>
+              <h4 class="text-sm font-semibold text-text-1">{{ $t(sg.disease.shortName) }}</h4>
               <span class="tag">{{ $t('扩展科普') }}</span>
             </div>
-            <p class="mt-1 text-3xs leading-relaxed text-text-2">{{ sg.desc }}</p>
+            <p class="mt-1 text-xs leading-relaxed text-text-2">{{ sg.desc }}</p>
           </article>
         </div>
       </div>
@@ -409,10 +409,10 @@ function optionClass(q, idx) {
           >
             <div class="flex items-baseline gap-2">
               <span class="text-2xs font-semibold text-brand-700 tnum">{{ String(index + 1).padStart(2, '0') }}</span>
-              <h3 class="text-xs font-semibold text-text-1">{{ g.title }}</h3>
+              <h3 class="text-sm font-semibold text-text-1">{{ g.title }}</h3>
               <span class="ml-auto text-2xs" :class="completedSteps.includes(index) ? 'text-success' : 'text-ink-300'">{{ completedSteps.includes(index) ? '✓' : '○' }}</span>
             </div>
-            <p class="mt-1 text-3xs leading-relaxed text-text-2">{{ g.desc }}</p>
+            <p class="mt-1 text-xs leading-relaxed text-text-2">{{ g.desc }}</p>
           </button>
         </div>
       </div>
@@ -566,8 +566,8 @@ function optionClass(q, idx) {
 
 /* ── 征象图库 ─────────────────────────────────────────────── */
 .section-mini-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
-.section-mini-title { margin-top: 3px; font-size: clamp(18px, 2vw, 22px); font-weight: 700; color: var(--color-text-1); }
-.section-mini-desc { margin-top: 2px; font-size: var(--text-2xs); color: var(--color-text-2); }
+.section-mini-title { margin-top: 3px; font-size: clamp(20px, 2.2vw, 25px); font-weight: 700; color: var(--color-text-1); }
+.section-mini-desc { margin-top: 2px; font-size: var(--text-sm); color: var(--color-text-2); }
 .signs-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .sign-card { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--surface-card); box-shadow: var(--shadow-1); transition: transform var(--dur-2), box-shadow var(--dur-2); }
 .sign-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
@@ -582,7 +582,7 @@ function optionClass(q, idx) {
 .nine-step { padding: 12px; background: var(--surface-card); }
 .nine-step:hover { background: var(--brand-50); }
 .nine-step.is-done { background: color-mix(in srgb, var(--risk-low-soft) 70%, var(--surface-card)); }
-.cap-link { display: inline-flex; align-items: center; gap: 4px; border: 0; background: transparent; color: var(--brand-700); font-size: var(--text-2xs); font-weight: 600; }
+.cap-link { display: inline-flex; align-items: center; gap: 4px; border: 0; background: transparent; color: var(--brand-700); font-size: var(--text-xs); font-weight: 600; }
 .quiz-card { background: var(--surface-card); }
 
 @media (max-width: 1279px) {
