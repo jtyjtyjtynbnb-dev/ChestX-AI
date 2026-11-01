@@ -45,37 +45,54 @@ async function askPrompt(prompt) {
     </svg>
   </button>
   <section id="aiChatPanel" class="ai-chat-panel" :class="{ hidden: !chat.open }" :style="panelStyle" role="dialog" aria-modal="false" aria-labelledby="aiChatTitle">
-    <header id="aiChatHeader" @pointerdown="beginDrag($event, 'panel')" class="ai-chat-header flex items-center justify-between border-b border-border-line bg-card-bg px-4 py-3">
-      <div>
-        <h2 id="aiChatTitle" class="text-sm font-semibold text-text-1">医学影像问答</h2>
-        <p class="text-2xs text-text-3">Qwen + 医学知识库</p>
+    <header id="aiChatHeader" @pointerdown="beginDrag($event, 'panel')" class="ai-chat-header flex items-center justify-between gap-2 border-b border-border-line bg-card-bg px-3 py-2.5">
+      <div class="flex min-w-0 items-center gap-2">
+        <span class="ai-chat-avatar" aria-hidden="true">AI</span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5">
+            <h2 id="aiChatTitle" class="truncate text-sm font-semibold text-text-1">医学影像问答</h2>
+            <span class="ai-chat-online" title="AI 助手已就绪"></span>
+          </div>
+          <p class="truncate text-3xs text-text-3">Qwen + 本地知识库 · {{ $t(pageLabel) }}</p>
+        </div>
       </div>
-      <div class="flex items-center gap-1">
-        <button id="aiChatNewBtn" @click="newConversation" type="button" class="btn-ghost h-7 w-7 px-0" aria-label="新建对话" title="新建对话">
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14" /></svg>
+      <div class="flex shrink-0 items-center gap-0.5">
+        <button id="aiChatNewBtn" @click="newConversation" type="button" class="btn-ghost ai-chat-icon-btn" aria-label="新建对话" title="新建对话">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14" /></svg>
         </button>
-        <button id="aiChatHistoryBtn" @click="chat.historyOpen = !chat.historyOpen" type="button" class="btn-ghost h-7 px-2 text-2xs" :aria-expanded="chat.historyOpen">历史</button>
-        <button id="aiChatMinimizeBtn" @click="hidePanel" type="button" class="btn-ghost h-7 px-2 text-2xs" aria-label="收起问答">收起</button>
-        <button id="aiChatCloseBtn" @click="hidePanel" type="button" class="btn-ghost h-7 px-2 text-2xs" aria-label="关闭问答">关闭</button>
+        <button id="aiChatHistoryBtn" @click="chat.historyOpen = !chat.historyOpen" type="button" class="btn-ghost ai-chat-icon-btn" :aria-expanded="chat.historyOpen" aria-label="历史对话" title="历史对话">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10" /></svg>
+        </button>
+        <button id="aiChatMinimizeBtn" @click="hidePanel" type="button" class="btn-ghost ai-chat-icon-btn" aria-label="收起问答" title="收起">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14" /></svg>
+        </button>
+        <button id="aiChatCloseBtn" @click="hidePanel" type="button" class="btn-ghost ai-chat-icon-btn" aria-label="关闭问答" title="关闭">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
       </div>
     </header>
-    <div id="aiChatContextBanner" class="flex items-center justify-between border-b border-border-line bg-brand-50 px-3.5 py-1.5 text-3xs text-text-2">
-      <span id="aiChatMemberContextText" class="truncate">{{ contextText }}</span>
-      <span id="aiChatSyncBadge" :class="syncClass">{{ syncBadge.text }}</span>
+    <div id="aiChatContextBanner" class="flex items-center justify-between gap-2 border-b border-border-line bg-brand-50 px-3 py-1 text-3xs text-text-2">
+      <span class="flex min-w-0 items-center gap-1.5">
+        <span class="ai-chat-context-dot" aria-hidden="true"></span>
+        <span id="aiChatMemberContextText" class="truncate">{{ contextText }}</span>
+      </span>
+      <span id="aiChatSyncBadge" :class="syncClass" class="shrink-0">{{ syncBadge.text }}</span>
     </div>
-    <div class="flex flex-wrap items-center gap-1.5 border-b border-border-line bg-card-bg px-3.5 py-2" data-chat-page-context>
-      <span class="w-full text-3xs font-semibold text-brand-700">{{ $t('AI 已读取当前页面') }}：{{ $t(pageLabel) }}</span>
-      <button
-        v-for="prompt in pagePrompts"
-        :key="prompt"
-        type="button"
-        class="rounded-full border border-brand-200 bg-brand-50 px-2 py-0.5 text-3xs text-brand-800 transition-colors hover:bg-brand-100 disabled:opacity-50"
-        :disabled="chat.busy"
-        data-chat-page-prompt
-        @click="askPrompt(prompt)"
-      >{{ prompt }}</button>
+    <div class="ai-chat-prompts" data-chat-page-context>
+      <span class="shrink-0 text-3xs font-semibold text-brand-700">{{ $t('试试问') }}</span>
+      <div class="flex min-w-0 gap-1 overflow-x-auto pb-0.5">
+        <button
+          v-for="prompt in pagePrompts"
+          :key="prompt"
+          type="button"
+          class="ai-chat-prompt"
+          :disabled="chat.busy"
+          data-chat-page-prompt
+          @click="askPrompt(prompt)"
+        >{{ prompt }}</button>
+      </div>
     </div>
-    <nav id="aiChatConversationList" class="max-h-40 overflow-y-auto border-b border-border-line bg-card-bg p-2" :class="{ hidden: !chat.historyOpen }" aria-label="已保存的对话">
+    <nav id="aiChatConversationList" class="ai-chat-history" :class="{ hidden: !chat.historyOpen }" aria-label="已保存的对话">
       <div v-for="conversation in conversations" :key="conversation.id" class="group flex items-start gap-1 rounded" :class="conversation.id === currentConversationId ? 'bg-brand-50' : 'hover:bg-surface-hover'">
         <button type="button" class="min-w-0 flex-1 px-2 py-1.5 text-left" :title="conversation.title || '新建对话'" @click="openConversation(conversation.id)">
           <span class="block truncate text-xs" :class="conversation.id === currentConversationId ? 'font-medium text-brand-800' : 'text-text-1'">{{ conversation.title || '新建对话' }}</span>
@@ -111,15 +128,16 @@ async function askPrompt(prompt) {
         </template>
       </div>
     </div>
-    <div class="border-t border-border-line bg-card-bg p-3">
-      <div class="mb-2 flex gap-1.5 overflow-x-auto pb-1" id="aiChatTeachingSamples">
-        <button v-for="[id, label] in samples" :key="id" type="button" :data-chat-sample="id" :disabled="chat.sampleBusy === id" class="btn-secondary h-7 flex-none px-2 text-3xs" @click="openSample(id)">{{ label }}</button>
+    <div class="ai-chat-composer">
+      <div id="aiChatTeachingSamples" class="mb-1.5 flex items-center gap-1.5 overflow-x-auto">
+        <span class="shrink-0 text-3xs text-text-3">{{ $t('示例') }}</span>
+        <button v-for="[id, label] in samples" :key="id" type="button" :data-chat-sample="id" :disabled="chat.sampleBusy === id" class="btn-secondary h-6 flex-none px-2 text-3xs" @click="openSample(id)">{{ label }}</button>
       </div>
       <form id="aiChatForm" @submit.prevent="send" class="flex items-end gap-2">
-        <textarea id="aiChatInput" ref="inputElement" v-model="chat.input" rows="2" maxlength="500" class="field min-w-0 flex-1 resize-none py-2" placeholder="例如：胸腔积液在胸片上常见哪些线索？"></textarea>
-        <button id="aiChatSendBtn" :disabled="chat.busy" type="submit" class="btn-primary h-9 px-3 text-2xs">{{ chat.busy ? '思考中' : '发送' }}</button>
+        <textarea id="aiChatInput" ref="inputElement" v-model="chat.input" rows="1" maxlength="500" aria-label="输入医学影像问题" class="field ai-chat-input min-w-0 flex-1 resize-none" placeholder="例如：胸腔积液在胸片上常见哪些线索？"></textarea>
+        <button id="aiChatSendBtn" :disabled="chat.busy" type="submit" class="btn-primary h-8 shrink-0 px-3 text-2xs">{{ chat.busy ? '思考中' : '发送' }}</button>
       </form>
-      <p class="mt-1 text-3xs text-text-3">内容仅供健康科普参考，请勿据此自行用药。</p>
+      <p class="mt-1 text-3xs leading-4 text-text-3">{{ $t('内容仅供健康科普参考，请勿据此自行用药。') }}</p>
     </div>
   </section>
 

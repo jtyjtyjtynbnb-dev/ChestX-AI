@@ -437,8 +437,9 @@ input[type='range']::-moz-range-thumb {
   right: 24px;
   bottom: 90px;
   z-index: 84;
-  width: min(460px, calc(100vw - 32px));
-  height: min(620px, calc(100vh - 128px));
+  width: min(520px, calc(100vw - 28px));
+  height: min(700px, calc(100dvh - 96px));
+  min-height: 360px;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--border-subtle);
@@ -447,14 +448,105 @@ input[type='range']::-moz-range-thumb {
   box-shadow: var(--shadow-3);
 }
 .ai-chat-panel:not(.hidden) { display: flex; }
-.ai-chat-header { cursor: grab; user-select: none; flex-wrap: wrap; row-gap: 6px; }
-.ai-chat-header > :last-child { margin-left: auto; flex-wrap: wrap; }
+.ai-chat-header { cursor: grab; user-select: none; }
+.ai-chat-header > :last-child { margin-left: auto; }
 .ai-chat-header:active { cursor: grabbing; }
-.ai-chat-messages {
-  flex: 1;
+.ai-chat-avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: linear-gradient(145deg, var(--brand-600), var(--brand-800));
+  color: #fff;
+  font-size: var(--text-3xs);
+  font-weight: 700;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--brand-700) 18%, transparent);
+}
+.ai-chat-online {
+  display: inline-block;
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--risk-low);
+  box-shadow: 0 0 0 3px var(--risk-low-soft);
+}
+.ai-chat-context-dot {
+  display: inline-block;
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand-500);
+}
+.ai-chat-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 7px;
+}
+.ai-chat-prompts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+  padding: 5px 10px;
+}
+.ai-chat-prompt {
+  flex: none;
+  border: 1px solid var(--brand-200);
+  border-radius: 999px;
+  background: var(--brand-50);
+  padding: 2px 9px;
+  color: var(--brand-800);
+  font-size: var(--text-3xs);
+  line-height: 1.45;
+  white-space: nowrap;
+  transition: background-color var(--dur-1) var(--ease-out);
+}
+.ai-chat-prompt:hover { background: var(--brand-100); }
+.ai-chat-prompt:disabled { opacity: 0.5; cursor: not-allowed; }
+.ai-chat-history {
+  position: absolute;
+  top: 66px;
+  left: 8px;
+  right: 8px;
+  z-index: 30;
+  max-height: 230px;
   overflow-y: auto;
-  padding: 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  padding: 6px;
+  box-shadow: var(--shadow-2);
+}
+.ai-chat-messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 12px 14px;
   background: var(--surface-sunken);
+}
+.ai-chat-bubble + .ai-chat-bubble { margin-top: 8px; }
+.ai-chat-composer {
+  flex: none;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+  padding: 8px 10px 9px;
+}
+.ai-chat-input {
+  min-height: 34px;
+  max-height: 96px;
+  padding: 6px 9px;
+  line-height: 1.45;
 }
 .ai-chat-welcome {
   padding: 14px;
@@ -476,12 +568,14 @@ input[type='range']::-moz-range-thumb {
   line-height: 1;
 }
 .ai-chat-bubble {
-  max-width: 88%;
+  max-width: 92%;
   border-radius: var(--radius-md);
-  padding: 9px 11px;
+  padding: 8px 10px;
   font-size: var(--text-xs);
-  line-height: 1.65;
+  line-height: 1.55;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .ai-chat-bubble.user {
   margin-left: auto;
@@ -500,6 +594,18 @@ input[type='range']::-moz-range-thumb {
   color: var(--brand-700);
   font-size: var(--text-3xs);
   text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .ai-chat-panel {
+    right: 8px;
+    bottom: 78px;
+    width: calc(100vw - 16px);
+    height: min(72dvh, 640px);
+    min-height: 360px;
+  }
+  .ai-chat-header { padding-left: 10px; padding-right: 10px; }
 }
 
 /* ══ 8. 滚动条 ══════════════════════════════════════════════════ */

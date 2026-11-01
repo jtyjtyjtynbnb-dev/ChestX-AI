@@ -9,8 +9,8 @@ import numpy as np
 from PIL import Image
 
 from .config import DISEASE_LIST, MODEL_INPUT_SIZE, MODEL_PATH
+from .calibration import assess as assess_calibrated, load_calibration, temperature_probabilities
 from .image_quality import preprocess_image
-from .uncertainty import assess_uncertainty
 
 try:
     import onnxruntime as ort
@@ -65,10 +65,7 @@ def _heatmap_overlay(image: Image.Image, cam: np.ndarray) -> tuple[np.ndarray, s
     return overlay, base64.b64encode(encoded.tobytes()).decode("ascii")
 
 
-def diagnose_image(image: Image.Image) -> dict:
-    """Run ONNX inference and return the fixed frontend response payload."""
-    # 预处理只在内存中完成：EXIF 方向、轻微旋转、过暗/过曝自动校正。
-    # 预处理后的图会随结果返回，热力图与显示图使用同一坐标系，避免叠加错位。
+def _infer(image: Image.Image) -> tuple[list[float], Image.Image, dict, np.ndarray]:
     processed, preprocessing = preprocess_image(image)
     session = _load_session()
     input_name = session.get_inputs()[0].name
@@ -78,9 +75,23 @@ def diagnose_image(image: Image.Image) -> dict:
     logits = np.asarray(outputs[0], dtype=np.float32)
     if logits.shape != (1, len(DISEASE_LIST)):
         raise RuntimeError("model output class count does not match DISEASE_LIST")
-    raw = logits[0]
-    probabilities = 1.0 / (1.0 + np.exp(-raw))
-    if probabilities.size != len(DISEASE_LIST):
+    return [float(value) for value in logits[0]], processed, preprocessing, outputs[1]
+
+
+def predict_logits(image: Image.Image) -> tuple[list[float], Image.Image, dict]:
+    """Return raw logits without building a heatmap; used by calibration CLI."""
+    values, processed, preprocessing, _cam = _infer(image)
+    return values, processed, preprocessing
+
+
+def diagnose_image(image: Image.Image) -> dict:
+    """Run ONNX inference and return the fixed frontend response payload."""
+    # 预处理只在内存中完成：EXIF 方向、轻微旋转、过暗/过曝自动校正。
+    # 预处理后的图会随结果返回，热力图与显示图使用同一坐标系，避免叠加错位。
+    raw_values, processed, preprocessing, cam = _infer(image)
+    calibration = load_calibration()
+    probabilities = temperature_probabilities(raw_values, calibration.get("temperature", 1.0))
+    if len(probabilities) != len(DISEASE_LIST):
         raise RuntimeError("model output class count does not match DISEASE_LIST")
     items = []
     for disease, probability in zip(DISEASE_LIST, probabilities, strict=True):
@@ -94,7 +105,7 @@ def diagnose_image(image: Image.Image) -> dict:
             }
         )
     sorted_items = sorted(items, key=lambda item: item["probability"], reverse=True)
-    overlay, heatmap = _heatmap_overlay(processed, outputs[1])
+    overlay, heatmap = _heatmap_overlay(processed, cam)
     normalized_image = None
     if preprocessing.get("applied"):
         buffer = BytesIO()
@@ -109,5 +120,6 @@ def diagnose_image(image: Image.Image) -> dict:
         "heatmap_overlay": heatmap,
         "normalized_image": normalized_image,
         "preprocessing": preprocessing,
-        "uncertainty": assess_uncertainty(sorted_items),
+        "uncertainty": assess_calibrated(sorted_items, calibration),
+        "calibration": {"temperature": calibration.get("temperature", 1.0), "source": calibration.get("provenance", "default")},
     }

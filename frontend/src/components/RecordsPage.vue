@@ -377,7 +377,7 @@ function dateParts(value) {
   pointer-events: none;
 }
 .hero-eyebrow { position: relative; color: var(--brand-300); font-size: var(--text-3xs); font-weight: 700; letter-spacing: 0.14em; }
-.hero-title { position: relative; margin-top: 6px; font-size: clamp(26px, 3.2vw, 38px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; color: var(--film-text); }
+.hero-title { position: relative; margin-top: 6px; font-size: clamp(22px, 2.8vw, 30px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; color: var(--film-text); }
 .hero-desc { position: relative; max-width: 56ch; margin-top: 8px; font-size: var(--text-sm); line-height: 1.75; color: var(--film-dim); }
 .hero-chips { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
 .hero-member {
@@ -392,7 +392,7 @@ function dateParts(value) {
   font-size: var(--text-2xs);
   font-weight: 600;
 }
-.hero-avatar { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--brand-500); color: #fff; font-size: 19px; font-weight: 700; }
+.hero-avatar { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--brand-500); color: #fff; font-size: var(--text-xs); font-weight: 700; }
 .hero-chip { padding: 3px 9px; border-radius: var(--radius-pill); border: 1px solid var(--film-line); background: color-mix(in srgb, var(--film-raise) 50%, transparent); color: var(--film-dim); font-size: var(--text-3xs); }
 .hero-chip strong { color: var(--film-text); font-size: var(--text-2xs); }
 .btn-on-dark {
@@ -442,7 +442,7 @@ function dateParts(value) {
   border: 1px solid var(--film-line);
 }
 .ring-inner strong { color: var(--film-text); font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
-.ring-inner span { margin-top: 3px; color: var(--film-dim); font-size: 19px; }
+.ring-inner span { margin-top: 3px; color: var(--film-dim); font-size: var(--text-xs); }
 .ring-legend { display: flex; flex: 1; flex-direction: column; gap: 7px; min-width: 0; }
 .ring-row { display: flex; align-items: center; gap: 7px; color: var(--film-dim); font-size: var(--text-2xs); }
 .ring-row strong { color: var(--film-text); font-size: var(--text-xs); }
@@ -529,8 +529,8 @@ function dateParts(value) {
 .record-row.is-latest::before { background: var(--brand-500); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-500) 16%, transparent); }
 .record-date { position: absolute; left: -160px; top: 12px; width: 120px; text-align: right; }
 .record-day { display: block; color: var(--color-text-1); font-size: var(--text-2xs); font-weight: 600; white-space: nowrap; }
-.record-time { display: block; margin-top: 1px; color: var(--color-text-3); font-size: 19px; }
-.record-latest { display: inline-block; margin-top: 4px; padding: 0 6px; border-radius: var(--radius-pill); background: var(--brand-50); color: var(--brand-800); font-size: 19px; font-weight: 600; }
+.record-time { display: block; margin-top: 1px; color: var(--color-text-3); font-size: var(--text-xs); }
+.record-latest { display: inline-block; margin-top: 4px; padding: 0 6px; border-radius: var(--radius-pill); background: var(--brand-50); color: var(--brand-800); font-size: var(--text-xs); font-weight: 600; }
 .record-card {
   display: flex;
   gap: 14px;
@@ -545,7 +545,7 @@ function dateParts(value) {
 .record-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--brand-400) 45%, var(--border-subtle)); box-shadow: var(--shadow-2); }
 .record-media { position: relative; flex: none; width: 104px; height: 104px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--film-line); background: var(--film-bg); }
 .record-media img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.12); }
-.record-pa { position: absolute; left: 5px; bottom: 5px; padding: 0 4px; border-radius: 3px; background: color-mix(in srgb, var(--ink-950) 78%, transparent); color: var(--film-text); font-size: 19px; font-weight: 700; }
+.record-pa { position: absolute; left: 5px; bottom: 5px; padding: 0 4px; border-radius: 3px; background: color-mix(in srgb, var(--ink-950) 78%, transparent); color: var(--film-text); font-size: var(--text-xs); font-weight: 700; }
 .record-heat { position: absolute; inset: 0; background: radial-gradient(45% 40% at 38% 64%, rgba(255, 112, 67, 0.42), transparent 72%); mix-blend-mode: screen; }
 .record-main { min-width: 0; flex: 1; }
 .record-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text-1); font-size: var(--text-sm); font-weight: 600; }
@@ -555,7 +555,7 @@ function dateParts(value) {
 .record-delete:hover { border-color: var(--risk-high-line); background: var(--risk-high-soft); color: var(--risk-high); }
 .record-probs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--border-subtle); }
 .record-prob { min-width: 0; }
-.record-prob-head { display: flex; align-items: center; gap: 4px; color: var(--color-text-2); font-size: 19px; }
+.record-prob-head { display: flex; align-items: center; gap: 4px; color: var(--color-text-2); font-size: var(--text-xs); }
 .record-prob-head strong { margin-left: auto; color: var(--color-text-1); font-size: var(--text-2xs); }
 .record-prob-dot { width: 5px; height: 5px; border-radius: 50%; flex: none; }
 .record-prob-track { height: 3px; margin-top: 4px; overflow: hidden; border-radius: var(--radius-pill); background: var(--surface-sunken); }

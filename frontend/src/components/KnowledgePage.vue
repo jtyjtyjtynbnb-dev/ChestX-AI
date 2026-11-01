@@ -382,7 +382,7 @@ const extendedTabs = [
 }
 .kb-hero-glow { position: absolute; inset: -30% -10% auto; height: 70%; background: radial-gradient(36% 50% at 20% 30%, color-mix(in srgb, var(--brand-500) 24%, transparent), transparent 70%); filter: blur(38px); pointer-events: none; }
 .kb-eyebrow { position: relative; color: var(--brand-300); font-size: var(--text-3xs); font-weight: 700; letter-spacing: 0.14em; }
-.kb-title { position: relative; margin-top: 6px; font-size: clamp(26px, 3.2vw, 38px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; color: var(--film-text); }
+.kb-title { position: relative; margin-top: 6px; font-size: clamp(22px, 2.8vw, 30px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; color: var(--film-text); }
 .kb-desc { position: relative; max-width: 58ch; margin-top: 8px; font-size: var(--text-sm); line-height: 1.7; color: var(--film-dim); }
 .kb-stats { position: relative; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .kb-stats span { padding: 4px 10px; border-radius: var(--radius-pill); border: 1px solid var(--film-line); background: color-mix(in srgb, var(--film-raise) 48%, transparent); color: var(--film-dim); font-size: var(--text-3xs); }
@@ -396,24 +396,24 @@ const extendedTabs = [
 /* ══ 左导航 ═════════════════════════════════════════════════════ */
 .kb-nav { overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--surface-card); box-shadow: var(--shadow-1); }
 .kb-nav-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); }
-.kb-nav-group { padding: 6px 8px 3px; color: var(--color-text-3); font-size: 19px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.kb-nav-group { padding: 6px 8px 3px; color: var(--color-text-3); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
 .kb-item { display: flex; width: 100%; align-items: center; gap: 7px; padding: 8px; border-radius: var(--radius-sm); color: var(--color-text-1); font-size: var(--text-2xs); text-align: left; }
 .kb-item:hover { background: var(--surface-hover); }
 .kb-item.is-active { background: var(--brand-50); color: var(--brand-900); }
-.kb-item-no { width: 18px; flex: none; color: var(--color-text-3); font-size: 19px; font-weight: 600; }
+.kb-item-no { width: 18px; flex: none; color: var(--color-text-3); font-size: var(--text-xs); font-weight: 600; }
 .kb-item.is-active .kb-item-no { color: var(--brand-700); }
-.kb-item-risk { flex: none; padding: 0 5px; border-radius: 4px; border: 1px solid; font-size: 19px; font-weight: 600; }
-.kb-nav-tip { padding: 10px 12px; border-top: 1px solid var(--border-subtle); background: var(--surface-sunken); color: var(--color-text-3); font-size: 19px; line-height: 1.6; }
+.kb-item-risk { flex: none; padding: 0 5px; border-radius: 4px; border: 1px solid; font-size: var(--text-xs); font-weight: 600; }
+.kb-nav-tip { padding: 10px 12px; border-top: 1px solid var(--border-subtle); background: var(--surface-sunken); color: var(--color-text-3); font-size: var(--text-xs); line-height: 1.6; }
 
 /* ══ 文章头 ════════════════════════════════════════════════════ */
 .kb-article-head { padding: 22px 24px 18px; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); background: var(--surface-card); box-shadow: var(--shadow-1); }
-.kb-index { padding: 1px 7px; border-radius: var(--radius-pill); background: var(--brand-50); color: var(--brand-800); font-size: 19px; font-weight: 700; }
-.kb-risk { padding: 1px 8px; border-radius: var(--radius-pill); border: 1px solid; font-size: 19px; font-weight: 600; }
-.kb-article-title { margin-top: 7px; font-size: clamp(28px, 3.2vw, 38px); font-weight: 700; letter-spacing: -0.02em; color: var(--color-text-1); }
+.kb-index { padding: 1px 7px; border-radius: var(--radius-pill); background: var(--brand-50); color: var(--brand-800); font-size: var(--text-xs); font-weight: 700; }
+.kb-risk { padding: 1px 8px; border-radius: var(--radius-pill); border: 1px solid; font-size: var(--text-xs); font-weight: 600; }
+.kb-article-title { margin-top: 7px; font-size: clamp(24px, 2.8vw, 30px); font-weight: 700; letter-spacing: -0.02em; color: var(--color-text-1); }
 .kb-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
 @media (min-width: 768px) { .kb-facts { grid-template-columns: 1.1fr 1.1fr 2fr; } }
 .kb-fact { padding: 10px 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--surface-sunken); }
-.kb-fact span { display: block; color: var(--color-text-3); font-size: 19px; }
+.kb-fact span { display: block; color: var(--color-text-3); font-size: var(--text-xs); }
 .kb-fact strong { display: block; margin-top: 3px; color: var(--color-text-1); font-size: var(--text-md); font-weight: 700; line-height: 1.45; }
 .kb-fact--wide { grid-column: span 2; }
 @media (min-width: 768px) { .kb-fact--wide { grid-column: auto; } .kb-fact--wide strong { font-size: var(--text-2xs); font-weight: 500; } }
@@ -424,16 +424,16 @@ const extendedTabs = [
 .kb-image-stage { position: relative; display: flex; min-height: 300px; align-items: center; justify-content: center; overflow: hidden; background: var(--film-bg); padding: 8px; }
 .kb-image-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
 .kb-image-stage img { position: relative; max-height: 380px; width: 100%; object-fit: contain; }
-.kb-image-pa { position: absolute; left: 8px; top: 8px; padding: 1px 5px; border-radius: 3px; background: color-mix(in srgb, var(--ink-950) 80%, transparent); color: var(--brand-300); font-size: 19px; font-weight: 700; }
+.kb-image-pa { position: absolute; left: 8px; top: 8px; padding: 1px 5px; border-radius: 3px; background: color-mix(in srgb, var(--ink-950) 80%, transparent); color: var(--brand-300); font-size: var(--text-xs); font-weight: 700; }
 
 /* ══ 一分钟 ════════════════════════════════════════════════════ */
 .kb-quick { padding: 16px 18px; border-radius: var(--radius-xl); border: 1px solid var(--brand-200); background: linear-gradient(180deg, var(--brand-50) 0%, var(--surface-card) 100%); }
 .kb-quick-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.kb-quick-badge { padding: 2px 8px; border-radius: var(--radius-pill); background: var(--brand-600); color: #fff; font-size: 19px; font-weight: 700; letter-spacing: 0.06em; }
+.kb-quick-badge { padding: 2px 8px; border-radius: var(--radius-pill); background: var(--brand-600); color: #fff; font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.06em; }
 .kb-quick-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
 .kb-quick-item { padding: 10px 12px; border-radius: var(--radius-md); background: color-mix(in srgb, var(--surface-card) 80%, transparent); border: 1px solid var(--border-subtle); }
 .kb-quick-item--alert { border-color: var(--risk-high-line); background: var(--risk-high-soft); }
-.kb-quick-no { color: var(--brand-600); font-size: 19px; font-weight: 700; }
+.kb-quick-no { color: var(--brand-600); font-size: var(--text-xs); font-weight: 700; }
 .kb-quick-item h4 { margin-top: 3px; font-size: var(--text-2xs); font-weight: 600; color: var(--color-text-1); }
 .kb-quick-item p { margin-top: 3px; font-size: var(--text-2xs); line-height: 1.7; color: var(--color-text-2); }
 
@@ -442,7 +442,7 @@ const extendedTabs = [
 .kb-section { padding: 14px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--surface-card); box-shadow: var(--shadow-1); }
 .kb-section.is-alert { border-color: var(--risk-high-line); background: linear-gradient(180deg, var(--risk-high-soft) 0%, var(--surface-card) 100%); }
 .kb-section-head { display: flex; align-items: baseline; gap: 7px; }
-.kb-section-no { color: var(--brand-700); font-size: 19px; font-weight: 700; }
+.kb-section-no { color: var(--brand-700); font-size: var(--text-xs); font-weight: 700; }
 .kb-section h3 { font-size: var(--text-sm); font-weight: 600; color: var(--color-text-1); }
 .kb-section-text { margin-top: 6px; font-size: var(--text-xs); line-height: 1.85; color: var(--color-text-2); text-wrap: pretty; }
 
@@ -454,7 +454,7 @@ const extendedTabs = [
 .kb-myth p { color: var(--risk-mid-strong); font-size: var(--text-2xs); line-height: 1.65; }
 
 .kb-ext-tabs { display: flex; flex-wrap: wrap; gap: 3px; padding: 3px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--surface-sunken); }
-.kb-ext-tabs button { height: 26px; padding: 0 8px; border-radius: 5px; color: var(--color-text-2); font-size: 19px; font-weight: 600; }
+.kb-ext-tabs button { height: 26px; padding: 0 8px; border-radius: 5px; color: var(--color-text-2); font-size: var(--text-xs); font-weight: 600; }
 .kb-ext-tabs button.is-active { background: var(--surface-card); color: var(--color-text-1); box-shadow: var(--shadow-1); }
 .kb-glossary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px 16px 16px; }
 .kb-glossary-item { padding: 9px 10px; border-radius: var(--radius-md); background: var(--surface-sunken); }
@@ -462,23 +462,23 @@ const extendedTabs = [
 .kb-glossary-item p { margin-top: 2px; color: var(--color-text-2); font-size: var(--text-2xs); line-height: 1.7; }
 .kb-exam { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px 16px 16px; }
 .kb-exam-item { display: flex; gap: 8px; padding: 9px 10px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); }
-.kb-exam-no { color: var(--brand-600); font-size: 19px; font-weight: 700; }
+.kb-exam-no { color: var(--brand-600); font-size: var(--text-xs); font-weight: 700; }
 .kb-exam-item h4 { font-size: var(--text-2xs); font-weight: 600; color: var(--color-text-1); }
-.kb-exam-item p { margin-top: 2px; color: var(--color-text-2); font-size: 19px; line-height: 1.65; }
+.kb-exam-item p { margin-top: 2px; color: var(--color-text-2); font-size: var(--text-xs); line-height: 1.65; }
 .kb-redflags { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; padding: 12px 16px 16px; }
 .kb-redflag { display: flex; align-items: center; gap: 7px; padding: 8px 10px; border-radius: var(--radius-md); border: 1px solid var(--risk-high-line); background: var(--risk-high-soft); }
-.kb-redflag span { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--risk-high); color: #fff; font-size: 19px; font-weight: 700; flex: none; }
-.kb-redflag p { color: var(--risk-high-strong); font-size: 19px; line-height: 1.55; }
+.kb-redflag span { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--risk-high); color: #fff; font-size: var(--text-xs); font-weight: 700; flex: none; }
+.kb-redflag p { color: var(--risk-high-strong); font-size: var(--text-xs); line-height: 1.55; }
 .kb-redflags > p { grid-column: 1 / -1; }
 .kb-myth-list { padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
 .kb-myth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .kb-myth-q, .kb-myth-a { padding: 8px 10px; border-radius: var(--radius-md); }
 .kb-myth-q { background: var(--risk-mid-soft); border: 1px solid var(--risk-mid-line); }
 .kb-myth-a { background: var(--risk-low-soft); border: 1px solid var(--risk-low-line); }
-.kb-myth-q span, .kb-myth-a span { font-size: 19px; font-weight: 700; }
+.kb-myth-q span, .kb-myth-a span { font-size: var(--text-xs); font-weight: 700; }
 .kb-myth-q span { color: var(--risk-mid-strong); }
 .kb-myth-a span { color: var(--risk-low-strong); }
-.kb-myth-q p, .kb-myth-a p { margin-top: 2px; font-size: 19px; line-height: 1.6; }
+.kb-myth-q p, .kb-myth-a p { margin-top: 2px; font-size: var(--text-xs); line-height: 1.6; }
 .kb-myth-q p { color: var(--risk-mid-strong); }
 .kb-myth-a p { color: var(--risk-low-strong); }
 
@@ -493,6 +493,6 @@ const extendedTabs = [
   .kb-fact--wide { grid-column: auto; }
   .kb-article-head { padding: 16px; }
   .kb-image-stage { min-height: 240px; }
-  .kb-ext-tabs button { font-size: 19px; }
+  .kb-ext-tabs button { font-size: var(--text-xs); }
 }
 </style>

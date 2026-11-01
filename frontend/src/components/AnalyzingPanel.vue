@@ -128,14 +128,14 @@ const activeIndex = computed(() => {
   border: 1px solid var(--film-line);
   background: var(--film-raise);
   color: var(--film-dim);
-  font-size: 19px;
+  font-size: var(--text-xs);
   font-weight: 700;
 }
 .analyzing-step.is-active .analyzing-dot { border-color: var(--brand-400); background: var(--brand-500); color: #fff; }
 .analyzing-step.is-done .analyzing-dot { border-color: var(--risk-low); background: var(--risk-low); color: #fff; }
 .analyzing-title { color: var(--film-text); font-size: var(--text-2xs); font-weight: 600; }
-.analyzing-desc { color: var(--film-dim); font-size: 19px; }
-.analyzing-state { flex: none; color: var(--film-dim); font-size: 19px; }
+.analyzing-desc { color: var(--film-dim); font-size: var(--text-xs); }
+.analyzing-state { flex: none; color: var(--film-dim); font-size: var(--text-xs); }
 .analyzing-step.is-active .analyzing-state { color: var(--brand-300); }
 .analyzing-step.is-done .analyzing-state { color: var(--risk-low); }
 </style>

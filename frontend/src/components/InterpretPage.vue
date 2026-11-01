@@ -1011,29 +1011,29 @@ function onResultTab(value) {
   .interpret-head { grid-template-columns: minmax(0, 1.1fr) minmax(420px, 0.9fr); align-items: center; }
 }
 .interpret-eyebrow { color: var(--brand-700); font-size: var(--text-3xs); font-weight: 700; letter-spacing: 0.14em; }
-.interpret-title { margin-top: 4px; font-size: clamp(24px, 2.6vw, 32px); font-weight: 700; letter-spacing: -0.02em; color: var(--color-text-1); }
+.interpret-title { margin-top: 4px; font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; letter-spacing: -0.02em; color: var(--color-text-1); }
 .interpret-desc { max-width: 70ch; margin-top: 5px; font-size: var(--text-sm); line-height: 1.7; color: var(--color-text-2); text-wrap: pretty; }
 .interpret-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.interpret-chips span { padding: 2px 8px; border-radius: var(--radius-pill); border: 1px solid var(--border-subtle); background: var(--surface-card); color: var(--color-text-2); font-size: 19px; font-weight: 500; }
+.interpret-chips span { padding: 2px 8px; border-radius: var(--radius-pill); border: 1px solid var(--border-subtle); background: var(--surface-card); color: var(--color-text-2); font-size: var(--text-xs); font-weight: 500; }
 
 .steprail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
 .steprail-item { display: flex; align-items: flex-start; gap: 7px; padding: 8px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: color-mix(in srgb, var(--surface-card) 74%, transparent); opacity: 0.78; }
 .steprail-item.is-active { border-color: var(--brand-300); background: var(--brand-50); opacity: 1; box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-400) 10%, transparent); }
 .steprail-item.is-done { border-color: var(--risk-low-line); background: var(--risk-low-soft); opacity: 1; }
-.steprail-no { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px; border-radius: 6px; background: var(--ink-900); color: #fff; font-size: 19px; font-weight: 700; }
+.steprail-no { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px; border-radius: 6px; background: var(--ink-900); color: #fff; font-size: var(--text-xs); font-weight: 700; }
 .steprail-item.is-active .steprail-no { background: var(--brand-600); }
 .steprail-item.is-done .steprail-no { background: var(--risk-low); }
 .steprail-title { color: var(--color-text-1); font-size: var(--text-2xs); font-weight: 600; white-space: nowrap; }
-.steprail-desc { display: block; margin-top: 1px; color: var(--color-text-3); font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.steprail-desc { display: block; margin-top: 1px; color: var(--color-text-3); font-size: var(--text-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .sample-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 12px; }
 .sample-label { margin-right: 2px; color: var(--color-text-3); font-size: var(--text-2xs); font-weight: 600; }
-.sample-case-btn { height: 28px; padding: 0 10px; border-radius: var(--radius-pill); border: 1px solid var(--color-border-line); background: var(--surface-card); color: var(--color-text-2); font-size: 19px; font-weight: 600; transition: background-color var(--dur-1), color var(--dur-1); }
+.sample-case-btn { height: 28px; padding: 0 10px; border-radius: var(--radius-pill); border: 1px solid var(--color-border-line); background: var(--surface-card); color: var(--color-text-2); font-size: var(--text-xs); font-weight: 600; transition: background-color var(--dur-1), color var(--dur-1); }
 .sample-case-btn:hover { background: var(--surface-sunken); }
 
 .question-row { padding: 10px 14px 0; }
 .idle-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 10px 14px 12px; }
-.idle-meta span { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: var(--radius-pill); border: 1px solid var(--border-subtle); background: var(--surface-sunken); color: var(--color-text-3); font-size: 19px; }
+.idle-meta span { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: var(--radius-pill); border: 1px solid var(--border-subtle); background: var(--surface-sunken); color: var(--color-text-3); font-size: var(--text-xs); }
 .idle-meta i { width: 4px; height: 4px; border-radius: 50%; background: var(--brand-500); }
 
 .result-tabs { overflow-x: auto; scrollbar-width: none; }

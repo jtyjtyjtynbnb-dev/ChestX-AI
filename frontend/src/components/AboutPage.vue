@@ -224,7 +224,7 @@ darkChartOption.series[0].label.color = '#E8EFF8';
 }
 .about-hero-title {
   margin-top: 18px;
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(24px, 3.2vw, 32px);
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--film-text);
@@ -436,7 +436,7 @@ darkChartOption.series[0].label.color = '#E8EFF8';
   border-radius: var(--radius-pill);
   border: 1px solid var(--film-line);
   background: linear-gradient(160deg, var(--film-raise), var(--film-panel));
-  font-size: 19px;
+  font-size: var(--text-xs);
   font-weight: 500;
   color: var(--film-dim);
   white-space: nowrap;
