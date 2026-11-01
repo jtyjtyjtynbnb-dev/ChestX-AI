@@ -5,6 +5,7 @@ export const API_ENDPOINTS = {
   membersSync: '/api/members/sync',
   conversations: '/api/conversations',
   conversationsSync: '/api/conversations/sync',
+  conversationDelete: (id) => '/api/conversations/' + encodeURIComponent(id),
   chat: '/api/agent/chat',
   chatStream: '/api/agent/chat/stream',
   coBrain: '/api/agent/cobrain',

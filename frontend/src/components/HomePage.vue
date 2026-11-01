@@ -508,7 +508,7 @@ onBeforeUnmount(() => {
             <span class="cap-icon cap-icon--amber">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5" /></svg>
             </span>
-            <span class="tag">{{ $t('40 条来源') }}</span>
+            <span class="tag">{{ $t('200 条来源') }}</span>
           </div>
           <h3 class="cap-title">{{ $t('每个结论，都能找到出处') }}</h3>
           <div class="report-mock">
@@ -518,7 +518,7 @@ onBeforeUnmount(() => {
               <span>BM25 + RRF</span>
             </div>
           </div>
-          <p class="cap-desc">{{ $t('报告引用本地知识库的 40 条来源，配合患者版 / 医生版摘要与随访提示。') }}</p>
+          <p class="cap-desc">{{ $t('报告引用本地知识库的 200 条来源，配合患者版 / 医生版摘要与随访提示。') }}</p>
           <button type="button" class="cap-link" @click="actions.switchPage('knowledge')">{{ $t('查看科普库') }} →</button>
         </article>
       </div>

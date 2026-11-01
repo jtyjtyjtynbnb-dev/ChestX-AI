@@ -24,10 +24,14 @@ export function useChatPanel() {
   const samples = [ ['teaching-pneumonia', '肺炎样例'], ['teaching-effusion', '积液样例'], ['teaching-pneumothorax', '气胸样例'], ['teaching-atelectasis', '肺不张样例'], ['teaching-nodule', '结节样例'], ['teaching-edema', '水肿样例'] ];
   function providerText(message) { return message.provider === 'qwen' ? 'Qwen 流式生成 · 已结合当前成员档案' : `本次由本地知识库兜底${message.failure_reason ? ` · ${actions.qwenFailureText?.(message.failure_reason) || message.failure_reason}` : ''}`; }
   function stepStatus(status) { return { completed: '完成', failed: '失败', degraded: '降级', no_evidence: '无匹配依据' }[status] || '跳过'; }
+  function deleteConversation(id, currentTitle) {
+    if (globalThis.confirm && !globalThis.confirm(`删除对话「${currentTitle || '新建对话'}」？`)) return;
+    modules.chatConv.deleteChatConversation(id);
+  }
   function renameConversation(id, currentTitle) {
     const next = globalThis.prompt?.('输入对话标题（最多 40 字）', currentTitle || '新建对话');
     if (next === null || next === undefined) return;
     modules.chatConv.renameChatConversation(id, next);
   }
-  return { chat, inputElement, messagesElement, ...floating, syncBadge, syncClass, samples, contextText: modules.chat.contextText, conversations: modules.chatConv.conversations, currentConversationId: computed(() => store.currentConversationId), send: () => modules.chat.sendAiChatMessage(), newConversation: () => modules.chatConv.newChatConversation(), openConversation: (id) => modules.chatConv.openChatConversation(id), renameConversation, focusHeatmap: () => modules.chatMsg.triggerCopilotFocusHeatmap(), saveNotes: (content) => modules.chatMsg.triggerCopilotSaveToMemberNotes(content), providerText, stepStatus };
+  return { chat, inputElement, messagesElement, ...floating, syncBadge, syncClass, samples, contextText: modules.chat.contextText, conversations: modules.chatConv.conversations, currentConversationId: computed(() => store.currentConversationId), send: () => modules.chat.sendAiChatMessage(), newConversation: () => modules.chatConv.newChatConversation(), openConversation: (id) => modules.chatConv.openChatConversation(id), renameConversation, deleteConversation, focusHeatmap: () => modules.chatMsg.triggerCopilotFocusHeatmap(), saveNotes: (content) => modules.chatMsg.triggerCopilotSaveToMemberNotes(content), providerText, stepStatus };
 }

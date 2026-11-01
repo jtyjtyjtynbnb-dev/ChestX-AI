@@ -58,6 +58,25 @@ export function useChatConversations({ AppState, api, store, actions, modules = 
     conversation.updatedAt = Date.now();
     saveChatConversations();
   }
+  function deleteChatConversation(id) {
+    const conversation = AppState.conversations.find((item) => item.id === id);
+    if (!conversation) return;
+    AppState.conversations = AppState.conversations.filter((item) => item.id !== id);
+    if (store.currentConversationId === id) {
+      const next = [...AppState.conversations].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0))[0];
+      if (next) {
+        store.currentConversationId = next.id;
+        renderChatConversation(next);
+      } else {
+        newChatConversation(false);
+      }
+    }
+    const request = new AbortController();
+    requests.add(request);
+    api.json(API_ENDPOINTS.conversationDelete(id), { method: 'DELETE', signal: request.signal }).catch(() => {});
+    saveChatConversations();
+    actions.showToast('对话已删除', 'success');
+  }
   function renderChatConversationList() { return conversations.value; }
   function renderChatConversation(conversation) {
     if (!conversation) return;
@@ -117,5 +136,5 @@ export function useChatConversations({ AppState, api, store, actions, modules = 
     else renderChatConversation(activeChatConversation());
     restoreRemote();
   }
-  return { conversations, saveChatConversations, activeChatConversation, persistChatMessage, renameChatConversation, renderChatConversationList, renderChatConversation, openChatConversation, newChatConversation, mount, dispose };
+  return { conversations, saveChatConversations, activeChatConversation, persistChatMessage, renameChatConversation, deleteChatConversation, renderChatConversationList, renderChatConversation, openChatConversation, newChatConversation, mount, dispose };
 }

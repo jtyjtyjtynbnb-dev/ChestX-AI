@@ -278,3 +278,11 @@ def sync_conversations_payload(conversations: list[dict[str, Any]]) -> list[dict
                 ),
             )
     return get_conversations()
+
+
+def delete_conversation(conversation_id: str) -> int:
+    """Delete one persisted conversation and return affected rows."""
+    init_db()
+    with _DB_LOCK, _connect() as conn:
+        cursor = conn.execute("DELETE FROM chat_conversations WHERE id = ?", (conversation_id,))
+        return int(cursor.rowcount or 0)

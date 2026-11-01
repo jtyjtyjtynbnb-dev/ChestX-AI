@@ -18,6 +18,7 @@ from .chat_service import answer_cobrain, answer_question, stream_answer_questio
 from .config import ALLOWED_CONTENT_TYPES, FRONTEND_ORIGINS, MAX_UPLOAD_BYTES
 from .database import (
     get_all_members_with_records,
+    delete_conversation,
     get_conversations,
     init_db,
     sync_conversations_payload,
@@ -150,6 +151,16 @@ async def sync_conversations(payload: ConversationsSyncRequest) -> JSONResponse:
     """Synchronize floating AI chat conversations into SQLite."""
     data = await run_in_threadpool(sync_conversations_payload, payload.conversations)
     return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": {"conversations": data}})
+
+
+@app.delete("/api/conversations/{conversation_id}")
+async def delete_conversation_route(conversation_id: str) -> JSONResponse:
+    """Delete one persisted AI conversation from SQLite."""
+    clean = str(conversation_id or "").strip()
+    if not clean or len(clean) > 100:
+        return error_response(400, "无效的对话 ID")
+    deleted = await run_in_threadpool(delete_conversation, clean)
+    return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": {"deleted": deleted, "id": clean}})
 
 
 @app.get("/api/samples/{sample_id}")

@@ -3,7 +3,7 @@ import { computed, nextTick } from 'vue';
 import { useChatPanel } from '../composables/useChatPanel.js';
 import { useAppContext } from '../composables/useAppContext.js';
 import { DISEASE_KNOWLEDGE_LIST } from '../stores/referenceData.js';
-const { chat, inputElement, messagesElement, launcherStyle, panelStyle, launcherClick, beginDrag, hidePanel, openSample, syncBadge, syncClass, samples, contextText, conversations, currentConversationId, send, newConversation, openConversation, renameConversation, focusHeatmap, saveNotes, providerText, stepStatus } = useChatPanel();
+const { chat, inputElement, messagesElement, launcherStyle, panelStyle, launcherClick, beginDrag, hidePanel, openSample, syncBadge, syncClass, samples, contextText, conversations, currentConversationId, send, newConversation, openConversation, renameConversation, deleteConversation, focusHeatmap, saveNotes, providerText, stepStatus } = useChatPanel();
 const { AppState } = useAppContext();
 
 const PAGE_LABELS = {
@@ -100,6 +100,9 @@ async function askPrompt(prompt) {
         </button>
         <button type="button" class="mt-1 rounded px-1.5 py-1 text-3xs text-text-3 opacity-70 hover:bg-card-bg hover:text-brand-700 group-hover:opacity-100" :aria-label="`重命名对话 ${conversation.title || ''}`" title="重命名" @click.stop="renameConversation(conversation.id, conversation.title)">
           <svg aria-hidden="true" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3Z" /><path d="m13.5 6.5 4 4" /></svg>
+        </button>
+        <button type="button" class="mt-1 rounded px-1.5 py-1 text-3xs text-text-3 opacity-70 hover:bg-danger/10 hover:text-danger group-hover:opacity-100" :aria-label="`删除对话 ${conversation.title || ''}`" title="删除对话" @click.stop="deleteConversation(conversation.id, conversation.title)">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M9 7V5h6v2M7 7l1 13h8l1-13" /></svg>
         </button>
       </div>
       <p v-if="!conversations.length" class="px-2 py-2 text-xs text-text-3">暂无保存的对话</p>
