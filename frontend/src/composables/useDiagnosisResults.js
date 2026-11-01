@@ -45,10 +45,19 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
   ]);
   const evidence = computed(() => {
     const sources = new Map((agentResult.value?.sources || []).map(item => [item.id, item]));
-    return (agentResult.value?.report?.evidence || []).flatMap(item => {
+    const used = new Set();
+    const cited = (agentResult.value?.report?.evidence || []).flatMap(item => {
       const source = sources.get(item.chunk_id);
-      return source ? [{ ...source, claim: item.claim || source.content }] : [];
+      if (!source) return [];
+      used.add(source.id);
+      return [{ ...source, claim: item.claim || source.content }];
     });
+    // The report may cite only 3 claims; keep the remaining retrieved sources
+    // available in the same collapsible list so the UI matches "sources: 10".
+    const remaining = [...sources.values()]
+      .filter(source => !used.has(source.id))
+      .map(source => ({ ...source, claim: source.content || source.title || '' }));
+    return [...cited, ...remaining].slice(0, 10);
   });
   function openKnowledge(code) {
     if (code) AppState.selectedDiseaseCode = code;

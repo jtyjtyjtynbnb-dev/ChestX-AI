@@ -957,7 +957,10 @@ function onResultTab(value) {
                 </div>
 
                 <details class="border-t border-border-line pt-2.5">
-                  <summary class="cursor-pointer text-2xs font-medium text-brand-700">{{ $t('检索依据与来源') }}（{{ vm.results.agentResult.sources?.length || 0 }}）</summary>
+                  <summary class="flex cursor-pointer flex-wrap items-center gap-2 text-2xs font-medium text-brand-700">
+                    <span>{{ $t('检索依据与来源') }}（{{ vm.results.agentResult.sources?.length || 0 }}）</span>
+                    <span class="text-3xs font-normal text-text-3">{{ $t('点击展开全部依据') }}</span>
+                  </summary>
                   <div id="agentEvidenceList" class="mt-2 space-y-2">
                     <article v-for="(item, index) in vm.results.evidence" :key="item.id + '-' + index" class="border-l-2 border-brand-300 pl-2.5 text-2xs leading-relaxed">
                       <p class="font-medium text-text-1"><span class="mr-1 text-brand-700 tnum">[{{ index + 1 }}]</span>{{ item.title }}</p>
