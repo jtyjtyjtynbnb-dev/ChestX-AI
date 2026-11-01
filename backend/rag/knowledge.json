@@ -588,5 +588,2565 @@
       "病原体",
       "临床"
     ]
+  },
+  {
+    "id": "general-pa-ap-projection",
+    "disease": "general",
+    "title": "后前位与前后位胸片的投照差异与心影评估",
+    "content": "常规后前位胸片立位贴近胶片，心影大小真实投影。卧位或坐位床旁前后位投照时，心脏离胶片较远导致几何放大效应，心影常被动偏大，解剖细节受限，临床阅读时需注意投照体位带来的差异。",
+    "source": "Chest X-Ray - Basic Interpretation (The Radiology Assistant)",
+    "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
+    "keywords": [
+      "后前位胸片",
+      "前后位投照",
+      "心影放大",
+      "几何投影",
+      "PA vs AP view",
+      "cardiac magnification"
+    ]
+  },
+  {
+    "id": "general-radiation-dose-evaluation",
+    "disease": "general",
+    "title": "胸部X射线检查的辐射量评估与防护原则",
+    "content": "胸片辐射剂量很低，相当于较短时间的日常生活天然本底辐射，益处远大于极低风险。检查应遵循正当化原则，由医生根据病情权衡必要性，无需过度担忧极微量辐射，但应避免无指征重复拍片。",
+    "source": "Facts About X-Rays | Radiation and Your Health (CDC)",
+    "source_url": "https://www.cdc.gov/radiation-health/data-research/facts-stats/x-rays.html",
+    "keywords": [
+      "胸片辐射",
+      "辐射防护",
+      "天然本底辐射",
+      "X射线检查",
+      "radiation dose",
+      "ALARA principle"
+    ]
+  },
+  {
+    "id": "no-finding-blind-spots-caution",
+    "disease": "no_finding",
+    "title": "胸片未见明显异常时的解剖重叠区排查提示",
+    "content": "胸片报告未见异常提示未检出显著大病灶，但肺尖部、心影后方及肋膈角深处存在骨骼与软组织重叠盲区。若存在持续顽固咳嗽或明显胸痛，单凭平片正常不能完全否定早期病灶，必要时建议胸部CT进一步评估。",
+    "source": "Chest X-Ray - Basic Interpretation (The Radiology Assistant)",
+    "source_url": "https://radiologyassistant.nl/chest/chest-x-ray/basic-interpretation",
+    "keywords": [
+      "胸片未见异常",
+      "解剖盲区",
+      "心影后区",
+      "肺尖重叠",
+      "blind spots",
+      "negative chest radiograph"
+    ]
+  },
+  {
+    "id": "atelectasis-volume-loss-mechanisms",
+    "disease": "atelectasis",
+    "title": "肺不张容积缩小的直接影像征象识别",
+    "content": "肺不张核心病理为肺含气量锐减与组织塌陷。胸片典型直接征象包括叶间裂向萎陷肺叶移位及局部不透亮高密度；间接征象可见同侧膈肌受牵拉抬高与纵隔移位。临床常结合支气管通畅度分析病因。",
+    "source": "Atelectasis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK545316/",
+    "keywords": [
+      "肺不张",
+      "肺容积缩小",
+      "叶间裂移位",
+      "膈肌抬高",
+      "atelectasis",
+      "volume loss"
+    ]
+  },
+  {
+    "id": "cardiomegaly-ctr-evaluation",
+    "disease": "cardiomegaly",
+    "title": "心肌病影像中胸片心影增大的提示意义",
+    "content": "心肌病等心脏疾患在立位胸片上常表现为心胸比率大于0.50，反映心腔扩张或心肌肥厚代偿。心影增大仅为影像学初筛提示，需结合超声心动图全面评估心室收缩与舒张功能，避免单纯依赖平片下结论。",
+    "source": "Cardiomyopathy Imaging (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK541056/",
+    "keywords": [
+      "心影增大",
+      "心胸比率",
+      "心肌病",
+      "超声心动图",
+      "cardiomegaly",
+      "cardiothoracic ratio"
+    ]
+  },
+  {
+    "id": "effusion-meniscus-ultrasound",
+    "disease": "effusion",
+    "title": "胸腔积液外高内低凹面征与超声检查互补",
+    "content": "游离性胸腔积液在立位胸片呈典型外高内低弧形凹面影，导致肋膈角变钝消失。胸壁超声对微量积液敏感度明显优于X射线，可探及几十毫升渗液，并能清晰辨别纤维分隔，是穿刺抽液理想定位工具。",
+    "source": "Pleural Effusion (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK448189/",
+    "keywords": [
+      "胸腔积液",
+      "肋膈角变钝",
+      "凹面征",
+      "胸膜腔超声",
+      "pleural effusion",
+      "meniscus sign"
+    ]
+  },
+  {
+    "id": "infiltration-ground-glass-opacities",
+    "disease": "infiltration",
+    "title": "高分辨CT对肺部浸润与磨玻璃影的评估",
+    "content": "肺部浸润在胸片常呈模糊云絮影，而高分辨CT能更清晰区分磨玻璃浸润与间质网织改变。浸润征象缺乏病因特异性，需密切结合临床症状、实验室指标及随访复查综合研判，由医生决定进一步检查方案。",
+    "source": "HRCT - Basic Interpretation (The Radiology Assistant)",
+    "source_url": "https://radiologyassistant.nl/chest/hrct/basic-interpretation",
+    "keywords": [
+      "肺部浸润",
+      "高分辨CT",
+      "磨玻璃影",
+      "间质改变",
+      "pulmonary infiltration",
+      "ground-glass opacity"
+    ]
+  },
+  {
+    "id": "mass-size-definition-evaluation",
+    "disease": "mass",
+    "title": "胸片肺部肿块直径界定与进一步评估原则",
+    "content": "影像学通常将肺实质内直径大于3厘米的圆形或类圆形高密度病灶界定为肿块。大于3厘米病灶恶性概率相对较高，常伴分叶、毛刺或胸膜牵拉征象，发现后多需及时行胸部增强CT及活检穿刺以明确性质。",
+    "source": "A Systematic Approach to Chest Radiographic Analysis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK553874/",
+    "keywords": [
+      "肺部肿块",
+      "3厘米界定",
+      "胸部增强CT",
+      "恶性风险",
+      "pulmonary mass",
+      "spiculation"
+    ]
+  },
+  {
+    "id": "nodule-fleischner-guidelines-followup",
+    "disease": "nodule",
+    "title": "偶然发现肺结节的Fleischner随访原则",
+    "content": "胸片或CT偶然检出实性肺结节通常依据Fleischner学会指南管理。对于小于6毫米低危结节通常无需过于频繁复查；大于6至8毫米结节需在数月后复查薄层CT观察形态与体积倍增时间，由专科评估。",
+    "source": "Guidelines for Management of Incidental Pulmonary Nodules (Fleischner Society 2017)",
+    "source_url": "https://pubs.rsna.org/doi/10.1148/radiol.2017161659",
+    "keywords": [
+      "肺结节",
+      "Fleischner指南",
+      "结节随访",
+      "薄层CT",
+      "pulmonary nodule",
+      "nodule follow-up"
+    ]
+  },
+  {
+    "id": "nodule-radiographic-detection-limits",
+    "disease": "nodule",
+    "title": "常规胸片对微小肺结节检出率的局限性",
+    "content": "常规胸片受空间分辨率限制及肋骨纵隔重叠遮挡，对小于8毫米微小结节敏感度欠佳，假阴性率相对较高。肺结节筛查与良恶性鉴别以低剂量薄层CT为优选手段，胸片正常不能完全替代高危人群专项筛查。",
+    "source": "Solitary Pulmonary Nodule (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK556143/",
+    "keywords": [
+      "肺微小结节",
+      "平片检出局限",
+      "薄层低剂量CT",
+      "解剖重叠",
+      "solitary pulmonary nodule",
+      "detection limits"
+    ]
+  },
+  {
+    "id": "pneumonia-lobar-consolidation-features",
+    "disease": "pneumonia",
+    "title": "大叶性肺炎的均质实变与支气管充气征",
+    "content": "大叶性肺炎在胸片典型表现为累及单个肺叶的均匀致密增高影，边缘常受叶间裂受限。病灶内部透亮气道分支清晰显影称为支气管充气征，表明肺泡内充满炎性渗出而支气管腔保持通畅，支持感染性病变。",
+    "source": "Pneumonia (Merck Manuals Professional Edition)",
+    "source_url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia",
+    "keywords": [
+      "大叶性肺炎",
+      "大叶实变",
+      "支气管充气征",
+      "肺叶间裂",
+      "lobar pneumonia",
+      "air bronchogram"
+    ]
+  },
+  {
+    "id": "pneumonia-urgent-symptom-warnings",
+    "disease": "pneumonia",
+    "title": "肺炎伴随危急红旗症状时的急诊就医警示",
+    "content": "若咳嗽或胸部不适伴随严重呼吸急促、喘息、持续高热寒战、意识模糊或咳铁锈色脓痰等表现，提示重症感染风险，不可延误盲目等待常规报告，需立即急诊，由医生评估处理并安排生命支持观察。",
+    "source": "Pneumonia - Symptoms and When to get medical help (NHS UK)",
+    "source_url": "https://www.nhs.uk/conditions/pneumonia/",
+    "keywords": [
+      "肺炎症状",
+      "急诊红旗体征",
+      "呼吸急促",
+      "高热寒战",
+      "pneumonia symptoms",
+      "urgent care"
+    ]
+  },
+  {
+    "id": "pneumothorax-visceral-pleural-line",
+    "disease": "pneumothorax",
+    "title": "气胸细线样脏层胸膜线与无肺纹理区识别",
+    "content": "胸膜腔进气使肺组织弹性回缩，胸片最关键诊断特征是肺外周弧形细白线即脏层胸膜线。线外侧完全丧失肺纹理且透光度明显增高。阅片时需与皮肤皱褶、衣服褶皱及肺大疱壁进行细致鉴别，以免误判。",
+    "source": "Pneumothorax (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK441885/",
+    "keywords": [
+      "气胸",
+      "脏层胸膜线",
+      "无肺纹理区",
+      "皮肤褶皱鉴别",
+      "pneumothorax",
+      "pleural line"
+    ]
+  },
+  {
+    "id": "pneumothorax-tension-emergency-signs",
+    "disease": "pneumothorax",
+    "title": "张力性气胸的纵隔推移征象与紧急急救指征",
+    "content": "单向活瓣机制导致胸腔内气体持续蓄积压力剧增，胸片可见同侧肺叶完全萎陷、纵隔及气管明显向健侧移位推挤、膈肌受压极度低平。此属致死性危急重症，常伴休克低血压，需立即急诊，由医生评估处理。",
+    "source": "Tension Pneumothorax (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK559090/",
+    "keywords": [
+      "张力性气胸",
+      "纵隔推移",
+      "气管对侧移位",
+      "血流动力学障碍",
+      "tension pneumothorax",
+      "mediastinal shift"
+    ]
+  },
+  {
+    "id": "consolidation-air-space-filling",
+    "disease": "consolidation",
+    "title": "肺实变肺泡腔渗液填充与肺容积守恒特征",
+    "content": "肺实变本质为肺泡内气体被炎性渗出液、血液或细胞成分取代，胸片呈均质云絮状密度增高。与肺不张显著不同的是，典型肺实变肺叶容积基本无缩减，叶间裂位置多保持正常，通常无气管及纵隔牵拉移位。",
+    "source": "Consolidation (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/consolidation",
+    "keywords": [
+      "肺实变",
+      "肺泡填充",
+      "肺容积守恒",
+      "肺不张鉴别",
+      "consolidation",
+      "air-space filling"
+    ]
+  },
+  {
+    "id": "edema-kerley-b-lines-interstitial",
+    "disease": "edema",
+    "title": "肺间质水肿Kerley B线与小叶间隔增厚",
+    "content": "心源性肺充血导致肺静脉压升高时，液体首先外渗至小叶间隔，胸片常见Kerley B线，表现为双下肺外带垂直于胸膜的水平短细线影。此征象提示间质性肺水肿，多见于左心功能不全，需结合心脏体征评估。",
+    "source": "Cardiogenic Pulmonary Edema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK544260/",
+    "keywords": [
+      "肺水肿",
+      "柯雷氏B线",
+      "小叶间隔增厚",
+      "间质水肿",
+      "Kerley B lines",
+      "cardiogenic edema"
+    ]
+  },
+  {
+    "id": "emphysema-hyperinflation-radiographic-signs",
+    "disease": "emphysema",
+    "title": "肺气肿过度充气胸片典型间接征象",
+    "content": "肺气肿因末梢小气道陷闭致残气量增多，胸片典型表现为双肺野过度透亮度增高、侧位胸骨后透亮间隙增宽、横膈位置低平活动度受限、心影受压呈垂直狭长滴状心。严重者可伴小叶中心性透亮破坏区。",
+    "source": "Chronic Obstructive Pulmonary Disease (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/",
+    "keywords": [
+      "肺气肿",
+      "过度充气",
+      "横膈低平",
+      "滴状心",
+      "胸骨后间隙",
+      "pulmonary emphysema"
+    ]
+  },
+  {
+    "id": "fibrosis-reticular-honeycombing-evaluation",
+    "disease": "fibrosis",
+    "title": "肺纤维化网织蜂窝影与高分辨CT评估价值",
+    "content": "肺纤维化在胸片常表现为双下肺基底部网状索条与小囊状透亮区，伴肺容积慢性缩小。由于平片分辨率有限易漏诊早期纤维化改变，临床高度怀疑时通常首选胸部高分辨CT以清晰呈现蜂窝肺与小叶变形。",
+    "source": "Idiopathic Pulmonary Fibrosis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK448162/",
+    "keywords": [
+      "肺纤维化",
+      "蜂窝样改变",
+      "高分辨CT",
+      "网织索条影",
+      "pulmonary fibrosis",
+      "honeycombing"
+    ]
+  },
+  {
+    "id": "pleural-thickening-fibrosis-plaques",
+    "disease": "pleural-thickening",
+    "title": "石棉与粉尘接触相关胸膜斑与胸膜增厚",
+    "content": "长期石棉或粉尘接触可引起壁层胸膜局限性斑块形成与胸膜增厚，胸片常呈胸壁软组织带状影或钙化。多数胸膜斑呈良性稳定病程，建议避免粉尘环境并定期进行胸部影像随访，由医生评估有无进展。",
+    "source": "Asbestosis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK555985/",
+    "keywords": [
+      "胸膜增厚",
+      "胸膜斑",
+      "石棉接触",
+      "胸膜钙化",
+      "pleural plaques",
+      "pleural thickening"
+    ]
+  },
+  {
+    "id": "hernia-hiatal-retrocardiac-opacity",
+    "disease": "hernia",
+    "title": "食管裂孔疝心影后充气囊腔与气液平识别",
+    "content": "食管裂孔疝表现为胃部经膈肌缺损疝入后纵隔，胸片常在心影后方出现圆形软组织密度伴囊状含气影或气液平面。侧位片可见中后纵隔局限性病变，易被初学者误为肺脓肿，临床常借助上消化道造影或CT明确。",
+    "source": "Hiatal Hernia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK562200/",
+    "keywords": [
+      "食管裂孔疝",
+      "心影后气液平",
+      "后纵隔",
+      "钡餐造影",
+      "hiatal hernia",
+      "retrocardiac mass"
+    ]
+  },
+  {
+    "id": "general-dicom-privacy-protection",
+    "disease": "general",
+    "title": "DICOM医学影像数据的隐私保护与合规",
+    "content": "医学影像DICOM文件包含患者姓名、年龄及检查号等敏感隐私信息。在数据传输、科研及AI辅助分析过程中，必须执行严格的脱敏处理与去标识化，保障患者隐私合规与医疗数据安全。",
+    "source": "HIPAA Privacy Rule (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK500019/",
+    "keywords": [
+      "DICOM数据",
+      "患者隐私",
+      "去标识化",
+      "医疗脱敏",
+      "DICOM de-identification",
+      "HIPAA privacy"
+    ]
+  },
+  {
+    "id": "general-ai-model-probability-limits",
+    "disease": "general",
+    "title": "胸部X射线检查的报告解读与医生评估",
+    "content": "胸片检查的影像学发现仅作为临床辅助参考，不能脱离患者临床实际。任何影像征象都必须由具备资质的执业放射科与临床医生结合既往病史、查体及实验室检查进行综合研判与最终解读。",
+    "source": "Chest X-ray (MedlinePlus - National Library of Medicine)",
+    "source_url": "https://medlineplus.gov/ency/article/003804.htm",
+    "keywords": [
+      "胸片报告",
+      "临床结合",
+      "放射科解读",
+      "医生评估",
+      "chest radiograph interpretation",
+      "physician review"
+    ]
+  },
+  {
+    "id": "general-emergency-red-flags-triage",
+    "disease": "general",
+    "title": "呼吸系统常见急重症红旗症状与就医",
+    "content": "当胸部不适伴随突发严重呼吸困难、持续剧烈胸痛、意识模糊、咳血或口唇发绀等红旗症状时，提示可能存在重症肺炎、大面积肺栓塞或张力性气胸等危急情况，需立即急诊，由医生评估处理。",
+    "source": "Pneumonia - Symptoms and When to get medical help (NHS UK)",
+    "source_url": "https://www.nhs.uk/conditions/pneumonia/",
+    "keywords": [
+      "急诊红旗",
+      "呼吸困难",
+      "剧烈胸痛",
+      "就医边界",
+      "red flag symptoms",
+      "emergency triage"
+    ]
+  },
+  {
+    "id": "general-inspiratory-effort-depth",
+    "disease": "general",
+    "title": "胸片吸气深度评价与假性病变甄别",
+    "content": "优质立位后前位胸片要求患者充分深吸气后屏气，右侧膈顶通常投影于第9至10后肋水平。若吸气不足，双下肺纹理密集聚集，极易造成假性基底实质浸润或心影假性肥大，阅片时需注意甄别。",
+    "source": "A Systematic Approach to Chest Radiographic Analysis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK553874/",
+    "keywords": [
+      "胸片吸气深度",
+      "后肋计数",
+      "假性心影增大",
+      "假性浸润",
+      "inspiratory effort",
+      "posterior ribs"
+    ]
+  },
+  {
+    "id": "no-finding-negative-report-clinical-significance",
+    "disease": "no_finding",
+    "title": "胸片未见异常报告的医学内涵与边界",
+    "content": "胸片未见明显异常代表检查范围内未发现活动性大面积实变、明显气胸或显著肿块等阳性征象。但平片反映的是宏观二维投照，不能等同于胸部完全无任何病变，仍应结合临床症状判断是否需复查。",
+    "source": "Chest X-ray (MedlinePlus - National Library of Medicine)",
+    "source_url": "https://medlineplus.gov/ency/article/003804.htm",
+    "keywords": [
+      "未见明显异常",
+      "阴性报告",
+      "胸片局限性",
+      "临床观察",
+      "normal chest x-ray",
+      "negative report"
+    ]
+  },
+  {
+    "id": "no-finding-early-small-lesion-limitations",
+    "disease": "no_finding",
+    "title": "平片未见异常与早期微小病灶的检出局限",
+    "content": "部分早期肺癌或粟粒性病变直径仅数毫米，在常规X射线胸片上极易被血管或肋骨掩盖而呈正常阴性。高危人群或持续伴有咳嗽咯血者，单凭胸片阴性不能彻底放下戒心，建议遵医嘱行低剂量CT排查。",
+    "source": "Lung Cancer Screening (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK537283/",
+    "keywords": [
+      "微小病灶",
+      "平片假阴性",
+      "低剂量薄层CT",
+      "高危筛查",
+      "small nodule limit",
+      "radiographic obscurity"
+    ]
+  },
+  {
+    "id": "pneumonia-radiographic-lag-resolution",
+    "disease": "pneumonia",
+    "title": "肺炎治疗后影像吸收滞后性的特点",
+    "content": "肺炎抗感染治疗后，临床发热及咳嗽等症状改善往往早于影像表现。胸片浸润影与实变吸收完全通常较为缓慢，影像吸收可能慢于症状恢复，建议遵医嘱在治疗结束后按计划复查对比评估吸收情况。",
+    "source": "About Pneumonia (CDC)",
+    "source_url": "https://www.cdc.gov/pneumonia/about/index.html",
+    "keywords": [
+      "肺炎吸收期",
+      "影像滞后性",
+      "随访复查",
+      "渗出吸收",
+      "radiographic lag",
+      "pneumonia resolution"
+    ]
+  },
+  {
+    "id": "atelectasis-postoperative-hypoventilation",
+    "disease": "atelectasis",
+    "title": "术后通气不足所致肺不张的预防与恢复",
+    "content": "全麻手术后因疼痛、长期卧床及浅快呼吸，容易导致双下肺坠积性肺不张。术后遵医嘱尽早进行深呼吸与有效咳嗽锻炼，配合自主翻身与拍背排痰，有助于促进肺泡重新膨胀并预防呼吸道坠积感染。",
+    "source": "Atelectasis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK545316/",
+    "keywords": [
+      "术后肺不张",
+      "深呼吸锻炼",
+      "有效咳嗽",
+      "排痰护理",
+      "postoperative atelectasis",
+      "breathing exercise"
+    ]
+  },
+  {
+    "id": "atelectasis-plate-like-discoid-features",
+    "disease": "atelectasis",
+    "title": "盘状肺不张的影像特点与临床意义",
+    "content": "胸片见双下肺野局限性横形条状或盘状高密度影，多为亚肺段通气障碍形成的盘状肺不张。常发生于术后下胸部活动受限、胸痛屏气或膈神经功能减退者，多数随充分深呼吸和体位活动后逐步吸收。",
+    "source": "Discoid atelectasis (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/discoid-atelectasis",
+    "keywords": [
+      "盘状肺不张",
+      "横行条状影",
+      "亚肺段不张",
+      "呼吸活动受限",
+      "discoid atelectasis",
+      "platelike atelectasis"
+    ]
+  },
+  {
+    "id": "cardiomegaly-ap-projection-magnification-artifact",
+    "disease": "cardiomegaly",
+    "title": "床旁前后位投照心影放大伪影甄别",
+    "content": "急危重症患者常于病床接受前后位投照，此时心脏距离探测板较远而产生明显几何放大。临床读片时若见心影略显饱满，不可草率认定为心脏扩大，需结合是否有肺淤血及超声心动图做谨慎鉴别。",
+    "source": "Cardiomegaly (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK553140/",
+    "keywords": [
+      "床旁胸片",
+      "前后位投照",
+      "几何放大伪影",
+      "心影扩大鉴别",
+      "AP magnification",
+      "pseudo-cardiomegaly"
+    ]
+  },
+  {
+    "id": "cardiomegaly-pericardial-effusion-differential",
+    "disease": "cardiomegaly",
+    "title": "烧瓶样心影增大与心包积液的鉴别",
+    "content": "当心影向两侧普遍均匀扩大且搏动减弱，外观呈对称性球形或烧瓶样时，需高度怀疑心包积液可能。胸片无法直接区分肥厚心肌与心包积液，超声心动图是最迅速有效的鉴别手段，能明确积液量与心包厚度。",
+    "source": "Cardiomegaly (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK553140/",
+    "keywords": [
+      "烧瓶样心影",
+      "心包积液",
+      "心脏肥大鉴别",
+      "超声心动图",
+      "water-bottle heart",
+      "pericardial effusion"
+    ]
+  },
+  {
+    "id": "effusion-blunting-costophrenic-angle",
+    "disease": "effusion",
+    "title": "肋膈角变钝与胸腔游离积液的影像特征",
+    "content": "正常立位胸片两侧外侧肋膈角呈深锐夹角。当胸腔内游离液体积聚约200毫升以上时，积液首先淹没肋膈窦，胸片表现为肋膈角模糊钝化。若伴有气促或发热，建议就诊评估积液原因与性质。",
+    "source": "Pleural Effusion (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK448189/",
+    "keywords": [
+      "肋膈角变钝",
+      "游离胸腔积液",
+      "立位胸片",
+      "胸膜渗液",
+      "costophrenic blunting",
+      "pleural fluid"
+    ]
+  },
+  {
+    "id": "effusion-loculated-interlobar-features",
+    "disease": "effusion",
+    "title": "包裹性积液与叶间积液假肿瘤样表现",
+    "content": "既往胸膜粘连或感染后，胸水可局限于叶间裂或胸壁局部形成包裹性积液，侧位胸片常呈梭形或透镜状。叶间裂积液在后前位平片有时酷似圆形实质肿块称为假肿瘤，常在利尿或抗炎后缩小消失。",
+    "source": "Pseudotumour (lung) (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/pseudotumour-lung",
+    "keywords": [
+      "包裹性积液",
+      "叶间裂积液",
+      "假肿瘤征",
+      "胸膜粘连",
+      "loculated effusion",
+      "pseudotumor"
+    ]
+  },
+  {
+    "id": "infiltration-laboratory-clinical-correlation",
+    "disease": "infiltration",
+    "title": "肺间质浸润影像与临床综合评估",
+    "content": "胸片提示肺部浸润影仅代表肺实质或间质充血渗出的影像表现，不能直接确定具体病因。需结合患者病史、肺功能及影像演变综合研判，必要时行薄层CT以明确病灶分布特征。",
+    "source": "Interstitial Lung Disease (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK541084/",
+    "keywords": [
+      "肺浸润影",
+      "间质性病变",
+      "综合评估",
+      "薄层CT评估",
+      "interstitial infiltration",
+      "clinical evaluation"
+    ]
+  },
+  {
+    "id": "infiltration-interstitial-vs-alveolar-pattern",
+    "disease": "infiltration",
+    "title": "间质性浸润与肺泡性浸润的影像分型",
+    "content": "肺浸润在影像学上分为两类：肺泡性浸润边缘模糊易融合呈棉絮状；间质性浸润则表现为网状、细线状或细颗粒状纹理增多。两者对鉴别细菌性肺炎与非典型病原体或纤维化疾病具有重要参考价值。",
+    "source": "Interstitial Lung Disease (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK541084/",
+    "keywords": [
+      "肺泡性浸润",
+      "间质性浸润",
+      "网状纹理",
+      "棉絮影",
+      "alveolar infiltrate",
+      "interstitial pattern"
+    ]
+  },
+  {
+    "id": "mass-abscess-cavity-differential-features",
+    "disease": "mass",
+    "title": "肺脓肿空洞与肺部肿块的影像鉴别",
+    "content": "肺脓肿在胸片上常表现为厚壁空洞伴内部气液平面，周围常伴有炎性浸润晕征，需与坏死性肺癌肿块鉴别。若患者伴高热、咳脓臭痰，多提示感染性空洞，建议进一步完善胸部增强CT与病原学排查。",
+    "source": "Lung Abscess (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK555920/",
+    "keywords": [
+      "肺脓肿",
+      "厚壁空洞",
+      "气液平面",
+      "肿块鉴别",
+      "lung abscess",
+      "cavitary lesion"
+    ]
+  },
+  {
+    "id": "mass-spiculated-margin-malignancy-risk",
+    "disease": "mass",
+    "title": "肺部肿块分叶毛刺征与恶性风险提示",
+    "content": "当胸片或CT显示孤立肿块边缘呈细小放射状毛刺或深分叶时，常反映肿瘤浸润性生长对周围结缔组织的牵拉。该形态征象恶性概率较高，医生通常会建议进一步安排对比增强CT及穿刺活检明确病理。",
+    "source": "Lung Cancer Screening (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK537283/",
+    "keywords": [
+      "肿块毛刺征",
+      "深分叶征",
+      "增强CT指征",
+      "病理活检",
+      "spiculated margins",
+      "lobulation"
+    ]
+  },
+  {
+    "id": "nodule-calcification-benign-morphology",
+    "disease": "nodule",
+    "title": "良性肺结节的典型钙化形态特征",
+    "content": "肺结节内部若出现致密、均匀、层状同心圆或典型“爆米花样”钙化，往往提示陈旧性结核球或错构瘤等良性改变。但偏心性或点状不规则钙化仍需警惕，通常建议对比既往老片以评估结节稳定性。",
+    "source": "Solitary Pulmonary Nodule (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK556143/",
+    "keywords": [
+      "肺结节钙化",
+      "爆米花样钙化",
+      "错构瘤",
+      "陈旧结核球",
+      "nodule calcification",
+      "popcorn calcification"
+    ]
+  },
+  {
+    "id": "pneumothorax-expiratory-phase-detection-value",
+    "disease": "pneumothorax",
+    "title": "呼气相胸片对微量气胸的检出价值",
+    "content": "微量或隐匿性气胸在标准吸气相胸片上常因肺泡过度充气而难以识别。加照呼气相胸片时，肺容积缩小而胸膜腔积气量不变，气体聚集密度反差增大，脏层胸膜线更易凸显，是疑难气胸的重要辅助手段。",
+    "source": "Pneumothorax (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK441885/",
+    "keywords": [
+      "微量气胸",
+      "呼气相胸片",
+      "肺容积回缩",
+      "密度反差",
+      "expiratory radiograph",
+      "occult pneumothorax"
+    ]
+  },
+  {
+    "id": "consolidation-silhouette-sign-localization",
+    "disease": "consolidation",
+    "title": "肺实变剪影征对病灶解剖定位的意义",
+    "content": "剪影征指肺内实变病灶与相邻心缘或膈肌密度相同且相贴时，导致解剖分界消失的影像征象。例如右心缘模糊提示右肺中叶实变，右膈肌消失提示右肺下叶病灶，有助于精准推断病变解剖部位。",
+    "source": "Silhouette sign (chest x-ray) (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/silhouette-sign-x-ray",
+    "keywords": [
+      "剪影征",
+      "解剖定位",
+      "右心缘模糊",
+      "中叶实变",
+      "silhouette sign",
+      "anatomical localization"
+    ]
+  },
+  {
+    "id": "consolidation-air-bronchogram-significance",
+    "disease": "consolidation",
+    "title": "空气支气管征在肺实变中的诊断意义",
+    "content": "实变肺组织内充盈气体的透亮分支支气管管腔显影，被称为空气支气管征。该征象强有力地证实病变位于肺实质肺泡空间，而近端大气道通常保持通畅，有效排除近端完全性气管异物或主支气管堵塞。",
+    "source": "Community-Acquired Pneumonia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK430749/",
+    "keywords": [
+      "空气支气管征",
+      "肺实质实变",
+      "支气管通畅",
+      "肺泡浸润",
+      "air bronchogram",
+      "airspace disease"
+    ]
+  },
+  {
+    "id": "edema-bat-wing-alveolar-pattern",
+    "disease": "edema",
+    "title": "肺水肿典型蝶翼征与肺泡期表现",
+    "content": "急性重度左心衰竭导致微血管静水压骤增，液体大量溢入肺泡腔，胸片呈典型“蝶翼征”或“蝙蝠翼征”，即双肺门周围对称性大片云雾影而肺外带透光良好。多伴严重端坐呼吸，需遵医嘱紧急利尿处理。",
+    "source": "Cardiogenic Pulmonary Edema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK544260/",
+    "keywords": [
+      "肺水肿",
+      "蝶翼征",
+      "蝙蝠翼征",
+      "肺泡期水肿",
+      "bat-wing pattern",
+      "alveolar edema"
+    ]
+  },
+  {
+    "id": "edema-peribronchial-cuffing-vessel-blurring",
+    "disease": "edema",
+    "title": "支气管袖口征与肺门血管模糊表现",
+    "content": "间质性肺水肿早期，支气管周围结缔组织鞘液体蓄积，胸片正位轴向投影呈环状增厚影，称为支气管袖口征；同时肺门血管分枝边缘毛糙模糊。这常早于严重肺泡实变出现，是早期充血的重要影像警示。",
+    "source": "Noncardiogenic Pulmonary Edema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK542230/",
+    "keywords": [
+      "支气管袖口征",
+      "血管边缘模糊",
+      "间质水肿早期",
+      "充血征象",
+      "peribronchial cuffing",
+      "vascular indistinctness"
+    ]
+  },
+  {
+    "id": "emphysema-flattened-diaphragm-rib-widening",
+    "disease": "emphysema",
+    "title": "膈肌低平与肋间隙增宽的肺过度膨胀征",
+    "content": "慢性阻塞性肺疾病严重肺气肿时，肺泡回缩力显著减低致使胸廓桶状畸形，后前位胸片见膈顶低平甚至呈凹面，侧位胸片肋间隙明显加宽。该影像形态直观体现残气量显著增加，建议行肺功能测定。",
+    "source": "Chronic Obstructive Pulmonary Disease (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/",
+    "keywords": [
+      "膈肌低平",
+      "肋间隙加宽",
+      "桶状胸廓",
+      "残气量增高",
+      "flattened diaphragm",
+      "intercostal widening"
+    ]
+  },
+  {
+    "id": "emphysema-bullous-rupture-pneumothorax-risk",
+    "disease": "emphysema",
+    "title": "肺大疱破裂风险与继发性自发性气胸",
+    "content": "肺气肿晚期常伴肺泡间隔严重破坏并融合为薄壁无纹理充气囊腔，称为肺大疱。肺大疱壁菲薄脆弱，遇剧烈咳嗽或屏气时易破裂引发继发性自发性气胸。若突发单侧剧烈胸痛，需遵医嘱紧急行胸片排查。",
+    "source": "Bullous Emphysema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK537243/",
+    "keywords": [
+      "肺大疱",
+      "囊性腔隙",
+      "自发性气胸",
+      "突发胸痛",
+      "bullous emphysema",
+      "secondary pneumothorax"
+    ]
+  },
+  {
+    "id": "fibrosis-traction-bronchiectasis-mechanism",
+    "disease": "fibrosis",
+    "title": "牵拉性支气管扩张在肺纤维化中的表现",
+    "content": "进行性肺纤维化导致周围间质纤维组织胶原沉积收缩，对邻近支气管壁施加机械外向牵拉力，胸片与CT可见支气管管腔不规则扩张变形。这常与广泛网格蜂窝影并存，直观反映肺组织不可逆纤维化扭曲。",
+    "source": "Idiopathic Pulmonary Fibrosis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK448162/",
+    "keywords": [
+      "牵拉性支气管扩张",
+      "肺纤维化进展",
+      "网状结缔组织",
+      "蜂窝肺",
+      "traction bronchiectasis",
+      "fibrotic distortion"
+    ]
+  },
+  {
+    "id": "fibrosis-progressive-volume-loss-signs",
+    "disease": "fibrosis",
+    "title": "肺容积进行性缩小对纤维化进展的提示",
+    "content": "肺纤维化病程进展中，纤维结缔组织收缩常使双下肺及全肺弹性回缩力显著升高，胸片动态对比显示肺容积进行性缩小，膈面被动抬高。复查对比评估肺体积变化是监测病程发展与纤维化程度的重要客观指标。",
+    "source": "HRCT - Fibrosis of the Lung (The Radiology Assistant)",
+    "source_url": "https://radiologyassistant.nl/chest/hrct/fibrosis-of-the-lung-on-hrct-imaging",
+    "keywords": [
+      "肺容积缩小",
+      "纤维化进展",
+      "膈肌抬高",
+      "动态对比",
+      "lung volume loss",
+      "fibrosis progression"
+    ]
+  },
+  {
+    "id": "pleural-thickening-apical-capping-benign",
+    "disease": "pleural-thickening",
+    "title": "双侧肺尖帽胸膜增厚的良性特征与随访",
+    "content": "胸片见双侧肺尖对称性帽状软组织密度影，常为良性肺尖帽，多由既往慢性炎症或缺血纤维化导致。若形态边缘光滑且长期随访无进行性增大，多属良性陈旧改变，通常建议定期影像复查对比。",
+    "source": "Diseases of the Pleura and Chest Wall (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK621648/",
+    "keywords": [
+      "肺尖帽",
+      "胸膜增厚",
+      "良性纤维化",
+      "随访对比",
+      "apical cap",
+      "pleural fibroelastosis"
+    ]
+  },
+  {
+    "id": "pleural-thickening-blunting-costophrenic-angle",
+    "disease": "pleural-thickening",
+    "title": "陈旧性胸膜炎愈合后肋膈角粘连变钝",
+    "content": "既往结核性或细菌性胸膜炎吸收愈合后，常在肋膈角遗留纤维纤维化粘连瘢痕，胸片同样表现为肋膈角变钝。与活动性积液不同，粘连角边缘多平直僵硬，无动态重力流动移位，多属稳定陈旧改变。",
+    "source": "Thoracic Empyema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK544279/",
+    "keywords": [
+      "胸膜粘连",
+      "肋膈角变钝",
+      "陈旧性胸膜炎",
+      "纤维瘢痕",
+      "pleural adhesion",
+      "costophrenic blunting"
+    ]
+  },
+  {
+    "id": "hernia-air-fluid-level-differential-abscess",
+    "disease": "hernia",
+    "title": "心影后膈疝气液平面与肺脓肿鉴别",
+    "content": "心影后区气液平面若伴随胃泡向胸腔移位，高度提示食管裂孔疝等膈疝病变。需细心与肺下叶内后段肺脓肿进行鉴别：膈疝通常无发热咳脓痰等感染中毒中毒症状，经胃肠道造影或胸部CT可快速明晰。",
+    "source": "Diaphragmatic Hernia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK554492/",
+    "keywords": [
+      "膈疝",
+      "心影后气液平",
+      "肺脓肿鉴别",
+      "胃泡移位",
+      "diaphragmatic hernia",
+      "air-fluid level"
+    ]
+  },
+  {
+    "id": "general-rotation-evaluation-clavicle",
+    "disease": "general",
+    "title": "胸片体位旋转评价与锁骨胸锁关节对称度",
+    "content": "优质立位胸片要求投照无旋转，评估标准是两侧锁骨内侧端与胸椎棘突中线距离严格对称。若体位旋转，可致双肺野透光度不对称，并造成肺门移位及心影假性饱满，影响影像征象的真实判断。",
+    "source": "Chest X-Ray Quality Assurance (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK534824/",
+    "keywords": [
+      "体位旋转",
+      "胸锁关节",
+      "锁骨内侧端",
+      "假性透光不均",
+      "patient rotation",
+      "clavicle symmetry"
+    ]
+  },
+  {
+    "id": "general-penetration-vertebral-visualization",
+    "disease": "general",
+    "title": "胸片曝光穿透度判断与胸椎轮廓可见度",
+    "content": "后前位胸片的标准穿透曝光应使下胸椎椎体轮廓隐约可见。若曝光不足穿透较差，双肺野发白常掩盖后部微小结节；若过度穿透则肺野发黑易使细小渗出或纹理减退无法显影，需由技师严格质控。",
+    "source": "Chest X-Ray Quality Assurance (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK534824/",
+    "keywords": [
+      "曝光穿透度",
+      "过度穿透",
+      "穿透不足",
+      "胸椎可见度",
+      "penetration",
+      "thoracic spine visibility"
+    ]
+  },
+  {
+    "id": "general-lateral-projection-utility-value",
+    "disease": "general",
+    "title": "胸部侧位平片对心后与膈下病灶的补充价值",
+    "content": "常规正位胸片心影及横膈后方易形成重叠盲区。加照侧位胸片可清晰展现胸骨后间隙、心后三角及后肋膈窦，大幅提高隐匿性实变与纵隔占位的检出率，常作为正位疑难征象的重要三维补充检查。",
+    "source": "Chest Radiography (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK563236/",
+    "keywords": [
+      "胸部侧位片",
+      "心后三角",
+      "胸骨后间隙",
+      "解剖盲区补充",
+      "lateral chest radiograph",
+      "retrocardiac space"
+    ]
+  },
+  {
+    "id": "general-prior-imaging-comparison-value",
+    "disease": "general",
+    "title": "新旧胸片对比对病灶动态性质判别的价值",
+    "content": "评估胸片阴影或结节性质时，调阅并对比既往历史平片具有极关键价值。若数年前老片已存在相同大小钙化结节且无体积变化，多属良性陈旧瘢痕；若病灶短时间内新发或倍增，需进一步排查活动性病因。",
+    "source": "Lung Imaging (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK558976/",
+    "keywords": [
+      "新旧片对比",
+      "病灶稳定性",
+      "体积倍增时间",
+      "陈旧性病灶",
+      "prior radiograph comparison",
+      "interval stability"
+    ]
+  },
+  {
+    "id": "general-metallic-artifact-interference",
+    "disease": "general",
+    "title": "体外金属物品与医用电极导线的伪影防范",
+    "content": "项链、纽扣、衣物拉链及心电监护电极导线等高密度物品，在胸片上可投影为致密异物影，重叠于肺野极易伪装成肺实质结节或钙化灶。拍片前需遵指导去除金属饰品并更换专用检查服以避免误读。",
+    "source": "Chest Radiography (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK563236/",
+    "keywords": [
+      "金属伪影",
+      "心电导线",
+      "检查服更换",
+      "假性结节",
+      "metallic artifacts",
+      "foreign body artifact"
+    ]
+  },
+  {
+    "id": "general-radiation-pregnancy-safety-shielding",
+    "disease": "general",
+    "title": "孕期胸部X射线检查的安全与腹部铅防护",
+    "content": "孕期若因严重呼吸道感染必须行胸片检查，单次常规拍片对腹部子宫的直接散射剂量微乎其微。规范检查时技师会对下腹盆腔使用铅橡胶屏障进行遮盖防护，只要临床指征明确，无需过度恐慌致畸风险。",
+    "source": "Facts About X-Rays | Radiation and Your Health (CDC)",
+    "source_url": "https://www.cdc.gov/radiation-health/data-research/facts-stats/x-rays.html",
+    "keywords": [
+      "孕期胸片",
+      "铅皮防护",
+      "胎儿辐射安全",
+      "低剂量检查",
+      "pregnancy radiation safety",
+      "lead shielding"
+    ]
+  },
+  {
+    "id": "no-finding-acute-bronchitis-normal-xray",
+    "disease": "no_finding",
+    "title": "急性支气管炎胸片表现正常与鉴别要点",
+    "content": "急性支气管炎主要病变局限于较大气道黏膜充血水肿，未波及肺泡实质时，胸片常完全正常或仅见非特异肺纹理轻度增粗。胸片未见异常有助于排除肺炎实变，由医生结合发热咳嗽病程指导治疗。",
+    "source": "Acute Bronchitis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK448067/",
+    "keywords": [
+      "急性支气管炎",
+      "胸片正常",
+      "肺炎排除",
+      "非特异性纹理",
+      "acute bronchitis",
+      "normal radiograph"
+    ]
+  },
+  {
+    "id": "no-finding-chronic-bronchitis-subtlety",
+    "disease": "no_finding",
+    "title": "慢性支气管炎胸片表现的隐匿性与体检提示",
+    "content": "慢性支气管炎患者胸片在相当长时间内可表现为未见明确异常，或仅有轻微肺纹理增多增粗。平片阴性不能代表气道功能完全健康，对于长期吸烟伴慢性咳痰者，建议进一步行肺功能测试以评估小气道阻塞。",
+    "source": "Chronic Bronchitis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK482437/",
+    "keywords": [
+      "慢性支气管炎",
+      "胸片阴性",
+      "肺功能评估",
+      "气道阻塞",
+      "chronic bronchitis",
+      "subtle radiography"
+    ]
+  },
+  {
+    "id": "no-finding-pulmonary-embolism-infarct-lag",
+    "disease": "no_finding",
+    "title": "肺栓塞平片常见正常与不可仅凭平片除外",
+    "content": "急性肺动脉栓塞患者胸片初查多无异常，少数仅见局部缺血透亮轻微增高（Westermark征）。胸片主要用于排除气胸及大面积实变，单凭平片正常绝不能排除致命性肺栓塞，疑诊时需急诊行肺动脉CTA。",
+    "source": "Pulmonary Embolism Imaging (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK470168/",
+    "keywords": [
+      "肺栓塞",
+      "平片阴性",
+      "肺动脉CTA",
+      "急重症鉴别",
+      "pulmonary embolism",
+      "normal x-ray in PE"
+    ]
+  },
+  {
+    "id": "pneumonia-bronchopneumonia-patchy-pattern",
+    "disease": "pneumonia",
+    "title": "小叶性支气管肺炎的多灶斑片浸润影",
+    "content": "支气管肺炎多见于儿童、老年人及卧床患者，胸片常呈沿支气管血管束分布的散在小斑片状、云絮状高密度浸润影，双下肺野常见。影像与肺泡性实变相比分布较为弥散，需配合临床听诊及抗感染随访观察。",
+    "source": "Bronchopneumonia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK549880/",
+    "keywords": [
+      "小叶性肺炎",
+      "支气管肺炎",
+      "斑片状浸润",
+      "双下肺分布",
+      "bronchopneumonia",
+      "patchy infiltrates"
+    ]
+  },
+  {
+    "id": "pneumonia-mycoplasma-reticulonodular-features",
+    "disease": "pneumonia",
+    "title": "肺炎支原体肺炎的间质浸润与游走性特点",
+    "content": "支原体肺炎常见于青少年，胸片多呈肺门向外周放射的网织结节影或云雾样间质浸润，常表现为病灶影像广泛而患者肺部听诊体征相对较轻的“体征分离”现象。症状缓解后需遵医嘱复查，避免擅自停药。",
+    "source": "Mycoplasma Infections (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK430787/",
+    "keywords": [
+      "支原体肺炎",
+      "网织浸润",
+      "体征分离",
+      "间质浸润",
+      "mycoplasma pneumonia",
+      "reticular infiltrates"
+    ]
+  },
+  {
+    "id": "pneumonia-elderly-subtle-presentation",
+    "disease": "pneumonia",
+    "title": "老年人肺炎影像与临床症状的不典型性",
+    "content": "高龄老年人机体反应减弱，发生肺炎时常缺乏明显高热与剧烈咳嗽，而以食欲不振、神志萎靡或跌倒就诊。胸片浸润渗出影有时呈淡薄隐匿斑片，极易掩盖于慢性肺病背景下，需家属细致观察并及早就诊。",
+    "source": "Community-Acquired Pneumonia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK430749/",
+    "keywords": [
+      "老年人肺炎",
+      "不典型症状",
+      "淡薄浸润",
+      "精神萎靡",
+      "geriatric pneumonia",
+      "atypical presentation"
+    ]
+  },
+  {
+    "id": "atelectasis-mucus-plugging-bronchial-obstruction",
+    "disease": "atelectasis",
+    "title": "黏液栓堵塞致阻塞性肺不张的影像与干预",
+    "content": "呼吸道感染或排痰无力时，浓稠黏液栓完全堵塞支气管腔，受累肺叶内气体逐渐被血流吸收导致阻塞性肺不张，胸片见肺叶实密萎陷伴叶间裂向患侧位移。医生可能根据病情安排雾化、体位引流或支气管镜处理。",
+    "source": "Obstructive Lung Atelectasis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK538202/",
+    "keywords": [
+      "阻塞性肺不张",
+      "黏液栓堵塞",
+      "吸收性不张",
+      "排痰复张",
+      "resorption atelectasis",
+      "mucus plug"
+    ]
+  },
+  {
+    "id": "atelectasis-compression-vs-resorption-mechanism",
+    "disease": "atelectasis",
+    "title": "压迫性肺不张与吸收性肺不张机制鉴别",
+    "content": "胸片肺不张主要分两类机制：大量胸腔积液或积气从胸膜腔直接压迫肺实质变形者为压迫性不张；中央气道堵塞气体吸收致肺萎缩者为吸收性不张。前者需医生评估是否引流，后者需解除气道堵塞，具体由临床决定。",
+    "source": "Obstructive Lung Atelectasis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK538202/",
+    "keywords": [
+      "压迫性肺不张",
+      "吸收性肺不张",
+      "积液压迫",
+      "气道梗阻",
+      "compressive atelectasis",
+      "resorptive atelectasis"
+    ]
+  },
+  {
+    "id": "atelectasis-round-atelectasis-pleural-mass-mimic",
+    "disease": "atelectasis",
+    "title": "圆形肺不张伴彗星尾征与假性肿块鉴别",
+    "content": "既往胸膜炎或石棉接触后，胸膜纤维化皱缩向内牵卷肺实质可形成圆形肺不张，胸片常呈外周邻近胸膜的圆形结节，伴支气管血管束向其聚集呈“彗星尾征”。常良性稳定，CT增强能清晰鉴别避免不必要手术。",
+    "source": "Round Atelectasis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK553177/",
+    "keywords": [
+      "圆形肺不张",
+      "彗星尾征",
+      "假性肿块",
+      "胸膜卷入",
+      "round atelectasis",
+      "comet tail sign"
+    ]
+  },
+  {
+    "id": "cardiomegaly-left-ventricular-contour-rounding",
+    "disease": "cardiomegaly",
+    "title": "左心室增大胸片左心缘饱满圆隆特征",
+    "content": "高血压或主动脉瓣病变导致左心室长期压力过重时，胸片后前位典型表现为心尖向左下圆隆延伸甚至陷入膈下，心左缘明显外突。心胸比多增大，提示慢性心肌肥厚代偿，建议结合心脏超声测定射血分数。",
+    "source": "Left Ventricular Hypertrophy (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK557534/",
+    "keywords": [
+      "左心室增大",
+      "心尖下移",
+      "左室肥厚",
+      "心脏超声评估",
+      "left ventricular hypertrophy",
+      "apex displacement"
+    ]
+  },
+  {
+    "id": "cardiomegaly-right-ventricular-apex-elevation",
+    "disease": "cardiomegaly",
+    "title": "右心室增大心尖上翘与靴形心表现",
+    "content": "肺动脉高压或慢性肺心病导致右室肥厚时，由于右心室位于心脏前方，后前位胸片常表现为心尖钝圆上翘远离膈面，侧位片可见胸骨后心脏接触面显著加长。此征象需结合肺动脉段突出综合评估。",
+    "source": "Right Ventricular Hypertrophy (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK499831/",
+    "keywords": [
+      "右心室增大",
+      "心尖上翘",
+      "靴形心",
+      "肺心病初筛",
+      "right ventricular hypertrophy",
+      "apex upturning"
+    ]
+  },
+  {
+    "id": "cardiomegaly-echocardiography-confirmation-role",
+    "disease": "cardiomegaly",
+    "title": "胸片初筛心影偏大与超声心动图评估对接",
+    "content": "胸片心胸比增大仅反映心脏二维几何投影扩展，无法分辨是心腔舒张期扩张、心壁肥厚还是心包积液。临床发现平片心影增大后，通常建议由医生评估是否需要超声心动图，以测量房室腔内径与收缩功能。",
+    "source": "Echocardiography (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK482272/",
+    "keywords": [
+      "超声心动图",
+      "心腔内径",
+      "射血分数",
+      "心影初筛对接",
+      "echocardiography",
+      "chamber quantification"
+    ]
+  },
+  {
+    "id": "effusion-subpulmonic-pseudodiaphragmatic",
+    "disease": "effusion",
+    "title": "肺底积液呈假性膈肌抬高的影像鉴别",
+    "content": "液体积聚于肺底与膈肌之间而未流入肋膈角时形成肺底积液，胸片表现为“膈肌穹窿假性抬高”且最高点异常外移。侧位片可见膈顶后方陡峭下陷。疑诊时加照卧位平片或行超声检查即可见游离液体移动。",
+    "source": "Pleural Space Imaging (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK553862/",
+    "keywords": [
+      "肺底积液",
+      "假性膈肌抬高",
+      "膈顶外移",
+      "体位移动性",
+      "subpulmonic effusion",
+      "pseudodiaphragm"
+    ]
+  },
+  {
+    "id": "effusion-massive-mediastinal-contralateral-shift",
+    "disease": "effusion",
+    "title": "大量胸腔积液纵隔对侧移位与急症评估",
+    "content": "单侧胸腔积液达上千毫升时，患侧肺野广泛呈大片均匀致密高密度，肋间隙增宽，纵隔及心脏明显被推挤移向对侧。此属大量占位压迫效应，患者多伴明显气急发绀，需立即急诊，由医生评估是否需要胸腔引流减压。",
+    "source": "Pleural Space Imaging (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK553862/",
+    "keywords": [
+      "大量胸腔积液",
+      "纵隔推移",
+      "白肺征象",
+      "胸腔引流减压",
+      "massive pleural effusion",
+      "mediastinal shift"
+    ]
+  },
+  {
+    "id": "effusion-thoracentesis-drainage-guidance",
+    "disease": "effusion",
+    "title": "胸腔穿刺抽液在积液病因学分析中的核心作用",
+    "content": "胸片检出中大量胸腔积液后，单纯影像无法定性漏出液还是渗出液。医生可能根据积液量和临床情况，在超声定位下安排胸腔穿刺送检，分析蛋白、细胞计数、脱落细胞及病原微生物，以协助明确积液性质。",
+    "source": "Thoracentesis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK441855/",
+    "keywords": [
+      "胸腔穿刺",
+      "超声定位抽液",
+      "渗出液鉴别",
+      "胸水生化",
+      "thoracentesis",
+      "pleural fluid analysis"
+    ]
+  },
+  {
+    "id": "infiltration-crazy-paving-hrct-features",
+    "disease": "infiltration",
+    "title": "高分辨CT铺路石征浸润影像的鉴别提示",
+    "content": "铺路石征表现为磨玻璃浸润背景上重叠增厚的小叶间隔网格影，形似不规则石板路。胸片上仅呈粗糙模糊浸润，而高分辨CT能清晰展现该特征，可见于肺泡蛋白沉积症、急性肺水肿或病毒感染，需结合临床。",
+    "source": "Crazy Paving Pattern (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/crazy-paving-pattern-1",
+    "keywords": [
+      "铺路石征",
+      "高分辨CT",
+      "磨玻璃浸润",
+      "小叶间隔增厚",
+      "crazy-paving pattern",
+      "ground glass"
+    ]
+  },
+  {
+    "id": "infiltration-tree-in-bud-endobronchial-spread",
+    "disease": "infiltration",
+    "title": "树芽征浸润对细支气管感染病灶的提示",
+    "content": "胸片见外周小斑点伴索条影时，薄层CT常表现为树枝分叉样芽苞结节即树芽征。该征象反映小气道终末细支气管被炎性黏液栓或脓液充填，高度提示活动性感染性细支气管炎或结核支气管播散，建议就诊排查。",
+    "source": "Tree-in-bud sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/tree-in-bud-sign",
+    "keywords": [
+      "树芽征",
+      "活动性感染",
+      "细支气管炎",
+      "支气管播散",
+      "tree-in-bud sign",
+      "bronchiolar impaction"
+    ]
+  },
+  {
+    "id": "infiltration-cardiopulmonary-multidisciplinary-triage",
+    "disease": "infiltration",
+    "title": "浸润影结合多学科多模态评估的就医建议",
+    "content": "胸片提示肺部浸润影鉴别范围广泛，涵盖细菌、病毒感染、结缔组织病及心功能减退等多种可能。临床就医时，医生常结合发病时间、听诊湿啰音及胸部CT综合分析，由专科制定个体化精准诊治方案。",
+    "source": "Pulmonary Infiltrates Evaluation (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK534295/",
+    "keywords": [
+      "浸润影鉴别",
+      "多模态评估",
+      "病程综合分析",
+      "专科就医",
+      "infiltrate triage",
+      "multidisciplinary approach"
+    ]
+  },
+  {
+    "id": "mass-ct-enhancement-vascularity-features",
+    "disease": "mass",
+    "title": "胸部增强CT对肺部肿块血供的鉴别意义",
+    "content": "胸片初筛发现直径超过3厘米肺肿块后，通常需进一步做胸部增强CT。良性炎性结节强化多均匀短暂，恶性肿瘤往往因新生畸形血管丰富而呈现早期不均一显著强化，有助于明确浸润范围与血管解剖关系。",
+    "source": "Lung Cancer Imaging (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK557765/",
+    "keywords": [
+      "胸部增强CT",
+      "肿块血供强化",
+      "新生血管",
+      "浸润范围",
+      "contrast-enhanced CT",
+      "mass vascularity"
+    ]
+  },
+  {
+    "id": "mass-central-atelectasis-golden-s-sign",
+    "disease": "mass",
+    "title": "中央型肺肿块与右上叶不张Golden S征",
+    "content": "右上肺门中央型肿块压迫右上叶支气管引起右上叶肺不张时，肺叶向内上方萎缩，外侧水平裂上移而内侧因肿块膨凸隆起，在胸片形成反S状线条即Golden S征。该征象高度提示中央型占位，建议尽早行气管镜排查。",
+    "source": "Golden S Sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/golden-s-sign",
+    "keywords": [
+      "Golden S征",
+      "中央型占位",
+      "右上叶不张",
+      "气管镜检查",
+      "Golden S sign",
+      "central mass"
+    ]
+  },
+  {
+    "id": "mass-histopathological-biopsy-gold-standard",
+    "disease": "mass",
+    "title": "组织病理活检作为肺肿块性质判断金标准",
+    "content": "无论胸片还是CT对肺肿块形态描述多么逼真，影像学均属于形态学间接推断，不能替代病理。经皮肺穿刺活检或支气管镜下组织活检获取肿瘤细胞学病理诊断，才是指导后续精准治疗决策的不可动摇的金标准。",
+    "source": "Lung Cancer Imaging (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK557765/",
+    "keywords": [
+      "组织病理活检",
+      "穿刺活检",
+      "金标准",
+      "肺部肿块性质",
+      "histopathology biopsy",
+      "definitive diagnosis"
+    ]
+  },
+  {
+    "id": "nodule-pet-ct-metabolic-evaluation-role",
+    "disease": "nodule",
+    "title": "PET-CT葡萄糖代谢评估在实性结节中的应用",
+    "content": "对于胸片或CT偶然发现直径大于8毫米实性肺结节，若临床风险分层较高，医生常建议行PET-CT检查。通过测定病灶氟代脱氧葡萄糖摄取SUV值评估代谢活性，有助于鉴别高度代谢肿瘤与非活动性良性病变。",
+    "source": "PET Imaging (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK599133/",
+    "keywords": [
+      "PET-CT检查",
+      "实性肺结节",
+      "葡萄糖代谢",
+      "SUV代谢值",
+      "PET-CT nodule",
+      "metabolic activity"
+    ]
+  },
+  {
+    "id": "nodule-subsolid-ground-glass-features",
+    "disease": "nodule",
+    "title": "亚实性肺结节与磨玻璃结节的分类特征",
+    "content": "亚实性结节包括纯磨玻璃结节及含实性成分的部分实性结节。胸片由于分辨率限制对此类结节极难识别，薄层低剂量CT是唯一可靠手段。部分实性结节恶性概率往往高于纯磨玻璃结节，需密切随访观察。",
+    "source": "Guidelines for Management of Incidental Pulmonary Nodules (Fleischner Society 2017 / Radiology)",
+    "source_url": "https://pubs.rsna.org/doi/10.1148/radiol.2017161659",
+    "keywords": [
+      "亚实性结节",
+      "磨玻璃结节",
+      "部分实性",
+      "Lung-RADS",
+      "subsolid nodule",
+      "part-solid nodule"
+    ]
+  },
+  {
+    "id": "nodule-volume-doubling-time-assessment",
+    "disease": "nodule",
+    "title": "体积倍增时间在肺结节良恶性鉴别中的应用",
+    "content": "结节体积增长一倍所需的时间称为体积倍增时间。典型恶性肿瘤倍增时间多在30至400天之间；若小于30天多见于急性感染炎症，若超过500天无变化多提示良性病变。通过多次CT随访测量可辅助研判病灶稳定性。",
+    "source": "Volume doubling time (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/volume-doubling-time",
+    "keywords": [
+      "体积倍增时间",
+      "结节稳定性",
+      "动态CT复查",
+      "良恶性鉴别",
+      "volume doubling time",
+      "nodule growth rate"
+    ]
+  },
+  {
+    "id": "pneumothorax-deep-sulcus-sign-supine",
+    "disease": "pneumothorax",
+    "title": "卧位胸片深沟征对气胸的提示意义",
+    "content": "卧位拍摄床旁胸片时，胸膜腔游离气体受重力驱使汇聚于前肋膈角，表现为侧肋膈角深长透亮并向腹部延伸，称为深沟征。在创伤或术后重症卧位患者中，深沟征常是提示隐匿性气胸的关键线索，需仔细检视。",
+    "source": "Deep Sulcus Sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/deep-sulcus-sign",
+    "keywords": [
+      "深沟征",
+      "卧位胸片",
+      "隐匿气胸",
+      "前肋膈窦透亮",
+      "deep sulcus sign",
+      "supine pneumothorax"
+    ]
+  },
+  {
+    "id": "pneumothorax-skin-fold-artifact-differential",
+    "disease": "pneumothorax",
+    "title": "皮肤褶皱伪影与真性气胸胸膜线的鉴别",
+    "content": "卧位或消瘦老年患者拍片时，背部或侧胸皮肤受压折叠可投影为宽带状弧形线条，极易被误判为气胸线。鉴别要点在于皮肤褶皱线外侧仍清晰可见连续正常肺纹理穿过，且线条通常延伸出胸廓骨性边界之外。",
+    "source": "Skin fold (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/skin-fold",
+    "keywords": [
+      "皮肤褶皱伪影",
+      "假性气胸",
+      "胸膜线鉴别",
+      "肺纹理穿透",
+      "skin fold artifact",
+      "pseudo-pneumothorax"
+    ]
+  },
+  {
+    "id": "pneumothorax-chest-tube-decompression-role",
+    "disease": "pneumothorax",
+    "title": "胸腔闭式引流术在较大气胸中的急救作用",
+    "content": "当肺萎陷程度超过30%或患者伴明显胸闷呼吸困难时，单纯保守观察难以迅速复张。医生可能根据气胸程度选择胸腔闭式引流，具体操作由临床团队决定，以帮助胸膜腔恢复负压并促使肺组织重新膨胀。",
+    "source": "Chest Tube Placement (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK459199/",
+    "keywords": [
+      "胸腔闭式引流",
+      "水封瓶引流",
+      "气胸减压",
+      "肺复张",
+      "chest tube placement",
+      "thoracostomy"
+    ]
+  },
+  {
+    "id": "consolidation-spine-sign-lower-lobe-retrocardiac",
+    "disease": "consolidation",
+    "title": "侧位胸片脊柱征对下叶心后实变的提示",
+    "content": "正常侧位胸片由于肺组织含气量自上而下递增，胸椎椎体投影表现为自上向下透亮度逐渐增高。当出现“脊柱征”即下段胸椎椎体密度反常增高发白时，高度提示心影后方或肺下叶后基底段存在隐蔽实变。",
+    "source": "Spine sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/spine-sign-chest-x-ray",
+    "keywords": [
+      "脊柱征",
+      "侧位胸片",
+      "下叶实变",
+      "心后区病变",
+      "spine sign",
+      "lower lobe consolidation"
+    ]
+  },
+  {
+    "id": "consolidation-delayed-resolution-differential",
+    "disease": "consolidation",
+    "title": "难吸收性肺实变病因鉴别与CT复查指征",
+    "content": "常规细菌性肺炎实变多在规范治疗数周内逐步吸收。若充分抗感染后实变持续数周无任何消退迹象（难吸收性肺炎），需警惕支气管堵塞、真菌感染或隐源性机化性肺炎等特殊病因，建议及时复查高分辨CT及支气管镜。",
+    "source": "Cryptogenic Organizing Pneumonia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK500008/",
+    "keywords": [
+      "难吸收性肺实变",
+      "延迟吸收",
+      "机化性肺炎",
+      "高分辨CT复查",
+      "non-resolving consolidation",
+      "delayed resolution"
+    ]
+  },
+  {
+    "id": "consolidation-lobar-anatomy-fissure-demarcation",
+    "disease": "consolidation",
+    "title": "叶间裂对肺叶实变边界界定的解剖意义",
+    "content": "大叶性实变常以脏层胸膜构成的叶间裂为天然边界。如右上叶实变下界呈平直水平裂边缘，右中叶实变受限于斜裂与水平裂之间。清晰的叶间裂分界有助于准确定位病变所属肺叶，并与跨叶浸润病灶做出鉴别。",
+    "source": "Consolidation (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/consolidation",
+    "keywords": [
+      "叶间裂",
+      "解剖边界",
+      "水平裂",
+      "大叶实变定位",
+      "interlobar fissure",
+      "lobar boundary"
+    ]
+  },
+  {
+    "id": "edema-kerley-a-lines-central-interstitial",
+    "disease": "edema",
+    "title": "肺间质水肿Kerley A线与中心淋巴吻合支",
+    "content": "Kerley A线表现为自肺门放射向肺周的细斜线状致密影，长度约数厘米，反映深部吻合淋巴管充血水肿扩张。常与外带Kerley B线伴随出现，直观提示较重程度的肺间质充血，多见于左心衰竭加重期。",
+    "source": "Kerley lines (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/kerley-lines",
+    "keywords": [
+      "Kerley A线",
+      "肺门放射斜线",
+      "深部淋巴管水肿",
+      "间质充血",
+      "Kerley A lines",
+      "central interstitial edema"
+    ]
+  },
+  {
+    "id": "edema-cephalization-pulmonary-venous-hypertension",
+    "disease": "edema",
+    "title": "肺淤血肺门血管头侧化征象与肺静脉高压",
+    "content": "正常立位胸片受重力影响下肺野血管管径较上肺更粗。当左心衰竭引起肺静脉压升高时，血液重分布使上肺静脉明显充盈增粗反超下肺，称为血管头侧化或鹿角征。这是早期肺静脉淤血的灵敏影像指标。",
+    "source": "Cephalisation of pulmonary veins (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/cephalisation-of-pulmonary-veins",
+    "keywords": [
+      "血管头侧化",
+      "鹿角征",
+      "肺淤血",
+      "肺静脉高压",
+      "cephalization",
+      "pulmonary venous congestion"
+    ]
+  },
+  {
+    "id": "edema-ards-noncardiogenic-permeability-features",
+    "disease": "edema",
+    "title": "ARDS非心源性肺水肿微血管通透性增高特征",
+    "content": "严重感染或创伤引起的急性呼吸窘迫综合征导致肺泡毛细血管内膜受损、通透性急剧增高。胸片常呈双肺对称弥漫性肺泡浸润影，但心胸比通常正常且无明显肺淤血血管扩张，需结合原发病抢救监护。",
+    "source": "Noncardiogenic Pulmonary Edema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK542230/",
+    "keywords": [
+      "非心源性水肿",
+      "ARDS",
+      "毛细血管通透性",
+      "心影大小正常",
+      "noncardiogenic edema",
+      "ARDS infiltration"
+    ]
+  },
+  {
+    "id": "emphysema-retrosternal-airspace-widening",
+    "disease": "emphysema",
+    "title": "胸骨后透亮间隙增宽在肺气肿侧位片中的表现",
+    "content": "侧位胸片上，升主动脉前缘与胸骨后壁之间的清晰含气肺组织区域若水平宽度超过2.5厘米，提示胸骨后透亮间隙病理性增宽。该征象灵敏反映肺过度充气向前推挤胸廓，是肺气肿辅助判定的客观指标。",
+    "source": "Retrosternal space (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/retrosternal-space",
+    "keywords": [
+      "胸骨后间隙",
+      "侧位胸片",
+      "过度充气",
+      "肺气肿指征",
+      "retrosternal space",
+      "hyperinflation sign"
+    ]
+  },
+  {
+    "id": "emphysema-saber-sheath-trachea-coronal-narrowing",
+    "disease": "emphysema",
+    "title": "剑鞘样气管在慢性阻塞性肺疾病中的征象",
+    "content": "长期严重肺气肿患者后前位胸片常现胸内气管横向内径显著狭窄变扁，而矢状面内径相对扩大，呈“剑鞘”形态。此改变多由胸廓前后径代偿膨隆及肺泡内压慢性增高导致气管软骨变形，高度伴随重度慢阻肺。",
+    "source": "Saber-sheath trachea (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/saber-sheath-trachea",
+    "keywords": [
+      "剑鞘样气管",
+      "气管狭窄",
+      "慢阻肺特征",
+      "胸廓畸形",
+      "saber-sheath trachea",
+      "coronal narrowing"
+    ]
+  },
+  {
+    "id": "emphysema-centrilobular-vs-panlobular-types",
+    "disease": "emphysema",
+    "title": "小叶中心型与全小叶型肺气肿的高分辨CT分型",
+    "content": "胸片仅能提示肺过度透亮，而高分辨CT能精细分型：小叶中心型以肺上叶多发小斑片透亮缺损为特征，与吸烟高度相关；全小叶型则全肺泡均匀弥漫破坏，多累及肺下叶，常与α1-抗胰蛋白酶缺乏等遗传代谢相关。",
+    "source": "Bullous Emphysema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK537243/",
+    "keywords": [
+      "小叶中心型肺气肿",
+      "全小叶型",
+      "高分辨CT分型",
+      "吸烟相关",
+      "centrilobular emphysema",
+      "panlobular emphysema"
+    ]
+  },
+  {
+    "id": "fibrosis-shaggy-heart-border-sign",
+    "disease": "fibrosis",
+    "title": "蓬乱心缘征对下叶肺间质纤维化的提示",
+    "content": "当肺底间质纤维化重叠于心缘周围时，纤维收缩使心包与邻近肺交界处解剖轮廓变得毛糙不齐，形似蓬乱胡须被称为“蓬乱心缘征”。该征象见于石棉肺或特发性肺纤维化，是下肺纤维化进展的特征性征象。",
+    "source": "Shaggy heart sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/shaggy-heart-sign",
+    "keywords": [
+      "蓬乱心缘征",
+      "间质纤维化",
+      "心缘模糊",
+      "石棉纤维化",
+      "shaggy heart sign",
+      "interstitial fibrosis"
+    ]
+  },
+  {
+    "id": "fibrosis-pulmonary-function-dlco-correlation",
+    "disease": "fibrosis",
+    "title": "肺纤维化影像进展与一氧化碳弥散量下降",
+    "content": "肺纤维化导致肺泡毛细血管膜增厚与气体交换面积显著减少，除胸片与CT出现网织蜂窝改变外，肺功能检测中一氧化碳弥散量（DLCO）常早期发生进行性下降，能敏锐反映气体弥散障碍与运动受限程度。",
+    "source": "Diffusing Capacity of the Lungs for Carbon Monoxide (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK553148/",
+    "keywords": [
+      "肺弥散功能",
+      "DLCO下降",
+      "气体交换障碍",
+      "活动后气促",
+      "DLCO impairment",
+      "diffusion capacity"
+    ]
+  },
+  {
+    "id": "fibrosis-honeycombing-uip-pattern-significance",
+    "disease": "fibrosis",
+    "title": "蜂窝样囊腔改变与普通型间质性肺炎UIP判定",
+    "content": "蜂窝征在高分辨CT上表现为胸膜下聚集分布、直径数毫米的多层厚壁纤维性囊腔。在排除结缔组织病等继发因素后，典型的UIP型蜂窝结构高度支持特发性肺纤维化临床判定，由呼吸专科医生评估是否需要抗纤维化治疗。",
+    "source": "HRCT - Fibrosis of the Lung (The Radiology Assistant)",
+    "source_url": "https://radiologyassistant.nl/chest/hrct/fibrosis-of-the-lung-on-hrct-imaging",
+    "keywords": [
+      "蜂窝样囊腔",
+      "UIP型改变",
+      "胸膜下蜂窝",
+      "特发性肺纤维化",
+      "honeycombing",
+      "UIP pattern"
+    ]
+  },
+  {
+    "id": "pleural-thickening-calcification-holly-leaf",
+    "disease": "pleural-thickening",
+    "title": "冬青叶征胸膜钙化与陈旧性斑块识别",
+    "content": "胸膜增厚伴广泛钙化时，胸片正面投影常呈多角形边缘不规则的高密度斑块，形似冬青树叶，被称为冬青叶征。此征象高度支持良性陈旧性石棉接触斑或既往血胸钙化，若无进行性增大通常定期随访即可。",
+    "source": "Holly leaf sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/holly-leaf-sign",
+    "keywords": [
+      "冬青叶征",
+      "胸膜钙化",
+      "石棉斑块",
+      "陈旧性改变",
+      "holly leaf sign",
+      "pleural calcification"
+    ]
+  },
+  {
+    "id": "pleural-thickening-fibrothorax-restrictive-defect",
+    "disease": "pleural-thickening",
+    "title": "严重纤维胸对胸廓顺应性与通气功能的限制",
+    "content": "严重弥漫性胸膜纤维化增厚包裹肺组织形成纤维胸时，胸片可见患侧胸壁广泛钙化铠甲状硬化带伴胸廓塌陷。僵硬胸膜阻碍肺膨胀引起显著限制性通气功能障碍，需由胸外科医生评估是否适合手术处理。",
+    "source": "Thoracic Empyema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK544279/",
+    "keywords": [
+      "纤维胸",
+      "胸膜剥脱术",
+      "限制性通气障碍",
+      "胸廓塌陷",
+      "fibrothorax",
+      "pleural peeling"
+    ]
+  },
+  {
+    "id": "pleural-thickening-mesothelioma-circumferential-alert",
+    "disease": "pleural-thickening",
+    "title": "环周结节样胸膜增厚与恶性间皮瘤鉴别警示",
+    "content": "良性胸膜增厚多为局限平滑斑块，若胸片或CT发现胸膜呈环周结节样隆起增厚大于1厘米、累及纵隔胸膜或伴持续胸痛消瘦时，需高度警惕恶性胸膜间皮瘤可能。建议尽早就医完善增强CT与胸膜组织活检排查。",
+    "source": "Diseases of the Pleura and Chest Wall (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK621648/",
+    "keywords": [
+      "恶性间皮瘤",
+      "环周胸膜增厚",
+      "结节样隆起",
+      "纵隔胸膜受累",
+      "malignant mesothelioma",
+      "nodular thickening"
+    ]
+  },
+  {
+    "id": "hernia-bochdalek-posterolateral-defect",
+    "disease": "hernia",
+    "title": "Bochdalek后外侧膈疝的解剖特点与影像识别",
+    "content": "Bochdalek疝为胚胎胸腹膜管闭合不全导致的先天性膈肌后外侧缺损，多见于左侧。胸片见胸腔后底部局限性含气肠管影或脂肪软组织突起，成人多为体检偶然发现，需与后纵隔神经源性肿瘤进行谨慎鉴别。",
+    "source": "Diaphragmatic Hernia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK554492/",
+    "keywords": [
+      "Bochdalek疝",
+      "后外侧膈疝",
+      "膈肌缺损",
+      "后纵隔肿块鉴别",
+      "Bochdalek hernia",
+      "posterolateral defect"
+    ]
+  },
+  {
+    "id": "hernia-morgagni-anterior-cardiophrenic-angle",
+    "disease": "hernia",
+    "title": "Morgagni前内侧膈疝心膈角软组织影鉴别",
+    "content": "Morgagni疝发生于胸骨旁肋软骨交界处的前内侧三角缺损，网膜或横结肠向胸腔疝入，胸片常呈右前心膈角光滑分叶软组织块影。常易与心包脂肪垫或心包囊肿混淆，胸部CT检查可清晰显示缺损处疝内容物。",
+    "source": "Diaphragmatic Hernia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK554492/",
+    "keywords": [
+      "Morgagni疝",
+      "心膈角软组织影",
+      "胸骨旁缺损",
+      "心包脂肪垫鉴别",
+      "Morgagni hernia",
+      "cardiophrenic mass"
+    ]
+  },
+  {
+    "id": "general-ap-lordotic-apical-visualization",
+    "disease": "general",
+    "title": "肺尖前凸位平片对锁骨下病灶的显示价值",
+    "content": "常规后前位胸片中双侧锁骨与第一肋骨常遮挡肺尖部。加照前凸位平片可将锁骨投照于肺野上方，消除骨骼重叠盲区，使肺尖部早期结节、陈旧性结核纤维灶或肿块清晰显露，便于医生评估处理。",
+    "source": "Apical lordotic view (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/apical-lordotic-view",
+    "keywords": [
+      "肺尖前凸位",
+      "锁骨重叠",
+      "肺尖结节",
+      "前凸投照",
+      "apical lordotic view",
+      "clavicle obscuration"
+    ]
+  },
+  {
+    "id": "general-expiratory-view-air-trapping",
+    "disease": "general",
+    "title": "呼气相胸片对局限性空气潴留的提示意义",
+    "content": "吸气相胸片双肺含气充盈，而呼气相时正常肺野密度显著升高。若支气管存在不完全活瓣性堵塞或异物，受累区域气体无法排出而反常保持透亮，形成局限性空气潴留征象，有助于医生评估处理小气道病变。",
+    "source": "Expiratory chest radiograph (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/expiratory-chest-radiograph",
+    "keywords": [
+      "呼气相胸片",
+      "空气潴留",
+      "活瓣狭窄",
+      "小气道病变",
+      "expiratory radiograph",
+      "air trapping"
+    ]
+  },
+  {
+    "id": "general-scapular-retraction-positioning",
+    "disease": "general",
+    "title": "胸片投照时双肩向前旋转避免肩胛骨遮挡",
+    "content": "拍摄标准后前位胸片时，技师通常指导受检者手背置于髋部并将双肘与双肩尽量向前旋转。这一规范体位能将两侧肩胛骨拉离肺野外侧，避免肩胛骨内缘重叠于中上肺野形成伪阴影，保证影像质量由医生评估处理。",
+    "source": "Chest (PA view) (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/chest-pa-view",
+    "keywords": [
+      "后前位体位",
+      "肩胛骨移开",
+      "投照摆位",
+      "伪影避免",
+      "scapular retraction",
+      "PA positioning"
+    ]
+  },
+  {
+    "id": "general-portable-icu-chest-radiograph-limits",
+    "disease": "general",
+    "title": "重症监护床旁移动胸片的技术局限与解读",
+    "content": "重症监护床旁胸片多采用前后位卧位投照，焦片距较短且患者常难以充分深吸气。图像易受心脏放大、肩胛骨重叠及胸膜反折等因素干扰，微小病灶分辨率受限，读片时需结合临床监护指标由医生评估处理。",
+    "source": "Mobile chest radiography (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/mobile-chest-radiography",
+    "keywords": [
+      "床旁移动胸片",
+      "前后位投照",
+      "几何放大",
+      "重症监护",
+      "mobile chest x-ray",
+      "portable radiograph"
+    ]
+  },
+  {
+    "id": "general-posteroanterior-erect-gravity-effect",
+    "disease": "general",
+    "title": "立位胸片重力沉降对气液平面的显示价值",
+    "content": "标准立位胸片充分利用重力物理特性，使胸膜腔游离液体自然沉降于下部肋膈角，而游离气体向上浮至肺尖或胸壁最高处。立位投照是清晰显示气胸脏层胸膜线与胸腔积液凹面分界的理想体位，便于医生评估处理。",
+    "source": "Erect chest radiograph (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/erect-chest-radiograph",
+    "keywords": [
+      "立位胸片",
+      "重力沉降",
+      "气液平面",
+      "胸膜分界",
+      "erect chest x-ray",
+      "gravity effect"
+    ]
+  },
+  {
+    "id": "general-incidentaloma-overdiagnosis-guidance",
+    "disease": "general",
+    "title": "胸部X射线检查偶然发现影像异常的就医原则",
+    "content": "体检或无症状筛查中偶然发现胸片阴影或结节称为偶然发现。绝大部分偶发钙化或条索影为陈旧良性改变，无需恐慌。建议携带原始数字影像至专科门诊，由医生评估处理并决定是否需复查随访，避免自行过度检查。",
+    "source": "X-ray (NHS UK)",
+    "source_url": "https://www.nhs.uk/conditions/x-ray/",
+    "keywords": [
+      "胸片偶发病灶",
+      "体检异常",
+      "就医原则",
+      "随访策略",
+      "incidental findings",
+      "NHS x-ray guidance"
+    ]
+  },
+  {
+    "id": "general-breast-shadow-density-artifact",
+    "disease": "general",
+    "title": "女性双侧乳房软组织影对下肺野密度的影响",
+    "content": "女性受检者后前位胸片双下肺野常因乳房软组织投照而呈对称性密度轻度增高。若患者曾行单侧乳房手术，可出现不对称性单侧肺野发白假象，易被初学者误读为肺浸润，阅片时需注意识别解剖对称性并由医生评估处理。",
+    "source": "Breast artefacts (chest) (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/breast-artefacts-chest",
+    "keywords": [
+      "乳房软组织影",
+      "下肺野密度",
+      "假性浸润",
+      "解剖对称性",
+      "breast shadow artifact",
+      "asymmetric attenuation"
+    ]
+  },
+  {
+    "id": "no-finding-asthma-normal-chest-radiograph",
+    "disease": "no_finding",
+    "title": "支气管哮喘发作间歇期胸片正常的临床意义",
+    "content": "支气管哮喘主要是支气管平滑肌痉挛与慢性气道反应性增高，在发作间歇期，胸片通常表现为双肺未见明显异常。胸片主要用于急性发作时排除并发气胸、纵隔气肿或肺部感染，临床症状仍需由医生评估处理。",
+    "source": "Asthma (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK430901/",
+    "keywords": [
+      "支气管哮喘",
+      "胸片正常",
+      "发作间歇期",
+      "排除气胸",
+      "bronchial asthma",
+      "normal radiograph in asthma"
+    ]
+  },
+  {
+    "id": "no-finding-early-interstitial-pneumonia-lag",
+    "disease": "no_finding",
+    "title": "早期间质性肺病胸片阴性与高分辨CT指征",
+    "content": "间质性肺病早期小叶间隔微细纤维化在常规胸片二维重叠中极易漏诊，报告常呈未见明显异常。若患者存在进行性活动后气促或干咳，即使平片阴性，仍建议遵医嘱行胸部高分辨CT排查微细网格病灶，由医生评估处理。",
+    "source": "Interstitial Lung Disease (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/interstitial-lung-disease",
+    "keywords": [
+      "早期间质病变",
+      "胸片假阴性",
+      "高分辨CT指征",
+      "活动后气促",
+      "early ILD subtlety",
+      "normal chest x-ray"
+    ]
+  },
+  {
+    "id": "no-finding-atypical-chest-pain-musculoskeletal",
+    "disease": "no_finding",
+    "title": "肌肉骨骼源性胸痛胸片未见异常的就医提示",
+    "content": "肋软骨炎、肌肉拉伤或肋间神经痛引起的胸痛，胸部平片检查通常完全正常。胸片未见异常能有效排除肺炎、大叶实变及气胸等器质性胸膜急症，若局部压痛明显或反复隐痛，建议专科就诊由医生评估处理。",
+    "source": "Chest Pain (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK482335/",
+    "keywords": [
+      "肌肉骨骼胸痛",
+      "胸片未见异常",
+      "肋软骨炎",
+      "器质病变排除",
+      "musculoskeletal chest pain",
+      "normal x-ray"
+    ]
+  },
+  {
+    "id": "pneumonia-aspiration-dependent-segment-localization",
+    "disease": "pneumonia",
+    "title": "吸入性肺炎好发于重力低位肺段的影像特征",
+    "content": "误吸异物或分泌物所致吸入性肺炎，受重力影响最常分布于下叶背段或上叶后段。胸片多表现为相应肺段局限性片状高密度浸润或实变影，易合并厌氧菌坏死，多见于卧床或吞咽困难者，需由医生评估处理。",
+    "source": "Aspiration Pneumonia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK430973/",
+    "keywords": [
+      "吸入性肺炎",
+      "重力低位肺段",
+      "下叶背段",
+      "吞咽障碍",
+      "aspiration pneumonia",
+      "dependent segments"
+    ]
+  },
+  {
+    "id": "pneumonia-round-pneumonia-pediatric-mimic",
+    "disease": "pneumonia",
+    "title": "儿童球形肺炎与肺部肿瘤的影像鉴别要点",
+    "content": "球形肺炎多见于儿童及青少年，由于肺泡孔未完全发育，炎性渗出局限呈圆形球状致密影，易被误认为肺肿瘤。患儿多伴急性发热与白细胞增高，经规范抗感染治疗后短期内多可显著吸收，由医生评估处理。",
+    "source": "Round pneumonia (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/round-pneumonia",
+    "keywords": [
+      "儿童球形肺炎",
+      "球形致密影",
+      "肺肿瘤鉴别",
+      "抗感染吸收",
+      "round pneumonia",
+      "pediatric consolidation"
+    ]
+  },
+  {
+    "id": "pneumonia-pneumocystis-jirovecii-perihilar-haze",
+    "disease": "pneumonia",
+    "title": "肺孢子菌肺炎双肺门蝴蝶样间质浸润征象",
+    "content": "免疫功能低下受检者发生肺孢子菌肺炎时，胸片典型表现为自双侧肺门向外周放射的对称性毛玻璃样或淡薄间质网织浸润，肺外带常相对清晰。患者常伴干咳与严重进行性呼吸急促，需由医生评估处理。",
+    "source": "Pneumocystis Jirovecii Pneumonia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK482370/",
+    "keywords": [
+      "肺孢子菌肺炎",
+      "双肺门浸润",
+      "磨玻璃浸润",
+      "免疫低下",
+      "Pneumocystis pneumonia",
+      "perihilar ground-glass"
+    ]
+  },
+  {
+    "id": "atelectasis-right-middle-lobe-syndrome",
+    "disease": "atelectasis",
+    "title": "右肺中叶综合征反复中叶肺不张的影像特点",
+    "content": "右中叶支气管细长且周围淋巴结密集，受炎症压迫极易引流不畅发生复发性萎陷。侧位胸片见自肺门向前下方心膈角延伸的锐利三角形致密影，后前位表现为右心缘模糊。易反复慢性感染，需由医生评估处理。",
+    "source": "Right middle lobe syndrome (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/right-middle-lobe-syndrome",
+    "keywords": [
+      "右中叶综合征",
+      "右心缘模糊",
+      "三角形萎陷",
+      "中叶不张",
+      "middle lobe syndrome",
+      "lobar collapse"
+    ]
+  },
+  {
+    "id": "atelectasis-left-upper-lobe-luftsichel-sign",
+    "disease": "atelectasis",
+    "title": "左肺上叶不张新月气征对解剖移位的提示",
+    "content": "左肺上叶发生严重萎陷时，下叶背段代偿性过度膨胀向前上方移位，插入主动脉弓与萎陷上叶之间，在主动脉结旁形成透亮的新月状充气晕环，称为新月气征。该征象直观体现了容积丢失代偿，由医生评估处理。",
+    "source": "Luftsichel sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/luftsichel-sign",
+    "keywords": [
+      "新月气征",
+      "左肺上叶不张",
+      "主动脉弓新月影",
+      "代偿性膨胀",
+      "Luftsichel sign",
+      "left upper lobe collapse"
+    ]
+  },
+  {
+    "id": "atelectasis-cicatricial-fibroatelectasis-healed-tb",
+    "disease": "atelectasis",
+    "title": "陈旧性结核瘢痕牵拉所致瘢痕性肺不张",
+    "content": "既往严重肺结核愈合后，局限性广泛肉芽组织机化收缩形成不可逆的瘢痕性肺不张。胸片常见上叶致密硬化萎陷，伴同侧肺门显著向上牵拉抬高、气管明显移向患侧。病灶长期稳定无急性症状者，由医生评估处理。",
+    "source": "Cicatrisation atelectasis (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/cicatrisation-atelectasis",
+    "keywords": [
+      "瘢痕性肺不张",
+      "陈旧结核瘢痕",
+      "肺门上提",
+      "气管牵拉",
+      "cicatrisation atelectasis",
+      "parenchymal scarring"
+    ]
+  },
+  {
+    "id": "cardiomegaly-left-atrial-enlargement-double-density",
+    "disease": "cardiomegaly",
+    "title": "左心房增大胸片心右缘双重轮廓征的识别",
+    "content": "二尖瓣病变导致左心房明显扩张时，增大的左心房体向右侧突出重叠于右心房后方，在后前位平片右心缘形成两条并行的重叠致密圆弧轮廓，称为双心房影；常伴隆突分叉角度增宽，建议行超声心动图由医生评估处理。",
+    "source": "Double cardiac density sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/double-cardiac-density-sign",
+    "keywords": [
+      "双心房影",
+      "左心房增大",
+      "双重密度征",
+      "隆突角度增宽",
+      "double density sign",
+      "left atrial enlargement"
+    ]
+  },
+  {
+    "id": "cardiomegaly-hypertensive-heart-disease-uncoiling",
+    "disease": "cardiomegaly",
+    "title": "高血压性心脏病胸片心影增大与主动脉迂曲",
+    "content": "长期未达标的高血压可促使左心室压力负荷增高导致代偿性肥厚，胸片可见心左缘下段圆隆外突延伸，常合并主动脉弓迂曲、延长及主动脉结明显外凸。胸片仅反映解剖轮廓，患者应监测血压并由医生评估处理。",
+    "source": "Hypertensive Heart Disease (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK539800/",
+    "keywords": [
+      "高血压性心脏病",
+      "主动脉迂曲",
+      "主动脉结突出",
+      "左心室负荷",
+      "hypertensive heart disease",
+      "aortic uncoiling"
+    ]
+  },
+  {
+    "id": "cardiomegaly-cor-pulmonale-pulmonary-artery-bulging",
+    "disease": "cardiomegaly",
+    "title": "慢性肺源性心脏病肺动脉段突出与右室增大",
+    "content": "慢阻肺晚期引起肺动脉高压时，后前位胸片见心腰部肺动脉段饱满弧形外凸，右下肺动脉干横径扩张增粗，心尖钝圆上翘远离膈面。平片提示慢性肺心改变，患者需结合心脏超声测定肺动脉压力，由医生评估处理。",
+    "source": "Cor Pulmonale (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK430738/",
+    "keywords": [
+      "慢性肺心病",
+      "肺动脉段突出",
+      "右室增大",
+      "心尖上翘",
+      "cor pulmonale",
+      "pulmonary artery segment"
+    ]
+  },
+  {
+    "id": "effusion-pleural-fluid-supine-haze-artifact",
+    "disease": "effusion",
+    "title": "卧位胸片胸腔积液弥漫性面纱样密度增高",
+    "content": "卧位拍片时游离胸水顺重力均匀铺展于患侧背部肺后方，立位典型的凹面肋膈角变钝征象消失，代之以整个患侧肺野弥漫均匀的面纱样透亮度减低，且肺血管纹理仍可辨认。读片时需细致甄别，由医生评估处理。",
+    "source": "Pleural effusion (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/pleural-effusion",
+    "keywords": [
+      "卧位胸水",
+      "面纱征",
+      "透亮减低",
+      "重力分层",
+      "supine pleural effusion",
+      "veil sign"
+    ]
+  },
+  {
+    "id": "effusion-empyema-vs-abscess-differential",
+    "disease": "effusion",
+    "title": "脓胸胸膜分离征与周围型肺脓肿的鉴别",
+    "content": "胸部增强CT上脏层与壁层胸膜受纤维炎性浸润明显增厚、分开展开包绕脓液称为胸膜分离征，结合胸壁钝角相交，高度支持包裹性脓胸；而肺脓肿多位于肺实质内呈锐角贴壁。准确鉴别有助于指导专科医生评估处理。",
+    "source": "Split pleura sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/split-pleura-sign",
+    "keywords": [
+      "胸膜分离征",
+      "包裹性脓胸",
+      "肺脓肿鉴别",
+      "胸膜增厚展开",
+      "split pleura sign",
+      "empyema differentiation"
+    ]
+  },
+  {
+    "id": "effusion-congestive-heart-failure-bilateral",
+    "disease": "effusion",
+    "title": "充血性心力衰竭双侧对称性积液伴肺水肿",
+    "content": "全心衰竭或急性左心失代偿常伴发双侧胸腔积液，多呈右侧多于左侧的对称性分布，常伴心影普遍饱满、肺门血管充血模糊及Kerley B线。经规范抗心力衰竭综合干预后积液常可逐步吸收，需由医生评估处理。",
+    "source": "Congestive Heart Failure (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK459141/",
+    "keywords": [
+      "充血性心衰",
+      "双侧胸水",
+      "心影饱满",
+      "肺门充血",
+      "congestive heart failure",
+      "bilateral effusion"
+    ]
+  },
+  {
+    "id": "infiltration-viral-pneumonia-diffuse-peribronchial",
+    "disease": "infiltration",
+    "title": "病毒性肺炎双肺弥漫性细网织浸润影像特点",
+    "content": "流感或腺病毒感染常累及小支气管周围间质，胸片多呈双肺弥漫分布的细支气管周围渗出、网状颗粒结节或淡薄磨玻璃浸润影，典型大叶性实变较为少见。患者伴发热干咳，应配合病原学检测由医生评估处理。",
+    "source": "Viral Pneumonia (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK513282/",
+    "keywords": [
+      "病毒性肺炎",
+      "间质浸润",
+      "细网织影",
+      "支气管周围渗出",
+      "viral pneumonia",
+      "interstitial infiltration"
+    ]
+  },
+  {
+    "id": "infiltration-diffuse-alveolar-hemorrhage-fluffy",
+    "disease": "infiltration",
+    "title": "弥漫性肺泡出血双肺云絮状浸润与咯血关联",
+    "content": "系统性血管炎导致毛细血管微渗血时，胸片短期内突发双中下肺广泛边缘模糊的棉絮状斑片浸润，形似急性肺水肿但多无心影扩大。患者常伴突发咯血或血红蛋白骤降，属危重呼吸急症，需立即急诊，由医生评估处理。",
+    "source": "Diffuse alveolar haemorrhage (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/diffuse-alveolar-haemorrhage",
+    "keywords": [
+      "弥漫肺泡出血",
+      "棉絮浸润",
+      "活动性咯血",
+      "血管炎征象",
+      "alveolar hemorrhage",
+      "fluffy opacities"
+    ]
+  },
+  {
+    "id": "infiltration-hypersensitivity-pneumonitis-hazy",
+    "disease": "infiltration",
+    "title": "过敏性肺炎急性期弥漫性磨玻璃浸润与脱离抗原",
+    "content": "反复吸入霉菌或有机粉尘可诱发外源性过敏性肺炎，胸片常呈双肺对称模糊的毛玻璃浸润或微细腺泡小结节，以下肺野显著。关键在于细致排查生活环境并及时脱离过敏原暴露，结合专科治疗方案由医生评估处理。",
+    "source": "Hypersensitivity Pneumonitis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK499913/",
+    "keywords": [
+      "过敏性肺炎",
+      "磨玻璃浸润",
+      "有机粉尘",
+      "抗原脱离",
+      "hypersensitivity pneumonitis",
+      "ground-glass haze"
+    ]
+  },
+  {
+    "id": "mass-pancoast-tumor-apical-bone-erosion",
+    "disease": "mass",
+    "title": "肺尖上沟瘤软组织占位伴局部肋骨侵蚀表现",
+    "content": "位于肺上沟尖端的肿块在后前位胸片常呈单侧肺尖不对称增厚的软组织块影，易被忽视误认为良性肺尖帽。常伴第一、二肋骨后段或胸椎横突骨质侵蚀吸收破坏，并可压迫交感神经链，需由专科医生评估处理。",
+    "source": "Pancoast tumour (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/pancoast-tumour",
+    "keywords": [
+      "肺尖上沟瘤",
+      "Pancoast肿瘤",
+      "肋骨骨破坏",
+      "肺尖软组织块",
+      "Pancoast tumor",
+      "apical mass"
+    ]
+  },
+  {
+    "id": "mass-hamartoma-popcorn-benign-lesion",
+    "disease": "mass",
+    "title": "肺错构瘤良性爆米花样钙化与光滑边缘特征",
+    "content": "错构瘤是肺内最常见良性间叶源性肿瘤，胸片表现为孤立、边缘锐利光滑的圆形实质块影。瘤内若含有典型爆米花样粗大软骨钙化灶或CT显示明确低密度脂肪组织成分，高度提示良性性质，由医生评估处理。",
+    "source": "Pulmonary chondroid hamartoma (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/pulmonary-chondroid-hamartoma",
+    "keywords": [
+      "肺错构瘤",
+      "爆米花钙化",
+      "光滑边缘",
+      "良性间叶肿瘤",
+      "pulmonary hamartoma",
+      "popcorn calcification"
+    ]
+  },
+  {
+    "id": "mass-bronchogenic-cyst-mediastinal-mass",
+    "disease": "mass",
+    "title": "支气管源性囊肿前中纵隔均匀水样囊块识别",
+    "content": "支气管源性囊肿为前肠胚胎发育异常所致先天畸形，胸片常呈气管旁或隆突下光滑均质圆形软组织块影，内部无血管强化。若未继发感染内部无气液平，多为体检偶然发现，CT能清晰测定内部水样密度，由医生评估处理。",
+    "source": "Bronchogenic Cyst (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK539857/",
+    "keywords": [
+      "支气管源性囊肿",
+      "纵隔囊性肿块",
+      "水样低密度",
+      "光滑边缘",
+      "bronchogenic cyst",
+      "mediastinal mass"
+    ]
+  },
+  {
+    "id": "nodule-tuberculoma-satellite-lesions",
+    "disease": "nodule",
+    "title": "肺结核球周围卫星病灶与良性钙化特点",
+    "content": "结核球多位于上叶尖后段或下叶背段，胸片呈边界清晰的圆形高密度结节，内部常见同心圆层状钙化。病灶周边散在分布微细纤维索条或小钙化点被称为卫星灶，是支持陈旧结核肉芽肿的重要征象，由医生评估处理。",
+    "source": "Tuberculoma (pulmonary) (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/tuberculoma-pulmonary",
+    "keywords": [
+      "肺结核球",
+      "卫星病灶",
+      "层状钙化",
+      "肉芽肿改变",
+      "pulmonary tuberculoma",
+      "satellite lesions"
+    ]
+  },
+  {
+    "id": "nodule-metastatic-cannonball-multiple-masses",
+    "disease": "nodule",
+    "title": "双肺多发加农炮弹样转移结节的影像警示",
+    "content": "双肺野同时出现多个大小不等、边缘光整锐利的圆形实质性结节且下肺野较为密集时，在影像学上常被称为加农炮弹征。常提示原发病灶经血行途径播散，需系统性排查全身各器官情况，由专科医生评估处理。",
+    "source": "Cannonball metastases (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/cannonball-metastases",
+    "keywords": [
+      "加农炮弹征",
+      "多发肺转移",
+      "血行播散",
+      "圆形多发结节",
+      "cannonball metastases",
+      "hematogenous spread"
+    ]
+  },
+  {
+    "id": "nodule-ground-glass-adenocarcinoma-in-situ",
+    "disease": "nodule",
+    "title": "肺部纯磨玻璃结节的长期惰性生物学特征",
+    "content": "高分辨CT发现的纯磨玻璃结节内部密度轻微增高但支气管血管纹理清晰穿透，多属早期非浸润病变。多数病灶生长极其缓慢或常年无体积变化，通常建议严格遵指南定期低剂量CT复查随访，由医生评估处理。",
+    "source": "Ground glass nodule (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/ground-glass-nodule",
+    "keywords": [
+      "纯磨玻璃结节",
+      "惰性病变",
+      "低剂量CT随访",
+      "微小浸润",
+      "ground glass nodule",
+      "indolent surveillance"
+    ]
+  },
+  {
+    "id": "pneumothorax-primary-spontaneous-tall-thin-males",
+    "disease": "pneumothorax",
+    "title": "瘦高体型青年自发性气胸的肺尖胸膜下大疱破裂",
+    "content": "瘦高体型年轻人群由于肺尖负压相对较高，易在肺尖胸膜下形成先天性微小气疱。剧烈运动或咳嗽时气疱破裂，气体逸入胸膜腔引发自发性气胸，胸片典型表现为肺尖细线状胸膜线，需由医生评估处理并观察肺复张。",
+    "source": "Spontaneous Pneumothorax (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK532859/",
+    "keywords": [
+      "自发性气胸",
+      "胸膜下微气疱",
+      "瘦高体型",
+      "肺尖胸膜线",
+      "spontaneous pneumothorax",
+      "apical bleb"
+    ]
+  },
+  {
+    "id": "pneumothorax-hydropneumothorax-horizontal-fluid-level",
+    "disease": "pneumothorax",
+    "title": "液气胸胸片特征性笔直水平气液平面的识别",
+    "content": "胸膜腔内同时存在气体与游离液体时形成液气胸。在立位胸片上，液体表面因上方气体存在不再呈现典型的弧形凹面征，而是形成一条极其平直笔直的横形水平分界面。该征象需由医生评估处理，排查外伤或支气管瘘。",
+    "source": "Hydropneumothorax (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/hydropneumothorax",
+    "keywords": [
+      "液气胸",
+      "水平气液平",
+      "笔直分界面",
+      "立位胸片",
+      "hydropneumothorax",
+      "air-fluid level"
+    ]
+  },
+  {
+    "id": "pneumothorax-pneumomediastinum-continuous-diaphragm",
+    "disease": "pneumothorax",
+    "title": "纵隔气肿连续膈肌征与心包积气鉴别",
+    "content": "气体漏入纵隔结缔组织间隙时，沿纵隔解剖轮廓蔓延，在心影下方与膈肌之间形成一条连续透亮气体带，使得两侧膈肌在中线贯通相连，称为连续膈肌征。表明纵隔积气，需进一步由医生评估处理排查气道损伤。",
+    "source": "Continuous diaphragm sign (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/continuous-diaphragm-sign",
+    "keywords": [
+      "连续膈肌征",
+      "纵隔气肿",
+      "心包下方透亮",
+      "气道破裂排查",
+      "continuous diaphragm sign",
+      "pneumomediastinum"
+    ]
+  },
+  {
+    "id": "consolidation-bronchoalveolar-carcinoma-pneumonic",
+    "disease": "consolidation",
+    "title": "肺炎型肺腺癌弥漫实变与感染性肺炎鉴别",
+    "content": "部分浸润性粘液腺癌可沿肺泡壁贴壁生长分泌粘液，胸片表现为大片假性炎性实变伴充气支气管征，酷似感染实变。若患者无急性感染发热且抗生素干预后病灶长期持续无吸收，需由医生评估处理行病理排查。",
+    "source": "Invasive mucinous adenocarcinoma of the lung (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/invasive-mucinous-adenocarcinoma-of-the-lung",
+    "keywords": [
+      "肺炎型腺癌",
+      "粘液腺癌",
+      "假性炎性实变",
+      "难吸收性实变",
+      "mucinous adenocarcinoma",
+      "pneumonic consolidation"
+    ]
+  },
+  {
+    "id": "consolidation-radiation-pneumonitis-sharp-border",
+    "disease": "consolidation",
+    "title": "放射性肺炎实变边缘与放疗照射野严格吻合",
+    "content": "胸部恶性肿瘤放疗后数周至数月，照射野内肺组织可发生急性渗出反应。胸片表现为与解剖叶间裂无关、而与放疗照射野几何轮廓严格一致的平直边缘实变影，后期可伴随纤维瘢痕收缩，需由医生评估处理。",
+    "source": "Radiation-Induced Lung Injury (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK539854/",
+    "keywords": [
+      "放射性肺炎",
+      "放疗照射野",
+      "平直边缘实变",
+      "组织瘢痕收缩",
+      "radiation pneumonitis",
+      "treatment portals"
+    ]
+  },
+  {
+    "id": "consolidation-lipoid-pneumonia-low-attenuation",
+    "disease": "consolidation",
+    "title": "外源性误吸矿物油所致脂质性肺炎实变特征",
+    "content": "长期使用矿物油通便剂或油性滴剂误吸入气道可引起脂质性肺炎。胸片表现为双下肺基底段慢性致密实变伴毛糙斑片影，胸部CT通过测定病灶内部特征性脂肪低衰减负值有助于探明原因，由医生评估处理。",
+    "source": "Lipoid pneumonia (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/lipoid-pneumonia",
+    "keywords": [
+      "脂质性肺炎",
+      "矿物油误吸",
+      "低密度实变",
+      "下叶基底段",
+      "lipoid pneumonia",
+      "fat attenuation"
+    ]
+  },
+  {
+    "id": "consolidation-chronic-eosinophilic-pneumonia-photonegative",
+    "disease": "consolidation",
+    "title": "慢性嗜酸性粒细胞肺炎反转肺水肿外周实变",
+    "content": "慢性嗜酸性粒细胞性肺炎胸片表现为双肺外周外带致密斑片实变，而中轴肺门区透亮正常，呈现如摄影底片般与典型肺水肿分布相反的“反转性肺水肿征”。常伴外周血嗜酸粒细胞增高，需由医生评估处理。",
+    "source": "Chronic eosinophilic pneumonia (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/chronic-eosinophilic-pneumonia",
+    "keywords": [
+      "嗜酸性粒细胞肺炎",
+      "反转肺水肿征",
+      "外周带实变",
+      "摄影底片征",
+      "chronic eosinophilic pneumonia",
+      "photographic negative"
+    ]
+  },
+  {
+    "id": "edema-reexpansion-pulmonary-edema-ipsilateral",
+    "disease": "edema",
+    "title": "大量胸膜引流后同侧复张性肺水肿影像警示",
+    "content": "慢性大量气胸或胸水在单次过快排气排液后，萎陷肺组织骤然膨胀，微血管再灌注损伤可导致单侧急性肺泡水肿。胸片表现为同侧肺野突发弥漫斑片磨玻璃实变影，需严格控制单次排液速度，由医生评估处理。",
+    "source": "Re-expansion pulmonary oedema (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/re-expansion-pulmonary-oedema",
+    "keywords": [
+      "复张性肺水肿",
+      "同侧急性水肿",
+      "快速胸膜引流",
+      "再灌注损伤",
+      "re-expansion edema",
+      "rapid thoracentesis"
+    ]
+  },
+  {
+    "id": "edema-neurogenic-pulmonary-edema-sympathetic",
+    "disease": "edema",
+    "title": "颅脑损伤急性下丘脑激惹致神经源性肺水肿",
+    "content": "脑出血或重度创伤后颅内压骤增，交感神经过度激活促使外周血管剧烈收缩，血液迅速转移至肺循环诱发神经源性肺水肿。胸片呈快速出现的双肺弥漫蝶翼样浸润实变，需与原发脑病协同抢救，由医生评估处理。",
+    "source": "Neurogenic Pulmonary Edema (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK538258/",
+    "keywords": [
+      "神经源性肺水肿",
+      "颅内高压",
+      "交感神经风暴",
+      "弥漫浸润",
+      "neurogenic pulmonary edema",
+      "sympathetic discharge"
+    ]
+  },
+  {
+    "id": "emphysema-vanishing-lung-syndrome-giant-bullae",
+    "disease": "emphysema",
+    "title": "巨大肺大疱压迫正常肺组织消失肺综合征",
+    "content": "严重大疱性肺气肿若单侧肺大疱体积占据超过半个胸腔，称为消失肺综合征。胸片见上叶大片完全无肺纹理的巨大无壁薄壁透亮区，压迫残余肺组织严重萎缩，易与全肺张力性气胸混淆，需由医生评估处理。",
+    "source": "Vanishing lung syndrome (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/vanishing-lung-syndrome",
+    "keywords": [
+      "消失肺综合征",
+      "巨大肺大疱",
+      "局限大疱气肿",
+      "残余肺压迫",
+      "vanishing lung syndrome",
+      "giant bullae"
+    ]
+  },
+  {
+    "id": "emphysema-alpha-1-antitrypsin-deficiency-basilar",
+    "disease": "emphysema",
+    "title": "α1-抗胰蛋白酶缺乏症双下肺全小叶破坏特点",
+    "content": "青年非吸烟者发生肺气肿需高度警惕遗传性α1-抗胰蛋白酶缺乏症。与吸烟所致上肺小叶中心型气肿显著不同，该病典型胸片表现为双下肺基底区严重的弥漫性透亮过度膨胀与肺血管床广泛稀疏破坏，由医生评估处理。",
+    "source": "Alpha-1 Antitrypsin Deficiency (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK459247/",
+    "keywords": [
+      "α1抗胰蛋白酶缺乏",
+      "全小叶型气肿",
+      "双下肺分布",
+      "遗传代谢肺病",
+      "alpha-1 antitrypsin deficiency",
+      "panacinar emphysema"
+    ]
+  },
+  {
+    "id": "fibrosis-rheumatoid-arthritis-nsip-vs-uip",
+    "disease": "fibrosis",
+    "title": "类风湿性关节炎伴发肺间质纤维化影像表现",
+    "content": "类风湿关节炎患者可合并肺间质病变，胸片多见双下肺边缘毛糙、网织小结节或线样增厚。高分辨CT能更清晰区分非特异性间质性肺炎磨玻璃改变与普通型间质肺炎蜂窝样破坏，由专科医生评估处理指导免疫干预。",
+    "source": "Rheumatoid Lung Disease (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK541095/",
+    "keywords": [
+      "类风湿肺病",
+      "间质纤维化",
+      "NSIP表现",
+      "UIP蜂窝",
+      "rheumatoid lung disease",
+      "interstitial fibrosis"
+    ]
+  },
+  {
+    "id": "fibrosis-silicosis-eggshell-calcification-hilar",
+    "disease": "fibrosis",
+    "title": "矽肺肺门淋巴结蛋壳样钙化与网织结节影",
+    "content": "长期二氧化硅粉尘作业史者，胸片典型表现为双肺中上野多发散在小圆形矽结节，常伴肺门及纵隔淋巴结外周环形环状钙化，称为蛋壳样钙化。晚期结节可融合为大块进行性大块纤维化，需由专科医生评估处理。",
+    "source": "Eggshell calcification (lymph nodes) (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/eggshell-calcification-lymph-nodes",
+    "keywords": [
+      "蛋壳样钙化",
+      "矽肺结节",
+      "粉尘纤维化",
+      "肺门淋巴结",
+      "eggshell calcification",
+      "silicosis"
+    ]
+  },
+  {
+    "id": "pleural-thickening-tuberculous-fibrothorax-unilateral",
+    "disease": "pleural-thickening",
+    "title": "结核性胸膜炎愈合后单侧胸壁铠甲状增厚",
+    "content": "既往重症结核性渗出性胸膜炎愈合后，常形成单侧广泛弥漫性胸膜纤维硬化板，称为纤维胸。胸片见患侧胸壁带状致密软组织影伴肋间隙狭窄、胸廓塌陷畸形，内部常伴广泛条状钙化，需由专科医生评估处理。",
+    "source": "Fibrothorax (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/fibrothorax",
+    "keywords": [
+      "结核性纤维胸",
+      "胸膜铠甲化",
+      "胸廓塌陷",
+      "胸膜增厚钙化",
+      "fibrothorax",
+      "pleural calcification"
+    ]
+  },
+  {
+    "id": "pleural-thickening-pseudomesotheliomatous-adenocarcinoma",
+    "disease": "pleural-thickening",
+    "title": "假间皮瘤样肺腺癌环周胸膜增厚与良性鉴别",
+    "content": "部分外周型侵袭性肺腺癌沿脏壁层胸膜广泛弥漫浸润，胸片呈类似恶性间皮瘤的单侧广泛多结节状或环周致密胸膜增厚。需与陈旧性炎性胸膜斑鉴别，胸部增强CT与胸膜穿刺活检是明确性质关键，由医生评估处理。",
+    "source": "Pseudomesotheliomatous carcinoma of the lung (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/pseudomesotheliomatous-carcinoma-of-the-lung",
+    "keywords": [
+      "假间皮瘤样癌",
+      "环周胸膜增厚",
+      "恶性多结节",
+      "穿刺活检指征",
+      "pseudomesotheliomatous carcinoma",
+      "nodular thickening"
+    ]
+  },
+  {
+    "id": "hernia-traumatic-diaphragmatic-rupture-blunt",
+    "disease": "hernia",
+    "title": "闭合性胸腹创伤后创伤性膈破裂伴脏器疝入",
+    "content": "严重车祸挤压伤导致腹内压骤增可撕裂膈肌，胸片可见患侧膈肌轮廓中断不连续，胸腔内突现充气胃肠袢或实质性软组织阴影，伴纵隔对侧移位。患者多伴严重胸腹痛，需立即急诊，由急症外科医生评估处理。",
+    "source": "Traumatic Diaphragmatic Injury (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK538183/",
+    "keywords": [
+      "创伤性膈疝",
+      "膈肌撕裂",
+      "腹腔脏器疝入",
+      "闭合挤压伤",
+      "traumatic diaphragmatic hernia",
+      "blunt trauma"
+    ]
+  },
+  {
+    "id": "hernia-hiatal-paraesophageal-rolling-type",
+    "disease": "hernia",
+    "title": "食管旁型食管裂孔疝胃底疝入纵隔与扭转警示",
+    "content": "食管旁型裂孔疝表现为贲门位置正常而胃底经增宽的膈孔疝入后纵隔，胸片常在心影后方出现巨大含气软组织包块。与滑动疝相比更易发生急性嵌顿或胃扭转缺血，若突发剧烈胸骨后绞痛需立即急诊，由医生评估处理。",
+    "source": "Para-oesophageal hernia (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/para-oesophageal-hernia",
+    "keywords": [
+      "食管旁疝",
+      "胃底疝入",
+      "心后区包块",
+      "急性胃扭转",
+      "paraesophageal hernia",
+      "gastric volvulus"
+    ]
+  },
+  {
+    "id": "hernia-congenital-diaphragmatic-scaphoid-abdomen",
+    "disease": "hernia",
+    "title": "新生儿先天性膈疝胸腔充气肠管与舟状腹征",
+    "content": "先天性膈疝多见于左侧，胸片显示患侧胸腔充满多发圆形充气肠管囊泡状阴影，正常肺组织严重受压萎陷，纵隔明显推向对侧；同时腹部因脏器疝入而平坦凹陷呈特征性舟状腹，属新生儿危急重症，由医生评估处理。",
+    "source": "Congenital diaphragmatic hernia (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/congenital-diaphragmatic-hernia",
+    "keywords": [
+      "先天性膈疝",
+      "充气肠袢",
+      "舟状腹",
+      "新生儿重症",
+      "congenital diaphragmatic hernia",
+      "scaphoid abdomen"
+    ]
+  },
+  {
+    "id": "hernia-eventration-of-diaphragm-differential",
+    "disease": "hernia",
+    "title": "膈肌膨出平滑高位穹窿与真性膈疝鉴别要点",
+    "content": "膈肌肌纤维发育不良变薄导致膈顶显著向胸腔局限或弥漫隆起抬高，称为膈肌膨出。与真性膈疝不同的是，膈肌膨出仍保持完整光滑的致密纤维肌层边界，内部无破裂孔洞，多数无明显症状，由医生评估处理。",
+    "source": "Eventration of the diaphragm (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/eventration-of-the-diaphragm",
+    "keywords": [
+      "膈肌膨出",
+      "完整肌层边界",
+      "膈顶抬高",
+      "膈疝鉴别",
+      "eventration of diaphragm",
+      "intact hemidiaphragm"
+    ]
+  },
+  {
+    "id": "general-scoliosis-cardiac-displacement",
+    "disease": "general",
+    "title": "胸椎侧弯畸形对心影位置与胸廓容积的影响",
+    "content": "脊柱胸段明显侧弯时，胸廓解剖结构不对称扭曲，常导致纵隔与心影发生假性旋转移位，一侧心缘可反常凸出饱满。评估心胸比率及肺实质时需充分考虑胸椎畸形干扰，结合体格检查由医生评估处理。",
+    "source": "Scoliosis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK441985/",
+    "keywords": [
+      "胸椎侧弯",
+      "胸廓畸形",
+      "假性心影增大",
+      "纵隔移位",
+      "thoracic scoliosis",
+      "cardiac displacement"
+    ]
+  },
+  {
+    "id": "no-finding-azygos-lobe-anatomical-variant",
+    "disease": "no_finding",
+    "title": "右肺尖奇静脉叶良性解剖变异的影像识别",
+    "content": "约1%人群在胚胎发育期奇静脉走行变异，在右肺上叶内侧形成一条细弧形高密度线，末端呈泪滴样致密影，称为奇静脉裂与奇静脉叶。此属正常先天解剖变异，无病理危害，无需特殊干预，由医生评估处理。",
+    "source": "Azygos lobe (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/azygos-lobe",
+    "keywords": [
+      "奇静脉叶",
+      "解剖变异",
+      "泪滴征",
+      "奇静脉裂",
+      "azygos lobe",
+      "anatomical variant"
+    ]
+  },
+  {
+    "id": "pneumonia-post-obstructive-recurrent-infiltrate",
+    "disease": "pneumonia",
+    "title": "支气管狭窄远端反复阻塞性肺炎的预警提示",
+    "content": "同一肺叶反复发生吸收缓慢的局限性肺炎实变时，称为阻塞性肺炎。常由支气管内肿瘤、良性息肉或异物导致引流不畅引起。平片提示相应肺段反复不张与渗出，需高度警惕管腔内病变，由专科医生评估处理。",
+    "source": "Post-obstructive pneumonia (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/post-obstructive-pneumonia",
+    "keywords": [
+      "阻塞性肺炎",
+      "反复肺炎",
+      "支气管狭窄",
+      "管腔病变排查",
+      "post-obstructive pneumonia",
+      "endobronchial obstruction"
+    ]
+  },
+  {
+    "id": "atelectasis-right-lower-lobe-triangular-sail",
+    "disease": "atelectasis",
+    "title": "右肺下叶肺不张内下移位与双重内下心缘征",
+    "content": "右肺下叶完全萎陷时，肺叶向内后下方收缩塌陷，后前位胸片在右心膈角后方呈现典型致密三角形阴影，使右侧横膈内侧轮廓模糊消失。常伴下叶斜裂向下内方移位及右侧胸腔容积减小，需由医生评估处理。",
+    "source": "Right lower lobe collapse (Radiopaedia.org)",
+    "source_url": "https://radiopaedia.org/articles/right-lower-lobe-collapse",
+    "keywords": [
+      "右下叶肺不张",
+      "三角形致密影",
+      "心膈角阴影",
+      "斜裂移位",
+      "right lower lobe collapse",
+      "triangular sail"
+    ]
+  },
+  {
+    "id": "cardiomegaly-aortic-stenosis-poststenotic-dilation",
+    "disease": "cardiomegaly",
+    "title": "主动脉瓣狭窄狭窄后升主动脉扩张与左室肥厚",
+    "content": "退行性主动脉瓣钙化狭窄患者，由于高速喷射血流冲击，后前位胸片常表现为右上纵隔升主动脉向右显著凸出扩张，合并左心室长期向心性肥厚代偿致心尖圆隆。需行超声心动图全面评估，由医生评估处理。",
+    "source": "Aortic Stenosis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK431078/",
+    "keywords": [
+      "主动脉瓣狭窄",
+      "狭窄后扩张",
+      "升主动脉增宽",
+      "左心室肥厚",
+      "aortic stenosis",
+      "post-stenotic dilatation"
+    ]
+  },
+  {
+    "id": "effusion-chylothorax-lymphatic-pleural-fluid",
+    "disease": "effusion",
+    "title": "胸导管损伤后乳糜性胸腔积液的影像与特点",
+    "content": "胸部手术或纵隔病变损伤胸导管时，富含淋巴甘油三酯的乳糜液流入胸膜腔形成乳糜胸。胸片表现为迅速增多的单侧或双侧均质胸腔积液，常致肋膈角闭塞与肺叶压迫。诊断依赖胸穿乳糜定性，由医生评估处理。",
+    "source": "Chylothorax (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK459206/",
+    "keywords": [
+      "乳糜胸",
+      "胸导管破裂",
+      "淋巴性胸水",
+      "快速积液",
+      "chylothorax",
+      "thoracic duct leak"
+    ]
+  },
+  {
+    "id": "infiltration-pulmonary-alveolar-proteinosis-batwing",
+    "disease": "infiltration",
+    "title": "肺泡蛋白沉积症双肺对称性磨玻璃浸润征象",
+    "content": "肺泡巨噬细胞清除障碍导致表面活性物质沉积时，胸片表现为自双肺门向外周扩展的对称性大片模糊云絮状浸润影，酷似心源性水肿但无心影增大。高分辨CT呈典型铺路石征，需行支气管灌洗由医生评估处理。",
+    "source": "Pulmonary Alveolar Proteinosis (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK539744/",
+    "keywords": [
+      "肺泡蛋白沉积症",
+      "对称性浸润",
+      "铺路石改变",
+      "心影大小正常",
+      "pulmonary alveolar proteinosis",
+      "perihilar haze"
+    ]
+  },
+  {
+    "id": "mass-posterior-mediastinal-schwannoma-sulcus",
+    "disease": "mass",
+    "title": "后纵隔脊柱旁沟神经源性肿块的平片边缘特征",
+    "content": "神经鞘瘤等神经源性肿瘤好发于后肋脊旁沟，胸片表现为与后脊柱轮廓重叠的光滑圆形或卵圆形致密软组织块影，侧位片见病变完全位于脊柱后纵隔，可伴椎间孔扩大或局部肋骨受压侵蚀，需行MRI由医生评估处理。",
+    "source": "Schwannoma (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK562312/",
+    "keywords": [
+      "后纵隔肿块",
+      "神经鞘瘤",
+      "脊柱旁沟",
+      "光滑轮廓",
+      "posterior mediastinal mass",
+      "schwannoma"
+    ]
+  },
+  {
+    "id": "nodule-arteriovenous-malformation-feeding-vessels",
+    "disease": "nodule",
+    "title": "肺动静脉畸形圆形结节伴滋养引流血管征象",
+    "content": "肺动静脉瘘为肺血管直接异常吻合沟通形成。胸片表现为边缘清晰的类圆形扩张血管囊状结节，常有一粗大滋养动脉自肺门伸入并有一条引流静脉汇出。增强CT或肺血管造影可清晰明确解剖，由医生评估处理。",
+    "source": "Pulmonary Arteriovenous Malformation (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK534863/",
+    "keywords": [
+      "肺动静脉畸形",
+      "滋养血管征",
+      "扩张血管囊",
+      "血管造影指征",
+      "arteriovenous malformation",
+      "feeding vessel sign"
+    ]
+  },
+  {
+    "id": "pneumothorax-catamenial-thoracic-endometriosis",
+    "disease": "pneumothorax",
+    "title": "育龄期女性月经性气胸与膈肌异位内膜相关性",
+    "content": "育龄期女性气胸若反复在月经来潮前后48至72小时内规律发作，多由胸腔子宫内膜异位导致横膈微细缺损或脏层胸膜破裂。胸片常呈右侧反复气胸伴少量积液，需由妇科与胸外科多学科联合，由医生评估处理。",
+    "source": "Catamenial Pneumothorax (StatPearls - NCBI Bookshelf)",
+    "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK537169/",
+    "keywords": [
+      "月经性气胸",
+      "胸腔内膜异位",
+      "膈肌微小缺损",
+      "周期性胸痛",
+      "catamenial pneumothorax",
+      "thoracic endometriosis"
+    ]
   }
 ]
