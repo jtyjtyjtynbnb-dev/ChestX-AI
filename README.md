@@ -30,7 +30,7 @@ python -m backend.evaluate_nih \
   --output data/nih_test_full/eval_metrics.json
 ```
 
-当前完整 NIH test：**Top-1 45.67%、Top-3 71.11%**（400 张子集为 57.25%/80.0%，仅作早期 smoke）。  
+当前完整 NIH test（微调后）：**Top-1 49.70%、Top-3 85.13%、Exact 24.64%**（原模型为 45.67%/71.11%/6.88%；完整指标为 PyTorch 候选，ONNX 4k 抽检 45.08%/84.40%/20.97%；400 张子集为早期 smoke）。  
 最新测试集评估、guard 指标与局限性见 [模型评估](模型评估.md)。  
 7 张教学图只用于 smoke test，**不是临床验证集**；完整说明见 [技术报告-合规与安全](技术报告-合规与安全.md)。
 

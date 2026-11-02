@@ -1,5 +1,6 @@
 """Application settings and the shared ten-class prediction vocabulary."""
 
+import os
 from pathlib import Path
 
 
@@ -9,7 +10,7 @@ MODEL_CANDIDATES = (
     BASE_DIR / "model.onnx",
     PROJECT_ROOT / "模型文件" / "model.onnx",
 )
-MODEL_PATH = next(
+MODEL_PATH = Path(os.environ.get("CHESTX_MODEL_PATH", "")).expanduser() if os.environ.get("CHESTX_MODEL_PATH") else next(
     (candidate for candidate in MODEL_CANDIDATES if candidate.exists()),
     MODEL_CANDIDATES[0],
 )

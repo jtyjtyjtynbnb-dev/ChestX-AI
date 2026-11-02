@@ -5,7 +5,7 @@ import zipfile
 from fnmatch import fnmatch
 from pathlib import Path
 
-EXCLUDE_DIR_NAMES = {".venv", "venv", "wheelhouse", "wheels", "__pycache__", ".git", "node_modules", "data", ".pytest_cache", "tests"}
+EXCLUDE_DIR_NAMES = {".venv", "venv", "wheelhouse", "wheels", "__pycache__", ".git", "node_modules", "data", ".pytest_cache", "tests", "runs"}
 EXCLUDE_DIR_PATTERNS = (
     "frontend.backup-*",
     "legacy-backup-*",
