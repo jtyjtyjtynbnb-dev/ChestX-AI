@@ -8,6 +8,8 @@ from pathlib import Path
 from collections import Counter
 import numpy as np
 
+from .dense import dense_scores
+
 
 KNOWLEDGE_PATH = Path(__file__).with_name("knowledge.json")
 
@@ -104,6 +106,7 @@ def retrieve_knowledge(
     corpus = [" ".join([i["title"], i["content"], *i.get("keywords", [])]) for i in candidates]
     bm25 = _bm25_scores(corpus, query_terms)
     _, vector_scores = _tfidf_vectors(corpus, query)
+    dense = dense_scores(query) if query.strip() else {}
     if not predicted and max(bm25, default=0) < 0.5 and max(vector_scores, default=0) < 0.18:
         return []
     bm25_max = max(bm25, default=0) or 1
@@ -114,8 +117,9 @@ def retrieve_knowledge(
     ranked_indices = sorted(
         range(len(candidates)),
         key=lambda i: (
-            (0.55 * bm25[i] / bm25_max)
-            + 0.45 * vector_scores[i]
+            (0.42 * bm25[i] / bm25_max)
+            + 0.28 * vector_scores[i]
+            + 0.30 * dense.get(candidates[i]["id"], 0.0)
             + (0.08 if candidates[i]["disease"] in predicted else 0)
         ),
         reverse=True,
@@ -123,7 +127,11 @@ def retrieve_knowledge(
     results = []
     for index in ranked_indices:
         item = candidates[index]
-        score = (0.55 * bm25[index] / bm25_max) + 0.45 * vector_scores[index]
+        score = (
+            (0.42 * bm25[index] / bm25_max)
+            + 0.28 * vector_scores[index]
+            + 0.30 * dense.get(item["id"], 0.0)
+        )
         if score < 0.08 and item["disease"] not in predicted:
             continue
         results.append({
@@ -131,8 +139,9 @@ def retrieve_knowledge(
             "retrieval": {
                 "bm25": round(bm25[index], 5),
                 "vector": round(vector_scores[index], 5),
+                "dense": round(float(dense.get(item["id"], 0.0)), 5),
                 "rrf_rank": round(1 / (60 + bm25_rank[index]) + 1 / (60 + vector_rank[index]), 6),
-                "mode": "local_tfidf",
+                "mode": "local_bm25_tfidf_dense",
             },
         })
     return results[: min(max(0, top_k), 12)]
@@ -153,7 +162,7 @@ async def hybrid_retrieve(
 
     client = DashScopeQwenClient()
     if not client.enabled():
-        return local[:top_k], {"mode": "local_bm25_tfidf", "bm25": True, "vector": "local_tfidf", "reranker": False}
+        return local[:top_k], {"mode": "local_bm25_tfidf_dense", "bm25": True, "vector": "local_tfidf+dense", "reranker": False}
 
     try:
         texts = [query, *[f"{item['title']}\n{item['content']}" for item in local]]
@@ -177,5 +186,5 @@ async def hybrid_retrieve(
             item["retrieval"]["rerank_rank"] = rank + 1
         return local[:top_k], {"mode": "dashscope_embedding_bm25_rerank", "bm25": True, "vector": client.model, "reranker": True}
     except (DashScopeError, KeyError, ValueError, TypeError):
-        return local[:top_k], {"mode": "local_bm25_tfidf", "bm25": True, "vector": "local_tfidf", "reranker": False, "degraded": True}
+        return local[:top_k], {"mode": "local_bm25_tfidf_dense", "bm25": True, "vector": "local_tfidf+dense", "reranker": False, "degraded": True}
 

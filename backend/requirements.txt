@@ -8,3 +8,5 @@ onnxruntime>=1.17,<2
 pytest>=8,<9
 httpx>=0.27,<1
 langgraph==1.2.16
+
+tokenizers>=0.15,<1
