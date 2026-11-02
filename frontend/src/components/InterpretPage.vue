@@ -880,7 +880,7 @@ function onResultTab(value) {
 
             <!-- 报告 -->
             <div v-show="activeTab === 'report'" class="p-4">
-              <div v-if="vm.results.agentResult" id="agentReportPanel" class="space-y-3">
+              <div v-if="vm.results.agentResult" id="agentReportPanel" class="report-document space-y-3">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div class="min-w-0">
                     <h3 class="text-sm font-semibold text-text-1">{{ $t('科普报告') }}</h3>
@@ -927,9 +927,49 @@ function onResultTab(value) {
                   <p class="text-3xs font-medium text-text-3">
                     {{ vm.results.reportMode === 'doctor' ? $t('医生版摘要（描述性，非诊断）') : $t('患者版摘要（通俗解释）') }}
                   </p>
-                  <p id="agentReportSummary" :key="vm.results.reportMode" class="report-fade mt-1 text-xs leading-6 text-text-1">
+                  <p id="agentReportSummary" :key="vm.results.reportMode" class="report-fade mt-1 text-sm leading-7 text-text-1">
                     {{ vm.results.reportSummary || $t('暂无报告摘要') }}
                   </p>
+                </div>
+
+                <div v-if="vm.results.reportMode === 'patient'" class="report-patient-grid">
+                  <div class="report-fact report-fact--blue">
+                    <span class="report-fact-kicker">01 · 影像提示</span>
+                    <strong>{{ vm.results.topProbabilities.map(item => item.name).join('、') }}</strong>
+                    <p>模型关注方向不等同于诊断，需要医生结合原始影像判断。</p>
+                  </div>
+                  <div class="report-fact report-fact--mint">
+                    <span class="report-fact-kicker">02 · 下一步</span>
+                    <strong>{{ vm.results.patientNext }}</strong>
+                    <p>建议携带原始影像、既往片和本次报告一起就诊。</p>
+                  </div>
+                  <div class="report-fact report-fact--amber">
+                    <span class="report-fact-kicker">03 · 何时就医</span>
+                    <strong>{{ vm.results.patientWarning }}</strong>
+                    <p>不要只凭概率自行用药或延误就诊。</p>
+                  </div>
+                </div>
+
+                <div v-if="vm.results.reportMode === 'doctor' && (vm.results.reportFindings.length || vm.results.reportImpression.length)" class="report-structured">
+                  <section v-if="vm.results.reportFindings.length">
+                    <h4 class="report-section-title">影像描述</h4>
+                    <ul class="space-y-1.5">
+                      <li v-for="(finding, index) in vm.results.reportFindings" :key="index" class="report-finding-row">
+                        <span class="report-finding-index">{{ String(index + 1).padStart(2, '0') }}</span>
+                        <div class="min-w-0">
+                          <strong>{{ typeof finding === 'string' ? finding : (finding.name || finding.code || '影像征象') }}</strong>
+                          <span v-if="finding.probability" class="ml-1 text-3xs text-text-3 tnum">{{ finding.probability }}%</span>
+                          <p v-if="finding.explanation" class="mt-0.5 text-2xs leading-relaxed text-text-2">{{ finding.explanation }}</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </section>
+                  <section v-if="vm.results.reportImpression.length">
+                    <h4 class="report-section-title">影像印象</h4>
+                    <ul class="list-disc space-y-1 pl-4 text-2xs leading-relaxed text-text-2">
+                      <li v-for="(item, index) in vm.results.reportImpression" :key="index">{{ item }}</li>
+                    </ul>
+                  </section>
                 </div>
 
                 <div v-if="vm.results.riskExplanation" id="reportRiskExplanation" class="rounded-md border border-warning-line bg-warning-soft p-3 text-2xs leading-relaxed text-text-2">
@@ -1071,5 +1111,89 @@ function onResultTab(value) {
 @keyframes cobrainDot { 0%, 100% { opacity: 0.35; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-2px); } }
 @media (max-width: 767px) {
   .cobrain-head { flex-direction: column; }
+}
+
+.report-document {
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(480px 180px at 100% 0%, color-mix(in srgb, var(--brand-400) 9%, transparent), transparent 70%),
+    linear-gradient(180deg, #FFFFFF 0%, #F7FBFC 100%);
+}
+.report-document::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--brand-500), var(--brand-700));
+}
+.report-patient-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.report-fact {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.report-fact--blue { background: var(--brand-50); border-color: var(--brand-200); }
+.report-fact--mint { background: var(--risk-low-soft); border-color: var(--risk-low-line); }
+.report-fact--amber { background: var(--risk-mid-soft); border-color: var(--risk-mid-line); }
+.report-fact-kicker {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--color-text-3);
+  font-size: var(--text-3xs);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.report-fact strong {
+  display: block;
+  color: var(--color-text-1);
+  font-size: var(--text-xs);
+  line-height: 1.55;
+}
+.report-fact p {
+  margin-top: 4px;
+  color: var(--color-text-2);
+  font-size: var(--text-3xs);
+  line-height: 1.55;
+}
+.report-structured {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-card) 72%, var(--brand-50));
+}
+.report-section-title {
+  margin-bottom: 6px;
+  color: var(--brand-800);
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.report-finding-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.report-finding-index {
+  flex: none;
+  min-width: 24px;
+  padding-top: 1px;
+  color: var(--brand-600);
+  font-size: var(--text-3xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 767px) {
+  .report-patient-grid { grid-template-columns: 1fr; }
 }
 </style>

@@ -43,6 +43,16 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
     ...(agentResult.value?.report?.suggested_actions || []),
     ...(agentResult.value?.report?.limitations || []).map(item => '局限：' + item)
   ]);
+  const reportFindings = computed(() => {
+    const values = agentResult.value?.report?.findings;
+    return Array.isArray(values) ? values : [];
+  });
+  const reportImpression = computed(() => {
+    const values = agentResult.value?.report?.impression;
+    return Array.isArray(values) ? values : [];
+  });
+  const patientNext = computed(() => reportActions.value[0] || '携带原始影像和既往片，到呼吸科或影像科门诊复核。');
+  const patientWarning = computed(() => reportActions.value.find((item) => /急诊|呼吸困难|咯血|胸痛/.test(String(item))) || '出现胸痛、呼吸困难、咯血或症状加重时，及时急诊就医。');
   const evidence = computed(() => {
     const sources = new Map((agentResult.value?.sources || []).map(item => [item.id, item]));
     const used = new Set();
@@ -89,6 +99,6 @@ export function useDiagnosisResults({ AppState, actions }, chartRef) {
   function setProbabilityMode(mode) { AppState.probViewMode = mode; }
   watch(probExpanded, () => { if (probExpanded.value) nextTick(renderProbabilityChart); });
   function dispose() { disposed = true; observer?.disconnect(); observer = null; chart?.dispose(); chart = null; }
-  return { currentCase, risk, probabilities, topProbabilities, probExpanded, toggleProbabilities, agentResult, agentSteps, uncertainty, groundedness, report, reportMode, reportSummary, riskExplanation, followUpQuestions, reportActions, evidence, setReportMode, openKnowledge, openRelatedKnowledge, renderProbabilityChart, setProbabilityMode, mount, dispose };
+  return { currentCase, risk, probabilities, topProbabilities, probExpanded, toggleProbabilities, agentResult, agentSteps, uncertainty, groundedness, report, reportMode, reportSummary, reportFindings, reportImpression, patientNext, patientWarning, riskExplanation, followUpQuestions, reportActions, evidence, setReportMode, openKnowledge, openRelatedKnowledge, renderProbabilityChart, setProbabilityMode, mount, dispose };
 }
 

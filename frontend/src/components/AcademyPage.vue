@@ -37,6 +37,46 @@ const cases = [
     image: '/assets/knowledge/nodule.jpg',
     meta: 'PA · 右肺中野',
     note: '示例片用于观察结节位置；胸片对微小结节敏感度有限，通常需 CT。'
+  },
+  {
+    key: 'effusion',
+    label: '肋膈角变钝',
+    short: '积液样例',
+    image: '/assets/knowledge/effusion.jpg',
+    meta: 'PA · 右侧肋膈角',
+    note: '观察外侧肋膈角变钝与外高内低弧线，少量积液需结合超声。'
+  },
+  {
+    key: 'pneumothorax',
+    label: '气胸线',
+    short: '气胸样例',
+    image: '/assets/knowledge/pneumothorax.jpg',
+    meta: 'PA · 右侧胸膜腔',
+    note: '对照脏层胸膜线与外侧无肺纹理区，急症表现需立即就医。'
+  },
+  {
+    key: 'cardiomegaly',
+    label: '心影增大',
+    short: '心影样例',
+    image: '/assets/knowledge/cardiomegaly.png',
+    meta: 'PA · 心影轮廓',
+    note: '观察心影横径与心胸比，体位和吸气深度会影响判读。'
+  },
+  {
+    key: 'atelectasis',
+    label: '肺不张',
+    short: '不张样例',
+    image: '/assets/knowledge/atelectasis.jpg',
+    meta: 'PA · 肺叶容积',
+    note: '关注叶间裂移位、局部密度增高和同侧膈肌抬高。'
+  },
+  {
+    key: 'edema',
+    label: '肺水肿',
+    short: '水肿样例',
+    image: '/assets/knowledge/edema.jpg',
+    meta: 'PA · 双肺门周围',
+    note: '观察肺门模糊、上肺血管增粗和间质性水肿改变。'
   }
 ];
 
