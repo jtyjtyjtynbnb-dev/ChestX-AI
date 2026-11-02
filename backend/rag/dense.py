@@ -81,11 +81,16 @@ class DenseIndex:
         outputs = self._session.run(["sentence_embedding"], inputs)[0]
         return np.asarray(outputs, dtype=np.float32)
 
-    def scores(self, query: str) -> dict[str, float]:
+    def query_vector(self, query: str) -> np.ndarray | None:
         if not query.strip() or not self._ensure():
-            return {}
+            return None
         vector = self._encode([query])[0]
-        vector = vector / max(float(np.linalg.norm(vector)), 1e-8)
+        return vector / max(float(np.linalg.norm(vector)), 1e-8)
+
+    def scores(self, query: str) -> dict[str, float]:
+        vector = self.query_vector(query)
+        if vector is None:
+            return {}
         cosine = self._vectors @ vector
         return {doc_id: float(score) for doc_id, score in zip(self._ids, cosine, strict=True)}
 
@@ -95,3 +100,7 @@ _INDEX = DenseIndex()
 
 def dense_scores(query: str) -> dict[str, float]:
     return _INDEX.scores(query)
+
+
+def dense_query_vector(query: str) -> np.ndarray | None:
+    return _INDEX.query_vector(query)

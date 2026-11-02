@@ -11,6 +11,7 @@ from typing import Any
 from .config import DISCLAIMER
 from .qwen_client import DashScopeError, DashScopeQwenClient
 from .rag.retriever import retrieve_knowledge
+from .semantic_cache import SemanticAnswerCache
 from .safety import has_unsafe_clinical_language, sanitize_text
 
 
@@ -146,14 +147,22 @@ def _chat_steps(retrieval: str, qwen: str, answer: str = "completed") -> list[di
     ]
 
 
+_CHAT_SEMANTIC_CACHE = SemanticAnswerCache()
+
+
 async def answer_question(question: str, history: Any = None, diagnosis_context: dict | None = None) -> dict[str, Any]:
     question = question.strip()
     if not question or len(question) > 500:
         raise ValueError("问题不能为空且不能超过500个字符")
     history = _clean_history(history)
+    cached = _CHAT_SEMANTIC_CACHE.get(question, diagnosis_context)
+    if cached is not None:
+        cached["cached"] = True
+        return cached
     if _local_intent_answer(question):
         response = _local_answer(question, [], diagnosis_context=diagnosis_context)
         response["steps"] = _chat_steps("skipped", "skipped")
+        _CHAT_SEMANTIC_CACHE.set(question, response, diagnosis_context)
         return response
     predicted = [
         str(item.get("code"))
@@ -165,12 +174,13 @@ async def answer_question(question: str, history: Any = None, diagnosis_context:
     if not client.enabled():
         response = _local_answer(question, documents, "qwen_not_configured", diagnosis_context=diagnosis_context)
         response["steps"] = _chat_steps("completed" if documents else "no_evidence", "skipped")
+        _CHAT_SEMANTIC_CACHE.set(question, response, diagnosis_context)
         return response
     try:
         answer = (await client.generate_chat(build_chat_prompt(question, history, documents, diagnosis_context))).strip()
         if not answer or any(pattern in answer for pattern in FORBIDDEN_PATTERNS):
             raise ValueError("unsafe chat answer")
-        return {
+        success = {
             "answer": answer,
             "provider": "qwen",
             "steps": _chat_steps("completed" if documents else "no_evidence", "completed"),
@@ -179,10 +189,13 @@ async def answer_question(question: str, history: Any = None, diagnosis_context:
                 for item in documents[:4]
             ],
         }
+        _CHAT_SEMANTIC_CACHE.set(question, success, diagnosis_context)
+        return success
     except Exception as exc:
         failure_reason = str(exc) if isinstance(exc, DashScopeError) and str(exc) else "qwen_error"
         response = _local_answer(question, documents, failure_reason, diagnosis_context=diagnosis_context)
         response["steps"] = _chat_steps("completed" if documents else "no_evidence", "failed", "degraded")
+        _CHAT_SEMANTIC_CACHE.set(question, response, diagnosis_context)
         return response
 
 
