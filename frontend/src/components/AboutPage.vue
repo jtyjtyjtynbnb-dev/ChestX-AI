@@ -15,6 +15,34 @@ const stack = [
   'ECharts 5.5', 'ONNX Runtime', 'Canvas 2D', 'Axios + SSE', 'vue-i18n 9'
 ];
 
+const modelMetrics = [
+  { label: 'Top-1', value: '52.74%', note: '最高概率命中真实阳性类' },
+  { label: 'Top-3', value: '85.00%', note: '真实阳性类进入前三' },
+  { label: 'Exact', value: '25.60%', note: '10 类 0/1 全部一致' },
+  { label: 'Test', value: '25,596', note: '官方 test 完整集' }
+];
+
+const modelAurocs = [
+  { name: '心影增大', value: 0.8876 },
+  { name: '气胸', value: 0.8536 },
+  { name: '胸腔积液', value: 0.8248 },
+  { name: '肺部肿块', value: 0.8094 },
+  { name: '肺不张', value: 0.7723 },
+  { name: '肺结节', value: 0.7613 },
+  { name: '肺实变', value: 0.7526 },
+  { name: '未见异常', value: 0.7240 },
+  { name: '肺炎', value: 0.7098 },
+  { name: '肺浸润', value: 0.6965 }
+];
+
+const workflowSteps = [
+  { no: '01', title: '输入校验', desc: 'MobileNetV3 guard 判断胸片 / 非胸片，非胸片不进入主模型。' },
+  { no: '02', title: '影像推理', desc: 'DenseNet121 ONNX 输出 10 类概率与 7×7 注意力图。' },
+  { no: '03', title: '混合检索', desc: '本地 BGE 语义向量 + BM25/TF-IDF + RRF，召回 Top10 证据。' },
+  { no: '04', title: 'Agent 编排', desc: 'LangGraph 依次完成证据一致性、Qwen 报告或本地回退、安全审查。' },
+  { no: '05', title: '报告归档', desc: '患者版/医生版摘要、引用来源、随访问题写入本机档案。' }
+];
+
 const privacy = [
   { title: '上传与解码', desc: 'JPG/PNG 在浏览器端压缩，DICOM 在浏览器端解码。服务端仅在内存中解码用于推理，不保存原始影像。' },
   { title: '本地存储', desc: '档案保存在 localStorage 与本机 SQLite，未加密。请勿录入真实患者身份信息。' },
@@ -132,6 +160,78 @@ darkChartOption.series[0].label.color = '#E8EFF8';
           <p class="layer-desc">{{ $t(layer.desc) }}</p>
         </li>
       </ol>
+    </div>
+
+    <!-- ══ 模型评估 + Agent 工作流 ═══════════════════════════════ -->
+    <div class="panel p-5">
+      <div class="flex flex-wrap items-end justify-between gap-2">
+        <div>
+          <span class="text-3xs font-semibold uppercase tracking-[0.14em] text-brand-700">MODEL CARD</span>
+          <h2 class="mt-1 text-xl font-semibold tracking-tight text-text-1">模型准确度与 Agent 工作流</h2>
+          <p class="mt-1 text-sm text-text-2">完整 NIH test 实测；指标来自报告 NLP 标签，不构成临床诊断性能。</p>
+        </div>
+        <span class="rounded-full border border-brand-200 bg-brand-50 px-2.5 py-1 text-2xs font-semibold text-brand-800">ONNX 部署口径</span>
+      </div>
+
+      <div class="mt-4 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
+        <div v-for="item in modelMetrics" :key="item.label" class="rounded-lg border border-border-line bg-surface-sunken p-3">
+          <div class="flex items-baseline justify-between gap-2">
+            <span class="text-2xs font-medium text-text-3">{{ item.label }}</span>
+            <strong class="text-xl font-semibold text-text-1 tnum">{{ item.value }}</strong>
+          </div>
+          <p class="mt-1 text-3xs leading-relaxed text-text-3">{{ item.note }}</p>
+        </div>
+      </div>
+
+      <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-12">
+        <div class="rounded-lg border border-border-line p-3 lg:col-span-5">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-text-1">每类 AUROC</h3>
+            <span class="text-3xs text-text-3">越接近 1 越好</span>
+          </div>
+          <div class="mt-3 space-y-2">
+            <div v-for="item in modelAurocs" :key="item.name">
+              <div class="flex items-center justify-between text-2xs">
+                <span class="text-text-2">{{ item.name }}</span>
+                <span class="font-medium text-text-1 tnum">{{ item.value.toFixed(3) }}</span>
+              </div>
+              <div class="mt-1 h-1.5 overflow-hidden rounded-full bg-surface-sunken">
+                <div class="h-full rounded-full bg-brand-500" :style="{ width: (item.value * 100).toFixed(1) + '%' }"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-lg border border-border-line p-3 lg:col-span-7">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-text-1">Agent 工作流</h3>
+            <span class="text-3xs text-text-3">LangGraph · 可审计</span>
+          </div>
+          <ol class="mt-3 space-y-0">
+            <li v-for="(step, index) in workflowSteps" :key="step.no" class="relative flex gap-3 pb-3 last:pb-0">
+              <div class="flex flex-col items-center">
+                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-600 text-3xs font-semibold text-white tnum">{{ step.no }}</span>
+                <span v-if="index < workflowSteps.length - 1" class="mt-1 w-px flex-1 bg-border-line"></span>
+              </div>
+              <div class="min-w-0 pb-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <strong class="text-xs text-text-1">{{ step.title }}</strong>
+                  <span v-if="index === 2" class="rounded bg-brand-50 px-1.5 py-0.5 text-3xs font-medium text-brand-700">BGE</span>
+                  <span v-if="index === 3" class="rounded bg-brand-50 px-1.5 py-0.5 text-3xs font-medium text-brand-700">Qwen + fallback</span>
+                </div>
+                <p class="mt-1 text-2xs leading-relaxed text-text-2">{{ step.desc }}</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border-line pt-3 text-3xs leading-relaxed text-text-3">
+        <span>校准：temperature 0.95 · 80% 覆盖率 Top-1 70.50%</span>
+        <span>Top 指标口径：24,468 张有目标阳性标签</span>
+        <span>guard 误拒：11 / 25,596</span>
+        <span>标签：NIH 报告 NLP，非医生逐图标注</span>
+      </div>
     </div>
 
     <!-- ══ 深色波段：模型输出 + 隐私 + 技术栈 ═══════════════════ -->
