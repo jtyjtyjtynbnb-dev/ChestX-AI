@@ -1,0 +1,53 @@
+{
+  "model": "training\\runs\\finetune_nih_full\\best.pt",
+  "rows": 25596,
+  "top": {
+    "evaluated_images": 24468,
+    "top1": 0.5273,
+    "top3": 0.8499,
+    "exact_match": 0.2559
+  },
+  "per_class": {
+    "no_finding": {
+      "support": 9861,
+      "auroc": 0.72395
+    },
+    "atelectasis": {
+      "support": 3279,
+      "auroc": 0.77233
+    },
+    "cardiomegaly": {
+      "support": 1069,
+      "auroc": 0.88763
+    },
+    "effusion": {
+      "support": 4658,
+      "auroc": 0.82475
+    },
+    "infiltration": {
+      "support": 6112,
+      "auroc": 0.69648
+    },
+    "mass": {
+      "support": 1748,
+      "auroc": 0.80935
+    },
+    "nodule": {
+      "support": 1623,
+      "auroc": 0.76125
+    },
+    "pneumonia": {
+      "support": 555,
+      "auroc": 0.70976
+    },
+    "pneumothorax": {
+      "support": 2665,
+      "auroc": 0.8536
+    },
+    "consolidation": {
+      "support": 1815,
+      "auroc": 0.75263
+    }
+  },
+  "note": "PyTorch candidate; model-only, no guard filtering"
+}
