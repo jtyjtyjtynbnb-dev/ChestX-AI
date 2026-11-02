@@ -897,7 +897,7 @@ function onResultTab(value) {
                         type="button"
                         role="tab"
                         :aria-selected="vm.results.reportMode === 'patient'"
-                        :class="['h-6 rounded px-2.5 font-medium transition-colors duration-150', vm.results.reportMode === 'patient' ? 'bg-card-bg text-text-1 shadow-1' : 'text-text-2 hover:text-text-1']"
+                        :class="['h-6 rounded px-2.5 font-medium transition-colors duration-150', vm.results.reportMode === 'patient' ? 'bg-brand-600 text-white shadow-1' : 'text-text-2 hover:text-text-1']"
                         @click="vm.results.setReportMode('patient')"
                       >{{ $t('患者版') }}</button>
                       <button
@@ -905,15 +905,15 @@ function onResultTab(value) {
                         type="button"
                         role="tab"
                         :aria-selected="vm.results.reportMode === 'doctor'"
-                        :class="['h-6 rounded px-2.5 font-medium transition-colors duration-150', vm.results.reportMode === 'doctor' ? 'bg-card-bg text-text-1 shadow-1' : 'text-text-2 hover:text-text-1']"
+                        :class="['h-6 rounded px-2.5 font-medium transition-colors duration-150', vm.results.reportMode === 'doctor' ? 'bg-brand-600 text-white shadow-1' : 'text-text-2 hover:text-text-1']"
                         @click="vm.results.setReportMode('doctor')"
                       >{{ $t('医生版') }}</button>
                     </div>
                     <span id="agentSourceCount" class="text-3xs text-text-3">
                       {{ $t('检索到') }} {{ vm.results.agentResult.sources?.length || 0 }} {{ $t('条知识依据') }}
                     </span>
-                    <span v-if="vm.results.groundedness" id="groundingBadge" class="tag" :class="vm.results.groundedness.status === 'strong' ? 'border-success/30 bg-success/10 text-success' : vm.results.groundedness.status === 'partial' ? 'border-warning/30 bg-warning/10 text-warning' : 'border-danger/30 bg-danger/10 text-danger'">
-                      {{ $t('证据支持度') }} {{ Math.round((vm.results.groundedness.score || 0) * 100) }}%
+                    <span v-if="vm.results.groundedness" id="groundingBadge" class="tag" :title="$t('报告中的引用说法在检索片段中能找到词项支持；不代表医学结论一定正确')" :class="vm.results.groundedness.status === 'strong' ? 'border-success/30 bg-success/10 text-success' : vm.results.groundedness.status === 'partial' ? 'border-warning/30 bg-warning/10 text-warning' : 'border-danger/30 bg-danger/10 text-danger'">
+                      {{ $t('证据引用支持度') }} {{ Math.round((vm.results.groundedness.score || 0) * 100) }}%
                     </span>
                   </div>
                 </div>

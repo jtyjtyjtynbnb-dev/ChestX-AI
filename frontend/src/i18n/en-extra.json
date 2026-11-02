@@ -746,5 +746,7 @@
   "已完成": "Completed",
   "上一步": "Previous",
   "下一步": "Next",
-  "点击展开全部依据": "Click to show all evidence"
+  "点击展开全部依据": "Click to show all evidence",
+  "证据引用支持度": "Evidence citation support",
+  "报告中的引用说法在检索片段中能找到词项支持；不代表医学结论一定正确": "Cited claims have lexical support in retrieved chunks; this does not guarantee medical correctness."
 }
