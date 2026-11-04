@@ -160,7 +160,18 @@ export function useImageUpload({ AppState, actions }, { onBeforeLoad = () => {},
       actions.showToast(cases.length > 1 ? `已载入 ${cases.length} 张影像，可用上一张/下一张切换` : (options.silent ? '教学胸片已载入' : '胸片上传成功，请点击右侧「开始 AI 智能分析」'), 'success');
       return true;
     } catch (error) {
-      if (active && requestId === generation && error.name !== 'AbortError') actions.showToast(error.message || '影像读取失败', 'error');
+      if (active && requestId === generation && error.name !== 'AbortError') {
+        actions.showToast(error.message || '影像读取失败', 'error');
+        // Rejected DICOM must not leave a previous case looking ready beside
+        // the now-empty viewer. Clear the stale selection so the right rail
+        // returns to the upload state.
+        AppState.currentCase = null;
+        AppState.series = [];
+        AppState.seriesIndex = 0;
+        AppState.diagnoseStatus = 'idle';
+        AppState.diagnosisError = '';
+        AppState.agentResult = null;
+      }
       return false;
     } finally {
       if (active && requestId === generation) state.busy = false;
