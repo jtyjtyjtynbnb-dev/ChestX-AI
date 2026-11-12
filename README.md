@@ -2,6 +2,33 @@
 
 胸部 X 光影像 AI 健康科普与家庭健康档案演示系统。后端使用 FastAPI + ONNX Runtime + LangGraph + SQLite，前端使用 Vue 3 + Pinia + Vite + Tailwind CSS，构建产物由 FastAPI 在单端口托管。
 
+## 团队信息
+
+> 提交前请替换为真实信息；不要把 API Key 写进本文件。
+
+- 队伍名称：【待填写】
+- 队长：【待填写】
+- 队员：【待填写】
+- 指导教师：【待填写】
+- 学校/组别：【待填写】
+
+## 环境配置
+
+```bash
+# 1) 复制环境变量模板，填入自己的 DashScope Key
+cp .env.example backend/.env
+
+# 2) 安装依赖（Windows 可直接双击一键启动.bat）
+python -m pip install -r backend/requirements.txt
+
+# 3) 启动
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+```
+
+- `backend/.env` 已被 `.gitignore` 排除，**不得提交真实 Key**。
+- 依赖清单：`backend/requirements.txt`、`frontend/package.json`。
+- 技术文档与评估材料：`技术报告-合规与安全.md`、`模型评估.md`、`操作手册.md`。
+
 > **界面说明**：2026-11 起采用「冷石墨 + 青蓝」视觉体系，并重做首页（可交互对比滑杆、产品能力、流程 / 场景切换、FAQ 等）。当前正文字号为 **17px**，并新增 `Ctrl/Cmd + K` 全局搜索与 AI 速答、页面感知 AI 助手、AI 共脑会诊、家庭健康摘要等 Web + AI 功能。详见 [前端整合与首页改版说明](前端整合与首页改版说明.md)。
 
 > **医疗声明**：本工具仅用于健康科普与教学演示，**不可用于临床诊断，不能替代医生**。系统输出为影像提示与可能性，不构成确诊或治疗建议。
