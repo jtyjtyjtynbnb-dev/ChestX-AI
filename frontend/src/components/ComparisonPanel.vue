@@ -1,8 +1,45 @@
 <script setup>
 import ChartCanvas from './ChartCanvas.vue';
 import UiRiskPill from './ui/UiRiskPill.vue';
+import { computed, ref } from 'vue';
 
 defineProps({ comparison: { type: Object, required: true } });
+
+const scale = ref(1);
+const offsetX = ref(0);
+const offsetY = ref(0);
+const dragging = ref(false);
+const showHeatmap = ref(true);
+let startX = 0;
+let startY = 0;
+let originX = 0;
+let originY = 0;
+
+const stageStyle = computed(() => ({
+  transform: `translate(${offsetX.value}px, ${offsetY.value}px) scale(${scale.value})`,
+}));
+function imageFor(record) {
+  return showHeatmap.value && record?.heatmapDataUrl ? record.heatmapDataUrl : record?.imageUrl;
+}
+function zoom(delta) {
+  scale.value = Math.min(3, Math.max(1, Number((scale.value + delta).toFixed(2))));
+  if (scale.value === 1) { offsetX.value = 0; offsetY.value = 0; }
+}
+function resetView() { scale.value = 1; offsetX.value = 0; offsetY.value = 0; }
+function wheel(event) { zoom(event.deltaY > 0 ? -0.15 : 0.15); }
+function startDrag(event) {
+  if (event.button !== 0) return;
+  dragging.value = true;
+  startX = event.clientX; startY = event.clientY;
+  originX = offsetX.value; originY = offsetY.value;
+  event.currentTarget.setPointerCapture?.(event.pointerId);
+}
+function drag(event) {
+  if (!dragging.value) return;
+  offsetX.value = originX + event.clientX - startX;
+  offsetY.value = originY + event.clientY - startY;
+}
+function endDrag() { dragging.value = false; }
 </script>
 
 <template>
@@ -16,6 +53,14 @@ defineProps({ comparison: { type: Object, required: true } });
     </div>
 
     <!-- 选择两侧记录 -->
+    <div class="mt-3 flex flex-wrap items-center gap-2 rounded-md border border-border-line bg-surface-sunken px-2.5 py-2" data-compare-tools>
+      <span class="text-2xs font-semibold text-text-2">双片同步</span>
+      <button type="button" data-compare-tool="zoom-out" class="btn-secondary h-6 px-2 text-2xs" title="缩小两片" @click="zoom(-0.2)">－</button>
+      <button type="button" data-compare-tool="zoom-in" class="btn-secondary h-6 px-2 text-2xs" title="放大两片" @click="zoom(0.2)">＋</button>
+      <button type="button" data-compare-tool="reset" class="btn-secondary h-6 px-2 text-2xs" title="重置两片" @click="resetView">重置</button>
+      <span class="text-3xs text-text-3 tnum">{{ Math.round(scale * 100) }}%</span>
+      <button type="button" data-compare-tool="heatmap" class="ml-auto h-6 rounded border px-2 text-2xs" :class="showHeatmap ? 'border-brand-300 bg-brand-50 text-brand-700' : 'border-border-line text-text-2'" :aria-pressed="showHeatmap" @click="showHeatmap = !showHeatmap">{{ showHeatmap ? '热力图开' : '原图' }}</button>
+    </div>
     <div class="mt-3 grid grid-cols-1 items-end gap-2 md:grid-cols-[1fr_auto_1fr]">
       <div>
         <label class="mb-1 block text-2xs font-medium text-text-2">{{ $t('较新一次') }}</label>
@@ -47,14 +92,26 @@ defineProps({ comparison: { type: Object, required: true } });
           </span>
           <UiRiskPill :level="record.riskLevel" variant="short" />
         </div>
-        <div data-surface="film" class="film-surface relative">
+        <div
+          data-surface="film"
+          class="film-surface relative h-52 overflow-hidden"
+          :class="dragging ? 'cursor-grabbing' : 'cursor-grab'"
+          @wheel.prevent="wheel"
+          @pointerdown="startDrag"
+          @pointermove="drag"
+          @pointerup="endDrag"
+          @pointercancel="endDrag"
+          @lostpointercapture="endDrag"
+        >
           <img
-            :src="record.heatmapDataUrl || record.imageUrl"
-            :alt="$t('影像') + '：' + record.title"
-            class="h-52 w-full object-contain"
+            :src="imageFor(record)"
+            :alt="record.title"
+            class="pointer-events-none h-full w-full select-none object-contain"
+            :style="stageStyle"
+            draggable="false"
           />
-          <span class="absolute bottom-1.5 right-1.5 rounded bg-ink-950/85 px-1.5 py-0.5 text-3xs text-film-text">
-            {{ record.heatmapDataUrl ? $t('已保存热力图') : $t('原始影像 · 无热力图') }}
+          <span class="pointer-events-none absolute bottom-1.5 right-1.5 rounded bg-ink-950/85 px-1.5 py-0.5 text-3xs text-film-text">
+            {{ showHeatmap && record.heatmapDataUrl ? '热力图' : '原始影像' }}
           </span>
         </div>
         <p class="line-clamp-2 px-3 py-2 text-2xs leading-relaxed text-text-2">{{ record.summary }}</p>
@@ -91,8 +148,16 @@ defineProps({ comparison: { type: Object, required: true } });
       </table>
     </div>
 
+    <div v-if="comparison.diffSummary?.value" data-compare-summary class="mt-3 rounded-md border border-brand-200 bg-brand-50 px-3 py-2.5">
+      <p class="text-2xs font-semibold text-brand-800">AI 差异摘要</p>
+      <p class="mt-1 text-xs leading-relaxed text-text-2">{{ comparison.diffSummary.value }}</p>
+    </div>
     <p class="mt-2 text-3xs leading-relaxed text-text-3">
       {{ $t('概率变化不等于病情变化；设备、体位与曝光条件都会影响模型输出。随访结论应由医生结合症状、病史与正式影像报告判断。') }}
     </p>
   </section>
 </template>
+
+<style scoped>
+.film-surface img { transition: transform .08s linear; }
+</style>

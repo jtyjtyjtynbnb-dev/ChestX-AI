@@ -1,0 +1,500 @@
+{
+  "mode": "bm25_tfidf",
+  "cases": 24,
+  "top_k": 10,
+  "recall_at_k": 1.0,
+  "mrr": 0.8417,
+  "hits": 24,
+  "rows": [
+    {
+      "query": "右下肺斑片状高密度影，可能是什么？",
+      "expected": [
+        "pneumonia",
+        "infiltration"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "pneumonia-bronchopneumonia-patchy-pattern",
+        "pneumonia-signs",
+        "atelectasis-plate-like-discoid-features",
+        "pneumonia-aspiration-dependent-segment-localization",
+        "infiltration-limits",
+        "consolidation-lipoid-pneumonia-low-attenuation",
+        "consolidation-signs",
+        "atelectasis-signs",
+        "cardiomegaly-cor-pulmonale-pulmonary-artery-bulging",
+        "general-breast-shadow-density-artifact"
+      ]
+    },
+    {
+      "query": "胸腔积液在胸片上怎么观察？",
+      "expected": [
+        "effusion"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "effusion-signs",
+        "effusion-meniscus-ultrasound",
+        "effusion-thoracentesis-drainage-guidance",
+        "effusion-massive-mediastinal-contralateral-shift",
+        "effusion-blunting-costophrenic-angle",
+        "effusion-chylothorax-lymphatic-pleural-fluid",
+        "effusion-followup",
+        "effusion-loculated-interlobar-features",
+        "edema-signs",
+        "effusion-congestive-heart-failure-bilateral"
+      ]
+    },
+    {
+      "query": "肋膈角变钝意味着什么？",
+      "expected": [
+        "effusion"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "effusion-signs",
+        "pleural-thickening-blunting-costophrenic-angle",
+        "effusion-blunting-costophrenic-angle",
+        "pleural-thickening-signs",
+        "effusion-meniscus-ultrasound",
+        "normal-xray",
+        "effusion-pleural-fluid-supine-haze-artifact",
+        "pneumothorax-deep-sulcus-sign-supine",
+        "image-acquisition",
+        "prevention"
+      ]
+    },
+    {
+      "query": "气胸线和外侧无肺纹理区是什么？",
+      "expected": [
+        "pneumothorax"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "pneumothorax-visceral-pleural-line",
+        "pneumothorax-skin-fold-artifact-differential",
+        "pneumonia-pneumothorax",
+        "emphysema-vanishing-lung-syndrome-giant-bullae",
+        "edema-signs",
+        "no-finding-acute-bronchitis-normal-xray",
+        "emphysema-bullous-rupture-pneumothorax-risk",
+        "general-inspiratory-effort-depth",
+        "no-finding-chronic-bronchitis-subtlety",
+        "hernia-bochdalek-posterolateral-defect"
+      ]
+    },
+    {
+      "query": "心影增大，心胸比怎么计算？",
+      "expected": [
+        "cardiomegaly"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "cardiomegaly-signs",
+        "cardiomegaly-ctr-evaluation",
+        "cardiomegaly-limits",
+        "cardiomegaly-echocardiography-confirmation-role",
+        "general-scoliosis-cardiac-displacement",
+        "cardiomegaly-left-ventricular-contour-rounding",
+        "cardiomegaly-pericardial-effusion-differential",
+        "cardiomegaly-right-ventricular-apex-elevation",
+        "edema-ards-noncardiogenic-permeability-features",
+        "general-inspiratory-effort-depth"
+      ]
+    },
+    {
+      "query": "肺结节随访需要做什么检查？",
+      "expected": [
+        "nodule"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "nodule-fleischner-guidelines-followup",
+        "prevention",
+        "nodule-followup",
+        "patient-questions",
+        "nodule-pet-ct-metabolic-evaluation-role",
+        "nodule-subsolid-ground-glass-features",
+        "nodule-signs",
+        "nodule-volume-doubling-time-assessment",
+        "nodule-calcification-benign-morphology",
+        "general-incidentaloma-overdiagnosis-guidance"
+      ]
+    },
+    {
+      "query": "磨玻璃影和肺结节有什么区别？",
+      "expected": [
+        "nodule",
+        "infiltration"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "nodule-subsolid-ground-glass-features",
+        "infiltration-ground-glass-opacities",
+        "nodule-ground-glass-adenocarcinoma-in-situ",
+        "infiltration-hypersensitivity-pneumonitis-hazy",
+        "nodule-signs",
+        "nodule-fleischner-guidelines-followup",
+        "infiltration-crazy-paving-hrct-features",
+        "nodule-calcification-benign-morphology",
+        "fibrosis-rheumatoid-arthritis-nsip-vs-uip",
+        "infiltration-viral-pneumonia-diffuse-peribronchial"
+      ]
+    },
+    {
+      "query": "肺不张有哪些间接征象？",
+      "expected": [
+        "atelectasis"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "atelectasis-volume-loss-mechanisms",
+        "emphysema-hyperinflation-radiographic-signs",
+        "atelectasis-compression-vs-resorption-mechanism",
+        "atelectasis-signs",
+        "atelectasis-plate-like-discoid-features",
+        "atelectasis-mucus-plugging-bronchial-obstruction",
+        "mass-central-atelectasis-golden-s-sign",
+        "atelectasis-limits",
+        "atelectasis-round-atelectasis-pleural-mass-mimic",
+        "atelectasis-postoperative-hypoventilation"
+      ]
+    },
+    {
+      "query": "肺水肿的蝶翼征怎么理解？",
+      "expected": [
+        "edema",
+        "infiltration"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "edema-bat-wing-alveolar-pattern",
+        "edema-signs",
+        "edema-neurogenic-pulmonary-edema-sympathetic",
+        "consolidation-chronic-eosinophilic-pneumonia-photonegative",
+        "edema-limits",
+        "edema-kerley-b-lines-interstitial",
+        "edema-reexpansion-pulmonary-edema-ipsilateral",
+        "edema-peribronchial-cuffing-vessel-blurring",
+        "edema-ards-noncardiogenic-permeability-features",
+        "infiltration-crazy-paving-hrct-features"
+      ]
+    },
+    {
+      "query": "肺部肿块边缘毛刺提示什么？",
+      "expected": [
+        "mass"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "mass-spiculated-margin-malignancy-risk",
+        "mass-signs",
+        "mass-size-definition-evaluation",
+        "mass-followup",
+        "mass-abscess-cavity-differential-features",
+        "mass-ct-enhancement-vascularity-features",
+        "mass-histopathological-biopsy-gold-standard",
+        "edema-peribronchial-cuffing-vessel-blurring",
+        "fibrosis-rheumatoid-arthritis-nsip-vs-uip",
+        "mass-central-atelectasis-golden-s-sign"
+      ]
+    },
+    {
+      "query": "肺炎的支气管充气征是什么？",
+      "expected": [
+        "pneumonia"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "pneumonia-lobar-consolidation-features",
+        "pneumonia-signs",
+        "consolidation-signs",
+        "pneumonia-bronchopneumonia-patchy-pattern",
+        "pneumonia-post-obstructive-recurrent-infiltrate",
+        "consolidation-bronchoalveolar-carcinoma-pneumonic",
+        "no-finding-acute-bronchitis-normal-xray",
+        "infiltration-viral-pneumonia-diffuse-peribronchial",
+        "atelectasis-left-upper-lobe-luftsichel-sign",
+        "consolidation-delayed-resolution-differential"
+      ]
+    },
+    {
+      "query": "胸膜增厚和肋膈角变钝怎么区分？",
+      "expected": [
+        "thickening",
+        "effusion"
+      ],
+      "hit": true,
+      "first_relevant_rank": 3,
+      "top_ids": [
+        "pleural-thickening-signs",
+        "pleural-thickening-blunting-costophrenic-angle",
+        "effusion-blunting-costophrenic-angle",
+        "effusion-signs",
+        "effusion-meniscus-ultrasound",
+        "pleural-thickening-mesothelioma-circumferential-alert",
+        "pleural-thickening-fibrosis-plaques",
+        "pleural-thickening-limits",
+        "image-acquisition",
+        "effusion-pleural-fluid-supine-haze-artifact"
+      ]
+    },
+    {
+      "query": "肺气肿的桶状胸表现是什么？",
+      "expected": [
+        "emphysema"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "emphysema-signs",
+        "emphysema-flattened-diaphragm-rib-widening",
+        "emphysema-centrilobular-vs-panlobular-types",
+        "emphysema-hyperinflation-radiographic-signs",
+        "emphysema-retrosternal-airspace-widening",
+        "emphysema-limits",
+        "emphysema-alpha-1-antitrypsin-deficiency-basilar",
+        "emphysema-vanishing-lung-syndrome-giant-bullae",
+        "edema-peribronchial-cuffing-vessel-blurring",
+        "edema-signs"
+      ]
+    },
+    {
+      "query": "肺纤维化的蜂窝肺表现是什么？",
+      "expected": [
+        "fibrosis"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "fibrosis-signs",
+        "fibrosis-reticular-honeycombing-evaluation",
+        "fibrosis-traction-bronchiectasis-mechanism",
+        "fibrosis-honeycombing-uip-pattern-significance",
+        "fibrosis-shaggy-heart-border-sign",
+        "fibrosis-pulmonary-function-dlco-correlation",
+        "fibrosis-rheumatoid-arthritis-nsip-vs-uip",
+        "fibrosis-limits",
+        "fibrosis-progressive-volume-loss-signs",
+        "fibrosis-silicosis-eggshell-calcification-hilar"
+      ]
+    },
+    {
+      "query": "胸腔有水在胸片上是什么样？",
+      "expected": [
+        "effusion"
+      ],
+      "hit": true,
+      "first_relevant_rank": 3,
+      "top_ids": [
+        "hernia-limits",
+        "emphysema-signs",
+        "effusion-signs",
+        "mass-abscess-cavity-differential-features",
+        "general-metallic-artifact-interference",
+        "normal-xray",
+        "prevention",
+        "edema-reexpansion-pulmonary-edema-ipsilateral",
+        "patient-questions",
+        "effusion-thoracentesis-drainage-guidance"
+      ]
+    },
+    {
+      "query": "肺部有阴影，一般要考虑哪些方向？",
+      "expected": [
+        "infiltration",
+        "pneumonia",
+        "mass"
+      ],
+      "hit": true,
+      "first_relevant_rank": 3,
+      "top_ids": [
+        "report-terms",
+        "urgent-symptoms",
+        "mass-signs",
+        "atelectasis-right-lower-lobe-triangular-sail",
+        "general-scoliosis-cardiac-displacement",
+        "infiltration-ground-glass-opacities",
+        "consolidation-signs",
+        "mass-size-definition-evaluation",
+        "infiltration-signs",
+        "general-prior-imaging-comparison-value"
+      ]
+    },
+    {
+      "query": "气胸急症为什么要尽快处理？",
+      "expected": [
+        "pneumothorax"
+      ],
+      "hit": true,
+      "first_relevant_rank": 5,
+      "top_ids": [
+        "no-finding-atypical-chest-pain-musculoskeletal",
+        "urgent-symptoms",
+        "prevention",
+        "normal-xray",
+        "pneumothorax-catamenial-thoracic-endometriosis",
+        "patient-questions",
+        "hernia-traumatic-diaphragmatic-rupture-blunt",
+        "infiltration-diffuse-alveolar-hemorrhage-fluffy",
+        "pneumothorax-hydropneumothorax-horizontal-fluid-level",
+        "pneumothorax-primary-spontaneous-tall-thin-males"
+      ]
+    },
+    {
+      "query": "心衰引起的肺水肿怎么观察？",
+      "expected": [
+        "edema"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "edema-signs",
+        "edema-ards-noncardiogenic-permeability-features",
+        "edema-kerley-a-lines-central-interstitial",
+        "edema-bat-wing-alveolar-pattern",
+        "effusion-congestive-heart-failure-bilateral",
+        "consolidation-chronic-eosinophilic-pneumonia-photonegative",
+        "edema-limits",
+        "edema-kerley-b-lines-interstitial",
+        "edema-neurogenic-pulmonary-edema-sympathetic",
+        "edema-reexpansion-pulmonary-edema-ipsilateral"
+      ]
+    },
+    {
+      "query": "报告里的浸润影是什么意思？",
+      "expected": [
+        "infiltration"
+      ],
+      "hit": true,
+      "first_relevant_rank": 2,
+      "top_ids": [
+        "report-terms",
+        "infiltration-limits",
+        "infiltration-signs",
+        "normal-xray",
+        "infiltration-laboratory-clinical-correlation",
+        "infiltration-cardiopulmonary-multidisciplinary-triage",
+        "pneumonia-bronchopneumonia-patchy-pattern",
+        "infiltration-viral-pneumonia-diffuse-peribronchial",
+        "infiltration-crazy-paving-hrct-features",
+        "infiltration-pulmonary-alveolar-proteinosis-batwing"
+      ]
+    },
+    {
+      "query": "胸腔积液和胸膜增厚怎么区分？",
+      "expected": [
+        "effusion",
+        "thickening"
+      ],
+      "hit": true,
+      "first_relevant_rank": 2,
+      "top_ids": [
+        "pleural-thickening-signs",
+        "effusion-meniscus-ultrasound",
+        "effusion-signs",
+        "pleural-thickening-mesothelioma-circumferential-alert",
+        "pleural-thickening-fibrosis-plaques",
+        "pleural-thickening-limits",
+        "effusion-blunting-costophrenic-angle",
+        "effusion-chylothorax-lymphatic-pleural-fluid",
+        "effusion-massive-mediastinal-contralateral-shift",
+        "pleural-thickening-pseudomesotheliomatous-adenocarcinoma"
+      ]
+    },
+    {
+      "query": "肺结节越大越危险吗？",
+      "expected": [
+        "nodule"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "nodule-signs",
+        "nodule-fleischner-guidelines-followup",
+        "nodule-calcification-benign-morphology",
+        "nodule-radiographic-detection-limits",
+        "nodule-pet-ct-metabolic-evaluation-role",
+        "follow-up",
+        "nodule-subsolid-ground-glass-features",
+        "nodule-followup",
+        "fibrosis-silicosis-eggshell-calcification-hilar",
+        "nodule-volume-doubling-time-assessment"
+      ]
+    },
+    {
+      "query": "肺部实变和浸润影有什么区别？",
+      "expected": [
+        "consolidation",
+        "infiltration"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "infiltration-signs",
+        "infiltration-laboratory-clinical-correlation",
+        "infiltration-cardiopulmonary-multidisciplinary-triage",
+        "consolidation-signs",
+        "pneumonia-bronchopneumonia-patchy-pattern",
+        "infiltration-viral-pneumonia-diffuse-peribronchial",
+        "infiltration-limits",
+        "infiltration-ground-glass-opacities",
+        "pneumonia-elderly-subtle-presentation",
+        "pneumonia-radiographic-lag-resolution"
+      ]
+    },
+    {
+      "query": "气胸和肺大疱怎么区分？",
+      "expected": [
+        "pneumothorax",
+        "emphysema"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "emphysema-bullous-rupture-pneumothorax-risk",
+        "emphysema-vanishing-lung-syndrome-giant-bullae",
+        "pneumothorax-visceral-pleural-line",
+        "pneumothorax-primary-spontaneous-tall-thin-males",
+        "emphysema-limits",
+        "edema-limits",
+        "pneumonia-pneumothorax",
+        "infiltration-ground-glass-opacities",
+        "pneumothorax-expiratory-phase-detection-value",
+        "cardiomegaly-pericardial-effusion-differential"
+      ]
+    },
+    {
+      "query": "心影增大需要做哪些检查？",
+      "expected": [
+        "cardiomegaly"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "top_ids": [
+        "cardiomegaly-signs",
+        "cardiomegaly-ctr-evaluation",
+        "cardiomegaly-limits",
+        "cardiomegaly-echocardiography-confirmation-role",
+        "general-scoliosis-cardiac-displacement",
+        "cardiomegaly-pericardial-effusion-differential",
+        "general-inspiratory-effort-depth",
+        "cardiomegaly-ap-projection-magnification-artifact",
+        "infiltration-pulmonary-alveolar-proteinosis-batwing",
+        "cardiomegaly-hypertensive-heart-disease-uncoiling"
+      ]
+    }
+  ],
+  "note": "Disease-level relevance labels for retrieval regression; not clinical ground truth."
+}

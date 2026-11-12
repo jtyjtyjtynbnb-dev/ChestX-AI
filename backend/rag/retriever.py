@@ -2,6 +2,7 @@
 
 import json
 import math
+import os
 import re
 from functools import lru_cache
 from pathlib import Path
@@ -106,7 +107,8 @@ def retrieve_knowledge(
     corpus = [" ".join([i["title"], i["content"], *i.get("keywords", [])]) for i in candidates]
     bm25 = _bm25_scores(corpus, query_terms)
     _, vector_scores = _tfidf_vectors(corpus, query)
-    dense = dense_scores(query) if query.strip() else {}
+    use_dense = os.environ.get("CHESTX_DISABLE_DENSE", "0") != "1"
+    dense = dense_scores(query) if query.strip() and use_dense else {}
     if not predicted and max(bm25, default=0) < 0.5 and max(vector_scores, default=0) < 0.18:
         return []
     bm25_max = max(bm25, default=0) or 1
@@ -141,7 +143,7 @@ def retrieve_knowledge(
                 "vector": round(vector_scores[index], 5),
                 "dense": round(float(dense.get(item["id"], 0.0)), 5),
                 "rrf_rank": round(1 / (60 + bm25_rank[index]) + 1 / (60 + vector_rank[index]), 6),
-                "mode": "local_bm25_tfidf_dense",
+                "mode": "local_bm25_tfidf_dense" if use_dense else "local_bm25_tfidf",
             },
         })
     return results[: min(max(0, top_k), 12)]

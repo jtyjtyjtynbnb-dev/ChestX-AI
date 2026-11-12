@@ -341,7 +341,36 @@ function optionClass(q, idx) {
           <span class="ml-auto">{{ $t('仅供教学 · 不作为诊断依据') }}</span>
         </div>
       </div>
-    </div>
+    
+      <div class="case-gallery" data-case-gallery>
+        <div class="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <span class="academy-eyebrow">CASE GALLERY</span>
+            <h2 class="section-mini-title">影像病例图库</h2>
+            <p class="section-mini-desc">8 个脱敏教学病例，点击图片进入上方工作站对照观察；图片仅用于教学，不作为诊断依据。</p>
+          </div>
+          <span class="rounded-full border border-border-line bg-surface-sunken px-2 py-1 text-3xs text-text-3">8 例 · 本地图片</span>
+        </div>
+        <div class="case-gallery-grid">
+          <button
+            v-for="item in cases"
+            :key="'gallery-' + item.key"
+            type="button"
+            class="case-gallery-card"
+            :class="{ 'is-active': activeCaseKey === item.key }"
+            :aria-pressed="activeCaseKey === item.key"
+            @click="setCase(item.key)"
+          >
+            <img :src="item.image" :alt="$t(item.label)" loading="lazy" />
+            <span class="case-gallery-body">
+              <strong>{{ $t(item.label) }}</strong>
+              <span>{{ item.meta }}</span>
+              <small>{{ item.note }}</small>
+            </span>
+          </button>
+        </div>
+      </div>
+</div>
 
     <!-- ══ 征象图库 ═════════════════════════════════════════════ -->
     <div id="academy-tab-signs" class="academy-tab-panel" :class="{ hidden: a.state.tab !== 'signs' }">
@@ -648,4 +677,18 @@ function optionClass(q, idx) {
 @media (prefers-reduced-motion: reduce) {
   .ws-stage { transition: none; }
 }
+</style>
+
+<style scoped>
+.case-gallery { margin-top: 14px; padding: 14px; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); background: var(--surface-card); }
+.case-gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+.case-gallery-card { display: flex; flex-direction: column; overflow: hidden; text-align: left; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: var(--surface-sunken); transition: border-color .15s, transform .15s; }
+.case-gallery-card:hover { border-color: var(--brand-300); transform: translateY(-1px); }
+.case-gallery-card.is-active { border-color: var(--brand-400); box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-400) 16%, transparent); }
+.case-gallery-card img { width: 100%; height: 120px; object-fit: cover; background: #0b1520; }
+.case-gallery-body { display: grid; gap: 2px; padding: 8px; }
+.case-gallery-body strong { color: var(--color-text-1); font-size: var(--text-2xs); }
+.case-gallery-body span { color: var(--brand-700); font-size: var(--text-3xs); }
+.case-gallery-body small { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--color-text-3); font-size: var(--text-3xs); line-height: 1.5; }
+@media (max-width: 900px) { .case-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>

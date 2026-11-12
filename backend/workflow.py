@@ -56,6 +56,7 @@ from PIL import Image
 
 from .rag.retriever import hybrid_retrieve
 from .report_service import build_local_fallback, create_report
+from .tools import invoke_tool, plan_tools
 
 
 class AgentState(TypedDict, total=False):
@@ -66,6 +67,8 @@ class AgentState(TypedDict, total=False):
     inference: dict
     sources: list[dict]
     retrieval_info: dict
+    tool_plan: list[dict]
+    tool_calls: list[dict]
     report: dict
     provider: str
     fallback_reason: str | None
@@ -89,6 +92,18 @@ def build_agent_graph():
         return {"inference": result, "steps": [*state.get("steps", []), step]}
 
     # 节点 3：混合检索。用模型 top-3 类别 + 用户问题召回本地知识片段。
+    async def tool_selection(state: AgentState) -> dict[str, Any]:
+        started = time.perf_counter()
+        codes = [item["code"] for item in state["inference"].get("all_predictions", [])[:3]]
+        plan = plan_tools(state.get("question", ""), codes, has_record=False)
+        step = {
+            "name": "工具选择",
+            "status": "completed",
+            "elapsed_ms": round((time.perf_counter() - started) * 1000, 1),
+            "tools": [item["name"] for item in plan],
+        }
+        return {"tool_plan": plan, "tool_calls": [{"name": item["name"], "status": "planned"} for item in plan], "steps": [*state.get("steps", []), step]}
+
     async def retrieve(state: AgentState) -> dict[str, Any]:
         started = time.perf_counter()
         codes = [item["code"] for item in state["inference"].get("all_predictions", [])[:3]]
@@ -133,6 +148,7 @@ def build_agent_graph():
     graph = StateGraph(AgentState)
     graph.add_node("input_validation", validate)
     graph.add_node("image_inference", image_inference)
+    graph.add_node("tool_selection", tool_selection)
     graph.add_node("hybrid_retrieval", retrieve)
     graph.add_node("report_generation", report)
     graph.add_node("insufficient_evidence", fallback)
@@ -140,7 +156,8 @@ def build_agent_graph():
     graph.add_node("safety_review", safety)
     graph.add_edge(START, "input_validation")
     graph.add_edge("input_validation", "image_inference")
-    graph.add_edge("image_inference", "hybrid_retrieval")
+    graph.add_edge("image_inference", "tool_selection")
+    graph.add_edge("tool_selection", "hybrid_retrieval")
     graph.add_conditional_edges("hybrid_retrieval", evidence_route, {"report": "report_generation", "fallback": "insufficient_evidence"})
     graph.add_edge("report_generation", "grounding_check")
     graph.add_edge("insufficient_evidence", "grounding_check")
@@ -172,4 +189,6 @@ async def workflow_events(image: Image.Image, question: str, infer: Callable[[Im
         "provider": state["provider"],
         "fallback_reason": state.get("fallback_reason"),
         "steps": state["steps"],
+        "tools": state.get("tool_plan", []),
+        "tool_calls": state.get("tool_calls", []),
     }

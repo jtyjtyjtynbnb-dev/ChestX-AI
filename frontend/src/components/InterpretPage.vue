@@ -40,6 +40,25 @@ const measureOptions = [
 
 const isDone = computed(() => vm.AppState.diagnoseStatus === 'done');
 const advancedOpen = ref(false);
+const askMode = ref(false);
+const askMark = ref(null);
+function toggleAskMode() {
+  askMode.value = !askMode.value;
+  if (askMode.value) vm.viewer.setMeasureMode('none');
+}
+function handleAskClick(event) {
+  if (!askMode.value) return;
+  const image = document.querySelector('#xrayBaseImg');
+  const rect = (image || event.currentTarget).getBoundingClientRect();
+  const nx = Math.min(1, Math.max(0, (event.clientX - rect.left) / Math.max(1, rect.width)));
+  const ny = Math.min(1, Math.max(0, (event.clientY - rect.top) / Math.max(1, rect.height)));
+  const horizontal = nx < 0.5 ? '影像左侧' : '影像右侧';
+  const vertical = ny < 0.34 ? '上野' : ny < 0.67 ? '中野' : '下野';
+  const region = `${horizontal}${vertical}`;
+  askMark.value = { x: nx * 100, y: ny * 100, region };
+  askMode.value = false;
+  vm.actions?.askAiQuestion?.(`我把影像上的${region}区域标记出来了（相对坐标 x=${(nx * 100).toFixed(0)}%，y=${(ny * 100).toFixed(0)}%）。请结合当前模型概率和 Top10 证据，解释模型为什么关注这个区域；注意热区不等同于临床病灶定位。`);
+}
 
 const flowStep = computed(() => {
   if (vm.AppState.diagnoseStatus === 'done') return 2;
@@ -381,7 +400,8 @@ function onResultTab(value) {
                 </button>
                 <button id="oneToOneBtn" type="button" class="btn-ghost h-7 px-2 text-2xs font-semibold text-film-dim hover:bg-film-raise hover:text-film-text" :title="$t('1:1 原始比例')" @click="vm.viewer.oneToOne()">1:1</button>
                 <button id="invertFilterBtn" type="button" class="btn-ghost h-7 px-2 text-2xs text-film-dim hover:bg-film-raise hover:text-film-text" :title="$t('黑白反相')" @click="vm.viewer.toggleInvert()">{{ $t('负片') }}</button>
-                <button id="resetViewerBtn" type="button" class="btn-ghost h-7 px-2 text-2xs text-film-dim hover:bg-film-raise hover:text-film-text" :title="$t('重置缩放与位移')" @click="vm.viewer.reset()">{{ $t('重置') }}</button>
+                <button type="button" data-region-ask class="btn-ghost h-7 px-2 text-2xs transition-colors" :class="askMode ? 'bg-brand-500/20 text-brand-300' : 'text-film-dim hover:bg-film-raise hover:text-film-text'" :aria-pressed="askMode" title="点击影像区域，向 AI 提问" @click="toggleAskMode">区域提问</button>
+              <button id="resetViewerBtn" type="button" class="btn-ghost h-7 px-2 text-2xs text-film-dim hover:bg-film-raise hover:text-film-text" :title="$t('重置缩放与位移')" @click="vm.viewer.reset()">{{ $t('重置') }}</button>
               </div>
 
               <!-- 热力组 -->
@@ -477,8 +497,16 @@ function onResultTab(value) {
             @pointercancel="vm.viewer.endDrag()"
             @lostpointercapture="vm.viewer.endDrag()"
             @dblclick="vm.viewer.resetViewerState()"
+            @click="handleAskClick"
           >
             <!-- 方位角标 -->
+            <div v-if="askMode" class="pointer-events-none absolute left-1/2 top-4 z-30 -translate-x-1/2 rounded-full border border-brand-300 bg-ink-950/90 px-3 py-1 text-2xs font-medium text-brand-200 shadow-lg">
+              点击影像区域，向 AI 提问
+            </div>
+            <div v-if="askMark" class="pointer-events-none absolute z-30 -translate-x-1/2 -translate-y-1/2" :style="{ left: askMark.x + '%', top: askMark.y + '%' }">
+              <span class="block h-6 w-6 rounded-full border-2 border-brand-300 bg-brand-500/25 shadow-[0_0_0_6px_rgba(14,165,183,.16)]"></span>
+              <span class="absolute left-7 top-0 whitespace-nowrap rounded bg-ink-950/90 px-1.5 py-0.5 text-3xs text-brand-200">{{ askMark.region }}</span>
+            </div>
             <div class="pointer-events-none absolute left-3 top-3 z-20 flex items-center gap-1.5">
               <span class="rounded border border-film-line bg-ink-950/85 px-1.5 py-0.5 text-3xs font-semibold tracking-wide text-brand-400">R</span>
               <span id="viewportCaseLabel" class="rounded border border-film-line bg-ink-950/85 px-2 py-0.5 text-3xs text-film-dim">{{ vm.currentCase.caseBadge || $t('PA 正位胸片') }}</span>

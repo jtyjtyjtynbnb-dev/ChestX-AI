@@ -29,6 +29,7 @@ from .image_quality import inspect_chest_xray
 from .model_infer import diagnose_image
 from .qwen_client import DashScopeError, DashScopeQwenClient, runtime_config_status, set_runtime_config
 from .safety import sanitize_text
+from .tools import invoke_tool, plan_tools, tool_schemas
 from .schemas import ChatRequest, CoBrainRequest, ConversationsSyncRequest, MembersSyncRequest, NoteSummaryRequest, QwenSettingsRequest
 from .workflow import workflow_events
 
@@ -170,6 +171,35 @@ def get_sample_image(sample_id: str):
     if path is None or not path.is_file():
         return error_response(404, "未找到演示胸片")
     return FileResponse(path, media_type="image/jpeg", filename=path.name)
+
+
+@app.get("/api/agent/tools")
+def list_agent_tools() -> dict:
+    """List the local Function-Calling/MCP tool schemas (no secrets)."""
+    return {"code": 200, "message": "success", "data": {"tools": tool_schemas()}}
+
+
+@app.post("/api/agent/tools/plan")
+def plan_agent_tools(payload: dict) -> dict:
+    """Return the transparent tool plan for a question/context."""
+    question = str((payload or {}).get("question") or "")[:500]
+    codes = [str(x) for x in ((payload or {}).get("predicted_codes") or [])][:3]
+    has_record = bool((payload or {}).get("has_record"))
+    return {"code": 200, "message": "success", "data": {"plan": plan_tools(question, codes, has_record)}}
+
+
+@app.post("/api/agent/tools/call")
+def call_agent_tool(payload: dict) -> JSONResponse:
+    """Call one bounded local tool. Unknown tools are rejected."""
+    name = str((payload or {}).get("name") or "")
+    allowed = {item["name"] for item in tool_schemas()}
+    if name not in allowed:
+        return error_response(400, "unknown tool")
+    arguments = (payload or {}).get("arguments") or {}
+    if not isinstance(arguments, dict):
+        return error_response(400, "arguments must be an object")
+    result = invoke_tool(name, arguments)
+    return JSONResponse(status_code=200, content={"code": 200, "message": "success", "data": result})
 
 
 @app.post("/api/agent/chat")

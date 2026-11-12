@@ -85,6 +85,18 @@ export function useComparison({ AppState, store, actions }) {
   });
 
   const hasHeatmap = computed(() => Boolean(left.value?.heatmapDataUrl || right.value?.heatmapDataUrl));
+  const diffSummary = computed(() => {
+    if (!left.value || !right.value || !diffRows.value.length) return '';
+    const topOf = (record) => {
+      const rows = (record?.probabilities || []).filter((item) => item.code !== 'no_finding');
+      return rows.sort((a, b) => (Number(b.prob) || 0) - (Number(a.prob) || 0))[0];
+    };
+    const latest = topOf(left.value);
+    const earlier = topOf(right.value);
+    const biggest = diffRows.value[0];
+    const direction = biggest.delta > 0 ? '上升' : biggest.delta < 0 ? '下降' : '基本不变';
+    return `模型最高关注从「${earlier?.name || '未知'}」变为「${latest?.name || '未知'}」；变化最大的征象是「${biggest.name}」，${direction} ${Math.abs(biggest.delta).toFixed(1)} 个百分点。该摘要只描述概率变化，不代表病情变化。`;
+  });
 
-  return { state, records, options, left, right, diffRows, trendOption, hasHeatmap, open, close, swap };
+  return { state, records, options, left, right, diffRows, diffSummary, trendOption, hasHeatmap, open, close, swap };
 }

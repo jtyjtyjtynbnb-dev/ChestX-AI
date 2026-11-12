@@ -111,6 +111,8 @@ ChestX-AI-演示运行包/
 - 家庭健康档案、随访对比、风险趋势、报告模板/JSON/Word/打印 PDF
 - 健康科普、影像小课堂、互动测验
 - Qwen 不可用时的本地知识库兜底
+- Function Calling 工具注册表 + MCP stdio server（knowledge_search / record_lookup / report_outline / safety_review）
+- RAG 回归评估：24 个胸片问题的 Recall@10 / MRR，支持 BGE 消融
 - 校准后的置信度/低置信复核提示；本地语义缓存减少重复问答
 
 ## 语言
@@ -123,6 +125,24 @@ ChestX-AI-演示运行包/
 - [操作手册](操作手册.md)：安装、启动、功能操作、排障、打包
 - [图文使用说明（Word）](ChestX-AI-图文使用说明.docx)：带截图的交付版说明
 - 后端接口：启动后访问 `http://127.0.0.1:8000/docs`（FastAPI OpenAPI）
+
+## 评测与工具调用
+
+```bash
+# RAG 回归：默认混合检索
+python -m backend.evaluate_rag --output reports/rag_eval_dense.json
+
+# RAG 消融：关闭 BGE 语义向量
+$env:CHESTX_DISABLE_DENSE="1"
+python -m backend.evaluate_rag --output reports/rag_eval_bm25.json
+
+# 工具列表 / 工具规划 / 工具调用
+curl http://127.0.0.1:8000/api/agent/tools
+curl -X POST http://127.0.0.1:8000/api/agent/tools/plan -H "Content-Type: application/json" -d "{\"question\":\"帮我看一下随访档案\",\"predicted_codes\":[\"infiltration\"],\"has_record\":true}"
+
+# MCP stdio server
+python -m backend.mcp_server
+```
 
 ## 安全与隐私
 

@@ -57,6 +57,17 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return undefined;
+          if (id.includes('echarts') || id.includes('zrender')) return 'echarts';
+          if (id.includes('/vue/') || id.includes('vue-router') || id.includes('pinia') || id.includes('vue-i18n')) return 'vue-vendor';
+          if (id.includes('axios')) return 'http';
+          return undefined;
+        }
+      }
+    }
   }
 });
