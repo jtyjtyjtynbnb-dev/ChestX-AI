@@ -2,16 +2,6 @@
 
 胸部 X 光影像 AI 健康科普与家庭健康档案演示系统。后端使用 FastAPI + ONNX Runtime + LangGraph + SQLite，前端使用 Vue 3 + Pinia + Vite + Tailwind CSS，构建产物由 FastAPI 在单端口托管。
 
-## 团队信息
-
-> 提交前请替换为真实信息；不要把 API Key 写进本文件。
-
-- 队伍名称：【待填写】
-- 队长：【待填写】
-- 队员：【待填写】
-- 指导教师：【待填写】
-- 学校/组别：【待填写】
-
 ## 环境配置
 
 ```bash
