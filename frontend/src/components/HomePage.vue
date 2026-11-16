@@ -1,4 +1,6 @@
 <script setup>
+// ChestX-AI maintenance: 首页：产品价值、能力矩阵、交互演示、FAQ 与入口编排。
+
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useShell } from '../composables/useShell.js';
 import { categoryColor } from '../utils/category.js';

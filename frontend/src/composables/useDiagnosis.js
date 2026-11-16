@@ -1,3 +1,4 @@
+/** ChestX-AI maintenance: 诊断状态机：上传/分析/取消/错误恢复，以及当前病例结果写回 AppState。 */
 import { ANALYSIS_STAGE_PERCENT } from '../constants/app.js';
 import { REQUEST_TIMEOUT_MS } from '../constants/api.js';
 import { reactive } from 'vue';

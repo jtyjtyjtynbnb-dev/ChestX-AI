@@ -1,3 +1,4 @@
+/** ChestX-AI maintenance: 智能解读页组合式入口：查看器、上传、诊断、结果、导出与教学样例的编排。 */
 import { computed, markRaw, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import { VIEWER_DEFAULTS } from '../constants/app.js';
 import { useAppContext } from './useAppContext.js';

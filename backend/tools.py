@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: Function Calling 工具注册表：知识检索、档案摘要、报告大纲、安全审查。
 """Small tool registry shared by the Agent, the HTTP API and the MCP stdio server.
 
 The registry is intentionally local and explicit: no arbitrary code execution.

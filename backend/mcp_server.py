@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: MCP stdio server：把本地工具暴露为 initialize/tools/list/tools/call。
 """Minimal MCP stdio server exposing the local tool registry.
 
 Run: python -m backend.mcp_server

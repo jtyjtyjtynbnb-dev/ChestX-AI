@@ -1,3 +1,4 @@
+/** ChestX-AI maintenance: 随访对比：记录选择、趋势、差异行和规则化 AI 差异摘要。 */
 import { computed, reactive } from 'vue';
 
 function timeOf(record) {

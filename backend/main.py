@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: FastAPI 入口：上传/推理/报告/流式问答/工具/MCP 辅助接口与静态资源托管。
 """FastAPI application for ChestX-AI image diagnosis education."""
 
 from io import BytesIO
@@ -173,6 +174,7 @@ def get_sample_image(sample_id: str):
     return FileResponse(path, media_type="image/jpeg", filename=path.name)
 
 
+# 工具 API：只暴露白名单工具，便于前端/评审验证 Function Calling。
 @app.get("/api/agent/tools")
 def list_agent_tools() -> dict:
     """List the local Function-Calling/MCP tool schemas (no secrets)."""

@@ -1,3 +1,4 @@
+/** ChestX-AI maintenance: AI 助手状态与流式请求：上下文、SSE 增量、区域问诊自动发送、错误回退。 */
 import { API_ENDPOINTS } from '../constants/api.js';
 import { computed } from 'vue';
 
@@ -39,6 +40,7 @@ export function useChat(ctx) {
       member_profile: member ? { id: member.id, name: member.profile.name, age: member.profile.age, gender: member.profile.gender, conditions: member.profile.conditions, notes: member.profile.notes, record_count: (member.records || []).length } : null
     };
   }
+  // 区域问诊：打开助手、填入带坐标的问题；autoSend 时自动进入回答流程。
   function askAiQuestion(question, autoSend = false) {
     chat.open = true;
     chat.input = String(question || '');

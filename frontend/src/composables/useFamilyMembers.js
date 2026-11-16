@@ -1,3 +1,4 @@
+/** ChestX-AI maintenance: 家庭成员状态：新增/删除、切换、表单同步与本地持久化。 */
 import { API_ENDPOINTS } from '../constants/api.js';
 export function useFamilyMembers({ AppState: s, api, actions }) {
  const KEY='chestx-ai-family-members-v1', CURRENT='chestx-ai-current-member-v1'; let disposed=false, initialized;

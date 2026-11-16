@@ -1,4 +1,6 @@
 <script setup>
+// ChestX-AI maintenance: 随访对比面板：双片同步缩放/平移、热力图切换与差异摘要。
+
 import ChartCanvas from './ChartCanvas.vue';
 import UiRiskPill from './ui/UiRiskPill.vue';
 import { computed, ref } from 'vue';
@@ -27,6 +29,7 @@ function zoom(delta) {
 }
 function resetView() { scale.value = 1; offsetX.value = 0; offsetY.value = 0; }
 function wheel(event) { zoom(event.deltaY > 0 ? -0.15 : 0.15); }
+// 双片对比共用同一组 scale/offset，保证左右影像始终同步。
 function startDrag(event) {
   if (event.button !== 0) return;
   dragging.value = true;

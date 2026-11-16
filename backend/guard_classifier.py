@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: 输入防御：MobileNetV3 胸片/非胸片分类与启发式兜底，避免非胸片进入主模型。
 """Small binary guard that rejects non-chest images before DenseNet121.
 
 The guard is a separately trained MobileNetV3-Small ONNX model. If the model or

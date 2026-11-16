@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: 本地检索：BM25、TF-IDF、BGE 语义向量与 RRF 融合，返回可追溯 Top10 证据。
 """Small source-backed retriever for the bundled medical knowledge base."""
 
 import json
@@ -93,6 +94,7 @@ def _tfidf_vectors(corpus: list[str], query: str) -> tuple[list[list[float]], li
 
 
 # 本地同步检索入口：类别过滤 + 文本相关性，供聊天和报告兜底使用。
+# 本地同步检索：类别过滤 + 文本相关性；聊天/报告不可用外部服务时使用。
 def retrieve_knowledge(
     predicted_codes: list[str],
     query: str = "",
@@ -150,6 +152,7 @@ def retrieve_knowledge(
 
 
 # 异步混合检索入口：本地 BM25/TF-IDF 为基线，可选 DashScope embedding/rerank 增强。
+# 异步混合检索：在本地结果上可选叠加 DashScope embedding/rerank。
 async def hybrid_retrieve(
     predicted_codes: list[str],
     query: str,

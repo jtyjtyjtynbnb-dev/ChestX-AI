@@ -1,4 +1,6 @@
 <script setup>
+// ChestX-AI maintenance: 智能解读页面：影像查看器、分析进度、结果面板、双报告、共脑与 Agent 轨迹。
+
 import { computed, onBeforeUnmount, ref } from 'vue';
 import { useInterpretPage } from '../composables/useInterpretPage.js';
 import { useCoBrain } from '../composables/useCoBrain.js';
@@ -46,6 +48,7 @@ function toggleAskMode() {
   askMode.value = !askMode.value;
   if (askMode.value) vm.viewer.setMeasureMode('none');
 }
+// 区域问诊：从影像实际边界换算相对坐标，避免把视口留白当成图像区域。
 function handleAskClick(event) {
   if (!askMode.value) return;
   const image = document.querySelector('#xrayBaseImg');

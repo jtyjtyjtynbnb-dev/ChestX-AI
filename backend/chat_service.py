@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: 问答与共脑服务：RAG、Qwen 流式输出、区域问诊的本地确定性回答、安全回退。
 """Evidence-grounded Qwen chat answers and SSE streaming for the floating health assistant."""
 
 from __future__ import annotations
@@ -155,6 +156,8 @@ def _is_region_question(question: str) -> bool:
 
 
 def _region_answer(question: str, diagnosis_context: dict | None) -> dict[str, Any]:
+    # 区域问诊走确定性本地回答，避免模型把“热区”误写成病灶定位。
+
     """Grounded, deterministic answer for the viewer region-question flow."""
     m = re.search(r"区域：([^，。]+)", question)
     region = m.group(1).strip() if m else "标记区域"

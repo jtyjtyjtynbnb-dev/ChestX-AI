@@ -1,4 +1,6 @@
 <script setup>
+// ChestX-AI maintenance: 影像课堂：病例对照、解剖热点、征象卡、九步读片、自测与病例图库。
+
 import { computed, reactive, ref } from 'vue';
 import { useAppContext } from '../composables/useAppContext.js';
 import { useAcademy } from '../composables/useAcademy.js';

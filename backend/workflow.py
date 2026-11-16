@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: LangGraph 可审计工作流：校验、推理、检索、工具选择、报告、合规审查与本地回退。
 """Observable LangGraph Agent workflow for chest X-ray education reports."""
 
 from __future__ import annotations
@@ -92,6 +93,7 @@ def build_agent_graph():
         return {"inference": result, "steps": [*state.get("steps", []), step]}
 
     # 节点 3：混合检索。用模型 top-3 类别 + 用户问题召回本地知识片段。
+    # 工具选择节点：把“可用工具”与“本次实际调用”解耦，便于审计。
     async def tool_selection(state: AgentState) -> dict[str, Any]:
         started = time.perf_counter()
         codes = [item["code"] for item in state["inference"].get("all_predictions", [])[:3]]
@@ -104,6 +106,7 @@ def build_agent_graph():
         }
         return {"tool_plan": plan, "tool_calls": [{"name": item["name"], "status": "planned"} for item in plan], "steps": [*state.get("steps", []), step]}
 
+    # 检索节点：Top3 类别 + 用户问题共同决定证据召回，禁止无证据硬生成。
     async def retrieve(state: AgentState) -> dict[str, Any]:
         started = time.perf_counter()
         codes = [item["code"] for item in state["inference"].get("all_predictions", [])[:3]]

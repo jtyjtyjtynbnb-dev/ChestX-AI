@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: 影像质量与格式边界：尺寸、曝光、压缩 DICOM、损坏文件的前置检查。
 """Chest X-ray plausibility checks and conservative display preprocessing.
 
 The guard is intentionally conservative: it rejects clearly non-radiographic

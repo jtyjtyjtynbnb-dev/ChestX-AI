@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: DashScope/Qwen 文本客户端：环境变量读取、流式输出、超时和错误分类。
 """DashScope text client for local-first chat and evidence reports."""
 
 import asyncio

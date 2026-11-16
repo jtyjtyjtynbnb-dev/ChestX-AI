@@ -1,3 +1,4 @@
+# ChestX-AI maintenance: 胸片视觉推理：预处理、DenseNet121 ONNX、温度校准、热力图与概率输出。
 """ONNX inference and model-attention heatmap generation."""
 
 import base64
