@@ -57,7 +57,10 @@ function handleAskClick(event) {
   const region = `${horizontal}${vertical}`;
   askMark.value = { x: nx * 100, y: ny * 100, region };
   askMode.value = false;
-  vm.actions?.askAiQuestion?.(`我把影像上的${region}区域标记出来了（相对坐标 x=${(nx * 100).toFixed(0)}%，y=${(ny * 100).toFixed(0)}%）。请结合当前模型概率和 Top10 证据，解释模型为什么关注这个区域；注意热区不等同于临床病灶定位。`);
+  const caseProbs = vm.currentCase?.probabilities || vm.results?.probabilities || [];
+  const top = [...caseProbs].sort((a, b) => (Number(b.prob) || 0) - (Number(a.prob) || 0))[0] || vm.results?.topProbabilities?.[0];
+  const topText = top ? `当前Top1：${top.name} ${top.prob}%。` : '';
+  vm.actions?.askAiQuestion?.(`区域：${region}，相对坐标 x=${(nx * 100).toFixed(0)}%，y=${(ny * 100).toFixed(0)}%。${topText}请只回答三点：1）这个区域在胸片上大致对应什么解剖位置；2）模型热力图为什么可能关注这里；3）仅凭这张片不能下什么结论。不要输出与当前病例无关的疾病科普。`, true);
 }
 
 const flowStep = computed(() => {

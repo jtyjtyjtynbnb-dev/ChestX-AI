@@ -150,11 +150,56 @@ def _chat_steps(retrieval: str, qwen: str, answer: str = "completed") -> list[di
 _CHAT_SEMANTIC_CACHE = SemanticAnswerCache()
 
 
+def _is_region_question(question: str) -> bool:
+    return question.startswith("区域：") and "相对坐标" in question
+
+
+def _region_answer(question: str, diagnosis_context: dict | None) -> dict[str, Any]:
+    """Grounded, deterministic answer for the viewer region-question flow."""
+    m = re.search(r"区域：([^，。]+)", question)
+    region = m.group(1).strip() if m else "标记区域"
+    probs = (diagnosis_context or {}).get("probabilities") or []
+    top = probs[0] if probs and isinstance(probs[0], dict) else {}
+    name = str(top.get("name") or top.get("code") or "当前最高关注类别")
+    prob = float(top.get("prob") or 0)
+    # The question carries the visible Top1 so the answer stays grounded even
+    # when the chat opens before the full analysis result has been stored.
+    if not probs or not top.get("prob"):
+        parsed = re.search(r"当前Top1：([^，。]+?)\s+([\d.]+)%", question)
+        if parsed:
+            name = parsed.group(1).strip()
+            prob = float(parsed.group(2))
+    evidence = (diagnosis_context or {}).get("evidence") or []
+    source = "；".join(
+        f"{str(item.get('title') or '本地知识')}" for item in evidence[:2] if isinstance(item, dict)
+    )
+    if prob > 0:
+        focus = f"当前模型最高关注类别是「{name}」，概率约 {prob:.1f}%。"
+    else:
+        focus = "右侧结果面板会给出当前最高关注类别和概率。"
+    answer = (
+        f"你标记的是「{region}」。{focus}"
+        "热力图只表示模型注意力落在附近，不等同于临床病灶定位，也不能仅凭这一张片判断病因。"
+        "更稳妥的下一步是结合症状、既往片和正式影像报告复核；若症状加重，及时就医。"
+        + (f" 本地证据：{source}。" if source else "")
+    )
+    return {
+        "answer": sanitize_text(answer),
+        "provider": "local_region",
+        "sources": evidence[:2],
+        "steps": _chat_steps("completed", "skipped"),
+    }
+
+
 async def answer_question(question: str, history: Any = None, diagnosis_context: dict | None = None) -> dict[str, Any]:
     question = question.strip()
     if not question or len(question) > 500:
         raise ValueError("问题不能为空且不能超过500个字符")
     history = _clean_history(history)
+    if _is_region_question(question):
+        response = _region_answer(question, diagnosis_context)
+        _CHAT_SEMANTIC_CACHE.set(question, response, diagnosis_context)
+        return response
     cached = _CHAT_SEMANTIC_CACHE.get(question, diagnosis_context)
     if cached is not None:
         cached["cached"] = True
@@ -251,6 +296,18 @@ async def stream_answer_question(
         raise ValueError("问题不能为空且不能超过500个字符")
 
     yield "step", {"name": "问题理解", "status": "completed"}
+
+    if _is_region_question(clean_q):
+        result = await answer_question(clean_q, history, diagnosis_context)
+        text = sanitize_text(result.get("answer", ""))
+        result["answer"] = text
+        for i in range(0, len(text), 12):
+            yield "token", {"delta": text[i : i + 12]}
+            await asyncio.sleep(0.008)
+        yield "step", {"name": "区域解释与证据", "status": "completed"}
+        yield "complete", result
+        return
+
 
     if _local_intent_answer(clean_q):
         result = await answer_question(clean_q, history, diagnosis_context)

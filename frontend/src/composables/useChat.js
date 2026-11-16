@@ -28,8 +28,9 @@ export function useChat(ctx) {
     const result = AppState.currentCase?.agentResult;
     const report = result?.report || {};
     const member = actions.getCurrentMember?.();
+    const probabilities = result?.inference?.probabilities || AppState.currentCase?.probabilities || [];
     return {
-      probabilities: (result?.inference?.probabilities || []).slice(0, 5),
+      probabilities: probabilities.slice(0, 5),
       summary: report.patient_summary || report.summary || '',
       doctor_summary: report.doctor_summary || '',
       risk_explanation: report.risk_explanation || '',
@@ -38,10 +39,14 @@ export function useChat(ctx) {
       member_profile: member ? { id: member.id, name: member.profile.name, age: member.profile.age, gender: member.profile.gender, conditions: member.profile.conditions, notes: member.profile.notes, record_count: (member.records || []).length } : null
     };
   }
-  function askAiQuestion(question) {
+  function askAiQuestion(question, autoSend = false) {
     chat.open = true;
     chat.input = String(question || '');
     chat.focusInput++;
+    if (autoSend) {
+      // Region questions should show the full ask -> answer loop, not just prefill the composer.
+      setTimeout(() => { if (!chat.busy && chat.input.trim()) sendAiChatMessage(chat.input); }, 180);
+    }
   }
   function cancel() { request?.abort(); request = null; chat.busy = false; chat.messages = chat.messages.filter((message) => !message.pending); }
   async function sendAiChatMessage(question = chat.input) {
