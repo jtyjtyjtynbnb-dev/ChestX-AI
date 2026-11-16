@@ -26,20 +26,39 @@
 CC BY 作品复用时应署名并链接授权；CC BY-SA 作品还应按相同许可发布改编内容。来源链接可查看完整授权文本与作者说明。
 
 
-二、待核实来源的演示样例（重要）
---------------------------------
+二、演示样例图片来源
+----------------------
 
-以下文件目前没有可核实的原始来源记录：
+以下三张样例图已替换为明确授权的素材，不再使用来源不明的图片：
 
-- frontend/assets/sample_1.jpg
-- frontend/assets/sample_2.jpg
-- frontend/assets/sample_3.jpg
-- dicom_samples/*.dcm（由 sample_2.jpg 生成）
+1. sample_1.jpg
+   对应：肺炎样例（右下肺斑片影）
+   原作者：Mikael Häggström, M.D.
+   原作品：X-ray of lobar pneumonia
+   来源：https://commons.wikimedia.org/wiki/File:X-ray_of_lobar_pneumonia.jpg
+   许可证：CC0 1.0
+   许可证链接：https://creativecommons.org/publicdomain/zero/1.0/
+   修改：转为 RGB JPEG；演示标注为教学说明
 
-在补充明确来源和许可证之前，不应把它们声称为 CC0 或“已授权素材”。
-提交公开作品前建议：
-1) 查到原始数据集/作者与许可证，补进本文件；或
-2) 替换为 CC0、公有领域或团队自行生成的样片。
+2. sample_2.jpg
+   对应：右肺结节/结节样表现样例
+   原作者：Mikael Häggström, M.D.
+   原作品：Chest X-ray of sarcoidosis nodules
+   来源：https://commons.wikimedia.org/wiki/File:Chest_X-ray_of_sarcoidosis_nodules.png
+   许可证：CC0 1.0
+   许可证链接：https://creativecommons.org/publicdomain/zero/1.0/
+   修改：转为 RGB JPEG；演示标注为教学说明
+
+3. sample_3.jpg
+   对应：正常胸片样例
+   原作者：Mikael Häggström, M.D.
+   原作品：Normal posteroanterior (PA) chest radiograph (X-ray)
+   来源：https://commons.wikimedia.org/wiki/File:Normal_posteroanterior_(PA)_chest_radiograph_(X-ray).jpg
+   许可证：CC0 1.0
+   许可证链接：https://creativecommons.org/publicdomain/zero/1.0/
+
+DICOM 验收样本由 sample_2.jpg 生成，仅用于读取边界演示，不包含真实患者信息；
+其来源随 sample_2.jpg 的 CC0 授权。
 
 三、字体与语音
 --------------
