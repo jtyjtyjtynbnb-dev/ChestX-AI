@@ -2,20 +2,37 @@
 
 胸部 X 光影像 AI 健康科普与家庭健康档案演示系统。后端使用 FastAPI + ONNX Runtime + LangGraph + SQLite，前端使用 Vue 3 + Pinia + Vite + Tailwind CSS，构建产物由 FastAPI 在单端口托管。
 
+## 团队信息
+
+> 提交前请替换为真实信息；不要把 API Key 写进本文件。
+
+- 队伍名称：【提交前填写】
+- 队长：【提交前填写】
+- 队员：【提交前填写】
+- 指导教师：【提交前填写】
+- 学校/组别：【提交前填写】
+
 ## 环境配置
 
-```bash
-# 1) 复制环境变量模板，填入自己的 DashScope Key
-cp .env.example backend/.env
+敏感配置统一通过**环境变量**注入；公开仓库不包含真实 Key。
 
-# 2) 安装依赖（Windows 可直接双击一键启动.bat）
+```powershell
+$env:DASHSCOPE_API_KEY = "sk-你的Key"
+$env:QWEN_MODEL = "qwen3.8-flash"
+
 python -m pip install -r backend/requirements.txt
-
-# 3) 启动
 python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
 ```
 
-- `backend/.env` 已被 `.gitignore` 排除，**不得提交真实 Key**。
+Windows 用户也可以设置用户级环境变量后双击 `一键启动.bat`：
+
+```powershell
+[Environment]::SetEnvironmentVariable("DASHSCOPE_API_KEY", "sk-你的Key", "User")
+[Environment]::SetEnvironmentVariable("QWEN_MODEL", "qwen3.8-flash", "User")
+```
+
+- `backend/.env` 仅用于本机临时调试，已被 `.gitignore` 排除，**不得提交或在公开包中分发**。
+- `.env.example` 只保留占位符；未配置环境变量时 Qwen 自动走本地回退。
 - 依赖清单：`backend/requirements.txt`、`frontend/package.json`。
 - 技术文档与评估材料：`技术报告-合规与安全.md`、`模型评估.md`、`操作手册.md`。
 
@@ -32,7 +49,7 @@ python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
 1. 安装 Python 3.10+（64 位），勾选 “Add Python to PATH”。
 2. 双击 `一键启动.bat`。脚本会检测依赖；缺失时自动在包内创建 `.venv` 并安装 `backend/requirements.txt`（首次需要联网）。
 3. 浏览器自动打开 `http://127.0.0.1:8000/`。
-4. 如果需要 Qwen 问答/报告，在页面右上角“设置”中填写 DashScope API Key，或编辑 `backend/.env`。Qwen 报告只发送结构化概率/问题/知识片段，不发送原始影像；零云端场景保持 Key 为空。
+4. 如果需要 Qwen 问答/报告，先设置 `DASHSCOPE_API_KEY` 环境变量再启动，或在页面右上角“设置”中填写 Key。Qwen 只接收结构化概率/问题/知识片段，不发送原始影像；未配置时自动本地回退。
 
 ### 测试集评估
 
@@ -89,6 +106,29 @@ ChestX-AI-演示运行包/
 - 模型：224×224 输入、10 类 sigmoid 输出、第二个输出为 7×7 注意力图（用于热力图叠加）
 - 输入防御：MobileNetV3 guard（胸片/非胸片）+ 启发式兜底，guard 不替代 121 主模型
 - 检索：BM25 + TF-IDF + 本地 BGE 语义向量 + RRF 排序；200 条来源可追溯的胸片科普知识；每次默认返回 Top10 证据（最多 12 条）；配置 DashScope 后可启用 embedding / rerank
+
+## 技术架构
+
+```text
+浏览器
+  Vue 3 SPA（views / components / composables / Pinia / Router）
+        │  JSON + SSE，同源 /api
+        ▼
+FastAPI 单端口
+  ├─ 上传校验：格式、大小、DICOM 边界、MobileNetV3 guard
+  ├─ 本地视觉：DenseNet121 ONNX → 10 类概率 + 7×7 热力图
+  ├─ 混合检索：BM25 + TF-IDF + BGE ONNX + RRF → Top10 证据
+  ├─ LangGraph：输入校验 → 推理 → 检索 → 报告 → 证据一致性 → 安全审查
+  ├─ 工具层：Function Calling 工具注册表 + MCP stdio server
+  └─ 文本增强：Qwen（可选；无 Key / 失败自动本地回退）
+        │
+        ▼
+SQLite + localStorage（家庭成员、档案、对话；仅本机）
+```
+
+- 前端五层：视图/交互、组合式逻辑、Pinia 状态、传输层、工具资源层；页面不直接发请求。
+- 后端本地优先：原始影像只在内存中解码和推理，不上传云端；Qwen 只接收结构化文本。
+- 部署形态：Windows 双击一键启动，FastAPI 在 `127.0.0.1:8000` 单端口托管前端与 API。
 
 ## 主要能力
 
