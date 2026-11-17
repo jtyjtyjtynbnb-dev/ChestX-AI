@@ -4,8 +4,6 @@
 
 ## 团队信息
 
-> 提交前请替换为真实信息；不要把 API Key 写进本文件。
-
 - 队伍名称：111qwer
 - 团队编号：45855
 - 队长：贾天阳
@@ -130,6 +128,14 @@ SQLite + localStorage（家庭成员、档案、对话；仅本机）
 - 前端五层：视图/交互、组合式逻辑、Pinia 状态、传输层、工具资源层；页面不直接发请求。
 - 后端本地优先：原始影像只在内存中解码和推理，不上传云端；Qwen 只接收结构化文本。
 - 部署形态：Windows 双击一键启动，FastAPI 在 `127.0.0.1:8000` 单端口托管前端与 API。
+
+## 代码规范
+
+- `.editorconfig`：UTF-8、LF、去尾部空格；前端/JS/Vue 2 空格缩进，Python 4 空格缩进。
+- `.prettierrc` / `.prettierignore`：单引号、120 列、ES5 尾逗号；构建产物、模型、数据库和依赖目录不参与格式化。
+- 后端模块使用文件头职责说明 + 关键流程行内注释；前端 composable 和页面组件使用 `ChestX-AI maintenance` 注释说明职责。
+- 代码分层：`views/components/composables/stores/api`；后端按 `main/model_infer/workflow/rag/tools` 拆分，避免页面直接请求或把业务逻辑塞进路由。
+- 提交前至少执行 `npm run build`、`npm test`、`python -m compileall backend`；当前 15 个前端测试全部通过。
 
 ## 主要能力
 
