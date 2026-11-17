@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
 set "RUN_ROOT=%~dp0"
@@ -77,7 +77,7 @@ echo Working directory: %APP_DIR%
 REM ---------------------------------------------------------------------------
 REM 2. Check runtime dependencies; install them into a local .venv on demand.
 REM ---------------------------------------------------------------------------
-"%PYTHON_EXE%" -c "import fastapi, uvicorn, cv2, onnxruntime, langgraph, httpx, PIL" >nul 2>nul
+"%PYTHON_EXE%" -c "import fastapi, uvicorn, cv2, onnxruntime, langgraph, httpx, PIL, multipart, tokenizers" >nul 2>nul
 if errorlevel 1 (
   echo Python dependencies are missing. Preparing a local .venv...
   if not defined USING_VENV (
@@ -100,7 +100,7 @@ if errorlevel 1 (
     pause
     exit /b 1
   )
-  "!PYTHON_EXE!" -c "import fastapi, uvicorn, cv2, onnxruntime, langgraph, httpx, PIL" >nul 2>nul
+  "!PYTHON_EXE!" -c "import fastapi, uvicorn, cv2, onnxruntime, langgraph, httpx, PIL, multipart, tokenizers" >nul 2>nul
   if errorlevel 1 (
     echo ERROR: Dependencies are still incomplete after installation.
     pause
@@ -160,3 +160,4 @@ if not defined CHESTX_NO_BROWSER start "" "http://127.0.0.1:%CHESTX_API_PORT%/"
 echo ChestX-AI is ready at http://127.0.0.1:%CHESTX_API_PORT%/
 echo Keep this window open while using the demo.
 if not defined CHESTX_NO_PAUSE pause
+
