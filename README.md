@@ -10,6 +10,7 @@
 - 队员：彭槐颖
 - 指导教师：高泽华
 - 学校/组别：中国石油大学（北京）克拉玛依校区 · A组
+- 代码仓库：https://github.com/jtyjtyjtynbnb-dev/ChestX-AI
 
 ## 环境配置
 
